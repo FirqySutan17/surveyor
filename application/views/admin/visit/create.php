@@ -438,6 +438,8 @@
                             </tr>
                         </tbody>
                     </table>
+
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.229637197503!2d106.81942827503788!3d-6.233430493754773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3e168e90827%3A0x865d0ef790a78279!2sMenara%20Jamsostek%2C%20Jl.%20Gatot%20Subroto%20No.Kav.%2038%2C%20RT.6%2FRW.1%2C%20Kuningan%20Bar.%2C%20Kec.%20Mampang%20Prpt.%2C%20Jakarta%2C%20Daerah%20Khusus%20Ibukota%20Jakarta%2012710!5e0!3m2!1sid!2sid!4v1726641729740!5m2!1sid!2sid" width="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
 
