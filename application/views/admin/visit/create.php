@@ -338,7 +338,7 @@
 
 <div class="main-content pre-posttest">
     <h3 class="card-title">
-        <strong>Visit Entry</strong>
+        <strong>SURVEY ENTRY</strong>
     </h3>
     <div class="row">
         <form action="<?= admin_url('visit/do_create') ?>" method="POST" enctype="multipart/form-data">
