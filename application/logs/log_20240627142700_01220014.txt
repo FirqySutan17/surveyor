@@ -1,0 +1,1 @@
+{"visiting_date":"2024-06-27","plant":"3212","customer":"1082498","transdate_open":"2024-07-25","transdate_close":"2024-06-28","close_type":"SUKARELA","ar_stop":"0","ar_current":"0","collateral_amt":"0","collection_type":"CICILAN","stopage_reason":"TEST","pending_fee_status":"TES","strategy_sales":"TE","strategy_cct":"TEST"}

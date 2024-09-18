@@ -1,0 +1,1 @@
+{"visiting_date":"2024-08-11","plant":"3212","customer":"1082498","transdate_open":"2024-08-11","transdate_close":"2024-08-11","close_type":"SUKARELA","ar_stop":"1.000","ar_current":"5.000","collateral_amt":"3.000","collection_type":"CICILAN","pic_open_ts":"01190075","stopage_reason":"test","pending_fee_status":"test it","VR_image_name":["test"]}
