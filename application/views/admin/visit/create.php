@@ -439,7 +439,7 @@
                         </tbody>
                     </table>
 
-                    <iframe src="https://maps.google.com/maps/embed?q=-6.2336281,106.8214081&output=embed" width="100%" height="350px" style="border:2px solid #C1C1C1; border-radius: 15px" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://maps.google.com/maps?q=-6.2336281,106.8214081&output=embed" width="100%" height="350px" style="border:2px solid #C1C1C1; border-radius: 15px" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
 
