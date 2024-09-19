@@ -898,7 +898,29 @@
     }
         
     function showPosition(position) {
-        lang.innerHTML = position.coords.latitude;
-        long.innerHTML = position.coords.longitude;
+        let latitude    = position.coords.latitude;
+        let longitude   = position.coords.longitude;
+
+        lang.innerHTML  = latitude;
+        long.innerHTML  = longitude;
+        detailPosition(latitude, longitude)
+    }
+
+    function detailPosition(latitude, longitude) {
+        $.ajax({
+            url: "<?= base_url('dashboard/survey/ajax_location_detail') ?>",
+            type: "GET",
+            data: {
+                "latitude": latitude,
+                "longitude": longitude
+            },
+            beforeSend: function () {
+                // removeElements();
+            },
+            success: function(response) {
+                console.log(response);
+                alert(response);
+            }
+        });
     }
 </script>

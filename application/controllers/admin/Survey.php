@@ -288,6 +288,43 @@ class survey extends CI_Controller {
         return redirect($this->own_link);
 	}
 
+	public function ajax_location_detail() {
+		// $check = $this->onlyRequestPost();
+		// if (!$check) {
+		// 	return json_encode([]);
+		// }
+
+		$api_key = "AIzaSyBLUc8QC0GYh5ozbMbGBcNUm1BBIjvmmg8";
+		$latitude = $this->input->get('latitude');
+		$longitude = $this->input->get('longitude');
+		
+		$elevationEndpoint 	= 'https://maps.googleapis.com/maps/api/elevation/json';
+		$elevationURL 			= $apiEndpoint . '?locations=' . $latitude . ',' . $longitude . '&key=' . $apiKey;
+    $responseElevation 	= file_get_contents($elevationURL);
+    $dataElevation 			= json_decode($response, true);
+
+    // Check if the request was successful
+		$data = [
+			"address" 		=> "",
+			"elevation"		=> "",
+		];
+    if ($dataElevation['status'] === 'OK') {
+        // Extract the elevation from the response
+        $result["elevation"] = $dataElevation['results'][0]['elevation'];
+    } else {
+      echo json_encode(["status" => false, "message" => "failed retrieve elevation", "data" => []]);
+			exit;
+    }
+
+		$geolocationURL = "http://maps.google.com/maps/api/geocode/json?latlng=$latitude,$longitude";
+		// send http request
+		$geocode	 				= file_get_contents($geolocationURL);
+		$json 						= json_decode($geocode);
+		$data["address"] 	= $json->results[0]->formatted_address;
+
+		echo json_encode(["status" => true, "message" => "success get detail coordinate", "data" => $data]);
+	}
+
 	public function report() {
 
 		$sdate = date('Y-m').'-01';

@@ -40,8 +40,9 @@ $route['visit/do_create_mobile'] 	= 'Home/do_create_mobile';
 /* MASTER DATA ROUTES */
 
 /* ENTRY ROUTES */
-	$route['dashboard/survey'] 				= 'admin/Survey/index';
-	$route['dashboard/survey/entry'] 		= 'admin/Survey/entry';
+	$route['dashboard/survey'] 											= 'admin/Survey/index';
+	$route['dashboard/survey/entry'] 								= 'admin/Survey/entry';
+	$route['dashboard/survey/ajax_location_detail'] = 'admin/Survey/ajax_location_detail';
 	$route['dashboard/visit/do_create'] 	= 'admin/Visit/do_create';
 	$route['dashboard/visit/detail/(:any)'] = 'admin/Visit/detail/$1';
 	$route['dashboard/visit/detail-customer/(:any)'] = 'admin/Visit/detail_customer/$1';
