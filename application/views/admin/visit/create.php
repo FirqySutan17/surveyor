@@ -832,20 +832,20 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>
+                                <td data-label="DATE">
                                     <input type="date" name="visiting_date" class="form-control" style="font-size: 14px" required>
                                 </td>
-                                <td>
+                                <td data-label="EMPLOYEE">
                                     <?= $user['EMPLOYEE_ID'] ?> - <?= $user['FULL_NAME'] ?>
                                 </td>
-                                <td>
+                                <td data-label="LATITUDE">
                                     <div id="latitude"></div>
                                 </td>
-                                <td>
+                                <td data-label="LONGITUDE">
                                     <div id="longitude"></div>
                                 </td>
                                 <td>
-                                    <a href="javascript:void(0)" onclick="getLocation()">UPDATE LOCATION</a>
+                                    <a href="javascript:void(0)" onclick="getLocation()" style="background: #00c0ff; border-radius: 10px; color: #fff; font-weight: 600">UPDATE LOCATION</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -860,7 +860,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td style="text-transform: uppercase;">Jl. Gatot Subroto No.Kav. 38, RT.6/RW.1, Kuningan Bar., Kec. Mampang Prpt., Jakarta, Daerah Khusus Ibukota Jakarta 12710</td>
+                                <td data-label="ADDRESS" style="text-transform: uppercase;">Jl. Gatot Subroto No.Kav. 38, RT.6/RW.1, Kuningan Bar., Kec. Mampang Prpt., Jakarta, Daerah Khusus Ibukota Jakarta 12710</td>
                             </tr>   
                         </tbody>
                         
