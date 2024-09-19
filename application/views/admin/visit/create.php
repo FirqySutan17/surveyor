@@ -447,13 +447,18 @@
                     </table>
 
                     <iframe class="maps-frame" src="https://maps.google.com/maps?q=-6.2336281,106.8214081&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    <table>
-                        <tr>
-                            <th>ADDRESS</th>
-                        </tr>
-                        <tr>
-                            <td>Jl. Gatot Subroto No.Kav. 38, RT.6/RW.1, Kuningan Bar., Kec. Mampang Prpt., Jakarta, Daerah Khusus Ibukota Jakarta 12710</td>
-                        </tr>
+                    <table class="table table-bordered" style="margin-bottom: 10px">
+                        <thead>
+                            <tr>
+                                <th>ADDRESS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-transform: uppercase;">Jl. Gatot Subroto No.Kav. 38, RT.6/RW.1, Kuningan Bar., Kec. Mampang Prpt., Jakarta, Daerah Khusus Ibukota Jakarta 12710</td>
+                            </tr>   
+                        </tbody>
+                        
                     </table>
                 </div>
             </div>
