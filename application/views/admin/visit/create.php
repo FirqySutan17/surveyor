@@ -845,7 +845,7 @@
                                     <div id="longitude"></div>
                                 </td>
                                 <td>
-                                    <a href="javascript:void(0)" onclick="getLocation()" style="background: #00c0ff; border-radius: 10px; color: #fff; font-weight: 600">UPDATE LOCATION</a>
+                                    <a href="javascript:void(0)" onclick="getLocation()" style="background: #00c0ff; border-radius: 10px; color: #fff; font-weight: 600; padding: 10px">UPDATE LOCATION</a>
                                 </td>
                             </tr>
                         </tbody>
