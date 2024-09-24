@@ -22,7 +22,7 @@ class Warehouse extends CI_Controller {
 	}
 
 	public function datatable() {
-		$data = $this->Dbhelper->selectTabel('*', 'CD_GUDANG', array('IS_DELETED !=' => 'Y'), 'CODE', 'ASC');
+		$data = $this->Dbhelper->selectTabel('*', 'CD_GUDANG', array('IS_DELETED' => ''), 'CODE', 'ASC');
 
 		return $data;
 	}
