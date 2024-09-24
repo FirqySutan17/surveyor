@@ -264,14 +264,12 @@
 
 <div class="main-content pre-posttest">
     <h3 class="card-title">
-        <strong>MASTER DATA - USER</strong>
+        <strong>MASTER DATA - GUDANG</strong>
     </h3>
     <div class="row" style="padding: 0px 10px; border-bottom: 2px solid #000; padding-bottom: 8px;margin: 0px 0px; margin-bottom: 10px; ">
         <div class="col-6"></div>
         <div class="col-4"></div>
-        <div class="col-2">
-            <a href="<?= admin_url('master/user/create') ?>" class="btn btn-primary btn-block">CREATE</a>
-        </div>
+        <div class="col-2"></div>
     </div>
     <table class="table table-bordered table-hover" id="example1">
         <thead>
