@@ -22,7 +22,7 @@ class Warehouse extends CI_Controller {
 	}
 
 	public function datatable() {
-		$data = $this->Dbhelper->selectTabel('*', 'CD_GUDANG', array('IS_DELETED' => ''), 'CODE', 'ASC');
+		$data = $this->Dbhelper->selectRawQuery("SELECT * FROM CD_GUDANG WHERE IS_DELETED <> 'Y' ORDER BY CODE ASC");
 
 		return $data;
 	}
