@@ -37,7 +37,14 @@ $route['visit/do_create_mobile'] 	= 'Home/do_create_mobile';
 	$route['dashboard/master/user/duplicate'] 		= 'admin/master/User/duplicate';
 	$route['dashboard/master/user/do_duplicate'] 	= 'admin/master/User/do_duplicate';
 	$route['dashboard/master/user/excel'] 				= 'admin/master/User/excel';
+
 	$route['dashboard/master/warehouse'] 						= 'admin/master/Warehouse';
+	$route['dashboard/master/warehouse/create'] 			= 'admin/master/Warehouse/create';
+	$route['dashboard/master/warehouse/do_create'] 		= 'admin/master/Warehouse/do_create';
+	$route['dashboard/master/warehouse/edit/(:any)'] 	= 'admin/master/Warehouse/edit/$1';
+	$route['dashboard/master/warehouse/do_update'] 		= 'admin/master/Warehouse/do_update';
+	$route['dashboard/master/warehouse/detail/(:any)'] 	= 'admin/master/Warehouse/detail/$1';
+	$route['dashboard/master/warehouse/delete/(:any)']	= 'admin/master/Warehouse/delete/$1';
 /* MASTER DATA ROUTES */
 
 /* ENTRY ROUTES */

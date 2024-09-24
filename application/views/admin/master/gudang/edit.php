@@ -258,65 +258,111 @@
         width: 100%
     }
     .table-w-message {
-        width: 100%;
+        width: 1330px;
     }
+    .c-form {
+        max-width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .cust-btn-back {
+        color: red;
+        border: 1px solid red;
+        background: #fff;
+    }
+    .cust-btn-back:hover {
+        background: red;
+        color: #fff;
+        border: 1px solid red;
+    }
+
 </style>
 
 <div class="main-content pre-posttest">
     <h3 class="card-title">
-        <strong>MASTER DATA - GUDANG</strong>
+        <strong>Edit Gudang</strong>
     </h3>
-    <div class="row" style="padding: 0px 10px; border-bottom: 2px solid #000; padding-bottom: 8px;margin: 0px 0px; margin-bottom: 10px; ">
-        <div class="col-6"></div>
-        <div class="col-4"></div>
-        <div class="col-2">
-            <a href="<?= admin_url('master/warehouse/create') ?>" class="btn btn-primary btn-block">CREATE</a>
+    <div class="row w-form">
+        <div class="c-form">
+            <form action="<?= admin_url('master/warehouse/do_update') ?>" method="POST" enctype="multipart/form-data" style="margin-top: 20px">
+                <input type="hidden" name="code" value="<?= $model['CODE'] ?>">
+                <div class="form-group row">
+                    <label for="nama" class="col-lg-12 col-sm-12 col-form-label">Nama <span class="text-danger">*</span></label>
+                    <div class="col-lg-12 col-sm-12">
+                        <input type="text" name="nama" class="form-control" placeholder="Type here.." autocomplete="off" required value="<?= $model['NAMA'] ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="alamat" class="col-lg-12 col-sm-12 col-form-label">Alamat <span class="text-danger">*</span></label>
+                    <div class="col-lg-12 col-sm-12">
+                        <textarea name="alamat" class="form-control" required><?= $model['ALAMAT'] ?></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="owner" class="col-lg-12 col-sm-12 col-form-label">Owner</label>
+                    <div class="col-lg-12 col-sm-12">
+                        <input type="text" name="owner" class="form-control" placeholder="Type here.." autocomplete="off" value="<?= $model['OWNER'] ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="phone_number" class="col-lg-12 col-sm-12 col-form-label">Nomor HP <span class="text-danger">*</span></label>
+                    <div class="col-lg-12 col-sm-12">
+                        <input type="text" name="phone_number" class="form-control" placeholder="Type here.." autocomplete="off" required value="<?= $model['PHONE_NUMBER'] ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="location" class="col-lg-12 col-sm-12 col-form-label">Lokasi</label>
+                    <div class="col-lg-12 col-sm-12">
+                        <input type="text" name="location" class="form-control" placeholder="Type here.." autocomplete="off" value="<?= $model['LOCATION'] ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="classification" class="col-lg-12 col-sm-12 col-form-label">Klasifikasi <span class="text-danger">*</span></label>
+                    <div class="col-lg-12 col-sm-12">
+                        <input type="text" name="classification" class="form-control" placeholder="Type here.." autocomplete="off" required value="<?= $model['CLASSIFICATION'] ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="capacity" class="col-lg-12 col-sm-12 col-form-label">Kapasitas <span class="text-danger">*</span></label>
+                    <div class="col-lg-12 col-sm-12">
+                        <input type="text" name="capacity" class="form-control" placeholder="Type here.." autocomplete="off" required value="<?= $model['CAPACITY'] ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="fasilitas" class="col-lg-12 col-sm-12 col-form-label">Fasilitas</label>
+                    <div class="col-lg-12 col-sm-12">
+                        <input type="text" name="fasilitas" class="form-control" placeholder="Type here.." autocomplete="off" value="<?= $model['FASILITAS'] ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="kategori" class="col-lg-12 col-sm-12 col-form-label">Kategori</label>
+                    <div class="col-lg-12 col-sm-12">
+                        <input type="text" name="kategori" class="form-control" placeholder="Type here.." autocomplete="off" value="<?= $model['KATEGORI'] ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="area" class="col-lg-12 col-sm-12 col-form-label">Area <span class="text-danger">*</span></label>
+                    <div class="col-lg-12 col-sm-12">
+                        <input type="text" name="area" class="form-control" placeholder="Type here.." autocomplete="off" required value="<?= $model['AREA'] ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="remarks" class="col-lg-12 col-sm-12 col-form-label">Remarks</label>
+                    <div class="col-lg-12 col-sm-12">
+                        <input type="text" name="remarks" class="form-control" placeholder="Type here.." autocomplete="off" value="<?= $model['REMARKS'] ?>">
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group row mt-5">
+                    <div class="col-lg-12 col-sm-12" style="display: flex;">
+                        <a href="<?= admin_url('master/warehouse') ?>" class="btn btn-primary cust-btn-back" style="width: 50%">Cancel</a>
+                        <span style="margin: 5px;"></span>
+                        <button type="submit" class="btn btn-primary cust-btn-save" style="width: 50%">Save</button>
+                    </div>
+                </div>
+            </form>
         </div>
+        
     </div>
-    <table class="table table-bordered table-hover" id="example1">
-        <thead>
-            <tr>
-                <th style="text-align: center;">No</th>
-                <th style="text-align: center;">Kode</th>
-                <th style="text-align: center;">Nama</th>
-                <th style="text-align: center;">Nomor HP</th>
-                <th style="text-align: center;">Klasifikasi</th>
-                <th style="text-align: center;">Kapasitas</th>
-                <th style="text-align: center;">Kategori</th>
-                <th style="text-align: center;">Area</th>
-                <th style="text-align: center;">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($datatable as $i => $v): ?>
-                <tr>
-                    <td style="text-align: center; vertical-align: middle"><?= $i + 1 ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['CODE'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['NAMA'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['PHONE_NUMBER'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['CLASSIFICATION'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['CAPACITY'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['KATEGORI'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['AREA'] ?></td><td style="text-align: center; vertical-align: middle">
-                        <!-- <a href="<?= admin_url('master/warehouse/detail/'.$v['CODE']) ?>" class="btn btn-sm"><i class="fas fa-eye text-success"></i></a> -->
-                        <a href="<?= admin_url('master/warehouse/edit/'.$v['CODE']) ?>" class="btn btn-sm"><i class="fas fa-pen text-warning"></i></a>
-                        <!-- <a href="<?= admin_url('master/warehouse/delete/'.$v['CODE']) ?>" class="btn btn-sm"><i class="fas fa-trash text-danger"></i></a> -->
-                    </td>
-                </tr>
-            <?php endforeach ?>
-        </tbody>
-    </table>
 </div>
-
-<script src="<?= asset('vendor/select2/js/select2.min.js') ?>"></script>
-<script src="<?= asset('vendor/select2/js/en.js') ?>"></script>
-<script src="<?= asset('vendor/datatables.net/js/jquery.dataTables.min.js') ?>"></script>
-<script src="<?= asset('vendor/datatables.net-bs/js/dataTables.bootstrap.min.js') ?>"></script>
-
-<script>
-    $(function () {
-      $('#example1').DataTable(
-        {"language": {"paginate": { "previous": "&lt","next": "&gt",}}}
-      );
-    })
-</script>
