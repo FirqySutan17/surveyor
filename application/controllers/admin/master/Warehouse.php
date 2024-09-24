@@ -18,11 +18,12 @@ class Warehouse extends CI_Controller {
 		$data['title'] 			= 'Data Gudang';
 		$data['user']				= $this->session_data['user'];
 		$data['datatable']	= $this->datatable();
+		// dd($data['datatable']);
 		$this->template->_v('master/gudang/index', $data);
 	}
 
 	public function datatable() {
-		$data = $this->Dbhelper->selectRawQuery("SELECT * FROM CD_GUDANG WHERE IS_DELETED <> 'Y' ORDER BY CODE ASC");
+		$data = $this->Dbhelper->selectRawQuery("SELECT * FROM CD_GUDANG WHERE IS_DELETED IS NULL ORDER BY CODE ASC");
 
 		return $data;
 	}
