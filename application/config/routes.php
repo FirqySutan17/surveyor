@@ -37,6 +37,7 @@ $route['visit/do_create_mobile'] 	= 'Home/do_create_mobile';
 	$route['dashboard/master/user/duplicate'] 		= 'admin/master/User/duplicate';
 	$route['dashboard/master/user/do_duplicate'] 	= 'admin/master/User/do_duplicate';
 	$route['dashboard/master/user/excel'] 				= 'admin/master/User/excel';
+	$route['dashboard/master/warehouse'] 						= 'admin/master/Warehouse';
 /* MASTER DATA ROUTES */
 
 /* ENTRY ROUTES */

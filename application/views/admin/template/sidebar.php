@@ -155,6 +155,14 @@
                             </a>
                         </li>
                     <?php endif ?>  
+                    <?php if (in_array('M005', $user_access) || in_array('*', $user_access)): ?>
+                        <li class="<?= $this->uri->segment(3) == 'warehouse' ? 'active' : '' ?>">
+                            <a href="<?= route('dashboard/master/warehouse') ?>"
+                                class="">
+                                <i class='bx bxs-right-arrow'></i> GUDANG
+                            </a>
+                        </li>
+                    <?php endif ?>  
                 </ul>
             </li>
             <?php endif ?>
