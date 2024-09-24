@@ -60,8 +60,8 @@ class Warehouse extends CI_Controller {
 	public function edit($code) {
 
 		$data['title'] 			= 'Edit Gudang';
-		$data['model']			= $this->Dbhelper->selectTabelOne('*', 'CD_USER', array('CODE' => $code));
-		$this->template->_v('master/user/edit', $data);
+		$data['model']			= $this->Dbhelper->selectTabelOne('*', 'CD_GUDANG', array('CODE' => $code));
+		$this->template->_v('master/gudang/edit', $data);
 	}
 
 	public function do_update() {
@@ -77,7 +77,7 @@ class Warehouse extends CI_Controller {
 
 			$code = $post_data['CODE'];
 			unset($post_data['CODE']);
-			$save 	= $this->Dbhelper->updateData("CD_USER", array('CODE' => $code), $update_data);		
+			$save 	= $this->Dbhelper->updateData("CD_GUDANG", array('CODE' => $code), $update_data);		
 			if ($save) {
 				$this->session->set_flashdata('success', "Update data success");
 				return redirect($this->own_link);
