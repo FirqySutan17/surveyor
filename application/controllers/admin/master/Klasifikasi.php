@@ -1,68 +1,74 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Warehouse extends CI_Controller {
+class Klasifikasi extends CI_Controller {
 	var $menu_id = "";
 	var $session_data = "";
 	public function __Construct() {
 		parent::__construct();
-		$this->menu_id = 'TR002';
+		$this->menu_id = 'M005';
 		$this->session_data = $this->session->userdata('user_dashboard');
 
 		$this->cekLogin();
-		$this->own_link = admin_url('master/warehouse');
+		$this->own_link = admin_url('master/klasifikasi');
 	}
 
 	public function index() {
 
-		$data['title'] 			= 'GUDANG ENTRY';
+		$data['title'] 			= 'CLASSIFICATION';
 		$data['user']				= $this->session_data['user'];
 		$data['datatable']	= $this->datatable();
 		// dd($data['datatable']);
-		$this->template->_v('master/gudang/index', $data);
+		$this->template->_v('master/klasifikasi/index', $data);
 	}
 
 	public function datatable() {
-		$data = $this->Dbhelper->selectRawQuery("SELECT * FROM CD_GUDANG WHERE IS_DELETED IS NULL ORDER BY CODE ASC");
+		$data = $this->Dbhelper->selectRawQuery("SELECT * FROM CD_KLASIFIKASI WHERE IS_DELETED IS NULL ORDER BY CODE ASC");
 
 		return $data;
 	}
 
 	public function create() {
 
-		$data['title'] 			= 'Create Gudang';
+		$data['title'] 			= 'CLASSIFITION';
 		
-		$this->template->_v('master/gudang/create', $data);
+		$this->template->_v('master/klasifikasi/create', $data);
 	}
 
 	public function do_create() {
 		if ($this->input->server('REQUEST_METHOD') === 'POST') {
 			$post = $this->input->post();
+			// dd($post);
+			$klasifikasi_no = $this->generateKlasifikasiNo();
+			try {
+				$klasifikasi_data = [
+					"CODE"		        => $klasifikasi_no,
+					"CLASSIFICATION"	=> dbClean($post['classification']),
+					"REMARKS"	        => dbClean($post['remarks']),
+					"IS_DELETED"		=> NULL,
+				];
 
-			$post_data = [];
-			foreach ($post as $key => $value) {
-				$post_data[strtoupper($key)] = dbClean($value);
-			}
-
-
-
-			$save = $this->Dbhelper->insertData('CD_GUDANG', $post_data);
-			if ($save) {
-				$this->session->set_flashdata('success', "Create data success");
-				return redirect($this->own_link);
+				$save = $this->Dbhelper->insertData('CD_KLASIFIKASI', $klasifikasi_data);
+				
+				if ($save) {
+					$this->session->set_flashdata('success', "Create data success");
+					return redirect($this->own_link);
+				}
+			} catch (Exception $e) {
+				dd($e->getMessage());
 			}
 			$this->session->set_flashdata('error', "Create data failed");
-			return redirect($this->own_link."/create");
+			return redirect($this->own_link);
 		}
 		$this->session->set_flashdata('error', "Access denied");
-    return redirect($this->own_link);
+        return redirect($this->own_link);
 	}
 
 	public function edit($code) {
 
-		$data['title'] 			= 'Edit Gudang';
-		$data['model']			= $this->Dbhelper->selectTabelOne('*', 'CD_GUDANG', array('CODE' => $code));
-		$this->template->_v('master/gudang/edit', $data);
+		$data['title'] 			= 'CLASSIFITION';
+		$data['model']			= $this->Dbhelper->selectTabelOne('*', 'CD_KLASIFIKASI', array('CODE' => $code));
+		$this->template->_v('master/klasifikasi/edit', $data);
 	}
 
 	public function do_update() {
@@ -78,7 +84,7 @@ class Warehouse extends CI_Controller {
 
 			$code = $post_data['CODE'];
 			unset($post_data['CODE']);
-			$save 	= $this->Dbhelper->updateData("CD_GUDANG", array('CODE' => $code), $update_data);		
+			$save 	= $this->Dbhelper->updateData("CD_KLASIFIKASI", array('CODE' => $code), $update_data);		
 			if ($save) {
 				$this->session->set_flashdata('success', "Update data success");
 				return redirect($this->own_link);
@@ -89,6 +95,22 @@ class Warehouse extends CI_Controller {
 		$this->session->set_flashdata('error', "Access denied");
     return redirect($this->own_link);
 	}
+
+    private function generateKlasifikasiNo() {
+        $generated_no = "CLS";
+        $no = 1;
+       
+        if ($no < 10) {
+            $no = "000".$no;
+        } elseif ($no >= 10 && $no < 100) {
+            $no = "00".$no;
+        } elseif ($no >= 100 && $no < 1000) {
+            $no = "0".$no;
+        }
+
+        $generated_no = $generated_no.$no;
+        return $generated_no;
+    }
 
 	// CHANGE NECESSARY POINT
 	private function cekLogin() {
@@ -103,4 +125,3 @@ class Warehouse extends CI_Controller {
 		}
 	}
 }
-

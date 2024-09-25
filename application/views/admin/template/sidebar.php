@@ -156,19 +156,19 @@
                         </li>
                     <?php endif ?>  
                     <?php if (in_array('M005', $user_access) || in_array('*', $user_access)): ?>
-                        <li class="<?= $this->uri->segment(3) == 'warehouse' ? 'active' : '' ?>">
-                            <a href="<?= route('dashboard/master/warehouse') ?>"
+                        <li class="<?= $this->uri->segment(3) == 'klasifikasi' ? 'active' : '' ?>">
+                            <a href="<?= route('dashboard/master/klasifikasi') ?>"
                                 class="">
-                                <i class='bx bxs-right-arrow'></i> GUDANG
+                                <i class='bx bxs-right-arrow'></i> CLASSIFICATION
                             </a>
                         </li>
-                    <?php endif ?>  
+                    <?php endif ?>
                 </ul>
             </li>
             <?php endif ?>
 
-            <?php if (in_array('TR001', $user_access) || in_array('TR002', $user_access) || in_array('TR003', $user_access) || in_array('*', $user_access)): ?>
-            <li class="dropdown <?= (($this->uri->segment(2) == 'survey' && $this->uri->segment(2) == 'remainder') && $this->uri->segment(3) == 'entry')  ? 'active' : '' ?> <?= ($this->uri->segment(2) == 'collector') ? 'active' : '' ?>">
+            <?php if (in_array('TR001', $user_access) || in_array('TR002', $user_access) || in_array('*', $user_access)): ?>
+            <li class="dropdown <?= (($this->uri->segment(2) == 'survey' && $this->uri->segment(2) == 'remainder') && $this->uri->segment(3) == 'entry')  ? 'active' : '' ?> <?= $this->uri->segment(3) == 'warehouse' ? 'active' : '' ?>">
                 <a href="javascript:void(0)" class="dropdown-btn">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -191,6 +191,14 @@
                             </a>
                         </li>
                     <?php endif ?>
+                    <?php if (in_array('TR002', $user_access) || in_array('*', $user_access)): ?>
+                        <li class="<?= $this->uri->segment(3) == 'warehouse' ? 'active' : '' ?>">
+                            <a href="<?= route('dashboard/master/warehouse') ?>"
+                                class="">
+                                <i class='bx bxs-right-arrow'></i> GUDANG ENTRY
+                            </a>
+                        </li>
+                    <?php endif ?>  
                 </ul>
             </li>
             <?php endif ?>

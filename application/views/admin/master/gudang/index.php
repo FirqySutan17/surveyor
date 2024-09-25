@@ -264,7 +264,7 @@
 
 <div class="main-content pre-posttest">
     <h3 class="card-title">
-        <strong>MASTER DATA - GUDANG</strong>
+        <strong>GUDANG ENTRY</strong>
     </h3>
     <div class="row" style="padding: 0px 10px; border-bottom: 2px solid #000; padding-bottom: 8px;margin: 0px 0px; margin-bottom: 10px; ">
         <div class="col-6"></div>

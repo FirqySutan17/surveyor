@@ -45,6 +45,14 @@ $route['visit/do_create_mobile'] 	= 'Home/do_create_mobile';
 	$route['dashboard/master/warehouse/do_update'] 		= 'admin/master/Warehouse/do_update';
 	$route['dashboard/master/warehouse/detail/(:any)'] 	= 'admin/master/Warehouse/detail/$1';
 	$route['dashboard/master/warehouse/delete/(:any)']	= 'admin/master/Warehouse/delete/$1';
+
+	$route['dashboard/master/klasifikasi'] 						= 'admin/master/Klasifikasi';
+	$route['dashboard/master/klasifikasi/create'] 			= 'admin/master/Klasifikasi/create';
+	$route['dashboard/master/klasifikasi/do_create'] 		= 'admin/master/Klasifikasi/do_create';
+	$route['dashboard/master/klasifikasi/edit/(:any)'] 	= 'admin/master/Klasifikasi/edit/$1';
+	$route['dashboard/master/klasifikasi/do_update'] 		= 'admin/master/Klasifikasi/do_update';
+	$route['dashboard/master/klasifikasi/detail/(:any)'] 	= 'admin/master/Klasifikasi/detail/$1';
+	$route['dashboard/master/klasifikasi/delete/(:any)']	= 'admin/master/Klasifikasi/delete/$1';
 /* MASTER DATA ROUTES */
 
 /* ENTRY ROUTES */
