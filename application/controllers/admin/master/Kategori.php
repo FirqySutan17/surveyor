@@ -84,7 +84,7 @@ class Kategori extends CI_Controller {
 
 			$code = $post_data['CODE'];
 			unset($post_data['CODE']);
-			$save 	= $this->Dbhelper->updateData("CD_KATEGORI", array('CODE' => $code), $update_data);		
+			$save 	= $this->Dbhelper->updateData("CD_KATEGORI", array('CODE' => $code), $post_data);		
 			if ($save) {
 				$this->session->set_flashdata('success', "Update data success");
 				return redirect($this->own_link);
