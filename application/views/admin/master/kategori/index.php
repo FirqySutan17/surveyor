@@ -280,7 +280,7 @@
 
 <div class="main-content pre-posttest">
 	<h3 class="card-title">
-		<strong>MASTER DATA - CLASSIFICATION</strong>
+		<strong>MASTER DATA - CATEGORY</strong>
 	</h3>
 	<div
 		class="row"
@@ -296,7 +296,7 @@
 		<div class="col-4"></div>
 		<div class="col-2">
 			<a
-				href="<?= admin_url('master/klasifikasi/create') ?>"
+				href="<?= admin_url('master/kategori/create') ?>"
 				class="btn btn-primary btn-block"
 				>CREATE</a
 			>
@@ -307,7 +307,7 @@
 			<tr>
 				<th style="text-align: center">NO</th>
 				<th style="text-align: center">CODE</th>
-				<th style="text-align: center">CLASSIFICATION</th>
+				<th style="text-align: center">CATEGORY</th>
 				<th style="text-align: center">Action</th>
 			</tr>
 		</thead>
@@ -322,16 +322,16 @@
 					<?= $v['CODE'] ?>
 				</td>
 				<td style="text-align: center; vertical-align: middle">
-					<?= $v['CLASSIFICATION'] ?>
+					<?= $v['CATEGORY'] ?>
 				</td>
 				<td style="text-align: center; vertical-align: middle">
-					<!-- <a href="<?= admin_url('master/klasifikasi/detail/'.$v['CODE']) ?>" class="btn btn-sm"><i class="fas fa-eye text-success"></i></a> -->
+					<!-- <a href="<?= admin_url('master/kategori/detail/'.$v['CODE']) ?>" class="btn btn-sm"><i class="fas fa-eye text-success"></i></a> -->
 					<a
-						href="<?= admin_url('master/klasifikasi/edit/'.$v['CODE']) ?>"
+						href="<?= admin_url('master/kategori/edit/'.$v['CODE']) ?>"
 						class="btn btn-sm"
 						><i class="fas fa-pen text-warning"></i
 					></a>
-					<!-- <a href="<?= admin_url('master/klasifikasi/delete/'.$v['CODE']) ?>" class="btn btn-sm"><i class="fas fa-trash text-danger"></i></a> -->
+					<!-- <a href="<?= admin_url('master/kategori/delete/'.$v['CODE']) ?>" class="btn btn-sm"><i class="fas fa-trash text-danger"></i></a> -->
 				</td>
 			</tr>
 			<?php endforeach ?>
