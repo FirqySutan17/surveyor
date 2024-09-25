@@ -454,9 +454,6 @@
 </style>
 
 <div class="main-content" style="background: linear-gradient(0deg, rgba(0,125,195,1) 10%, rgba(161,221,255,1) 98%); min-height: 91.6vh">
-    <div style="width: 100%">
-        <img src="<?= asset('img/banner-cct-fix.jpg') ?>" style="width: 100%; object-fit: cover; text-align: center; margin-bottom: 0px; border-radius: 10px; border: 5px solid #fff"> 
-    </div>
     <div class="db-table" style="margin-top: 10px">
         <div class="db-box" style="height: 250px">
             <h4 style="font-family: cjFont; margin-bottom: 0px; text-align: center; margin-bottom: 5px">TITLE POINT 1</h4>

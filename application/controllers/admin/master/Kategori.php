@@ -1,54 +1,54 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Klasifikasi extends CI_Controller {
+class Kategori extends CI_Controller {
 	var $menu_id = "";
 	var $session_data = "";
 	public function __Construct() {
 		parent::__construct();
-		$this->menu_id = 'M005';
+		$this->menu_id = 'M006';
 		$this->session_data = $this->session->userdata('user_dashboard');
 
 		$this->cekLogin();
-		$this->own_link = admin_url('master/klasifikasi');
+		$this->own_link = admin_url('master/kategori');
 	}
 
 	public function index() {
 
-		$data['title'] 			= 'CLASSIFICATION';
+		$data['title'] 			= 'KATEGORI';
 		$data['user']				= $this->session_data['user'];
 		$data['datatable']	= $this->datatable();
 		// dd($data['datatable']);
-		$this->template->_v('master/klasifikasi/index', $data);
+		$this->template->_v('master/kategori/index', $data);
 	}
 
 	public function datatable() {
-		$data = $this->Dbhelper->selectRawQuery("SELECT * FROM CD_KLASIFIKASI WHERE IS_DELETED IS NULL ORDER BY CODE ASC");
+		$data = $this->Dbhelper->selectRawQuery("SELECT * FROM CD_KATEGORI WHERE IS_DELETED IS NULL ORDER BY CODE ASC");
 
 		return $data;
 	}
 
 	public function create() {
 
-		$data['title'] 			= 'CLASSIFICATION';
+		$data['title'] 			= 'KATEGORI';
 		
-		$this->template->_v('master/klasifikasi/create', $data);
+		$this->template->_v('master/kategori/create', $data);
 	}
 
 	public function do_create() {
 		if ($this->input->server('REQUEST_METHOD') === 'POST') {
 			$post = $this->input->post();
 			// dd($post);
-			$klasifikasi_no = $this->generateKlasifikasiNo();
+			$kategori_no = $this->generateKategoriCode();
 			try {
 				$klasifikasi_data = [
-					"CODE"		        => $klasifikasi_no,
-					"CLASSIFICATION"	=> dbClean($post['classification']),
+					"CODE"		        => $kategori_no,
+					"CATEGORY"	=> dbClean($post['category']),
 					"REMARKS"	        => dbClean($post['remarks']),
 					"IS_DELETED"		=> NULL,
 				];
 
-				$save = $this->Dbhelper->insertData('CD_KLASIFIKASI', $klasifikasi_data);
+				$save = $this->Dbhelper->insertData('CD_KATEGORI', $klasifikasi_data);
 				
 				if ($save) {
 					$this->session->set_flashdata('success', "Create data success");
@@ -67,8 +67,8 @@ class Klasifikasi extends CI_Controller {
 	public function edit($code) {
 
 		$data['title'] 			= 'CLASSIFICATION';
-		$data['model']			= $this->Dbhelper->selectTabelOne('*', 'CD_KLASIFIKASI', array('CODE' => $code));
-		$this->template->_v('master/klasifikasi/edit', $data);
+		$data['model']			= $this->Dbhelper->selectTabelOne('*', 'CD_KATEGORI', array('CODE' => $code));
+		$this->template->_v('master/kategori/edit', $data);
 	}
 
 	public function do_update() {
@@ -84,7 +84,7 @@ class Klasifikasi extends CI_Controller {
 
 			$code = $post_data['CODE'];
 			unset($post_data['CODE']);
-			$save 	= $this->Dbhelper->updateData("CD_KLASIFIKASI", array('CODE' => $code), $update_data);		
+			$save 	= $this->Dbhelper->updateData("CD_KATEGORI", array('CODE' => $code), $update_data);		
 			if ($save) {
 				$this->session->set_flashdata('success', "Update data success");
 				return redirect($this->own_link);
@@ -96,8 +96,8 @@ class Klasifikasi extends CI_Controller {
     return redirect($this->own_link);
 	}
 
-    private function generateKlasifikasiNo() {
-        $generated_no = "CLS";
+    private function generateKategoriCode() {
+        $generated_no = "CAT";
         $no = 1;
        
         if ($no < 10) {

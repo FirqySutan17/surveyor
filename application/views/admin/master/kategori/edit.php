@@ -761,23 +761,23 @@
 
 <div class="main-content pre-posttest">
     <h3 class="card-title">
-        <strong>CREATE CLASSIFICATION</strong>
+        <strong>EDIT KATEGORI</strong>
     </h3>
     <div class="row" style="align-items: center; justify-content: center; min-height: 80vh">
-        <form class="form-classification" action="<?= admin_url('master/klasifikasi/do_update') ?>" method="POST" enctype="multipart/form-data">
+        <form class="form-category" action="<?= admin_url('master/kategori/do_update') ?>" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="code" value="<?= $model['CODE'] ?>">
             <div class="content-task">
                 <div class="table-responsive mt-2">
                     <table class="table table-bordered" style="margin-bottom: 10px">
                         <thead>
                             <tr>
-                                <th style="text-align: left">CLASSIFICATION</th>
+                                <th style="text-align: left">KATEGORI</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td data-label="CLASSIFICATION">
-                                    <input type="text" name="classification" class="form-control" style="font-size: 14px !important; text-align: left" placeholder="type here.." required value="<?= $model['CLASSIFICATION'] ?>">
+                                <td data-label="category">
+                                    <input type="text" name="category" class="form-control" style="font-size: 14px !important; text-align: left" placeholder="type here.." required value="<?= $model['CATEGORY'] ?>">
                                 </td>
                             </tr>
                         </tbody>
@@ -801,7 +801,7 @@
 
             <div class="form-group row mt-5" style="margin: 20px 0px !important">
                 <div class="col-lg-12 col-sm-12" style="display: flex; padding: 0px">
-                    <a href="<?= admin_url('master/klasifikasi') ?>" class="btn btn-primary cust-btn-back" style="width: 50%; height: 50px; display: flex; align-items: center; justify-content: center;">CANCEL</a>
+                    <a href="<?= admin_url('master/kategori') ?>" class="btn btn-primary cust-btn-back" style="width: 50%; height: 50px; display: flex; align-items: center; justify-content: center;">CANCEL</a>
                     <span style="margin: 5px;"></span>
                     <button type="submit" class="btn btn-primary cust-btn-save" style="width: 50%; height: 50px">UPDATE</button>
                 </div>

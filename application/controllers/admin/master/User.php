@@ -345,6 +345,8 @@ class User extends CI_Controller {
 			'M002'	=> 'Master - Data Employee',
 			'M003'	=> 'Master - Data Customer',
 			'M004'	=> 'Master - Data User',
+			'M005'	=> 'Master - Data Klasifikasi',
+			'M006'	=> 'Master - Data Kategori',
 			'TR001'	=> 'Entry - Visit Entry',
 			'TR002'	=> 'Master - Data Gudang',
 			'R001'	=> 'Report - Visit Report by Date',

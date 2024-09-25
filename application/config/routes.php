@@ -53,6 +53,15 @@ $route['visit/do_create_mobile'] 	= 'Home/do_create_mobile';
 	$route['dashboard/master/klasifikasi/do_update'] 		= 'admin/master/Klasifikasi/do_update';
 	$route['dashboard/master/klasifikasi/detail/(:any)'] 	= 'admin/master/Klasifikasi/detail/$1';
 	$route['dashboard/master/klasifikasi/delete/(:any)']	= 'admin/master/Klasifikasi/delete/$1';
+	
+
+	$route['dashboard/master/kategori'] 						= 'admin/master/Kategori';
+	$route['dashboard/master/kategori/create'] 			= 'admin/master/Kategori/create';
+	$route['dashboard/master/kategori/do_create'] 		= 'admin/master/Kategori/do_create';
+	$route['dashboard/master/kategori/edit/(:any)'] 	= 'admin/master/Kategori/edit/$1';
+	$route['dashboard/master/kategori/do_update'] 		= 'admin/master/Kategori/do_update';
+	$route['dashboard/master/kategori/detail/(:any)'] 	= 'admin/master/Kategori/detail/$1';
+	$route['dashboard/master/kategori/delete/(:any)']	= 'admin/master/Kategori/delete/$1';
 /* MASTER DATA ROUTES */
 
 /* ENTRY ROUTES */
