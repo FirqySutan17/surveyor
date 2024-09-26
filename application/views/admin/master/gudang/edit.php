@@ -1080,7 +1080,7 @@
                                     <td data-label="classification" class="tb-width">
                                         <select id="klasifikasi" class="form-control" name="classification">
                                             <?php foreach ($classification as $field): ?>
-                                                <option value="<?= $field['CODE'] ?>" <?= $field['CODE'] == $model['CLASSIFICATION'] ? 'selected' : '' ?>><?= $field['CODE'] ?> - <?= $field['CLASSIFICATION'] ?></option>
+                                                <option value="<?= $field['CODE'] ?>" <?= $field['CLASSIFICATION'] == $model['CLASSIFICATION'] ? 'selected' : '' ?>><?= $field['CODE'] ?> - <?= $field['CLASSIFICATION'] ?></option>
                                             <?php endforeach ?>
                                         </select>
                                     </td>
@@ -1088,7 +1088,7 @@
                                     <td data-label="category" class="tb-width">
                                         <select id="category" class="form-control" name="kategori[]" multiple>
                                             <?php foreach ($category as $field): ?>
-                                                <option value="<?= $field['CODE'] ?>" <?= in_array($field['CODE'], $explode_kategori) ? 'selected' : '' ?> ><?= $field['CATEGORY'] ?></option>
+                                                <option value="<?= $field['CODE'] ?>" <?= in_array($field['CATEGORY'], $explode_kategori) ? 'selected' : '' ?> ><?= $field['CATEGORY'] ?></option>
                                             <?php endforeach ?>
                                         </select>
                                     </td>
