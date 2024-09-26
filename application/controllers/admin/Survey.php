@@ -24,7 +24,11 @@ class survey extends CI_Controller {
 	}
 
 	public function index() {
-		redirect($this->own_link.'/report');
+		
+		$data['title'] 			= 'SURVEY';
+		
+		// dd($data['user']);
+		$this->template->_v('survey/index', $data);
 	}
 
 	public function entry() {

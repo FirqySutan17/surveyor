@@ -229,7 +229,7 @@
                 <ul class="nav-submenu menu-content">
                     <?php if (in_array('R001', $user_access) || in_array('*', $user_access)): ?>
                         <li class="<?= ($this->uri->segment(2) == 'visit' && $this->uri->segment(3) == 'report') ? 'active' : '' ?>">
-                            <a href="<?= route('dashboard/survey/entry') ?>"
+                            <a href="<?= route('dashboard/survey') ?>"
                                 class="">
                                 <i class='bx bxs-right-arrow'></i> SURVEY REPORT
                             </a>
