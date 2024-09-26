@@ -77,6 +77,8 @@ class Warehouse extends CI_Controller {
 
 		$data['title'] 			= 'WAREHOUSE';
 		$data['model']			= $this->Dbhelper->selectTabelOne('*', 'CD_GUDANG', array('CODE' => $code));
+		$data['classification'] 	= $this->Dbhelper->selectTabel('CODE, CLASSIFICATION', 'CD_KLASIFIKASI');
+		$data['category'] 		= $this->Dbhelper->selectTabel('CODE, CATEGORY', 'CD_KATEGORI');
 		$this->template->_v('master/gudang/edit', $data);
 	}
 
