@@ -653,7 +653,7 @@
                         font-size: 12px
                     }
 
-                    .form-classification {
+                    .form-category {
                         width: 75%; 
                         display: flex; 
                         flex-direction: column; 
@@ -671,7 +671,7 @@
                         h3.sub-title {
                             line-height: 25px;
                         }
-                        .form-classification {
+                        .form-category {
                             width: 100%; 
                         }
                     }
@@ -761,7 +761,7 @@
 
 <div class="main-content pre-posttest">
     <h3 class="card-title">
-        <strong>CREATE KATEGORI</strong>
+        <strong>CREATE CATEGORY</strong>
     </h3>
     <div class="row" style="align-items: center; justify-content: center; min-height: 80vh">
         <form class="form-category" action="<?= admin_url('master/kategori/do_create') ?>" method="POST" enctype="multipart/form-data">
@@ -790,7 +790,7 @@
                         <tbody>
                             <tr>
                                 <td data-label="REMARKS">
-                                    <textarea name="remarks" id="" rows="5" class="form-control" style="font-size: 14px !important; padding: 10px" placeholder="type here.." required></textarea>
+                                    <textarea name="remarks" id="" rows="5" class="form-control" style="font-size: 14px !important; padding: 10px" placeholder="type here.."></textarea>
                                 </td>
                             </tr>
                         </tbody>

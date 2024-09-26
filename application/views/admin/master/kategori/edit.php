@@ -761,7 +761,7 @@
 
 <div class="main-content pre-posttest">
     <h3 class="card-title">
-        <strong>EDIT KATEGORI</strong>
+        <strong>EDIT CATEGORY</strong>
     </h3>
     <div class="row" style="align-items: center; justify-content: center; min-height: 80vh">
         <form class="form-category" action="<?= admin_url('master/kategori/do_update') ?>" method="POST" enctype="multipart/form-data">
@@ -791,7 +791,7 @@
                         <tbody>
                             <tr>
                                 <td data-label="REMARKS">
-                                    <textarea name="remarks" id="" rows="5" class="form-control" style="font-size: 14px !important; padding: 10px" placeholder="type here.." required><?= $model['REMARKS'] ?></textarea>
+                                    <textarea name="remarks" id="" rows="5" class="form-control" style="font-size: 14px !important; padding: 10px" placeholder="type here.."><?= $model['REMARKS'] ?></textarea>
                                 </td>
                             </tr>
                         </tbody>

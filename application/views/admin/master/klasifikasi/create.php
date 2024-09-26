@@ -790,7 +790,7 @@
                         <tbody>
                             <tr>
                                 <td data-label="REMARKS">
-                                    <textarea name="remarks" id="" rows="5" class="form-control" style="font-size: 14px !important; padding: 10px" placeholder="type here.." required></textarea>
+                                    <textarea name="remarks" id="" rows="5" class="form-control" style="font-size: 14px !important; padding: 10px" placeholder="type here.."></textarea>
                                 </td>
                             </tr>
                         </tbody>

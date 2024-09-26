@@ -7,6 +7,7 @@ class Warehouse extends CI_Controller {
 	public function __Construct() {
 		parent::__construct();
 		$this->menu_id = 'TR002';
+		$this->menu_id1 = 'R002';
 		$this->session_data = $this->session->userdata('user_dashboard');
 
 		$this->cekLogin();
@@ -14,9 +15,19 @@ class Warehouse extends CI_Controller {
 	}
 
 	public function index() {
+		$warehouse = "*";
 
-		$data['title'] 			= 'GUDANG ENTRY';
+		if ($this->input->server('REQUEST_METHOD') === 'POST') {
+			$warehouse 		= $this->input->post('warehouse');
+		}
+
+		$filter = [
+			"warehouse"	=> $warehouse,
+		];
+
+		$data['title'] 			= 'WAREHOUSE';
 		$data['user']				= $this->session_data['user'];
+		$data['warehouse'] 			= $this->Dbhelper->selectTabel('CODE, NAMA', 'CD_GUDANG');
 		$data['datatable']	= $this->datatable();
 		// dd($data['datatable']);
 		$this->template->_v('master/gudang/index', $data);
@@ -29,9 +40,10 @@ class Warehouse extends CI_Controller {
 	}
 
 	public function create() {
-
-		$data['title'] 			= 'Create Gudang';
-		
+		$data['title'] 				= 'WAREHOUSE';
+		$data['classification'] 	= $this->Dbhelper->selectTabel('CODE, CLASSIFICATION', 'CD_KLASIFIKASI');
+		$data['category'] 		= $this->Dbhelper->selectTabel('CODE, CATEGORY', 'CD_KATEGORI');
+		// dd($data['classification']);
 		$this->template->_v('master/gudang/create', $data);
 	}
 
@@ -43,8 +55,6 @@ class Warehouse extends CI_Controller {
 			foreach ($post as $key => $value) {
 				$post_data[strtoupper($key)] = dbClean($value);
 			}
-
-
 
 			$save = $this->Dbhelper->insertData('CD_GUDANG', $post_data);
 			if ($save) {
@@ -60,7 +70,7 @@ class Warehouse extends CI_Controller {
 
 	public function edit($code) {
 
-		$data['title'] 			= 'Edit Gudang';
+		$data['title'] 			= 'WAREHOUSE';
 		$data['model']			= $this->Dbhelper->selectTabelOne('*', 'CD_GUDANG', array('CODE' => $code));
 		$this->template->_v('master/gudang/edit', $data);
 	}

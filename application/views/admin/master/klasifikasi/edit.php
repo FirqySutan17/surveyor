@@ -791,7 +791,7 @@
                         <tbody>
                             <tr>
                                 <td data-label="REMARKS">
-                                    <textarea name="remarks" id="" rows="5" class="form-control" style="font-size: 14px !important; padding: 10px" placeholder="type here.." required><?= $model['REMARKS'] ?></textarea>
+                                    <textarea name="remarks" id="" rows="5" class="form-control" style="font-size: 14px !important; padding: 10px" placeholder="type here.."><?= $model['REMARKS'] ?></textarea>
                                 </td>
                             </tr>
                         </tbody>

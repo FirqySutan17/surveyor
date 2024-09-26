@@ -343,16 +343,13 @@ class User extends CI_Controller {
 			'*' 	=> 'ALL MENU',
 			'M001'	=> 'Master - Data Common Code',
 			'M002'	=> 'Master - Data Employee',
-			'M003'	=> 'Master - Data Customer',
 			'M004'	=> 'Master - Data User',
 			'M005'	=> 'Master - Data Klasifikasi',
 			'M006'	=> 'Master - Data Kategori',
-			'TR001'	=> 'Entry - Visit Entry',
-			'TR002'	=> 'Master - Data Gudang',
-			'R001'	=> 'Report - Visit Report by Date',
-			'R002'	=> 'Report - Overdue / Deb list',
-			'R003'	=> 'Report - Collector Report',
-			'R004'	=> 'Report - Visit Report by Customer',
+			'TR001'	=> 'Entry - Survey',
+			'TR002'	=> 'Entry - Gudang',
+			'R001'	=> 'Report - Survey',
+			'R002'	=> 'Report - Gudang',
 		];
 	}
 

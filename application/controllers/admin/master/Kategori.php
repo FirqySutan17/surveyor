@@ -99,7 +99,8 @@ class Kategori extends CI_Controller {
     private function generateKategoriCode() {
         $generated_no = "CAT";
         $no = 1;
-       
+        $data = $this->Dbhelper->selectTabel('CODE', 'CD_KATEGORI', array(), 'CODE', 'DESC');
+		$no 	= count($data) + 1;
         if ($no < 10) {
             $no = "000".$no;
         } elseif ($no >= 10 && $no < 100) {
