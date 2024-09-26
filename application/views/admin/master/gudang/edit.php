@@ -1079,16 +1079,16 @@
                                 <tr>
                                     <td data-label="classification" class="tb-width">
                                         <select id="klasifikasi" class="form-control" name="classification">
-                                            <option value="<?= $model['KATEGORI'] ?>" selected><?= $model['KATEGORI'] ?></option>
                                             <?php foreach ($classification as $field): ?>
-                                                <option value="<?= $field['CODE'] ?>"><?= $field['CODE'] ?> - <?= $field['CLASSIFICATION'] ?></option>
+                                                <option value="<?= $field['CODE'] ?>" <?= $field['CODE'] == $model['CLASSIFICATION'] ? 'selected' : '' ?>><?= $field['CODE'] ?> - <?= $field['CLASSIFICATION'] ?></option>
                                             <?php endforeach ?>
                                         </select>
                                     </td>
+                                    <?php $explode_kategori = explode(",", $model['KATEGORI']); ?>
                                     <td data-label="category" class="tb-width">
                                         <select id="category" class="form-control" name="kategori[]" multiple>
                                             <?php foreach ($category as $field): ?>
-                                                <option value="<?= $field['CODE'] ?>"><?= $field['CATEGORY'] ?></option>
+                                                <option value="<?= $field['CODE'] ?>" <?= in_array($field['CODE'], $explode_kategori) ? 'selected' : '' ?> ><?= $field['CATEGORY'] ?></option>
                                             <?php endforeach ?>
                                         </select>
                                     </td>

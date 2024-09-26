@@ -53,8 +53,13 @@ class Warehouse extends CI_Controller {
 
 			$post_data = [];
 			foreach ($post as $key => $value) {
-				$post_data[strtoupper($key)] = dbClean($value);
+				if ($key != 'kategori') {
+					$key = strtoupper($key);
+					$post_data[$key] = dbClean($value);
+				} 
 			}
+			$kategori = implode(',', $post['kategori']);
+			$post_data['KATEGORI'] = $kategori;
 
 			$save = $this->Dbhelper->insertData('CD_GUDANG', $post_data);
 			if ($save) {
@@ -82,13 +87,17 @@ class Warehouse extends CI_Controller {
 
 			$post_data = [];
 			foreach ($post as $key => $value) {
-				$key = strtoupper($key);
-				$post_data[$key] = dbClean($value);
+				if ($key != 'kategori') {
+					$key = strtoupper($key);
+					$post_data[$key] = dbClean($value);
+				} 
 			}
+			$kategori = implode(',', $post['kategori']);
+			$post_data['KATEGORI'] = $kategori;
 
 			$code = $post_data['CODE'];
 			unset($post_data['CODE']);
-			$save 	= $this->Dbhelper->updateData("CD_GUDANG", array('CODE' => $code), $update_data);		
+			$save 	= $this->Dbhelper->updateData("CD_GUDANG", array('CODE' => $code), $post_data);		
 			if ($save) {
 				$this->session->set_flashdata('success', "Update data success");
 				return redirect($this->own_link);
