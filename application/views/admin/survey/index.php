@@ -297,7 +297,7 @@
                 <button type="submit" class="btn btn-primary btn-block" style="height: 30px">FILTER</button>
             </div>
             <div class="col-md-2 col-sm-12" style="display: flex; align-items: center">
-                <button type="submit" formaction="<?= admin_url('visit/report-collector/excel') ?>" class="btn btn-info btn-block" style="height: 30px">EXCEL</button>
+                <button type="submit" formaction="<?= admin_url('survey/report/excel') ?>" class="btn btn-info btn-block" style="height: 30px">EXCEL</button>
             </div>
         </div>
     </form>
@@ -306,143 +306,29 @@
             <tr>
                 <th style="text-align: center;">NO</th>
                 <th style="text-align: center;">CODE</th>
-                <th style="text-align: center;">SURVEY</th>
+                <th style="text-align: center;">DATE</th>
                 <th style="text-align: center;">COORDINATE</th>
                 <th style="text-align: center;">ADDRESS</th>
-                <th style="text-align: center;">LEVEL</th>
                 <th style="text-align: center;">SURVEYOR</th>
                 <th style="text-align: center;">ACTION</th>
             </tr>
         </thead>
         <tbody>
-            <!-- <?php foreach ($datatable as $i => $v): ?>
+            <?php foreach ($datatable as $i => $v): ?>
                 <tr>
                     <td style="text-align: center; vertical-align: middle"><?= $i + 1 ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['CODE'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['NAMA'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['PHONE_NUMBER'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['CLASSIFICATION'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['CAPACITY'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['KATEGORI'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['AREA'] ?></td><td style="text-align: center; vertical-align: middle">
-                        <a href="<?= admin_url('master/warehouse/detail/'.$v['CODE']) ?>" class="btn btn-sm"><i class="fas fa-eye text-success"></i></a>
-                        <a href="<?= admin_url('master/warehouse/edit/'.$v['CODE']) ?>" class="btn btn-sm"><i class="fas fa-pen text-success"></i></a>
-                        <a href="<?= admin_url('master/warehouse/delete/'.$v['CODE']) ?>" class="btn btn-sm"><i class="fas fa-trash text-danger"></i></a>
-                    </td>
-                </tr>
-            <?php endforeach ?> -->
-                <tr>
-                    <td style="text-align: center; vertical-align: middle">1</td>
-                    <td style="text-align: center; vertical-align: middle">SRV0001</td>
-                    <td style="text-align: center; vertical-align: middle">SURVEY A</td>
-                    <td style="text-align: center; vertical-align: middle">-6.2336193, 106.8214119</td>
-                    <td style="text-align: center; vertical-align: middle; width: 30%; text-transform: uppercase;">Jl. Gatot Subroto No.Kav. 38, RT.6/RW.1, Kuningan Bar. Kec. Mampang Prpt. Jakarta, Daerah Khusus Ibukota Jakarta 12710</td>
-                    <td style="text-align: center; vertical-align: middle">VERY GOOD</td>
-                    <td style="text-align: center; vertical-align: middle">FIRQY SUTAN</td>
+                    <td style="text-align: center; vertical-align: middle"><?= $v['SURVEY_CODE'] ?></td>
+                    <td style="text-align: center; vertical-align: middle"><?= $v['SURVEY_DATE'] ?></td>
+                    <td style="text-align: center; vertical-align: middle"><?= $v['COORDINATE'] ?></td>
+                    <td style="text-align: center; vertical-align: middle"><?= $v['DESCRIPTION'] ?></td>
+                    <td style="text-align: center; vertical-align: middle"><?= $v['CREATED_BY_NAME'] ?></td>
                     <td style="text-align: center; vertical-align: middle">
                         <a href="<?= admin_url('survey/edit') ?>" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
                         <a href="<?= admin_url('survey/drawing') ?>" class="btn btn-sm" title="Drawing"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px"></i></a>
                         <a href="<?= admin_url('survey/detail') ?>" target="_blank" class="btn btn-sm" title="Detail"><i class="fas fa-eye text-primary"></i></a>
                     </td>
                 </tr>
-                <tr>
-                    <td style="text-align: center; vertical-align: middle">2</td>
-                    <td style="text-align: center; vertical-align: middle">SRV0002</td>
-                    <td style="text-align: center; vertical-align: middle">SURVEY B</td>
-                    <td style="text-align: center; vertical-align: middle">-6.2336193, 106.8214119</td>
-                    <td style="text-align: center; vertical-align: middle; width: 30%; text-transform: uppercase;">Jl. Gatot Subroto No.Kav. 38, RT.6/RW.1, Kuningan Bar. Kec. Mampang Prpt. Jakarta, Daerah Khusus Ibukota Jakarta 12710</td>
-                    <td style="text-align: center; vertical-align: middle">VERY GOOD</td>
-                    <td style="text-align: center; vertical-align: middle">FIRQY SUTAN</td>
-                    <td style="text-align: center; vertical-align: middle">
-                        <a href="<?= admin_url('survey/edit') ?>" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
-                        <a href="<?= admin_url('survey/drawing') ?>" class="btn btn-sm" title="Drawing"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px"></i></a>
-                        <a href="<?= admin_url('survey/detail') ?>" target="_blank" class="btn btn-sm" title="Detail"><i class="fas fa-eye text-primary"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="text-align: center; vertical-align: middle">3</td>
-                    <td style="text-align: center; vertical-align: middle">SRV0003</td>
-                    <td style="text-align: center; vertical-align: middle">SURVEY C</td>
-                    <td style="text-align: center; vertical-align: middle">-6.2336193, 106.8214119</td>
-                    <td style="text-align: center; vertical-align: middle; width: 30%; text-transform: uppercase;">Jl. Gatot Subroto No.Kav. 38, RT.6/RW.1, Kuningan Bar. Kec. Mampang Prpt. Jakarta, Daerah Khusus Ibukota Jakarta 12710</td>
-                    <td style="text-align: center; vertical-align: middle">VERY GOOD</td>
-                    <td style="text-align: center; vertical-align: middle">FIRQY SUTAN</td>
-                    <td style="text-align: center; vertical-align: middle">
-                        <a href="<?= admin_url('survey/edit') ?>" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
-                        <a href="<?= admin_url('survey/drawing') ?>" class="btn btn-sm" title="Drawing"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px"></i></a>
-                        <a href="<?= admin_url('survey/detail') ?>" target="_blank" class="btn btn-sm" title="Detail"><i class="fas fa-eye text-primary"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="text-align: center; vertical-align: middle">4</td>
-                    <td style="text-align: center; vertical-align: middle">SRV0004</td>
-                    <td style="text-align: center; vertical-align: middle">SURVEY D</td>
-                    <td style="text-align: center; vertical-align: middle">-6.2336193, 106.8214119</td>
-                    <td style="text-align: center; vertical-align: middle; width: 30%; text-transform: uppercase;">Jl. Gatot Subroto No.Kav. 38, RT.6/RW.1, Kuningan Bar. Kec. Mampang Prpt. Jakarta, Daerah Khusus Ibukota Jakarta 12710</td>
-                    <td style="text-align: center; vertical-align: middle">VERY GOOD</td>
-                    <td style="text-align: center; vertical-align: middle">FIRQY SUTAN</td>
-                    <td style="text-align: center; vertical-align: middle">
-                        <a href="<?= admin_url('survey/edit') ?>" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
-                        <a href="<?= admin_url('survey/drawing') ?>" class="btn btn-sm" title="Drawing"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px"></i></a>
-                        <a href="<?= admin_url('survey/detail') ?>" target="_blank" class="btn btn-sm" title="Detail"><i class="fas fa-eye text-primary"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="text-align: center; vertical-align: middle">5</td>
-                    <td style="text-align: center; vertical-align: middle">SRV0005</td>
-                    <td style="text-align: center; vertical-align: middle">SURVEY E</td>
-                    <td style="text-align: center; vertical-align: middle">-6.2336193, 106.8214119</td>
-                    <td style="text-align: center; vertical-align: middle; width: 30%; text-transform: uppercase;">Jl. Gatot Subroto No.Kav. 38, RT.6/RW.1, Kuningan Bar. Kec. Mampang Prpt. Jakarta, Daerah Khusus Ibukota Jakarta 12710</td>
-                    <td style="text-align: center; vertical-align: middle">VERY GOOD</td>
-                    <td style="text-align: center; vertical-align: middle">FIRQY SUTAN</td>
-                    <td style="text-align: center; vertical-align: middle">
-                        <a href="<?= admin_url('survey/edit') ?>" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
-                        <a href="<?= admin_url('survey/drawing') ?>" class="btn btn-sm" title="Drawing"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px"></i></a>
-                        <a href="<?= admin_url('survey/detail') ?>" target="_blank" class="btn btn-sm" title="Detail"><i class="fas fa-eye text-primary"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="text-align: center; vertical-align: middle">6</td>
-                    <td style="text-align: center; vertical-align: middle">SRV0006</td>
-                    <td style="text-align: center; vertical-align: middle">SURVEY F</td>
-                    <td style="text-align: center; vertical-align: middle">-6.2336193, 106.8214119</td>
-                    <td style="text-align: center; vertical-align: middle; width: 30%; text-transform: uppercase;">Jl. Gatot Subroto No.Kav. 38, RT.6/RW.1, Kuningan Bar. Kec. Mampang Prpt. Jakarta, Daerah Khusus Ibukota Jakarta 12710</td>
-                    <td style="text-align: center; vertical-align: middle">VERY GOOD</td>
-                    <td style="text-align: center; vertical-align: middle">FIRQY SUTAN</td>
-                    <td style="text-align: center; vertical-align: middle">
-                        <a href="<?= admin_url('survey/edit') ?>" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
-                        <a href="<?= admin_url('survey/drawing') ?>" class="btn btn-sm" title="Drawing"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px"></i></a>
-                        <a href="<?= admin_url('survey/detail') ?>" target="_blank" class="btn btn-sm" title="Detail"><i class="fas fa-eye text-primary"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="text-align: center; vertical-align: middle">7</td>
-                    <td style="text-align: center; vertical-align: middle">SRV0007</td>
-                    <td style="text-align: center; vertical-align: middle">SURVEY G</td>
-                    <td style="text-align: center; vertical-align: middle">-6.2336193, 106.8214119</td>
-                    <td style="text-align: center; vertical-align: middle; width: 30%; text-transform: uppercase;">Jl. Gatot Subroto No.Kav. 38, RT.6/RW.1, Kuningan Bar. Kec. Mampang Prpt. Jakarta, Daerah Khusus Ibukota Jakarta 12710</td>
-                    <td style="text-align: center; vertical-align: middle">VERY GOOD</td>
-                    <td style="text-align: center; vertical-align: middle">FIRQY SUTAN</td>
-                    <td style="text-align: center; vertical-align: middle">
-                        <a href="<?= admin_url('survey/edit') ?>" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
-                        <a href="<?= admin_url('survey/drawing') ?>" class="btn btn-sm" title="Drawing"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px"></i></a>
-                        <a href="<?= admin_url('survey/detail') ?>" target="_blank" class="btn btn-sm" title="Detail"><i class="fas fa-eye text-primary"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="text-align: center; vertical-align: middle">8</td>
-                    <td style="text-align: center; vertical-align: middle">SRV0008</td>
-                    <td style="text-align: center; vertical-align: middle">SURVEY H</td>
-                    <td style="text-align: center; vertical-align: middle">-6.2336193, 106.8214119</td>
-                    <td style="text-align: center; vertical-align: middle; width: 30%; text-transform: uppercase;">Jl. Gatot Subroto No.Kav. 38, RT.6/RW.1, Kuningan Bar. Kec. Mampang Prpt. Jakarta, Daerah Khusus Ibukota Jakarta 12710</td>
-                    <td style="text-align: center; vertical-align: middle">VERY GOOD</td>
-                    <td style="text-align: center; vertical-align: middle">FIRQY SUTAN</td>
-                    <td style="text-align: center; vertical-align: middle">
-                        <a href="<?= admin_url('survey/edit') ?>" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
-                        <a href="<?= admin_url('survey/drawing') ?>" class="btn btn-sm" title="Drawing"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px"></i></a>
-                        <a href="<?= admin_url('survey/detail') ?>" target="_blank" class="btn btn-sm" title="Detail"><i class="fas fa-eye text-primary"></i></a>
-                    </td>
-                </tr>
+            <?php endforeach ?>
         </tbody>
     </table>
 </div>
