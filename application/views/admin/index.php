@@ -454,6 +454,7 @@
 </style>
 
 <div class="main-content" style="background: linear-gradient(0deg, rgba(0,125,195,1) 10%, rgba(161,221,255,1) 98%); min-height: 91.6vh">
+    <img src="<?= asset('img/maps-markers.png') ?>" alt="" style="width: 100%; text-align: center; object-fit: cover; border-radius: 10px; border: 1px solid #fff">
     <div class="db-table" style="margin-top: 10px">
         <div class="db-box" style="height: 250px">
             <h4 style="font-family: cjFont; margin-bottom: 0px; text-align: center; margin-bottom: 5px">TITLE POINT 1</h4>

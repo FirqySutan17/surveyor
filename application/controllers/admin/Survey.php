@@ -408,11 +408,12 @@ class survey extends CI_Controller {
 		$this->template->_v('visit/report_customer', $data);
 	}
 
-	public function detail($visiting_no) {
-
-		$data = $this->get_visitingreport($visiting_no);
-		$data['title'] 				= 'Visit Detail';
-		$this->template->_v('visit/detail', $data);
+	public function detail() {
+		$user	= 	$this->session_data['user'];
+		// $data = $this->get_visitingreport($visiting_no);
+		$data['title'] 				= 'SURVEY';
+		$data['user'] 				= $user;
+		$this->template->_v('survey/detail', $data);
 	}
 
 	public function detail_customer($slug) {
@@ -685,6 +686,22 @@ class survey extends CI_Controller {
 		}
 		$this->session->set_flashdata('error', "Access denied");
         return redirect($this->own_link."/report");
+	}
+
+	public function drawing() {
+		$user 							= $this->session_data['user'];
+		$filter = ['HEAD_CODE'	=> 'AB'];
+		if ($user['PLANT'] != '*') {
+			$filter['CODE'] = $user['PLANT'];
+		}
+
+		// $data 	= $this->get_visitingreport($visiting_no);
+		$data['title'] 				= 'SURVEY';
+		$data['plant'] 				= $this->Dbhelper->selectTabel('CODE, CODE_NAME', 'CD_CODE', $filter, 'CODE', 'ASC');
+		$data['collection_type']	= $this->collection_type();
+		$data['user'] = $user;
+		
+		$this->template->_v('survey/drawing', $data);
 	}
 
 	public function export($visiting_no) {

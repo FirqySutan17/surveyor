@@ -69,9 +69,10 @@ $route['visit/do_create_mobile'] 	= 'Home/do_create_mobile';
 	$route['dashboard/survey/entry'] 								= 'admin/Survey/entry';
 	$route['dashboard/survey/ajax_location_detail'] = 'admin/Survey/ajax_location_detail';
 	$route['dashboard/survey/do_create'] 	= 'admin/Survey/do_create';
-	$route['dashboard/survey/detail/(:any)'] = 'admin/Survey/detail/$1';
+	$route['dashboard/survey/detail'] = 'admin/Survey/detail';
 	$route['dashboard/survey/edit'] 	= 'admin/Survey/edit';
 	$route['dashboard/survey/do_update'] 	= 'admin/Survey/do_update';
+	$route['dashboard/survey/drawing'] 	= 'admin/Survey/drawing';
 	$route['dashboard/visit/export/(:any)'] = 'admin/Visit/export/$1';
 
 	$route['dashboard/remainder'] 					= 'admin/Remainder/index';
