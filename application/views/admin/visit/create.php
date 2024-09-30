@@ -1358,7 +1358,7 @@
             <div class="content-task mt-5">
                 <h3 class="sub-title">4. MARKET PRICES</h3>
                 <div class="table-responsive">
-                    <table class="table table-bordered" style="margin-bottom: 0px">
+                    <table class="table table-bordered" style="margin-bottom: 20px">
                         <thead>
                             <tr>
                                 <th colspan="3" style="text-align: right; background: #fff; border: 0px"><button type="button" class="btn cust-btn-add" onclick="addMarketprice()">+</button></th>
