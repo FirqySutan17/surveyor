@@ -1003,31 +1003,31 @@
                                         10
                                     </td>
                                     <td data-label="BARIS">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="BIJI">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="BOBOT">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                 </tr>
                                 <tr>
@@ -1035,31 +1035,31 @@
                                         9
                                     </td>
                                     <td data-label="BARIS">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="BIJI">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="BOBOT">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                 </tr>
                                 <tr>
@@ -1067,31 +1067,31 @@
                                         8
                                     </td>
                                     <td data-label="BARIS">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="BIJI">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="BOBOT">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                 </tr>
                                 <tr>
@@ -1099,31 +1099,31 @@
                                         7
                                     </td>
                                     <td data-label="BARIS">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="BIJI">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="BOBOT">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                 </tr>
                                 <tr>
@@ -1131,31 +1131,31 @@
                                         6
                                     </td>
                                     <td data-label="BARIS">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="BIJI">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="BOBOT">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                 </tr>
                                 <tr>
@@ -1163,31 +1163,31 @@
                                         5
                                     </td>
                                     <td data-label="BARIS">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="BIJI">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="BOBOT">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                 </tr>
                                 <tr>
@@ -1195,31 +1195,31 @@
                                         4
                                     </td>
                                     <td data-label="BARIS">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="BIJI">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="BOBOT">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                 </tr>
                                 <tr>
@@ -1227,31 +1227,31 @@
                                         3
                                     </td>
                                     <td data-label="BARIS">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="BIJI">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="BOBOT">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                 </tr>
                                 <tr>
@@ -1259,31 +1259,31 @@
                                         2
                                     </td>
                                     <td data-label="BARIS">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="BIJI">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="BOBOT">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                 </tr>
                                 <tr>
@@ -1291,31 +1291,31 @@
                                         1
                                     </td>
                                     <td data-label="BARIS">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="BIJI">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="BOBOT">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                 </tr>
                                 <tr>
@@ -1323,31 +1323,31 @@
                                         0
                                     </td>
                                     <td data-label="BARIS">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="BIJI">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="BOBOT">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="ACTUAL">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                     <td data-label="%">
-                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                 </tr>
                             </tbody>
