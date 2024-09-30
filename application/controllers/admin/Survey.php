@@ -43,7 +43,7 @@ class survey extends CI_Controller {
 		// } else {
 		// 	setcookie('connection', 'default');
 		// }
-		$data['title'] 			= 'SURVEY ENTRY';
+		$data['title'] 			= 'SURVEY';
 		$data['plant'] 			= $this->Dbhelper->selectTabel('CODE, CODE_NAME', 'CD_CODE', $filter, 'CODE', 'ASC');
 		$data['collection_type'] = $this->collection_type();
 		$data['user'] = $user;
@@ -304,8 +304,8 @@ class survey extends CI_Controller {
 		
 		$elevationEndpoint 	= 'https://maps.googleapis.com/maps/api/elevation/json';
 		$elevationURL 			= $apiEndpoint . '?locations=' . $latitude . ',' . $longitude . '&key=' . $apiKey;
-    $responseElevation 	= file_get_contents($elevationURL);
-    $dataElevation 			= json_decode($response, true);
+		$responseElevation 	= file_get_contents($elevationURL);
+		$dataElevation 			= json_decode($response, true);
 
     // Check if the request was successful
 		$data = [

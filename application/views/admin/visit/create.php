@@ -293,7 +293,7 @@
         text-align: center;
     }
     input {
-        font-size: 10px !important;
+        font-size: 12px !important;
         text-align: center;
     }
     .wrapper-reason {
@@ -623,7 +623,7 @@
                         text-align: center;
                     }
                     input {
-                        font-size: 10px !important;
+                        font-size: 12px !important;
                         text-align: center;
                     }
                     .wrapper-reason {
@@ -651,6 +651,16 @@
                     }
                     .select2-container--bootstrap4 .select2-results__option {
                         font-size: 12px
+                    }
+
+                    #farmersinfo .cust-btn-add {
+                        display: none;
+                    }
+                    #marketprice .cust-btn-add {
+                        display: none;
+                    }
+                    #visitimages .cust-btn-add {
+                        display: none;
                     }
 
                     @media (max-width: 1024px) {
@@ -745,6 +755,15 @@
                             height: auto !important;
                             padding: 15px !important;
                         }
+                        #farmersinfo .cust-btn-add {
+                            display: block;
+                        }
+                        #marketprice .cust-btn-add {
+                            display: block;
+                        }
+                        #visitimages .cust-btn-add {
+                            display: block;
+                        }
                     }
                 </style>
 
@@ -754,77 +773,15 @@
     </h3>
     <div class="row">
         <form action="<?= admin_url('visit/do_create') ?>" method="POST" enctype="multipart/form-data">
-            <div class="content-task">
-                <!-- <div class="row">
-                    <div class="col-md-6 col-sm-12"></div>
-                    <div class="col-md-6 col-sm-12">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>DRF</th>
-                                    <th>ADJ</th>
-                                    <th>DEC</th>
-                                </tr>
-                               
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td style="height: 100px; width: 60px"><?= $user['EMPLOYEE_ID'] ?> <br> <?= $user['FULL_NAME'] ?></td>
-                                    <td style="height: 100px; width: 60px"></td>
-                                    <td style="height: 100px; width: 60px"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div> -->
+            <div class="content-task mt-5">
                 <h3 class="sub-title">1. LOCATION INFORMATION</h3>
-                <!-- <div class="row">
-                    <div class="col-md-3 col-sm-12">
-                        <div class="form-group row">
-                            <label for="plant" class="col-lg-12 col-sm-12 col-form-label">SURVEY DATE <span class="text-danger">*</span></label>
-                            <div class="col-lg-12 col-sm-12">
-                                <input type="date" name="visiting_date" class="form-control" style="font-size: 14px" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-12">
-                        <div class="form-group row">
-                            <label for="plant" class="col-lg-12 col-sm-12 col-form-label">Plant <span class="text-danger">*</span></label>
-                            <div class="col-lg-12 col-sm-12">
-                                <select id="plant_entry" class="form-control" style="width: 100%;" name="plant" required>
-                                    <option value="" selected>- PILIH PLANT -</option>
-                                    <?php foreach ($plant as $field): ?>
-                                      <option value="<?= $field['CODE'] ?>" selected><?= $field['CODE'].' - '.$field['CODE_NAME'] ?></option>
-                                    <?php endforeach ?>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-12">
-                        <div class="form-group row">
-                            <label for="customer" class="col-lg-12 col-sm-12 col-form-label">Customer <span class="text-danger">*</span></label>
-                            <div class="col-lg-12 col-sm-12">
-                                <select id="customer_entry" class="form-control" style="width: 100%;" name="customer" required>
-                                    <option value="" selected>- PILIH CUSTOMER -</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-12">
-                        <div class="form-group row">
-                            <label for="customer" class="col-lg-12 col-sm-12 col-form-label">Region</label>
-                            <div class="col-lg-12 col-sm-12">
-                                <input type="text" id="region_entry" class="form-control" readonly>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
                 <div class="table-responsive mt-2">
                     <table class="table table-bordered" style="margin-bottom: 10px">
                         <thead>
                             <tr>
-                                <th style="text-align: center">DATE</th>
                                 <th style="text-align: center">DRAFTER</th>
+                                <th style="text-align: center">DATE</th>
+                                <th style="text-align: center">LAND TYPE</th>
                                 <th style="text-align: center">LATITUDE</th>
                                 <th style="text-align: center">LONGITUTE</th>
                                 <th style="text-align: center">ACTION</th>
@@ -832,11 +789,17 @@
                         </thead>
                         <tbody>
                             <tr>
+                                <td data-label="EMPLOYEE">
+                                    <?= $user['EMPLOYEE_ID'] ?> - <?= $user['FULL_NAME'] ?>
+                                </td>
                                 <td data-label="DATE">
                                     <input type="date" name="visiting_date" class="form-control" style="font-size: 14px" required>
                                 </td>
-                                <td data-label="EMPLOYEE">
-                                    <?= $user['EMPLOYEE_ID'] ?> - <?= $user['FULL_NAME'] ?>
+                                <td data-label="LAND TYPE">
+                                    <select id="land_type" class="form-control" style="width: 100%;" name="land_type" required>
+                                        <option value="">SAWAH</option>
+                                        <option value="">PERBUKITAN</option>
+                                    </select>
                                 </td>
                                 <td data-label="LATITUDE">
                                     <div id="latitude"></div>
@@ -846,6 +809,38 @@
                                 </td>
                                 <td>
                                     <a href="javascript:void(0)" onclick="getLocation()" style="background: #00c0ff; border-radius: 10px; color: #fff; font-weight: 600; padding: 10px">UPDATE LOCATION</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="table table-bordered" style="margin-bottom: 10px">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center">PROVINCE</th>
+                                <th style="text-align: center">REGENCIES</th>
+                                <th style="text-align: center">DISTRICTS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td data-label="PROVINCE">
+                                    <select id="province" class="form-control" style="width: 100%;" name="province" required>
+                                        <option value="">A</option>
+                                        <option value="">B</option>
+                                    </select>
+                                </td>
+                                <td data-label="REGENCIES">
+                                    <select id="regencies" class="form-control" style="width: 100%;" name="regencies" required>
+                                        <option value="">C</option>
+                                        <option value="">D</option>
+                                    </select>
+                                </td>
+                                <td data-label="DISTRICTS">
+                                    <select id="districts" class="form-control" style="width: 100%;" name="districts" required>
+                                        <option value="">E</option>
+                                        <option value="">F</option>
+                                    </select>
                                 </td>
                             </tr>
                         </tbody>
@@ -864,6 +859,554 @@
                             </tr>   
                         </tbody>
                         
+                    </table>
+                </div>
+            </div>
+
+            <div class="content-task mt-5">
+                <h3 class="sub-title">2. FARMERS INFORMATION</h3>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th colspan="3" style="text-align: right; background: #fff; border: 0px"><button type="button" class="btn cust-btn-add" onclick="addFarmers()">+</button></th>
+                                </tr>
+                                <tr>
+                                    <th>FARMERS</th>
+                                    <th>PHONE NUMBER</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="farmersinfo">
+                                <tr style="align-items: flex-end">
+                                    <th style="text-align: left; background: #fff; border: 0px"><button type="button" class="btn cust-btn-add" onclick="addFarmers()">+</button></th>
+                                </tr>
+                                <tr>
+                                    <td data-label="FARMERS" width="45%"><input type="text" name="FM_farmers[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" placeholder="EX : JOHN DOE" id=""></td>
+                                    <td data-label="PHONE NUMBER" width="50%"><input type="number" name="FM_phone_number[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" placeholder="EX : 08XXXXXXXXXX" id=""></td>
+                                    <td width="5%"><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+
+            <div class="content-task mt-5">
+                <h3 class="sub-title">3. SEGMENT CONDITION</h3>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" style="margin-bottom: 0px">
+                            <thead>
+                                <tr>
+                                    <th colspan="2" style="text-align: left; font-size: 13px !important">PLANTING PHASE</th>
+                                </tr>
+                                <tr>
+                                    <th style="text-align: left">PHASE</th>
+                                    <th style="text-align: left">DESCRIPTION</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="align-items: flex-end">
+                                    <td data-label="PHASE" width="45%" style="vertical-align: top">
+                                        <select id="fasetanam" class="form-control" style="width: 100%; padding: 10px" name="phase_tanam" required>
+                                            <option id="persiapan-lahan" value="PERSIAPAN LAHAN" selected>PERSIAPAN LAHAN</option>
+                                            <option id="vegetatif-awal" value="VEGETATIF AWAL">VEGETATIF AWAL</option>
+                                            <option id="vegetatif-akhir" value="VEGETATIF AKHIR">VEGETATIF AKHIR</option>
+                                            <option id="genetatif-awal" value="GENETATIF AWAL">GENETATIF AWAL</option>
+                                            <option id="genetatif-akhir" value="GENETATIF AKHIR">GENETATIF AKHIR (PANEN)</option>
+                                            <option id="gagal-panen" value="PUSO / GAGAL PANEN">PUSO / GAGAL PANEN</option>
+                                        </select>
+                                    </td>
+                                    <td data-label="DESCRIPTION" width="50%">
+                                        <!-- <div class="persiapan-lahan">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="EX : LOREM IPSUM DOLOR SIT AMET" id="">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="EX : LOREM IPSUM DOLOR SIT AMET" id="">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="EX : LOREM IPSUM DOLOR SIT AMET" id="">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="EX : LOREM IPSUM DOLOR SIT AMET" id="">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="EX : LOREM IPSUM DOLOR SIT AMET" id="">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="EX : LOREM IPSUM DOLOR SIT AMET" id="">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" placeholder="EX : LOREM IPSUM DOLOR SIT AMET" id="">
+                                        </div> -->
+                                        <!-- <div class="vegetatif-awal">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="UMUR TANAM (1 - 25)">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="TINGGI TANAMAN">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JUMLAH DAUN">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JENIS PUPUK YANG SUDAH DIAPLIKASIKAN">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="ESTIMASI JUMLAH PUPUK DIAPLIKASIKAN(KG)">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JENIS HERBISIDA / PERSTISIDA YANG DIAPLIKASIKAN">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000;" placeholder="INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)">
+                                        </div> -->
+                                        <!-- <div class="vegetatif-akhir">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="UMUR TANAM (26 - 50)">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="TINGGI TANAMAN">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JUMLAH DAUN">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="MUNCUL BUNGA JANTAN DAN BETINA (ADA / TIDAK)">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JENIS PUPUK YANG SUDAH DIAPLIKASIKAN">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="ESTIMASI JUMLAH PUPUK DIAPLIKASIKAN (KG)">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JENIS HERBISIDA / PESTISIDA YANG DIAPLIKASIKAN">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000;" placeholder="INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)">
+                                        </div> -->
+                                        <!-- <div class="genetatif-awal">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="UMUR TANAM (51 - 70)">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="MUNCUL BUAH (ADA / TIDAK)">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JIKA BUAH ADA MAKA UKURAN BUAH (PANJANG DAN DIAMETER BUAH MUDA)">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="MUNCUL BUNGA JANTAN DAN BETINA (ADA / TIDAK)">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="KONDISI BUAH MUDAH (HUJAN SEGAR, PUCAT ATAU BUSUK)">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="ESTIMASI JUMLAH PUPUK DIAPLIKASIKAN (KG)">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JENIS HERBISIDA / PESTISIDA YANG DIAPLIKASIKAN">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000;" placeholder="INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)">
+                                        </div> -->
+                                        <div class="genetatif-akhir">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="UMUR TANAM (71 - 110)">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="MASUK KE FORMAT HASIL PANEN PADA SHEET HASIL PANEN">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JENIS HERBISIDA / PESTISIDA YANG DIAPLIKASIKAN">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000;" placeholder="INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)">
+                                        </div>
+                                        <!-- <div class="gagal-panen">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="UMUR SAAT PUSO">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="KONDISI SAAT PUSO (KEKERINGAN / BANJIR)">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="ESTIMASI LAHAN YANG TERKENA PUSO">
+                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000;" placeholder="ESTIMASI PRODUKSI YANG HILANG KARENA PUSO">
+                                        </div> -->
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th colspan="10" style="text-align: left; font-size: 13px !important">HARVEST PHASE</th>
+                                </tr>
+                                <tr>
+                                    <th style="width: 10%">SCORE</th>
+                                    <th style="width: 10%">BARIS</th>
+                                    <th style="width: 10%">ACTUAL</th>
+                                    <th style="width: 10%">%</th>
+                                    <th style="width: 10%">BIJI</th>
+                                    <th style="width: 10%">ACTUAL</th>
+                                    <th style="width: 10%">%</th>
+                                    <th style="width: 10%">BOBOT</th>
+                                    <th style="width: 10%">ACTUAL</th>
+                                    <th style="width: 10%">%</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td data-label="SCORE" style="">
+                                        10
+                                    </td>
+                                    <td data-label="BARIS">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="BIJI">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="BOBOT">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-label="SCORE" style="">
+                                        9
+                                    </td>
+                                    <td data-label="BARIS">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="BIJI">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="BOBOT">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-label="SCORE" style="">
+                                        8
+                                    </td>
+                                    <td data-label="BARIS">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="BIJI">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="BOBOT">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-label="SCORE" style="">
+                                        7
+                                    </td>
+                                    <td data-label="BARIS">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="BIJI">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="BOBOT">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-label="SCORE" style="">
+                                        6
+                                    </td>
+                                    <td data-label="BARIS">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="BIJI">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="BOBOT">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-label="SCORE" style="">
+                                        5
+                                    </td>
+                                    <td data-label="BARIS">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="BIJI">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="BOBOT">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-label="SCORE" style="">
+                                        4
+                                    </td>
+                                    <td data-label="BARIS">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="BIJI">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="BOBOT">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-label="SCORE" style="">
+                                        3
+                                    </td>
+                                    <td data-label="BARIS">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="BIJI">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="BOBOT">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-label="SCORE" style="">
+                                        2
+                                    </td>
+                                    <td data-label="BARIS">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="BIJI">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="BOBOT">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-label="SCORE" style="">
+                                        1
+                                    </td>
+                                    <td data-label="BARIS">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="BIJI">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="BOBOT">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-label="SCORE" style="">
+                                        0
+                                    </td>
+                                    <td data-label="BARIS">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="BIJI">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="BOBOT">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+
+            <div class="content-task mt-5">
+                <h3 class="sub-title">4. MARKET PRICES</h3>
+                <div class="table-responsive">
+                    <table class="table table-bordered" style="margin-bottom: 0px">
+                        <thead>
+                            <tr>
+                                <th colspan="3" style="text-align: right; background: #fff; border: 0px"><button type="button" class="btn cust-btn-add" onclick="addMarketprice()">+</button></th>
+                            </tr>
+                            <tr>
+                                <th>DATE</th>
+                                <th>PRICE</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="marketprice">
+                            <tr style="align-items: flex-end">
+                                <th style="text-align: right; background: #fff; border: 0px;"><button type="button" class="btn cust-btn-add" onclick="addMarketprice()">+</button></th>
+                            </tr>
+                            <tr>
+                                <td data-label="DATE"><input type="month" name="CL_collection_date[]" class="form-control"></td>
+                                <td data-label="PRICE"><input type="number" name="CL_ar_balance[]" class="form-control" onkeyup="onkeyup_data(event)" onkeydown="onkeydown_data(event)"></td>
+                                <td><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>                   
+            </div>
+
+            <div class="content-task mt-5">
+                <h3 class="sub-title">5. Visit Photos</h3>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th colspan="3" style="text-align: right; background: #fff; border: 0px"><button type="button" class="btn cust-btn-add" onclick="addImages()">+</button></th>
+                            </tr>
+                            <tr>
+                                <th>Title / Judul</th>
+                                <th>Upload Image</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="visitimages">
+                            <tr style="align-items: flex-end">
+                                <th style="text-align: right; background: #fff; border: 0px"><button type="button" class="btn cust-btn-add" onclick="addImages()">+</button></th>
+                            </tr>
+                            <tr>
+                                <td data-label ="Title"><input type="text" name="VR_image_name[]" class="form-control" placeholder="Type here.."></td>
+                                <td data-label ="Upload photo"><input type="file" accept="image/png, image/jpeg, image/jpg" name="VR_image_file[]" class="form-control"></td>
+                                <td><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -920,6 +1463,81 @@
             success: function(response) {
                 console.log(response);
                 alert(response);
+            }
+        });
+    }
+
+    $('#land_type').select2({
+        theme: 'bootstrap4',
+        language: "en",
+        placeholder: "- SELECT LAND TYPE -",
+    });
+    $('#province').select2({
+        theme: 'bootstrap4',
+        language: "en",
+        placeholder: "- SELECT PROVINCE -",
+    });
+    $('#regencies').select2({
+        theme: 'bootstrap4',
+        language: "en",
+        placeholder: "- SELECT REGENCIES -",
+    });
+    $('#districts').select2({
+        theme: 'bootstrap4',
+        language: "en",
+        placeholder: "- SELECT DISTRICTS -",
+    });
+
+    $('#fasetanam').select2({
+        theme: 'bootstrap4',
+        language: "en",
+        placeholder: "- SELECT PHASE -",
+    });
+
+    function addFarmers() {
+        let tabledata = `
+        <tr>
+            <td data-label="FARMERS" width="45%"><input type="text" name="FM_farmers[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" placeholder="EX : JOHN DOE" id=""></td>
+            <td data-label="PHONE NUMBER" width="50%"><input type="number" name="FM_phone_number[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" placeholder="EX : 08XXXXXXXXXX" id=""></td>
+            <td width="5%"><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
+        </tr>
+        `;
+
+        $("#farmersinfo").append(tabledata);
+    }
+
+    function addMarketprice() {
+        let tabledata = `
+        <tr>
+            <td data-label="DATE"><input type="month" name="CL_collection_date[]" class="form-control"></td>
+            <td data-label="PRICE"><input type="number" name="CL_ar_balance[]" class="form-control" onkeyup="onkeyup_data(event)" onkeydown="onkeydown_data(event)"></td>
+            <td><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
+        </tr>
+         `;
+
+        $("#marketprice").append(tabledata);
+    }
+
+    function addImages() {
+        let tabledata = `
+        <tr>
+            <td data-label ="Title"><input type="text" name="VR_image_name[]" class="form-control" placeholder="Type here.."></td>
+            <td data-label ="Upload photo"><input type="file" accept="image/png, image/jpeg, image/jpg" name="VR_image_file[]" class="form-control"></td>
+            <td><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
+        </tr>
+        `;
+        $("#visitimages").append(tabledata);
+    }
+
+    function deleteRow(e) {
+        Swal.fire({
+            type: "warning",
+            title: "Delete Row",
+            showCancelButton: true,
+            text: "Are you sure want to delete this data ?"
+        }).then((result) => {
+            if (result.value) {
+                $(e).parent().parent().remove();
             }
         });
     }
