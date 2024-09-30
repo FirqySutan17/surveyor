@@ -340,7 +340,7 @@
                     <td style="text-align: center; vertical-align: middle">VERY GOOD</td>
                     <td style="text-align: center; vertical-align: middle">FIRQY SUTAN</td>
                     <td style="text-align: center; vertical-align: middle">
-                        <a href="#" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
+                        <a href="<?= admin_url('survey/edit') ?>" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
                         <a href="#" class="btn btn-sm" title="Drawing"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px"></i></a>
                         <a href="#" target="_blank" class="btn btn-sm" title="Detail"><i class="fas fa-eye text-primary"></i></a>
                     </td>
@@ -354,7 +354,7 @@
                     <td style="text-align: center; vertical-align: middle">VERY GOOD</td>
                     <td style="text-align: center; vertical-align: middle">FIRQY SUTAN</td>
                     <td style="text-align: center; vertical-align: middle">
-                        <a href="#" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
+                        <a href="<?= admin_url('survey/edit') ?>" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
                         <a href="#" class="btn btn-sm" title="Drawing"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px"></i></a>
                         <a href="#" target="_blank" class="btn btn-sm" title="Detail"><i class="fas fa-eye text-primary"></i></a>
                     </td>
@@ -368,7 +368,7 @@
                     <td style="text-align: center; vertical-align: middle">VERY GOOD</td>
                     <td style="text-align: center; vertical-align: middle">FIRQY SUTAN</td>
                     <td style="text-align: center; vertical-align: middle">
-                        <a href="#" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
+                        <a href="<?= admin_url('survey/edit') ?>" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
                         <a href="#" class="btn btn-sm" title="Drawing"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px"></i></a>
                         <a href="#" target="_blank" class="btn btn-sm" title="Detail"><i class="fas fa-eye text-primary"></i></a>
                     </td>
@@ -382,7 +382,7 @@
                     <td style="text-align: center; vertical-align: middle">VERY GOOD</td>
                     <td style="text-align: center; vertical-align: middle">FIRQY SUTAN</td>
                     <td style="text-align: center; vertical-align: middle">
-                        <a href="#" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
+                        <a href="<?= admin_url('survey/edit') ?>" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
                         <a href="#" class="btn btn-sm" title="Drawing"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px"></i></a>
                         <a href="#" target="_blank" class="btn btn-sm" title="Detail"><i class="fas fa-eye text-primary"></i></a>
                     </td>
@@ -396,7 +396,7 @@
                     <td style="text-align: center; vertical-align: middle">VERY GOOD</td>
                     <td style="text-align: center; vertical-align: middle">FIRQY SUTAN</td>
                     <td style="text-align: center; vertical-align: middle">
-                        <a href="#" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
+                        <a href="<?= admin_url('survey/edit') ?>" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
                         <a href="#" class="btn btn-sm" title="Drawing"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px"></i></a>
                         <a href="#" target="_blank" class="btn btn-sm" title="Detail"><i class="fas fa-eye text-primary"></i></a>
                     </td>
@@ -410,7 +410,7 @@
                     <td style="text-align: center; vertical-align: middle">VERY GOOD</td>
                     <td style="text-align: center; vertical-align: middle">FIRQY SUTAN</td>
                     <td style="text-align: center; vertical-align: middle">
-                        <a href="#" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
+                        <a href="<?= admin_url('survey/edit') ?>" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
                         <a href="#" class="btn btn-sm" title="Drawing"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px"></i></a>
                         <a href="#" target="_blank" class="btn btn-sm" title="Detail"><i class="fas fa-eye text-primary"></i></a>
                     </td>
@@ -424,7 +424,7 @@
                     <td style="text-align: center; vertical-align: middle">VERY GOOD</td>
                     <td style="text-align: center; vertical-align: middle">FIRQY SUTAN</td>
                     <td style="text-align: center; vertical-align: middle">
-                        <a href="#" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
+                        <a href="<?= admin_url('survey/edit') ?>" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
                         <a href="#" class="btn btn-sm" title="Drawing"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px"></i></a>
                         <a href="#" target="_blank" class="btn btn-sm" title="Detail"><i class="fas fa-eye text-primary"></i></a>
                     </td>
@@ -438,7 +438,7 @@
                     <td style="text-align: center; vertical-align: middle">VERY GOOD</td>
                     <td style="text-align: center; vertical-align: middle">FIRQY SUTAN</td>
                     <td style="text-align: center; vertical-align: middle">
-                        <a href="#" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
+                        <a href="<?= admin_url('survey/edit') ?>" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
                         <a href="#" class="btn btn-sm" title="Drawing"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px"></i></a>
                         <a href="#" target="_blank" class="btn btn-sm" title="Detail"><i class="fas fa-eye text-primary"></i></a>
                     </td>

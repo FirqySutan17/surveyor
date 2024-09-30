@@ -48,7 +48,7 @@ class survey extends CI_Controller {
 		$data['collection_type'] = $this->collection_type();
 		$data['user'] = $user;
 		// dd($data['user']);
-		$this->template->_v('visit/create', $data);
+		$this->template->_v('survey/create', $data);
 	}
 
 	public function do_create() {
@@ -307,26 +307,26 @@ class survey extends CI_Controller {
 		$responseElevation 	= file_get_contents($elevationURL);
 		$dataElevation 			= json_decode($response, true);
 
-    // Check if the request was successful
-		$data = [
-			"address" 		=> "",
-			"elevation"		=> "",
-		];
-    if ($dataElevation['status'] === 'OK') {
-        // Extract the elevation from the response
-        $result["elevation"] = $dataElevation['results'][0]['elevation'];
-    } else {
-      echo json_encode(["status" => false, "message" => "failed retrieve elevation", "data" => []]);
-			exit;
-    }
+		// Check if the request was successful
+			$data = [
+				"address" 		=> "",
+				"elevation"		=> "",
+			];
+		if ($dataElevation['status'] === 'OK') {
+			// Extract the elevation from the response
+			$result["elevation"] = $dataElevation['results'][0]['elevation'];
+		} else {
+		echo json_encode(["status" => false, "message" => "failed retrieve elevation", "data" => []]);
+				exit;
+		}
 
-		$geolocationURL = "http://maps.google.com/maps/api/geocode/json?latlng=$latitude,$longitude";
-		// send http request
-		$geocode	 				= file_get_contents($geolocationURL);
-		$json 						= json_decode($geocode);
-		$data["address"] 	= $json->results[0]->formatted_address;
+			$geolocationURL = "http://maps.google.com/maps/api/geocode/json?latlng=$latitude,$longitude";
+			// send http request
+			$geocode	 				= file_get_contents($geolocationURL);
+			$json 						= json_decode($geocode);
+			$data["address"] 	= $json->results[0]->formatted_address;
 
-		echo json_encode(["status" => true, "message" => "success get detail coordinate", "data" => $data]);
+			echo json_encode(["status" => true, "message" => "success get detail coordinate", "data" => $data]);
 	}
 
 	public function report() {
@@ -985,20 +985,20 @@ class survey extends CI_Controller {
 		$this->template->_v('visit/detail', $data);
 	}
 
-	public function edit($visiting_no) {
+	public function edit() {
 		$user 							= $this->session_data['user'];
 		$filter = ['HEAD_CODE'	=> 'AB'];
 		if ($user['PLANT'] != '*') {
 			$filter['CODE'] = $user['PLANT'];
 		}
 
-		$data 	= $this->get_visitingreport($visiting_no);
-		$data['title'] 				= 'Visit Update';
+		// $data 	= $this->get_visitingreport($visiting_no);
+		$data['title'] 				= 'SURVEY';
 		$data['plant'] 				= $this->Dbhelper->selectTabel('CODE, CODE_NAME', 'CD_CODE', $filter, 'CODE', 'ASC');
 		$data['collection_type']	= $this->collection_type();
 		$data['user'] = $user;
 		
-		$this->template->_v('visit/edit', $data);
+		$this->template->_v('survey/edit', $data);
 	}
 
 	public function do_update() {

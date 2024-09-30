@@ -909,7 +909,7 @@
                                     <td data-label="PHASE" width="45%" style="vertical-align: top">
                                         <select id="fasetanam" class="form-control" style="width: 100%; padding: 10px" name="phase_tanam" required>
                                             <option id="persiapan-lahan" value="PERSIAPAN LAHAN" selected>PERSIAPAN LAHAN</option>
-                                            <option id="vegetatif-awal" value="VEGETATIF AWAL">VEGETATIF AWAL</option>
+                                            <option id="vegetatif-awal" value="VEGETATIF AWAL">VqEGETATIF AWAL</option>
                                             <option id="vegetatif-akhir" value="VEGETATIF AKHIR">VEGETATIF AKHIR</option>
                                             <option id="genetatif-awal" value="GENETATIF AWAL">GENETATIF AWAL</option>
                                             <option id="genetatif-akhir" value="GENETATIF AKHIR">GENETATIF AKHIR (PANEN)</option>
@@ -1375,7 +1375,7 @@
                             </tr>
                             <tr>
                                 <td data-label="DATE"><input type="month" name="CL_collection_date[]" class="form-control"></td>
-                                <td data-label="PRICE"><input type="number" name="CL_ar_balance[]" class="form-control" onkeyup="onkeyup_data(event)" onkeydown="onkeydown_data(event)"></td>
+                                <td data-label="PRICE"><input type="number" name="CL_ar_balance[]" class="form-control" placeholder="EX : 200000" onkeyup="onkeyup_data(event)" onkeydown="onkeydown_data(event)"></td>
                                 <td><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
                             </tr>
                         </tbody>
@@ -1392,8 +1392,8 @@
                                 <th colspan="3" style="text-align: right; background: #fff; border: 0px"><button type="button" class="btn cust-btn-add" onclick="addImages()">+</button></th>
                             </tr>
                             <tr>
-                                <th>Title / Judul</th>
-                                <th>Upload Image</th>
+                                <th>DATE / TITLE</th>
+                                <th>UPLOAD IMAGE</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -1402,8 +1402,8 @@
                                 <th style="text-align: right; background: #fff; border: 0px"><button type="button" class="btn cust-btn-add" onclick="addImages()">+</button></th>
                             </tr>
                             <tr>
-                                <td data-label ="Title"><input type="text" name="VR_image_name[]" class="form-control" placeholder="Type here.."></td>
-                                <td data-label ="Upload photo"><input type="file" accept="image/png, image/jpeg, image/jpg" name="VR_image_file[]" class="form-control"></td>
+                                <td data-label ="DATE / TITLE"><input type="text" name="VR_image_name[]" class="form-control" placeholder="EX : JAN 2024 / TITLE HERE"></td>
+                                <td data-label ="UPLOAD IMAGE"><input type="file" accept="image/png, image/jpeg, image/jpg" name="VR_image_file[]" class="form-control"></td>
                                 <td><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
                             </tr>
                         </tbody>
@@ -1510,7 +1510,7 @@
         let tabledata = `
         <tr>
             <td data-label="DATE"><input type="month" name="CL_collection_date[]" class="form-control"></td>
-            <td data-label="PRICE"><input type="number" name="CL_ar_balance[]" class="form-control" onkeyup="onkeyup_data(event)" onkeydown="onkeydown_data(event)"></td>
+            <td data-label="PRICE"><input type="number" name="CL_ar_balance[]" class="form-control" placeholder="EX : 200000" onkeyup="onkeyup_data(event)" onkeydown="onkeydown_data(event)"></td>
             <td><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
         </tr>
          `;
@@ -1521,8 +1521,8 @@
     function addImages() {
         let tabledata = `
         <tr>
-            <td data-label ="Title"><input type="text" name="VR_image_name[]" class="form-control" placeholder="Type here.."></td>
-            <td data-label ="Upload photo"><input type="file" accept="image/png, image/jpeg, image/jpg" name="VR_image_file[]" class="form-control"></td>
+            <td data-label ="DATE / TITLE"><input type="text" name="VR_image_name[]" class="form-control" placeholder="EX : JAN 2024 / TITLE HERE"></td>
+            <td data-label ="UPLOAD IMAGE"><input type="file" accept="image/png, image/jpeg, image/jpg" name="VR_image_file[]" class="form-control"></td>
             <td><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
         </tr>
         `;
