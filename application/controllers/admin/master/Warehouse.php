@@ -58,7 +58,9 @@ class Warehouse extends CI_Controller {
 					$post_data[$key] = dbClean($value);
 				} 
 			}
+			$gudang_code = $this->generateGudangCode();
 			$kategori = implode(',', $post['kategori']);
+			$post_data['CODE']		= $gudang_code;
 			$post_data['KATEGORI'] = $kategori;
 
 			$save = $this->Dbhelper->insertData('CD_GUDANG', $post_data);
@@ -110,6 +112,23 @@ class Warehouse extends CI_Controller {
 		$this->session->set_flashdata('error', "Access denied");
     return redirect($this->own_link);
 	}
+
+	private function generateGudangCode() {
+		$generated_no = "WHS";
+		$no = 1;
+		$data = $this->Dbhelper->selectTabel('CODE', 'CD_GUDANG', array(), 'CODE', 'DESC');
+		$no 	= count($data) + 1;
+		if ($no < 10) {
+				$no = "000".$no;
+		} elseif ($no >= 10 && $no < 100) {
+				$no = "00".$no;
+		} elseif ($no >= 100 && $no < 1000) {
+				$no = "0".$no;
+		}
+
+		$generated_no = $generated_no.$no;
+		return $generated_no;
+}
 
 	// CHANGE NECESSARY POINT
 	private function cekLogin() {
