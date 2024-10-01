@@ -236,8 +236,9 @@ class survey extends CI_Controller {
 		// $json 						= json_decode($geocode);
 		// $data["address"] 	= $json->results[0]->formatted_address;
 
-		$addressURL = "https://nominatim.openstreetmap.org/reverse?format=geocodejson&lat=$latitude&lon=$longitude";
-		$geocode	 				= file_get_contents($addressURL);
+		// $addressURL = "https://nominatim.openstreetmap.org/reverse?format=geocodejson&lat=$latitude&lon=$longitude";
+		// $geocode	 				= file_get_contents($addressURL);
+		$geocode = '{"type":"FeatureCollection","geocoding":{"version":"0.1.0","attribution":"Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright","licence":"ODbL","query":""},"features":[{"type":"Feature","properties":{"geocoding":{"place_id":57254301,"osm_type":"way","osm_id":120840856,"osm_key":"office","osm_value":"company","type":"house","accuracy":0,"label":"Menara Jamsostek (North Tower), No. 38 Kav. 71-73, Jalan Jenderal Gatot Subroto, RW 01, Kuningan Barat, Mampang Prapatan, South Jakarta, Special capital Region of Jakarta, Java, 12920, Indonesia","name":"Menara Jamsostek (North Tower)","housenumber":"No. 38 Kav. 71-73","postcode":"12920","street":"Jalan Jenderal Gatot Subroto","locality":"RW 01","district":"Mampang Prapatan","city":"Special capital Region of Jakarta","state":"Java","country":"Indonesia","country_code":"id","admin":{"level9":"RW 01","level7":"Kuningan Barat","level6":"Mampang Prapatan","level5":"South Jakarta","level4":"Special capital Region of Jakarta","level3":"Java"}}},"geometry":{"type": "Point","coordinates": [106.82159104641431, -6.233682]}}]}';
 		$json 						= json_decode($geocode);
 
 		$address = $json['features'][0]['properties']['geocoding']['label'];
@@ -1194,9 +1195,9 @@ class survey extends CI_Controller {
 			where SURVEY_DATE BETWEEN '$sdate' AND '$edate'
 		";
 		
-		if ($filter['drafter'] != '*') {
-			$query .= " and a.CREATED_BY = '".$filter['drafter']."'";
-		}
+		// if ($filter['drafter'] != '*') {
+		// 	$query .= " and a.CREATED_BY = '".$filter['drafter']."'";
+		// }
 		$query .= " order by SURVEY_DATE DESC";
         $data = $this->db->query($query)->result_array();
 		// dd($query);
