@@ -319,7 +319,7 @@ class survey extends CI_Controller {
 			// send http request
 			$geocode	 				= file_get_contents($geolocationURL);
 			$json 						= json_decode($geocode);
-			$data["address"] 	= $json->results[0]->formatted_address;
+			$data["address"] 			= $json->results[0]->formatted_address;
 
 			echo json_encode(["status" => true, "message" => "success get detail coordinate", "data" => $data]);
 	}

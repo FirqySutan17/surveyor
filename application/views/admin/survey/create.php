@@ -897,14 +897,15 @@
                         <table class="table table-bordered" style="margin-bottom: 0px">
                             <thead>
                                 <tr>
-                                    <th colspan="2" style="text-align: left; font-size: 13px !important">PLANTING PHASE</th>
+                                    <th style="text-align: left; font-size: 13px !important">PLANTING PHASE</th>
+                                    <th style="text-align: right;"><input style="height: 20px; width: 20px !important" class="coupon_question" type="checkbox" name="coupon_question" value="1" onchange="valueChanged()" checked/></th>
                                 </tr>
-                                <tr>
+                                <tr class="planting-phase">
                                     <th style="text-align: left">PHASE</th>
                                     <th style="text-align: left">DESCRIPTION</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="planting-phase">
                                 <tr style="align-items: flex-end">
                                     <td data-label="PHASE" width="45%" style="vertical-align: top">
                                         <select id="fasetanam" class="form-control" style="width: 100%; padding: 10px" name="phase_tanam" required>
@@ -982,9 +983,10 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th colspan="10" style="text-align: left; font-size: 13px !important">HARVEST PHASE</th>
+                                    <th colspan="9" style="text-align: left; font-size: 13px !important">HARVEST PHASE</th>
+                                    <th style="text-align: right;"><input style="height: 20px; width: 20px !important" class="coupon_question2" type="checkbox" name="coupon_question2" value="1" onchange="value1Changed()" checked/></th>
                                 </tr>
-                                <tr>
+                                <tr class="harvest-phase">
                                     <th style="width: 10%">SCORE</th>
                                     <th style="width: 10%">BARIS</th>
                                     <th style="width: 10%">ACTUAL</th>
@@ -997,7 +999,7 @@
                                     <th style="width: 10%">%</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="harvest-phase">
                                 <tr>
                                     <td data-label="SCORE" style="">
                                         10
@@ -1540,5 +1542,19 @@
                 $(e).parent().parent().remove();
             }
         });
+    }
+    function valueChanged()
+    {
+        if($('.coupon_question').is(":checked"))   
+            $(".planting-phase").show();
+        else
+            $(".planting-phase").hide();
+    }
+    function value1Changed()
+    {
+        if($('.coupon_question2').is(":checked"))   
+            $(".harvest-phase").show();
+        else
+            $(".harvest-phase").hide();
     }
 </script>
