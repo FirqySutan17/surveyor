@@ -317,7 +317,7 @@
             <?php foreach ($datatable as $i => $v): ?>
                 <tr>
                     <td style="text-align: center; vertical-align: middle"><?= $i + 1 ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['SURVEY_CODE'] ?></td>
+                    <td style="text-align: center; vertical-align: middle"><?= $v['SURVEY_NO'] ?></td>
                     <td style="text-align: center; vertical-align: middle"><?= $v['SURVEY_DATE'] ?></td>
                     <td style="text-align: center; vertical-align: middle"><?= $v['COORDINATE'] ?></td>
                     <td style="text-align: center; vertical-align: middle"><?= $v['DESCRIPTION'] ?></td>
