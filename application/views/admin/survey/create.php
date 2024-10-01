@@ -1152,9 +1152,10 @@
                 // removeElements();
             },
             success: function(response) {
-                console.log(response);
-                alert(response.data);
-                $("#address").val(response.data.address);
+                let data = JSON.parse(response);
+                // console.log(data);
+                alert(data.data);
+                $("#address").val(data.data.address);
             }
         });
     }
