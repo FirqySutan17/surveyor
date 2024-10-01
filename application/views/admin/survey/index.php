@@ -326,7 +326,7 @@
                     <td style="text-align: center; vertical-align: middle"><?= $v['SURVEY_NO'] ?></td>
                     <td style="text-align: center; vertical-align: middle"><?= $v['SURVEY_DATE'] ?></td>
                     <td style="text-align: center; vertical-align: middle">
-											<iframe class="maps-frame" src="https://maps.google.com/maps?q=-<?= $v['COORDINATE'] ?>&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+											<iframe class="maps-frame" src="https://maps.google.com/maps?q=<?= $v['COORDINATE'] ?>&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 										</td>
                     <td style="text-align: center; vertical-align: middle"><?= $v['DESCRIPTION'] ?></td>
                     <td style="text-align: center; vertical-align: middle"><?= $v['CREATED_BY'] ?></td>
