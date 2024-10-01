@@ -44,7 +44,7 @@ class survey extends CI_Controller {
 		$data['user'] = $user;
 		$data['provinces'] 			= $this->Dbhelper->selectTabel('ID_PROVINCE, PROVINCE', 'CD_PROVINCE', [], 'PROVINCE', 'ASC');
 		$data['regencies'] 			= $this->Dbhelper->selectTabel('ID_REGENCIES, PROVINCE_ID, REGENCIES', 'CD_REGENCIES', [], 'REGENCIES', 'ASC');
-		$data['districts'] 			= $this->Dbhelper->selectTabel('ID_DISTRICTS, REGENCIES_ID, DISTRICTS', 'CD_DISTRICTS', [], 'DISTRICTS', 'ASC');
+		$data['districts'] 			= $this->Dbhelper->selectTabel('ID_DISTRICTS, REGENCIES_ID, DISTRICS', 'CD_DISTRICTS', [], 'DISTRICTS', 'ASC');
 
 		// dd($data['user']);
 		$this->template->_v('survey/create', $data);

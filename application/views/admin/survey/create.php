@@ -843,7 +843,7 @@
                                 <td data-label="DISTRICTS">
                                     <select id="districts" class="form-control" style="width: 100%;" name="districts" required>
                                         <?php foreach($districts as $item): ?>
-                                            <option value="<?= $item['ID_DISTRICTS'] ?>"><?= $item['DISTRICTS'] ?></option>
+                                            <option value="<?= $item['ID_DISTRICTS'] ?>"><?= $item['DISTRICS'] ?></option>
                                         <?php endforeach ?>
                                     </select>
                                 </td>
