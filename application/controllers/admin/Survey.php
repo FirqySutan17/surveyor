@@ -244,7 +244,7 @@ class survey extends CI_Controller {
 		// $address = $json['features'][0]['properties']['geocoding']['label'];
 		$address = "Menara Jamsostek (North Tower), No. 38 Kav. 71-73, Jalan Jenderal Gatot Subroto, RW 01, Kuningan Barat, Mampang Prapatan, South Jakarta, Special capital Region of Jakarta, Java, 12920, Indonesia";
 		$data["address"] 	= $address;
-
+		dd($data["address"]);
 		echo json_encode(["status" => true, "message" => "success get detail coordinate", "data" => $data]);
 	}
 
