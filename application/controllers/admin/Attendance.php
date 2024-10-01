@@ -72,8 +72,9 @@ class Attendance extends CI_Controller {
 				$config['file_name']            = $PLANT."_".$EMPNO."_".$ATTEND_DATE."_".$type.".jpg";
 				$config['allowed_types']        = 'gif|jpg|jpeg|png';
 				$config['overwrite']            = true;
-				$this->load->library('upload', $config);
+				$this->load->library('upload');
 
+				$this->upload->initialize($config);
 				if ( ! $this->upload->do_upload('selfie_in'))
 				{
 					dd($this->upload->display_errors(), FALSE);
