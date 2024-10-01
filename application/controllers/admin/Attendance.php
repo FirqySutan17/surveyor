@@ -64,11 +64,11 @@ class Attendance extends CI_Controller {
 				$PLANT = $attendance_data['PLANT'];
 				$EMPNO = $attendance_data['EMPNO'];
 				$ATTEND_DATE = $attendance_data['ATTEND_DATE'];
-				if (!file_exists('./uploads/'.$PLANT)) {
-						mkdir('./uploads/'.$PLANT, 0777, true);
-				}
+				// if (!file_exists('./uploads/'.$PLANT)) {
+				// 		mkdir('./uploads/'.$PLANT, 0777, true);
+				// }
 
-				$config['upload_path']          = "./uploads/$PLANT";
+				$config['upload_path']          = "./upload/";
 				$config['file_name']            = $PLANT."_".$EMPNO."_".$ATTEND_DATE."_".$type.".jpg";
 				$config['allowed_types']        = 'gif|jpg|jpeg|png';
 				$config['overwrite']            = true;
