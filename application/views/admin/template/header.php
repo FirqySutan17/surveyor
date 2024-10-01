@@ -387,5 +387,5 @@
 
         <main class="page-wrapper">
             <?= $sidebar_menu ?>
-            <div id="main" class="main open-main">
+            <div id="main" class="main close-main">
             

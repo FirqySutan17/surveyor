@@ -3270,21 +3270,21 @@ i.fa-circle {
 
 /* RESPONSIVE */
 .open-nav {
-	width: 0%;
-	display: none;
-}
-.close-nav {
 	width: 20%;
 	display: block;
+}
+.close-nav {
+	width: 0%;
+	display: none;
 }
 .main {
 	margin-left: 20%;
 }
 .open-main {
-	margin-left: 0%;
+	margin-left: 20%;
 }
 .close-main {
-	margin-left: 20%;
+	margin-left: 0%;
 }
 .table-responsive {
 	width: 100%;
