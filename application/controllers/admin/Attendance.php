@@ -26,6 +26,12 @@ class Attendance extends CI_Controller {
 		$this->template->_v('attendance/index', $data);
 	}
 
+	public function datatable() {
+		$data = $this->Dbhelper->selectRawQuery("SELECT * FROM HR_ATTENDANCE_WFH ORDER BY ATTEND_DATE ASC");
+
+		return $data;
+	}
+
 	public function create() {
 		$user 											= $this->check_attendanceUserWFH();
 		$data['title'] 							= 'ATTANDANCE';
