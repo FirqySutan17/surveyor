@@ -903,11 +903,11 @@
     document.getElementById("do_selfie").addEventListener("click", function() {
         const result = getMobileOperatingSystem();
 
-        if (result != "unknown"){
+        // if (result != "unknown"){
             document.getElementById("selfie_in").click();
-        } else {
-            alert("Error, please use Android/iOS phone and updated browser!");
-        }
+        // } else {
+        //     alert("Error, please use Android/iOS phone and updated browser!");
+        // }
     });
 
     document.getElementById("selfie_in").addEventListener("change", function () {
