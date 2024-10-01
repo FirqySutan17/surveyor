@@ -772,7 +772,7 @@
         <strong>SURVEY ENTRY</strong>
     </h3>
     <div class="row">
-        <form action="<?= admin_url('visit/do_create') ?>" method="POST" enctype="multipart/form-data">
+        <form action="<?= admin_url('survey/do_create') ?>" method="POST" enctype="multipart/form-data">
             <div class="content-task mt-5">
                 <h3 class="sub-title">1. LOCATION INFORMATION</h3>
                 <div class="table-responsive mt-2">

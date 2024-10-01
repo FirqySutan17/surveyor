@@ -243,7 +243,7 @@ class survey extends CI_Controller {
 
 		$address = $json['features'][0]['properties']['geocoding']['label'];
 		$data["address"] 	= $address;
-
+		dd($data["address"]);
 		echo json_encode(["status" => true, "message" => "success get detail coordinate", "data" => $data]);
 	}
 
