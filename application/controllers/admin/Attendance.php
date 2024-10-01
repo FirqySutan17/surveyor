@@ -34,143 +34,60 @@ class Attendance extends CI_Controller {
 	public function do_attend() {
 		if ($this->input->server('REQUEST_METHOD') === 'POST') {
 			$post = $this->input->post();
-			dd($post, FALSE);
-			dd($_FILES);
-			$postjson = json_encode($post);
-			$textfile = date('YmdHis').'_'.$this->session_data['user']['EMPLOYEE_ID'];
-			if (!write_file(APPPATH."logs/log_$textfile.txt", $postjson)) {
-				$this->session->set_flashdata('success', "Unable to logs post");
-				return redirect($this->own_link.'/report');
-			}
-
-			// dd($post);
-			$survey_no = $this->generateSurveyNo();
 			try {
+				$user 											= $this->check_attendanceUserWFH();
+				if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
+							$ip = $_SERVER["HTTP_CLIENT_IP"];
+				} elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])) {
+						$ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+				} else {
+						$ip = $_SERVER["REMOTE_ADDR"];
+				}
 				
 				// SURVEY DATA
-				$survey_report = [
-					"SURVEY_NO"			=> $survey_no,
-					"SURVEY_DATE"		=> date('Ymd', strtotime($post['survey_date'])),
-					"COORDINATE"		=> dbClean($post['coordinate']),
-					"LAND_TYPE"			=> dbClean($post['land_type']),
-					"PROVINCE"			=> dbClean($post['province']),
-					"REGENCY"			=> dbClean($post['regencies']),
-					"DISTRICT"			=> dbClean($post['districts']),
-					"CURRENT_PHASE"		=> dbClean($post['current_phase']),
-					"DESCRIPTION"		=> dbClean($post['address']),
-					"CREATED_AT"		=> date('Ymd His'),
-					"CREATED_BY"		=> $this->session_data['user']['EMPLOYEE_ID'],
+				$attendance_data = [
+					"COMPANY"			=> $user['userWFH']['COMPANY'],
+					"PLANT"				=> $user['userWFH']['PLANT'],
+					"EMPNO"				=> $user['userWFH']['EMPNO'],
+					"ATTEND_DATE"	=> dbClean($post['attend_date']),
+					"TIME_IN"			=> dbClean($post['attend_time']),
+					"REG_IN_OS"		=> dbClean($post['coordinate']),
+					"REG_IN_IP"		=> $ip,
+					"GMT"					=> 0
 				];
-
-				if (empty($survey_report["CREATED_BY"])) {
-					$this->session->set_flashdata('error', "User log-in not found");
-						return redirect($this->own_link.'/report');
-				}
 				
-				$survey_farmers = [];
-				if (!empty($post['farmer_name'])) {
-					foreach ($post['farmer_name'] as $i => $v) {
-						$curr_data = [
-							"SURVEY_NO"		=> $survey_no,
-							"SEQUENCE"		=> $i + 1,
-							"SURVEY_DATE"	=> $survey_report['SURVEY_DATE'],
-							"FARMER_NAME"	=> $v,
-							"FARMER_PHONE"	=> $post['farmer_phone'][$i]
-						];
+				dd($attendance_data);
 
-						$survey_farmers[] = $curr_data;
-					}
+				$PLANT = $attendance_data['PLANT'];
+				$EMPNO = $attendance_data['EMPNO'];
+				$ATTEND_DATE = $attendance_data['ATTEND_DATE'];
+				if (!file_exists('./uploads/'.$PLANT)) {
+						mkdir('./uploads/'.$PLANT, 0777, true);
 				}
 
-				$survey_market_price = [];
-				if (!empty($post['market_price'])) {
-					foreach ($post['market_price'] as $i => $v) {
-						$curr_data = [
-							"SURVEY_NO"		=> $survey_no,
-							"SURVEY_DATE"	=> $survey_report['SURVEY_DATE'],
-							"PRICE"	=> $v
-						];
+				$config['upload_path']          = "./uploads/$PLANT";
+				$config['file_name']            = $PLANT."_".$EMPNO."_".$ATTEND_DATE."_IN.jpg";
+				$config['allowed_types']        = 'gif|jpg|jpeg|png';
+				$config['overwrite']            = true;
+				$this->load->library('upload', $config);
 
-						$survey_market_price[] = $curr_data;
-					}
+				if ( ! $this->upload->do_upload('selfie_in'))
+				{
+					$this->session->set_flashdata('error', "Create data failed");
+					return redirect($this->own_link);
 				}
 
-				$survey_harvest_phase = [];
-				if (!empty($post['HARVEST_score'])) {
-					foreach ($post['HARVEST_score'] as $i => $v) {
-						$curr_data = [
-							"SURVEY_NO"			=> $survey_no,
-							"SEQUENCE"			=> $i + 1,
-							"SURVEY_DATE"		=> $survey_report['SURVEY_DATE'],
-							"SCORE"				=> $v,
-							"BARIS"				=> dbClean($post['baris'][$i]),
-							"BARIS_ACTUAL"		=> dbClean($post['baris_actual'][$i]),
-							"BARIS"				=> dbClean($post['baris'][$i]),
-							"BARIS_ACTUAL"		=> dbClean($post['baris_actual'][$i]),
-							"BIJI"				=> dbClean($post['biji'][$i]),
-							"BIJI_ACTUAL"		=> dbClean($post['biji_actual'][$i]),
-							"BOBOT"				=> dbClean($post['bobot'][$i]),
-							"BOBOT_ACTUAL"		=> dbClean($post['bobot_actual'][$i]),
-						];
+				$uploadData = $this->upload->data();
 
-						$survey_harvest_phase[] = $curr_data;
-					}
-				}
+				unset($config);
 
-				$survey_planting_phase = [];
-				if (!empty($post['PLANTING_description'])) {
-					foreach ($post['PLANTING_description'] as $i => $v) {
-						$curr_data = [
-							"SURVEY_NO"			=> $survey_no,
-							"SEQUENCE"			=> $i + 1,
-							"SURVEY_DATE"		=> $survey_report['SURVEY_DATE'],
-							"PHASE"				=> dbClean($post['current_phase']),
-							"DESCRIPTION"		=> dbClean($v),
-						];
+				$config = $this->createImgConfig($uploadData['full_path']);
+				$this->load->library('image_lib', $config);
 
-						$survey_planting_phase[] = $curr_data;
-					}
+				if($this->image_lib->resize()) {
+						if(array_key_exists('rotation_angle', $config)) $this->image_lib->rotate();
 				}
-
-
-				$survey_galleries = [];
-				if (!empty($_FILES)) {
-					foreach ($_FILES['SURVEY_IMAGE']['name'] as $key => $v) {
-						$no = $key + 1;
-						$berkas = [];
-						$berkas['name']= $v;
-				        $berkas['type']= $_FILES['SURVEY_IMAGE']['type'][$key];
-				        $berkas['tmp_name']= $_FILES['SURVEY_IMAGE']['tmp_name'][$key];
-				        $berkas['error']= $_FILES['SURVEY_IMAGE']['error'][$key];
-				        $berkas['size']= $_FILES['SURVEY_IMAGE']['size'][$key];
-
-				        $namafile = $this->upload_image($berkas, $survey_no, $no);
-				        $survey_galleries[] = [
-				        	'SURVEY_NO'		=> $survey_no,
-				        	'SEQUENCE'		=> $no,
-				        	'IMAGE_TITLE'	=> !empty($post['SURVEY_IMAGE_TITLE'][$key]) ? $post['SURVEY_IMAGE_TITLE'][$key] : '-',
-				        	'IMAGE_FILENAME'	=> $namafile
-				        ];
-					}
-				}
-
-
-				$save = $this->Dbhelper->insertData('SURVEY', $survey_report);
-				if (!empty($survey_farmers)) {
-					$save_farmers = $this->db->insert_batch('SURVEY_FARMERS', $survey_farmers);
-				}
-				if (!empty($survey_market_price)) {
-					$save_market_prices = $this->db->insert_batch('SURVEY_MARKET_PRICES', $survey_market_price);
-				}
-				if (!empty($survey_harvest_phase)) {
-					$save_harvest_phase = $this->db->insert_batch('SURVEY_HARVEST_PHASE', $survey_harvest_phase);
-				}
-				if (!empty($survey_planting_phase)) {
-					$save_planting_phase = $this->db->insert_batch('SURVEY_PLANTING_PHASE', $survey_planting_phase);
-				}
-				if (!empty($survey_galleries)) {
-					$save_galleries = $this->db->insert_batch('SURVEY_IMAGES', $survey_galleries);
-				}
+				$save = $this->Dbhelper->insertData('HR_ATTENDANCE_WFH', $attendance_data);
 				if ($save) {
 					$this->session->set_flashdata('success', "Create data success");
 					return redirect($this->own_link);

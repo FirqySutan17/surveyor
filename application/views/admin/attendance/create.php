@@ -817,6 +817,7 @@
                                     <input type="hidden" name="coordinate" id="coordinate_input">
                                     <input type="hidden" name="attend_date" value="<?= date('Ymd') ?>">
                                     <input type="hidden" name="attend_time" value="<?= date('His') ?>">
+                                    <input type="hidden" name="attend_type" value="check_in">
                                     <div id="coordinate"></div>
                                     <a id="share-location" href="javascript:void(0)" onclick="getLocation()" style="background: #00c0ff; border-radius: 10px; color: #fff; font-weight: 600; padding: 10px">SHARE LOCATION</a>
                                 </td>
