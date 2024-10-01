@@ -226,19 +226,11 @@ class survey extends CI_Controller {
 		// 	exit;
 		// }
 
-<<<<<<< HEAD
-			$geolocationURL = "http://maps.google.com/maps/api/geocode/json?latlng=$latitude,$longitude";
-			// send http request
-			$geocode	 				= file_get_contents($geolocationURL);
-			$json 						= json_decode($geocode);
-			$data["address"] 			= $json->results[0]->formatted_address;
-=======
 		// $geolocationURL = "http://maps.google.com/maps/api/geocode/json?latlng=$latitude,$longitude";
 		// // send http request
 		// $geocode	 				= file_get_contents($geolocationURL);
 		// $json 						= json_decode($geocode);
 		// $data["address"] 	= $json->results[0]->formatted_address;
->>>>>>> ad60cd16926a98ae591cf6086d25c64bf5064284
 
 		$addressURL = "https://nominatim.openstreetmap.org/reverse?format=geocodejson&lat=$latitude&lon=$longitude";
 		$geocode	 				= file_get_contents($addressURL);
