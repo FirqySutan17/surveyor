@@ -775,6 +775,9 @@
         <form action="<?= admin_url('attendance/do-attend') ?>" method="POST" enctype="multipart/form-data">
             <div class="content-task mt-5">
                 <h3 class="sub-title">ATTENDANCE CHECK</h3>
+                <?php if ($this->session->flashdata('error')): ?>
+                    <h5><?= $this->session->flashdata('error') ?></h5>
+                <?php endif ?>
                 <div class="table-responsive mt-2">
                     <table class="table table-bordered" style="margin-bottom: 10px">
                         <thead>

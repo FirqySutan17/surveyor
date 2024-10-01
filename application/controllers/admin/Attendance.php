@@ -93,6 +93,7 @@ class Attendance extends CI_Controller {
 
 				if ($type == 'IN') { 
 					$save = $this->Dbhelper->insertData('HR_ATTENDANCE_WFH', $attendance_data);
+					dd($attendance_data);
 				} elseif ($type == 'OUT') {
 					$update_data = [
 						"TIME_OUT"		=> dbClean($post['attend_time']),
@@ -104,6 +105,7 @@ class Attendance extends CI_Controller {
 				}
 
 				if ($save) {
+					dd($save);
 					$this->session->set_flashdata('success', "Attendance data success");
 					return redirect($this->own_link);
 				}
