@@ -90,7 +90,7 @@
     }
 </style>
 
-<nav id="myNav" class="myNav open-nav">
+<nav id="myNav" class="myNav close-nav">
     <?php $user_access = $this->session->userdata('user_dashboard')['user_access']; ?>
     <div class="menu-items">
         <ul class="nav-links">
