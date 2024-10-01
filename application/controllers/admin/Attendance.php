@@ -5,17 +5,11 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Attendance extends CI_Controller {
-	var $menu_id 	= "";
-	var $menu_id2 	= "";
-	var $menu_id3 	= "";
-	var $menu_id4 	= "";
+	var $menu_id 	= "R003";
 	var $session_data = "";
 	public function __Construct() {
 		parent::__construct();
-		$this->menu_id 	= 'TR003';
-		$this->menu_id2 = 'R001';
-		$this->menu_id3 = 'R003';
-		$this->menu_id4 = 'R004';
+		$this->menu_id 	= 'R003';
 		$this->session_data = $this->session->userdata('user_dashboard');
 
 		$this->cekLogin();
@@ -24,27 +18,10 @@ class Attendance extends CI_Controller {
 	}
 
 	public function index() {
-		$user 											= $this->check_attendanceUserWFH();
-		$data['title'] 							= 'ATTENDANCE';
-		$data['user'] 							= $user;
-		
-		$latest_attendance 	= $this->Dbhelper->selectTabelOne('*', 'HR_ATTENDANCE_WFH', ['COMPANY' => $user['userWFH']['COMPANY'], 'PLANT' => $user['userWFH']['PLANT'], 'EMPNO' => $user['userWFH']['EMPNO']], 'ATTEND_DATE', 'DESC');
-
-		$attendance_type 	= "CHECK-IN";
-		if ($latest_attendance) {
-			if (empty($latest_attendance['TIME_OUT'])) {
-				$attendance_type = "CHECK-OUT";
-			} elseif (
-					!empty($latest_attendance['ATTEND_DATE']) && 
-					!empty($latest_attendance['TIME_OUT']) && 
-					$latest_attendance['ATTEND_DATE'] == date('Ymd')
-			) {
-				$attendance_type = "STABLE";
-			}
-		}
-		$data['attendance_type'] 	= $attendance_type;
-		$data['attend_date']			= !empty($latest_attendance) ? $latest_attendance['ATTEND_DATE'] : date('Ymd');
-		$data['latest_attendance'] = $latest_attendance;
+		$user 			= $this->check_attendanceUserWFH();
+		$data['title'] 	= 'ATTENDANCE';
+		$data['user'] 	= $user;
+		$data['datatable']	= $this->datatable();
 
 		$this->template->_v('attendance/index', $data);
 	}

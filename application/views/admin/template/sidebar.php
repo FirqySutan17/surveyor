@@ -243,7 +243,7 @@
                             </a>
                         </li>
                     <?php endif ?>
-                    <?php if (in_array('R004', $user_access) || in_array('*', $user_access)): ?>
+                    <?php if (in_array('R002', $user_access) || in_array('*', $user_access)): ?>
                         <li class="<?= ($this->uri->segment(2) == 'visit' && $this->uri->segment(3) == 'customer') ? 'active' : '' ?>">
                             <a href="<?= route('dashboard/master/warehouse') ?>"
                                 class="">
@@ -251,7 +251,7 @@
                             </a>
                         </li>
                     <?php endif ?>
-                    <?php if (in_array('R005', $user_access) || in_array('*', $user_access)): ?>
+                    <?php if (in_array('R003', $user_access) || in_array('*', $user_access)): ?>
                         <li class="<?= ($this->uri->segment(2) == 'visit' && $this->uri->segment(3) == 'report') ? 'active' : '' ?>">
                             <a href="<?= route('dashboard/attendance') ?>"
                                 class="">

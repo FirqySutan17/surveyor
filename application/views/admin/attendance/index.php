@@ -290,53 +290,44 @@
     </h3>
 	<form class="form-horizontal" action="#" method="POST">
         <div class="row" style="padding: 0px 10px; border-bottom: 2px solid #000; padding-bottom: 10px;margin: 0px 0px; margin-bottom: 10px; ">
-			<div class="col-md-8 col-sm-12" style="display: flex;; align-items: center">
-                <span class="label-span" style="width: 17%; display: inline-block; vertical-align: middle; margin-top: 0px; font-weight: 600">LOCATION : </span> 
+			<div class="col-md-10 col-sm-12" style="display: flex;; align-items: center">
+                <span class="label-span" style="width: 17%; display: inline-block; vertical-align: middle; margin-top: 0px; font-weight: 600">USER NAME : </span> 
                 <select id="warehouse" class="form-control" name="warehouse" style="width: 50%">
-                    <option selected>LOCATION A</option>
-                    <!-- <?php foreach ($warehouse as $field): ?>
-                        <option <?= $filter['warehouse'] == $field['CODE'] ? 'selected' : '' ?> value="<?= $field['CODE'] ?>"><?= $field['NAMA'] ?></option>
-                    <?php endforeach ?> -->
+                    <option selected>NAME</option>
+                   
                 </select>
             </div>            
             <div class="col-md-2 col-sm-12" style="display: flex; align-items: center">
                 <button type="submit" class="btn btn-primary btn-block" style="height: 30px">FILTER</button>
             </div>
-            <div class="col-md-2 col-sm-12" style="display: flex; align-items: center">
+            <!-- <div class="col-md-2 col-sm-12" style="display: flex; align-items: center">
                 <button type="submit" formaction="<?= admin_url('survey/report/excel') ?>" class="btn btn-info btn-block" style="height: 30px">EXCEL</button>
-            </div>
+            </div> -->
         </div>
     </form>
     <table class="table table-bordered table-hover" id="example1">
         <thead>
             <tr>
                 <th style="text-align: center;">NO</th>
-                <th style="text-align: center;">CODE</th>
                 <th style="text-align: center;">DATE</th>
-                <th style="text-align: center;">COORDINATE</th>
-                <th style="text-align: center;">ADDRESS</th>
-                <th style="text-align: center;">SURVEYOR</th>
-                <th style="text-align: center;">ACTION</th>
+				<th style="text-align: center;">NAME</th>
+                <th style="text-align: center;">CHECK IN</th>
+                <th style="text-align: center;">CHECK OUT</th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($datatable as $i => $v): ?>
-                <tr>
-                    <td style="text-align: center; vertical-align: middle"><?= $i + 1 ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['SURVEY_NO'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['SURVEY_DATE'] ?></td>
-                    <td style="text-align: center; vertical-align: middle">
-											<iframe class="maps-frame" src="https://maps.google.com/maps?q=<?= $v['COORDINATE'] ?>&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-										</td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['DESCRIPTION'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['CREATED_BY'] ?></td>
-                    <td style="text-align: center; vertical-align: middle">
+            <tr>
+                <td style="text-align: center; vertical-align: middle">1</td>
+                <td style="text-align: center; vertical-align: middle">27/09/2024</td>
+                <td style="text-align: center; vertical-align: middle">FIRQY SUTANWALIYAH</td>
+				<td style="text-align: center; vertical-align: middle">08:00 <br>27-09-2024</td>
+				<td style="text-align: center; vertical-align: middle">17:00 <br>27-09-2024</td>
+                    <!-- <td style="text-align: center; vertical-align: middle">
                         <a href="<?= admin_url('survey/edit') ?>" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
                         <a href="<?= admin_url('survey/drawing') ?>" class="btn btn-sm" title="Drawing"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px"></i></a>
                         <a href="<?= admin_url('survey/detail') ?>" target="_blank" class="btn btn-sm" title="Detail"><i class="fas fa-eye text-primary"></i></a>
-                    </td>
-                </tr>
-            <?php endforeach ?>
+                    </td> -->
+            </tr>
         </tbody>
     </table>
 </div>
@@ -352,4 +343,10 @@
         {"language": {"paginate": { "previous": "&lt","next": "&gt",}}}
       );
     })
+
+	$('#warehouse').select2({
+        theme: 'bootstrap4',
+        language: "en",
+        placeholder: "- SELECT USER NAME -",
+    });
 </script>

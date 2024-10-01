@@ -351,6 +351,7 @@ class User extends CI_Controller {
 			'TR003'	=> 'Entry - Attendance',
 			'R001'	=> 'Report - Survey',
 			'R002'	=> 'Report - Gudang',
+			'R003'	=> 'Report - Attendance',
 		];
 	}
 
