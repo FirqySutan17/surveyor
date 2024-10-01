@@ -1088,7 +1088,7 @@
                     <tbody class="planting-phase-${index}" style="display: none;">
                         <tr style="align-items: flex-end">
                             <td>
-                                <input type="date" name="PLANTING_date[${index}]['persiapan-lahan']" class="form-control" style="font-size: 14px" required>
+                                <input type="date" name="PLANTING_date[${index}]['persiapan-lahan']" class="form-control" style="font-size: 14px" >
                             </td>
                             <td data-label="PHASE" width="45%">
                                 <input type="text" name="PLANTING_phase[${index}]['persiapan-lahan']" value="PERSIAPAN LAHAN" class="form-control" style="font-size: 14px" readonly>
@@ -1106,7 +1106,7 @@
                             </td>
                         </tr>
                         <tr style="align-items: flex-end">
-                            <td><input type="date" name="PLANTING_date[${index}]['vegetatif-awal']" class="form-control" style="font-size: 14px" required></td>
+                            <td><input type="date" name="PLANTING_date[${index}]['vegetatif-awal']" class="form-control" style="font-size: 14px" ></td>
                             <td data-label="PHASE" width="45%">
                                 <input type="text" name="PLANTING_phase[${index}]['vegetatif-awal']" value="VEGETATIF AWAL" class="form-control" style="font-size: 14px" readonly>
                             </td>
@@ -1125,7 +1125,7 @@
                             </td>
                         </tr>
                         <tr style="align-items: flex-end">
-                            <td><input type="date" name="PLANTING_date[${index}]['vegetatif-akhir']" class="form-control" style="font-size: 14px" required></td>
+                            <td><input type="date" name="PLANTING_date[${index}]['vegetatif-akhir']" class="form-control" style="font-size: 14px" ></td>
                             <td data-label="PHASE" width="45%">
                                 <input type="text" name="PLANTING_phase[${index}]['vegetatif-akhir']" value="VEGETATIF AKHIR" class="form-control" style="font-size: 14px" readonly>
                             </td>
@@ -1145,7 +1145,7 @@
                             </td>
                         </tr>
                         <tr style="align-items: flex-end">
-                            <td><input type="date" name="PLANTING_date[${index}]['genetatif-awal']" class="form-control" style="font-size: 14px" required></td>
+                            <td><input type="date" name="PLANTING_date[${index}]['genetatif-awal']" class="form-control" style="font-size: 14px" ></td>
                             <td data-label="PHASE" width="45%">
                                 <input type="text" name="PLANTING_phase[${index}]['genetatif-awal']" value="GENETATIF AWAL" class="form-control" style="font-size: 14px" readonly>
                             </td>
@@ -1165,7 +1165,7 @@
                             </td>
                         </tr>
                         <tr style="align-items: flex-end">
-                            <td><input type="date" name="PLANTING_date[${index}]['genetatif-akhir']" class="form-control" style="font-size: 14px" required></td>
+                            <td><input type="date" name="PLANTING_date[${index}]['genetatif-akhir']" class="form-control" style="font-size: 14px" ></td>
                             <td data-label="PHASE" width="45%">
                                 <input type="text" name="PLANTING_phase[${index}]['genetatif-akhir']" value="GENETATIF AKHIR" class="form-control" style="font-size: 14px" readonly>
                             </td>
@@ -1181,7 +1181,7 @@
                             </td>
                         </tr>
                         <tr style="align-items: flex-end">
-                            <td><input type="date" name="PLANTING_date[${index}]['gagal-panen']" class="form-control" style="font-size: 14px" required></td>
+                            <td><input type="date" name="PLANTING_date[${index}]['gagal-panen']" class="form-control" style="font-size: 14px" ></td>
                             <td data-label="PHASE" width="45%">
                                 <input type="text" name="PLANTING_phase[${index}]['gagal-panen']" value="PUSO / GAGAL PANEN" class="form-control" style="font-size: 14px" readonly>
                             </td>
