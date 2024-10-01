@@ -896,14 +896,14 @@
                                         <td data-label="CHECK-OUT">
                                             <?= $latest_attendance['ATTEND_DATE'].' '.$latest_attendance['TIME_OUT'] ?>
                                         </td>
-                                        <td data-label="COORDINATE">
+                                        <td data-label="COORDINATE" style="display: flex; align-items: center; flex-direction: column; align-content: center; justify-content: center;">
                                             <?= $latest_attendance['REG_OUT_OS'] ?>
                                             <br>
-                                            <iframe class="maps-frame" src="https://maps.google.com/maps?q=<?= $latest_attendance['REG_OUT_OS'] ?>&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                            <iframe style="height: 300px; width: 300px; margin-top: 10px" class="maps-frame" src="https://maps.google.com/maps?q=<?= $latest_attendance['REG_OUT_OS'] ?>&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                         </td>
-                                        <td data-label="TAKE-SELFIE">
+                                        <td data-label="TAKE-SELFIE" style="display: flex; align-items: center; flex-direction: column; align-content: center; justify-content: center;">
                                             <?php $path = $latest_attendance['PLANT'].'/'.$latest_attendance['PLANT'].'_'.$latest_attendance['EMPNO'].'_'.$latest_attendance['ATTEND_DATE'].'_OUT.jpg'; ?>
-                                            <img class="selfie-prv" src="<?= base_url('uploads/'.$path) ?>" />
+                                            <img style="height: 300px; width: 300px; margin-top: 10px; object-fit: contain" class="selfie-prv" src="<?= base_url('uploads/'.$path) ?>" />
                                         </td>
                                         <td></td>
                                     </tr>
