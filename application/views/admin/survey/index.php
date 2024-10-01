@@ -329,7 +329,7 @@
 											<iframe class="maps-frame" src="https://maps.google.com/maps?q=-<?= $v['COORDINATE'] ?>&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 										</td>
                     <td style="text-align: center; vertical-align: middle"><?= $v['DESCRIPTION'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['CREATED_BY_NAME'] ?></td>
+                    <td style="text-align: center; vertical-align: middle"><?= $v['CREATED_BY'] ?></td>
                     <td style="text-align: center; vertical-align: middle">
                         <a href="<?= admin_url('survey/edit') ?>" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
                         <a href="<?= admin_url('survey/drawing') ?>" class="btn btn-sm" title="Drawing"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px"></i></a>
