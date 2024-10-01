@@ -64,11 +64,11 @@ class Attendance extends CI_Controller {
 				$PLANT = $attendance_data['PLANT'];
 				$EMPNO = $attendance_data['EMPNO'];
 				$ATTEND_DATE = $attendance_data['ATTEND_DATE'];
-				// if (!file_exists('./uploads/'.$PLANT)) {
-				// 		mkdir('./uploads/'.$PLANT, 0777, true);
-				// }
+				if (!file_exists('./uploads/'.$PLANT)) {
+						mkdir('./uploads/'.$PLANT, 0777, true);
+				}
 
-				$config['upload_path']          = "./upload/";
+				$config['upload_path']          = "./uploads/".$PLANT;
 				$config['file_name']            = $PLANT."_".$EMPNO."_".$ATTEND_DATE."_".$type.".jpg";
 				$config['allowed_types']        = 'gif|jpg|jpeg|png';
 				$config['overwrite']            = true;
@@ -77,8 +77,6 @@ class Attendance extends CI_Controller {
 				$this->upload->initialize($config);
 				if ( ! $this->upload->do_upload('selfie_in'))
 				{
-					dd($this->upload->display_errors(), FALSE);
-					dd($config);
 					$this->session->set_flashdata('error', "Create data failed");
 					return redirect($this->own_link);
 				}
@@ -96,7 +94,6 @@ class Attendance extends CI_Controller {
 
 				if ($type == 'IN') { 
 					$save = $this->Dbhelper->insertData('HR_ATTENDANCE_WFH', $attendance_data);
-					dd($attendance_data);
 				} elseif ($type == 'OUT') {
 					$update_data = [
 						"TIME_OUT"		=> dbClean($post['attend_time']),
@@ -162,6 +159,58 @@ class Attendance extends CI_Controller {
 			'userWFH'				=> $userWFH
 		];
 	}
+
+	private function createImgConfig($path)
+    {
+        $config['image_library'] = 'gd2';
+        $config['source_image'] = $path;
+        $config['maintain_ratio'] = TRUE;
+        $config['new_image']     = $path;
+
+        $exif = exif_read_data($path);
+
+        if ($exif && (!empty($exif['Orientation']))) {
+            switch ($exif['Orientation']) {
+                case 1: // nothing
+                    $config['width'] = 500;
+                    break;
+                case 2: // horizontal flip
+                    $config['rotation_angle'] = 'hor';
+                    $config['width'] = 500;
+                    break;
+                case 3: // 180 rotate left
+                    $config['rotation_angle'] = 180;
+                    $config['width'] = 500;
+                    break;
+                case 4: // vertical flip
+                    $config['rotation_angle'] = 'ver';
+                    $config['width'] = 500;
+                    break;
+                case 5: // vertical flip + 90 rotate right
+                    $config['rotation_angle'] = 270;
+                    $config['height'] = 500;
+                    break;
+                case 6: // 90 rotate right
+                    $config['rotation_angle'] = 270;
+                    $config['height'] = 500;
+                    break;
+                case 7: // horizontal flip + 90 rotate right
+                    $config['rotation_angle'] = 90;
+                    $config['height'] = 500;
+                    break;
+                case 8:    // 90 rotate left
+                    $config['rotation_angle'] = 90;
+                    $config['height'] = 500;
+                    break;
+                default:
+                    $config['width'] = 500;
+            }
+        } else {
+            $config['width'] = 500;
+        }
+
+        return $config;
+    }
 
 	// CHANGE NECESSARY POINT
 	private function cekLogin() {
