@@ -914,7 +914,7 @@
 
             <div class="form-group row mt-5" style="margin: 20px 0px !important">
                 <div class="col-lg-12 col-sm-12" style="display: flex; padding: 0px">
-                    <!-- <a href="<?= admin_url('visit/report') ?>" class="btn btn-primary cust-btn-back" style="width: 50%; height: 50px; display: flex; align-items: center; justify-content: center;">Cancel</a> -->
+                    <a href="<?= admin_url('dashboard') ?>" class="btn btn-primary cust-btn-back" style="width: 50%; height: 50px; display: flex; align-items: center; justify-content: center;">Back to Dashboard</a>
                     <span style="margin: 5px;"></span>
                     <button id="submit_btn" type="submit" class="btn btn-primary cust-btn-save" style="width: 50%; height: 50px">Save</button>
                 </div>
