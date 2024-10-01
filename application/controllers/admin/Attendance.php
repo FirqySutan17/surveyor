@@ -56,7 +56,10 @@ class Attendance extends CI_Controller {
 					"GMT"					=> 0
 				];
 				
-				dd($attendance_data);
+				$type = "OUT";
+				if ($post['attend_type'] == 'check_in') {
+					$type = "IN";
+				}
 
 				$PLANT = $attendance_data['PLANT'];
 				$EMPNO = $attendance_data['EMPNO'];
@@ -66,7 +69,7 @@ class Attendance extends CI_Controller {
 				}
 
 				$config['upload_path']          = "./uploads/$PLANT";
-				$config['file_name']            = $PLANT."_".$EMPNO."_".$ATTEND_DATE."_IN.jpg";
+				$config['file_name']            = $PLANT."_".$EMPNO."_".$ATTEND_DATE."_".$type.".jpg";
 				$config['allowed_types']        = 'gif|jpg|jpeg|png';
 				$config['overwrite']            = true;
 				$this->load->library('upload', $config);
@@ -87,15 +90,27 @@ class Attendance extends CI_Controller {
 				if($this->image_lib->resize()) {
 						if(array_key_exists('rotation_angle', $config)) $this->image_lib->rotate();
 				}
-				$save = $this->Dbhelper->insertData('HR_ATTENDANCE_WFH', $attendance_data);
+
+				if ($type == 'IN') { 
+					$save = $this->Dbhelper->insertData('HR_ATTENDANCE_WFH', $attendance_data);
+				} elseif ($type == 'OUT') {
+					$update_data = [
+						"TIME_OUT"		=> dbClean($post['attend_time']),
+						"REG_OUT_OS"	=> dbClean($post['coordinate']),
+						"REG_OUT_IP"	=> $ip
+					];
+
+					$save = $this->Dbhelper->updateData("HR_ATTENDANCE_WFH", array('COMPANY' => $attendance_data['COMPANY'], 'PLANT' => $attendance_data['PLANT'], 'EMPNO' => $attendance_data['EMPNO'], 'ATTEND_DATE' => $attendance_data['ATTEND_DATE']), $update_data);		
+				}
+
 				if ($save) {
-					$this->session->set_flashdata('success', "Create data success");
+					$this->session->set_flashdata('success', "Attendance data success");
 					return redirect($this->own_link);
 				}
 			} catch (Exception $e) {
 				dd($e->getMessage());
 			}
-			$this->session->set_flashdata('error', "Create data failed");
+			$this->session->set_flashdata('error', "Attendance data failed");
 			return redirect($this->own_link."/report");
 		}
 		$this->session->set_flashdata('error', "Access denied");
