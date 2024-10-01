@@ -1215,36 +1215,36 @@
                             <th style="width: 10%">%</th>
                         </tr>
                     </thead>
-                    <tbody class="harvest-phase" style="display: none;">
+                    <tbody class="harvest-phase-${index}" style="display: none;">
                         <?php for ($i=10; $i >= 0; $i--) { ?>
                             <tr>
                                 <td data-label="SCORE" style="">
                                     <?= $i ?>
-                                    <input type="hidden" name="HARVEST_score[]" value="<?= $i ?>">
+                                    <input type="hidden" name="HARVEST_score[${index}][]" value="<?= $i ?>">
                                 </td>
                                 <td data-label="BARIS">
-                                    <input name="baris[]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    <input name="baris[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                 </td>
                                 <td data-label="ACTUAL">
-                                    <input name="baris_actual[]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    <input name="baris_actual[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                 </td>
                                 <td data-label="%">
                                     <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                 </td>
                                 <td data-label="BIJI">
-                                    <input name="biji[]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    <input name="biji[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                 </td>
                                 <td data-label="ACTUAL">
-                                    <input name="biji_actual[]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    <input name="biji_actual[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                 </td>
                                 <td data-label="%">
                                     <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                 </td>
                                 <td data-label="BOBOT">
-                                    <input name="bobot[]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    <input name="bobot[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                 </td>
                                 <td data-label="ACTUAL">
-                                    <input name="bobot_actual[]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    <input name="bobot_actual[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                 </td>
                                 <td data-label="%">
                                     <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
