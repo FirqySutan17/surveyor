@@ -787,7 +787,7 @@
                         <tbody>
                             <tr>
                                 <td data-label="EMPLOYEE">
-                                    <?= $user['EMPLOYEE_ID'] ?> - <?= $user['FULL_NAME'] ?>
+                                    <?= $user['userSurveyor']['EMPLOYEE_ID'] ?> - <?= $user['userSurveyor']['FULL_NAME'] ?>
                                 </td>
                                 <td data-label="DATE">
                                     <div id="current-date"></div>
@@ -845,8 +845,7 @@
 </div>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLUc8QC0GYh5ozbMbGBcNUm1BBIjvmmg8&callback=myMap"></script>
 <script>
-    const lang = document.getElementById("latitude");
-    const long = document.getElementById("longitude");
+    const coordinate = document.getElementById("coordinate");
 
     function getLocation() {
         console.log(navigator.geolocation);
@@ -854,8 +853,7 @@
             
             navigator.geolocation.watchPosition(showPosition);
         } else { 
-            lang.innerHTML = "Geolocation is not supported by this browser.";
-            long.innerHTML = "Geolocation is not supported by this browser.";
+            coordinate.innerHTML = "Geolocation is not supported by this browser.";
         }
     }
         
@@ -863,9 +861,8 @@
         let latitude    = position.coords.latitude;
         let longitude   = position.coords.longitude;
 
-        lang.innerHTML  = latitude;
-        long.innerHTML  = longitude;
         $("#coordinate").val(latitude + "," + longitude);
+        $("#coordinate_input").val(latitude + "," + longitude);
     }
 
     document.getElementById("do_selfie").addEventListener("click", function() {
