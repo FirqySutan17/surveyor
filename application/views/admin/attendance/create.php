@@ -716,6 +716,9 @@
                             font-size: 12px !important;
 
                         }
+                        td {
+                            font-weight: 600
+                        }
                         input {
                             font-size: 12px !important;
                         }
@@ -732,7 +735,10 @@
                             font-size: 13px;
                             text-align: left;
                             text-transform: uppercase;
-                            margin-bottom: 5px;
+                            margin-bottom: 10px;
+                            padding: 10px 15px;
+                            border-radius: 8px;
+                            background: #e4e4e4;
                         } 
                         .ts-asm {
                             display: none;
@@ -774,11 +780,11 @@
     <div class="row">
         <form action="<?= admin_url('attendance/do-attend') ?>" method="POST" enctype="multipart/form-data">
             <div class="content-task mt-5">
-                <h3 class="sub-title">ATTENDANCE CHECK</h3>
+                <!-- <h3 class="sub-title">ATTENDANCE CHECK</h3> -->
                 <?php if ($this->session->flashdata('error')): ?>
                     <h5><?= $this->session->flashdata('error') ?></h5>
                 <?php endif ?>
-                <div class="table-responsive mt-2">
+                <div class="table-responsive">
                     <table class="table table-bordered" style="margin-bottom: 10px">
                         <thead>
                             <tr>
@@ -793,7 +799,7 @@
                                     <?= $user['userSurveyor']['EMPLOYEE_ID'] ?> - <?= $user['userSurveyor']['FULL_NAME'] ?>
                                 </td>
                                 <td data-label="DATE">
-                                    <div id="current-date"></div>
+                                    <div id="current-date" style="text-transform: uppercase"></div>
                                 </td>
                                 <td data-label="CLOCK">
                                     <div id="current-clock"></div>
@@ -820,7 +826,7 @@
                                     <td data-label="COORDINATE">
                                         <input type="hidden" name="coordinate" id="coordinate_input">
                                         <input type="hidden" name="attend_date" value="<?= $attend_date ?>">
-                                        <input type="hidden" name="attend_time" value="<?= date('His') ?>">
+                                        <input type="hidden" name="attend_time" value="<?= date('H:i:s') ?>">
                                         <input type="hidden" name="attend_type" value="check_in">
                                         <div id="coordinate"></div>
                                         <a id="share-location" href="javascript:void(0)" onclick="getLocation()" style="background: #00c0ff; border-radius: 10px; color: #fff; font-weight: 600; padding: 10px">SHARE LOCATION</a>
@@ -838,14 +844,14 @@
                                     <td data-label="CHECK-IN">
                                         <?= $latest_attendance['ATTEND_DATE'].' '.$latest_attendance['TIME_IN'] ?>
                                     </td>
-                                    <td data-label="COORDINATE">
+                                    <td data-label="COORDINATE" style="display: flex; align-items: center; flex-direction: column; align-content: center; justify-content: center;">
                                         <?= $latest_attendance['REG_IN_OS'] ?>
                                         <br>
-                                        <iframe class="maps-frame" src="https://maps.google.com/maps?q=<?= $latest_attendance['REG_IN_OS'] ?>&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                        <iframe style="height: 300px; width: 300px; margin-top: 10px" class="maps-frame" src="https://maps.google.com/maps?q=<?= $latest_attendance['REG_IN_OS'] ?>&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                     </td>
-                                    <td data-label="TAKE-SELFIE">
+                                    <td data-label="TAKE-SELFIE" style="display: flex; align-items: center; flex-direction: column; align-content: center; justify-content: center;">
                                         <?php $path = $latest_attendance['PLANT'].'/'.$latest_attendance['PLANT'].'_'.$latest_attendance['EMPNO'].'_'.$latest_attendance['ATTEND_DATE'].'_IN.jpg'; ?>
-                                        <img class="selfie-prv" src="<?= base_url('uploads/'.$path) ?>" />
+                                        <img style="height: 300px; width: 300px; margin-top: 10px; object-fit: contain" class="selfie-prv" src="<?= base_url('uploads/'.$path) ?>" />
                                     </td>
                                     <td></td>
                                 </tr>
