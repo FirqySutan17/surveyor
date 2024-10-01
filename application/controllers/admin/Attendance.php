@@ -85,12 +85,12 @@ class Attendance extends CI_Controller {
 
 				unset($config);
 
-				$config = $this->createImgConfig($uploadData['full_path']);
-				$this->load->library('image_lib', $config);
+				// $config = $this->createImgConfig($uploadData['full_path']);
+				// $this->load->library('image_lib', $config);
 
-				if($this->image_lib->resize()) {
-						if(array_key_exists('rotation_angle', $config)) $this->image_lib->rotate();
-				}
+				// if($this->image_lib->resize()) {
+				// 		if(array_key_exists('rotation_angle', $config)) $this->image_lib->rotate();
+				// }
 
 				if ($type == 'IN') { 
 					$save = $this->Dbhelper->insertData('HR_ATTENDANCE_WFH', $attendance_data);
