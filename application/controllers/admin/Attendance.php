@@ -34,7 +34,8 @@ class Attendance extends CI_Controller {
 	public function do_attend() {
 		if ($this->input->server('REQUEST_METHOD') === 'POST') {
 			$post = $this->input->post();
-			dd($post);
+			dd($post, FALSE);
+			dd($_FILES);
 			$postjson = json_encode($post);
 			$textfile = date('YmdHis').'_'.$this->session_data['user']['EMPLOYEE_ID'];
 			if (!write_file(APPPATH."logs/log_$textfile.txt", $postjson)) {
