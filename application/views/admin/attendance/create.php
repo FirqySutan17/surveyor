@@ -812,29 +812,47 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td data-label="CHECK-IN">
-                                    <div id="check-in"><?= date('Y-m-d H:i:s') ?></div>
-                                </td>
-                                <td data-label="COORDINATE">
-                                    <input type="hidden" name="coordinate" id="coordinate_input">
-                                    <input type="hidden" name="attend_date" value="<?= date('Ymd') ?>">
-                                    <input type="hidden" name="attend_time" value="<?= date('His') ?>">
-                                    <input type="hidden" name="attend_type" value="check_in">
-                                    <div id="coordinate"></div>
-                                    <a id="share-location" href="javascript:void(0)" onclick="getLocation()" style="background: #00c0ff; border-radius: 10px; color: #fff; font-weight: 600; padding: 10px">SHARE LOCATION</a>
-                                </td>
-                                <td data-label="TAKE-SELFIE">
-                                    <input type="file" name="selfie_in" id="selfie_in" accept="image/*" capture="user" style="display: none">
-                                    <img class="selfie-prv" id="selfie_in_prv" src="#" style="display: none"/>
-                                </td>
-                                <td>
-                                    <a id="selfie_btn" href="javascript:void(0)" style="background: #00c0ff; border-radius: 10px; color: #fff; font-weight: 600; padding: 10px; display:none">TAKE SELFIE</a>
-                                </td>
-                            </tr>
+                            <?php if ($attendance_type == 'CHECK-IN'): ?>
+                                <tr>
+                                    <td data-label="CHECK-IN">
+                                        <div id="check-in"><?= date('Y-m-d H:i:s') ?></div>
+                                    </td>
+                                    <td data-label="COORDINATE">
+                                        <input type="hidden" name="coordinate" id="coordinate_input">
+                                        <input type="hidden" name="attend_date" value="<?= $attend_date ?>">
+                                        <input type="hidden" name="attend_time" value="<?= date('His') ?>">
+                                        <input type="hidden" name="attend_type" value="check_in">
+                                        <div id="coordinate"></div>
+                                        <a id="share-location" href="javascript:void(0)" onclick="getLocation()" style="background: #00c0ff; border-radius: 10px; color: #fff; font-weight: 600; padding: 10px">SHARE LOCATION</a>
+                                    </td>
+                                    <td data-label="TAKE-SELFIE">
+                                        <input type="file" name="selfie_in" id="selfie_in" accept="image/*" capture="user" style="display: none">
+                                        <img class="selfie-prv" id="selfie_in_prv" src="#" style="display: none"/>
+                                    </td>
+                                    <td>
+                                        <a id="selfie_btn" href="javascript:void(0)" style="background: #00c0ff; border-radius: 10px; color: #fff; font-weight: 600; padding: 10px; display:none">TAKE SELFIE</a>
+                                    </td>
+                                </tr>
+                            <?php elseif($attendance_type == 'CHECK-OUT' || $attendance_type == 'STABLE'): ?>
+                                <tr>
+                                    <td data-label="CHECK-IN">
+                                        <?= $latest_attendance['ATTEND_DATE'].' '.$latest_attendance['TIME_IN'] ?>
+                                    </td>
+                                    <td data-label="COORDINATE">
+                                        <?= $latest_attendance['REG_IN_OS'] ?>
+                                        <br>
+                                        <iframe class="maps-frame" src="https://maps.google.com/maps?q=<?= $latest_attendance['REG_IN_OS'] ?>&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                    </td>
+                                    <td data-label="TAKE-SELFIE">
+                                        <?php $path = $latest_attendance['PLANT'].'/'.$latest_attendance['PLANT'].'_'.$latest_attendance['EMPNO'].'_'.$latest_attendance['ATTEND_DATE'].'_IN.jpg'; ?>
+                                        <img class="selfie-prv" id="selfie_in_prv" src="<?= base_url('uploads/'.$path) ?>" />
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            <?php endif ?>
                         </tbody>
                     </table>
-                    <div id="check-in-maps">
+                    <div id="check-maps">
                     <!-- <iframe id="maps-checkin" class="maps-frame" src="https://maps.google.com/maps?q=-6.2336281,106.8214081&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
                     </div>
                 </div>
@@ -875,7 +893,7 @@
         $("#share-location").remove();
 
         let gmaps_iframe = iframe_gmaps.replace("_googlemap_coordinate_", coordinate);
-        $("#check-in-maps").html(gmaps_iframe);
+        $("#check-maps").html(gmaps_iframe);
         selfiePhase();
     }
 

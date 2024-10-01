@@ -27,7 +27,25 @@ class Attendance extends CI_Controller {
 		$user 											= $this->check_attendanceUserWFH();
 		$data['title'] 							= 'SURVEY';
 		$data['user'] 							= $user;
-		$data['latest_attendance'] 	= $this->Dbhelper->selectTabelOne('*', 'HR_ATTENDANCE_WFH', ['COMPANY' => $user['userWFH']['COMPANY'], 'PLANT' => $user['userWFH']['PLANT'], 'EMPNO' => $user['userWFH']['EMPNO']], 'ATTEND_DATE', 'DESC');
+		
+		$latest_attendance 	= $this->Dbhelper->selectTabelOne('*', 'HR_ATTENDANCE_WFH', ['COMPANY' => $user['userWFH']['COMPANY'], 'PLANT' => $user['userWFH']['PLANT'], 'EMPNO' => $user['userWFH']['EMPNO']], 'ATTEND_DATE', 'DESC');
+
+		$attendance_type 	= "CHECK-IN";
+		if ($latest_attendance) {
+			if (empty($latest_attendance['TIME_OUT'])) {
+				$attendance_type = "CHECK-OUT";
+			} elseif (
+					!empty($latest_attendance['ATTEND_DATE']) && 
+					!empty($latest_attendance['TIME_OUT']) && 
+					$latest_attendance['ATTEND_DATE'] == date('Ymd')
+			) {
+				$attendance_type = "STABLE";
+			}
+		}
+		$data['attendance_type'] 	= $attendance_type;
+		$data['attend_date']			= !empty($latest_attendance) ? $latest_attendance['ATTEND_DATE'] : date('Ymd');
+		$data['latest_attendance'] = $latest_attendance;
+
 		$this->template->_v('attendance/create', $data);
 	}
 
@@ -105,7 +123,6 @@ class Attendance extends CI_Controller {
 				}
 
 				if ($save) {
-					dd($save);
 					$this->session->set_flashdata('success', "Attendance data success");
 					return redirect($this->own_link);
 				}
