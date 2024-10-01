@@ -76,7 +76,8 @@ class Attendance extends CI_Controller {
 
 				if ( ! $this->upload->do_upload('selfie_in'))
 				{
-					dd($this->upload->display_errors());
+					dd($this->upload->display_errors(), FALSE);
+					dd($config);
 					$this->session->set_flashdata('error', "Create data failed");
 					return redirect($this->own_link);
 				}
