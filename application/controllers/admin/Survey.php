@@ -23,7 +23,7 @@ class survey extends CI_Controller {
 		$this->load->library('upload');
 	}
 
-	public function index() {
+	public function index_bak() {
 		
 		$data['title'] 			= 'SURVEY';
 		
@@ -42,6 +42,10 @@ class survey extends CI_Controller {
 		$data['plant'] 			= $this->Dbhelper->selectTabel('CODE, CODE_NAME', 'CD_CODE', $filter, 'CODE', 'ASC');
 		$data['collection_type'] = $this->collection_type();
 		$data['user'] = $user;
+		$data['provinces'] 			= $this->Dbhelper->selectTabel('ID_PROVINCE, PROVINCE', 'CD_PROVINCE', [], 'PROVINCE', 'ASC');
+		$data['regencies'] 			= $this->Dbhelper->selectTabel('ID_REGENCIES, PROVINCE_ID, REGENCIES', 'CD_REGENCIES', [], 'REGENCIES', 'ASC');
+		$data['districts'] 			= $this->Dbhelper->selectTabel('ID_DISTRICTS, REGENCIES_ID, DISTRICTS', 'CD_DISTRICTS', [], 'DISTRICTS', 'ASC');
+
 		// dd($data['user']);
 		$this->template->_v('survey/create', $data);
 	}
@@ -242,7 +246,7 @@ class survey extends CI_Controller {
 		echo json_encode(["status" => true, "message" => "success get detail coordinate", "data" => $data]);
 	}
 
-	public function report() {
+	public function index() {
 
 		$sdate = date('Y-m').'-01';
 		$edate 	= date('Y-m-d');

@@ -828,20 +828,23 @@
                             <tr>
                                 <td data-label="PROVINCE">
                                     <select id="province" class="form-control" style="width: 100%;" name="province" required>
-                                        <option value="">A</option>
-                                        <option value="">B</option>
+                                        <?php foreach($province as $item): ?>
+                                            <option value="<?= $item['ID_PROVINCE'] ?>"><?= $item['PROVINCE'] ?></option>
+                                        <?php endforeach ?>
                                     </select>
                                 </td>
                                 <td data-label="REGENCIES">
                                     <select id="regencies" class="form-control" style="width: 100%;" name="regencies" required>
-                                        <option value="">C</option>
-                                        <option value="">D</option>
+                                        <?php foreach($regencies as $item): ?>
+                                            <option value="<?= $item['ID_REGENCIES'] ?>"><?= $item['REGENCIES'] ?></option>
+                                        <?php endforeach ?>
                                     </select>
                                 </td>
                                 <td data-label="DISTRICTS">
                                     <select id="districts" class="form-control" style="width: 100%;" name="districts" required>
-                                        <option value="">E</option>
-                                        <option value="">F</option>
+                                        <?php foreach($districts as $item): ?>
+                                            <option value="<?= $item['ID_DISTRICTS'] ?>"><?= $item['DISTRICTS'] ?></option>
+                                        <?php endforeach ?>
                                     </select>
                                 </td>
                             </tr>
