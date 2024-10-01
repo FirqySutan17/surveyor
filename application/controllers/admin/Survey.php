@@ -57,221 +57,132 @@ class survey extends CI_Controller {
 			}
 
 			// dd($post);
-			$visiting_no = $this->generateSurveyNo();
+			$survey_no = $this->generateSurveyNo();
 			try {
 				
-				// VR DATA
-				$visiting_report = [
-					"VISITING_NO"		=> $visiting_no,
-					"VISITING_DATE"		=> dbClean(str_replace("-", "", $post['visiting_date'])),
-					"PLANT"				=> dbClean($post['plant']),
-					"CUSTOMER"			=> dbClean($post['customer']),
-					"TRANSDATE_OPEN"	=> dbClean(date('Ymd', strtotime($post['transdate_open']))),
-					"TRANSDATE_CLOSE"	=> dbClean(date('Ymd', strtotime($post['transdate_close']))),
-					"CLOSE_TYPE"		=> dbClean($post['close_type']),
-					"AR_STOP"			=> dbClean(cleanformat($post['ar_stop'])),
-					"AR_CURRENT"		=> dbClean(cleanformat($post['ar_current'])),
-					"COLLATERAL_AMT"	=> dbClean(cleanformat($post['collateral_amt'])),
-					"COLLECTION_TYPE"	=> dbClean($post['collection_type']),
-					"STOPAGE_REASON"	=> dbClean($post['stopage_reason']),
-					"PENDING_FEE_STATUS"	=> dbClean($post['pending_fee_status']),
-					"PIC_OPEN_TS"		=> !empty($post['pic_open_ts']) ? dbClean($post['pic_open_ts']) : '',
-					"PIC_OPEN_ASM"		=> !empty($post['pic_open_asm']) ? dbClean($post['pic_open_asm']) : '',
-					"PIC_OPEN_GSM"		=> !empty($post['pic_open_gsm']) ? dbClean($post['pic_open_gsm']) : '',
-					"PIC_OPEN_CCT"		=> !empty($post['pic_open_cct']) ? dbClean($post['pic_open_cct']) : '',
-					"PIC_CLOSE_TS"		=> !empty($post['pic_close_ts']) ? dbClean($post['pic_close_ts']) : '',
-					"PIC_CLOSE_ASM"		=> !empty($post['pic_close_asm']) ? dbClean($post['pic_close_asm']) : '',
-					"PIC_CLOSE_GSM"		=> !empty($post['pic_close_gsm']) ? dbClean($post['pic_close_gsm']) : '',
-					"PIC_CLOSE_CCT"		=> !empty($post['pic_close_cct']) ? dbClean($post['pic_close_cct']) : '',
-					"STRATEGY_SALES"	=> "",
-					"STRATEGY_CCT"		=> "",
+				// SURVEY DATA
+				$survey_report = [
+					"SURVEY_NO"			=> $survey_no,
+					"SURVEY_DATE"		=> date('Ymd', strtotime($post['survey_date'])),
+					"COORDINATE"		=> dbClean($post['coordinate']),
+					"LAND_TYPE"			=> dbClean($post['land_type']),
+					"PROVINCE"			=> dbClean($post['province']),
+					"REGENCY"			=> dbClean($post['regency']),
+					"DISTRICT"			=> dbClean($post['district']),
+					"CURRENT_PHASE"		=> dbClean($post['current_phase']),
+					"DESCRIPTION"		=> dbClean($post['address']),
 					"CREATED_AT"		=> date('Ymd His'),
 					"CREATED_BY"		=> $this->session_data['user']['EMPLOYEE_ID'],
-					"CREATED_DATE"		=> date('Ymd'),
 				];
 
-				if (empty($visiting_report["CREATED_BY"])) {
+				if (empty($survey_report["CREATED_BY"])) {
 					$this->session->set_flashdata('error', "User log-in not found");
 						return redirect($this->own_link.'/report');
 				}
 				
-				$vr_assets = [];
-				if (!empty($post['assets_class1'])) {
-					foreach ($post['assets_class1'] as $i => $v) {
+				$survey_farmers = [];
+				if (!empty($post['farmer_name'])) {
+					foreach ($post['farmer_name'] as $i => $v) {
 						$curr_data = [
-							"VISITING_NO"	=> $visiting_no,
+							"SURVEY_NO"		=> $survey_no,
 							"SEQUENCE"		=> $i + 1,
-							"CLASS1"		=> $v,
-							"CLASS2"		=> $post['assets_class2'][$i],
-							"ASSET_TYPE"		=> $post['asset_type'][$i],
-							"ASSET_SIZE"		=> $post['asset_size'][$i],
-							"ASSET_VALUE"	=> cleanformat($post['asset_value'][$i]),
-							"ASSET_ADDRESS"	=> $post['asset_address'][$i],
-							"DOCS_CERTIFICATE"	=> $post['docs_certificate'][$i],
-							"DOCS_SPPJ"		=> $post['docs_sppj'][$i],
-							"DOCS_HT"	=> $post['docs_ht'][$i],
-							"DOCS_OTHERS"	=> $post['docs_others'][$i]
+							"SURVEY_DATE"	=> $survey_report['SURVEY_DATE'],
+							"FARMER_NAME"	=> $v,
+							"FARMER_PHONE"	=> $post['farmer_phone'][$i]
 						];
 
-						$vr_assets[] = $curr_data;
+						$survey_farmers[] = $curr_data;
 					}
 				}
 
-				$vr_collection_plan = [];
-				if (!empty($post['CL_collection_date'])) {
-					foreach ($post['CL_collection_date'] as $i => $v) {
+				$survey_market_price = [];
+				if (!empty($post['market_price'])) {
+					foreach ($post['market_price'] as $i => $v) {
 						$curr_data = [
-							"VISITING_NO"		=> $visiting_no,
+							"SURVEY_NO"		=> $survey_no,
+							"SURVEY_DATE"	=> $survey_report['SURVEY_DATE'],
+							"PRICE"	=> $v
+						];
+
+						$survey_market_price[] = $curr_data;
+					}
+				}
+
+				$survey_harvest_phase = [];
+				if (!empty($post['HARVEST_score'])) {
+					foreach ($post['HARVEST_score'] as $i => $v) {
+						$curr_data = [
+							"SURVEY_NO"			=> $survey_no,
 							"SEQUENCE"			=> $i + 1,
-							"COLLECTION_DATE"	=> date('Ym', strtotime($v)),
-							"AMOUNT"			=> cleanformat($post['CL_amount'][$i]),
-							"AR_BALANCE"		=> cleanformat($post['CL_ar_balance'][$i]),
-							"NOTES"				=> $post['CL_note'][$i]
+							"SURVEY_DATE"		=> $survey_report['SURVEY_DATE'],
+							"SCORE"				=> $v,
+							"BARIS"				=> dbClean($post['baris'][$i]),
+							"BARIS_ACTUAL"		=> dbClean($post['baris_actual'][$i]),
+							"BARIS"				=> dbClean($post['baris'][$i]),
+							"BARIS_ACTUAL"		=> dbClean($post['baris_actual'][$i]),
+							"BIJI"				=> dbClean($post['biji'][$i]),
+							"BIJI_ACTUAL"		=> dbClean($post['biji_actual'][$i]),
+							"BOBOT"				=> dbClean($post['bobot'][$i]),
+							"BOBOT_ACTUAL"		=> dbClean($post['bobot_actual'][$i]),
 						];
 
-						$vr_collection_plan[] = $curr_data;
+						$survey_harvest_phase[] = $curr_data;
 					}
 				}
 
-				$vr_other_debts = [];
-				if (!empty($post['OT_creditor'])) {
-					foreach ($post['OT_creditor'] as $i => $v) {
+				$survey_planting_phase = [];
+				if (!empty($post['PLANTING_description'])) {
+					foreach ($post['PLANTING_description'] as $i => $v) {
 						$curr_data = [
-							"VISITING_NO"		=> $visiting_no,
+							"SURVEY_NO"			=> $survey_no,
 							"SEQUENCE"			=> $i + 1,
-							"CREDITOR"			=> $v,
-							"CURRENT_DEBT"		=> cleanformat($post['OT_current_debt'][$i]),
-							"NOTES"				=> $post['OT_note'][$i]
+							"SURVEY_DATE"		=> $survey_report['SURVEY_DATE'],
+							"PHASE"				=> dbClean($post['current_phase']),
+							"DESCRIPTION"		=> dbClean($v),
 						];
 
-						$vr_other_debts[] = $curr_data;
+						$survey_planting_phase[] = $curr_data;
 					}
 				}
 
-				$vr_details = [];
-				if (!empty($post['VD_visit_date'])) {
-					foreach ($post['VD_visit_date'] as $i => $v) {
-						$curr_data = [
-							"VISITING_NO"			=> $visiting_no,
-							"SEQUENCE"				=> $i + 1,
-							"VISIT_DATE"			=> date('Ymd', strtotime($v)),
-							"PARTICIPANT_CJ"		=> $post['VD_participant_cj'][$i],
-							"PARTICIPANT_CUST"		=> $post['VD_participant_customer'][$i],
-							"LOCATION"				=> $post['VD_location'][$i],
-							"DESCRIPTION"			=> dbClean($post['VD_description'][$i]),
-							"COLLECTION_BD_OPINION"	=> dbClean($post['VD_collection_bd_opinion'][$i])
-						];
 
-						$vr_details[] = $curr_data;
-					}
-				}
-
-				$vr_strategy = [];
-				if (!empty($post['VR_strategy_sales'])) {
-					foreach ($post['VR_strategy_sales'] as $i => $v) {
-						$curr_data = [
-							"VISITING_NO"		=> $visiting_no,
-							"SEQUENCE"			=> $i + 1,
-							"STRATEGY_SALES"	=> $v,
-							"STRATEGY_CCT"		=> dbClean($post['VR_strategy_cct'][$i]),
-						];
-
-						$vr_strategy[] = $curr_data;
-					}
-				}
-
-				$vr_galleries = [];
+				$survey_galleries = [];
 				if (!empty($_FILES)) {
-					foreach ($_FILES['VR_image_file']['name'] as $key => $v) {
+					foreach ($_FILES['SURVEY_IMAGE']['name'] as $key => $v) {
 						$no = $key + 1;
 						$berkas = [];
 						$berkas['name']= $v;
-				        $berkas['type']= $_FILES['VR_image_file']['type'][$key];
-				        $berkas['tmp_name']= $_FILES['VR_image_file']['tmp_name'][$key];
-				        $berkas['error']= $_FILES['VR_image_file']['error'][$key];
-				        $berkas['size']= $_FILES['VR_image_file']['size'][$key];
+				        $berkas['type']= $_FILES['SURVEY_IMAGE']['type'][$key];
+				        $berkas['tmp_name']= $_FILES['SURVEY_IMAGE']['tmp_name'][$key];
+				        $berkas['error']= $_FILES['SURVEY_IMAGE']['error'][$key];
+				        $berkas['size']= $_FILES['SURVEY_IMAGE']['size'][$key];
 
-				        $namafile = $this->upload_image($berkas, $visiting_no, $no);
-				        $vr_galleries[] = [
-				        	'VISITING_NO'	=> $visiting_no,
+				        $namafile = $this->upload_image($berkas, $survey_no, $no);
+				        $survey_galleries[] = [
+				        	'SURVEY_NO'		=> $survey_no,
 				        	'SEQUENCE'		=> $no,
-				        	'IMAGE_NAME'	=> $post['VR_image_name'][$key],
+				        	'IMAGE_TITLE'	=> $post['SURVEY_IMAGE_TITLE'][$key],
 				        	'IMAGE_FILENAME'	=> $namafile
 				        ];
 					}
 				}
 
-				$core_logs = [
-					"VISITING_NO"		=> $visiting_no,
-					"TYPE"					=> "ENTRY",
-					"CREATED_AT"		=> date('Ymd His'),
-					"CREATED_BY"		=> $this->session_data['user']['EMPLOYEE_ID'],
-				];
 
-				$masterdata_logs = [
-					"ON_TABLE"	=> "TR_VR",
-					"JSONDATA"	=> json_encode($visiting_report)
-				];
-				$masterdata_logs = array_merge($masterdata_logs, $core_logs);
-
-				$assets_logs = [
-					"ON_TABLE"	=> "TR_VR_ASSETS",
-					"JSONDATA"	=> json_encode($vr_assets)
-				];
-				$assets_logs = array_merge($assets_logs, $core_logs);
-
-				$collection_plan_logs = [
-					"ON_TABLE"	=> "TR_VR_COLLECTION_PLAN",
-					"JSONDATA"	=> json_encode($vr_collection_plan)
-				];
-				$collection_plan_logs = array_merge($collection_plan_logs, $core_logs);
-
-				$other_debts_logs = [
-					"ON_TABLE"	=> "TR_VR_OTHER_DEBTS",
-					"JSONDATA"	=> json_encode($vr_other_debts)
-				];
-				$other_debts_logs = array_merge($other_debts_logs, $core_logs);
-
-				$details_logs = [
-					"ON_TABLE"	=> "TR_VR_DETAILS",
-					"JSONDATA"	=> json_encode($vr_other_debts)
-				];
-				$details_logs = array_merge($details_logs, $core_logs);
-
-				$strategy_logs = [
-					"ON_TABLE"	=> "TR_VR_STRATEGY",
-					"JSONDATA"	=> json_encode($vr_strategy)
-				];
-				$strategy_logs = array_merge($strategy_logs, $core_logs);
-
-				$insertbatch_logs = [];
-				$insertbatch_logs[] = $masterdata_logs;
-				$insertbatch_logs[] = $assets_logs;
-				$insertbatch_logs[] = $collection_plan_logs;
-				$insertbatch_logs[] = $other_debts_logs;
-				$insertbatch_logs[] = $details_logs;
-				$insertbatch_logs[] = $strategy_logs;
-				$save_logs = $this->db->insert_batch('LOGS_VISIT_REPORT_DATA', $insertbatch_logs);
-
-
-				$save = $this->Dbhelper->insertData('TR_VR', $visiting_report);
-				if (!empty($vr_assets)) {
-					$save_assets = $this->db->insert_batch('TR_VR_ASSETS', $vr_assets);
+				$save = $this->Dbhelper->insertData('SURVEY', $survey_report);
+				if (!empty($survey_farmers)) {
+					$save_farmers = $this->db->insert_batch('SURVEY_FARMERS', $survey_farmers);
 				}
-				if (!empty($vr_collection_plan)) {
-					$save_collection_plan = $this->db->insert_batch('TR_VR_COLLECTION_PLAN', $vr_collection_plan);
+				if (!empty($survey_market_price)) {
+					$save_market_prices = $this->db->insert_batch('SURVEY_MARKET_PRICES', $survey_market_price);
 				}
-				if (!empty($vr_other_debts)) {
-					$save_other_debts = $this->db->insert_batch('TR_VR_OTHER_DEBTS', $vr_other_debts);
+				if (!empty($survey_harvest_phase)) {
+					$save_harvest_phase = $this->db->insert_batch('SURVEY_HARVEST_PHASE', $survey_harvest_phase);
 				}
-				if (!empty($vr_details)) {
-					$save_details = $this->db->insert_batch('TR_VR_DETAILS', $vr_details);
+				if (!empty($survey_planting_phase)) {
+					$save_planting_phase = $this->db->insert_batch('SURVEY_PLANTING_PHASE', $survey_planting_phase);
 				}
-				if (!empty($vr_strategy)) {
-					$save_strategy = $this->db->insert_batch('TR_VR_STRATEGY', $vr_strategy);
-				}
-				if (!empty($vr_galleries)) {
-					$save_galleries = $this->db->insert_batch('TR_VR_GALLERIES', $vr_galleries);
+				if (!empty($survey_galleries)) {
+					$save_galleries = $this->db->insert_batch('SURVEY_IMAGES', $survey_galleries);
 				}
 				if ($save) {
 					$this->session->set_flashdata('success', "Create data success");
@@ -297,78 +208,70 @@ class survey extends CI_Controller {
 		$latitude = $this->input->get('latitude');
 		$longitude = $this->input->get('longitude');
 		
-		$elevationEndpoint 	= 'https://maps.googleapis.com/maps/api/elevation/json';
-		$elevationURL 			= $apiEndpoint . '?locations=' . $latitude . ',' . $longitude . '&key=' . $apiKey;
-		$responseElevation 	= file_get_contents($elevationURL);
-		$dataElevation 			= json_decode($response, true);
+		// $elevationEndpoint 	= 'https://maps.googleapis.com/maps/api/elevation/json';
+		// $elevationURL 			= $apiEndpoint . '?locations=' . $latitude . ',' . $longitude . '&key=' . $apiKey;
+		// $responseElevation 	= file_get_contents($elevationURL);
+		// $dataElevation 			= json_decode($response, true);
 
-		// Check if the request was successful
-			$data = [
-				"address" 		=> "",
-				"elevation"		=> "",
-			];
-		if ($dataElevation['status'] === 'OK') {
-			// Extract the elevation from the response
-			$result["elevation"] = $dataElevation['results'][0]['elevation'];
-		} else {
-		echo json_encode(["status" => false, "message" => "failed retrieve elevation", "data" => []]);
-				exit;
-		}
+		// // Check if the request was successful
+		// 	$data = [
+		// 		"address" 		=> "",
+		// 		"elevation"		=> "",
+		// 	];
+		// if ($dataElevation['status'] === 'OK') {
+		// 	// Extract the elevation from the response
+		// 	$result["elevation"] = $dataElevation['results'][0]['elevation'];
+		// } else {
+		// 	echo json_encode(["status" => false, "message" => "failed retrieve elevation", "data" => []]);
+		// 	exit;
+		// }
 
+<<<<<<< HEAD
 			$geolocationURL = "http://maps.google.com/maps/api/geocode/json?latlng=$latitude,$longitude";
 			// send http request
 			$geocode	 				= file_get_contents($geolocationURL);
 			$json 						= json_decode($geocode);
 			$data["address"] 			= $json->results[0]->formatted_address;
+=======
+		// $geolocationURL = "http://maps.google.com/maps/api/geocode/json?latlng=$latitude,$longitude";
+		// // send http request
+		// $geocode	 				= file_get_contents($geolocationURL);
+		// $json 						= json_decode($geocode);
+		// $data["address"] 	= $json->results[0]->formatted_address;
+>>>>>>> ad60cd16926a98ae591cf6086d25c64bf5064284
 
-			echo json_encode(["status" => true, "message" => "success get detail coordinate", "data" => $data]);
+		$addressURL = "https://nominatim.openstreetmap.org/reverse?format=geocodejson&lat=$latitude&lon=$longitude";
+		$geocode	 				= file_get_contents($addressURL);
+		$json 						= json_decode($geocode);
+
+		$address = $json['features'][0]['properties']['geocoding']['label'];
+		$data["address"] 	= $address;
+
+		echo json_encode(["status" => true, "message" => "success get detail coordinate", "data" => $data]);
 	}
 
 	public function report() {
 
 		$sdate = date('Y-m').'-01';
 		$edate 	= date('Y-m-d');
-		$plant = "*";
-		$customer = "*";
-		$drafter = "*";
-
-		$user 							= $this->session_data['user'];
-		$filter_plant 			= ['HEAD_CODE'	=> 'AB'];
-		$filter_user 				= ['EMPLOYEE_ID !=' => '999999'];
-		$filter_usersuja 				= ['PLANT =' => '3272'];
-		if ($user['PLANT'] != '*') {
-			$plant = $user['PLANT'];
-			$filter_plant['CODE'] = $plant;
-			$filter_user['PLANT'] = $plant;
-		}
 
 		if ($this->input->server('REQUEST_METHOD') === 'POST') {
 			$sdate 		= $this->input->post('sdate');
 			$edate 		= $this->input->post('edate');
-			$plant 		= $this->input->post('plant');
-			$customer 	= $this->input->post('customer');
-			$drafter 	= $this->input->post('drafter');
 		}
 
 		$filter = [
 			"sdate"	=> $sdate,
-			"edate"	=> $edate,
-			"plant"	=> $plant,
-			"customer"	=> $customer,
-			"drafter"	=> $drafter
+			"edate"	=> $edate
 		];
 
-		$data['title'] 			= 'Visit Report';
-		$data['plant'] 			= $this->Dbhelper->selectTabel('CODE, CODE_NAME', 'CD_CODE', $filter_plant, 'CODE', 'ASC');
-		$data['users'] 			= $this->Dbhelper->selectTabel('EMPLOYEE_ID, FULL_NAME', 'CD_USER', $filter_user, 'EMPLOYEE_ID', 'ASC');
-		$data['userssuja'] 			= $this->Dbhelper->selectTabel('EMPLOYEE_ID, FULL_NAME', 'CD_USER', $filter_usersuja, 'EMPLOYEE_ID', 'ASC');
-		$data['collection_type'] = $this->collection_type();
+		$data['title'] 			= 'Survey Report';
 		$data['datatable']	= $this->datatable($filter);
 		$data['filter']		= $filter;
 
 		// dd($data['userssuja']);
 
-		$this->template->_v('visit/index', $data);
+		$this->template->_v('survey/index', $data);
 	}
 
 	public function report_customer() {
@@ -1284,35 +1187,21 @@ class survey extends CI_Controller {
 		$edate = date('Ymd', strtotime($filter['edate']));
 		// $date = date('Ymd', strtotime($filter['date']));
 
-		$exp_customer = explode("|", $filter['customer']);
 		$query = "
 			select 
-				VISITING_NO,
-			    VISITING_DATE,
-			    b.CUSTOMER,
-			    b.CUSTOMER_NAME,
-			    FN_CODE_NAME('CS02' ,REGION)   REGION_NAME,
-			    FN_CODE_NAME('AB' ,SALES_ORG)   COMPANY_NAME,
-			    FN_CODE_NAME('AC01' ,NVL(SALES_OFFICE,'3210'))   SALES_OFFICE_NAME,
-				FN_USER_NAME(CREATED_BY) CREATED_BY_NAME,
-				FN_USER_NAME(UPDATED_BY) UPDATED_BY_NAME
-			from TR_VR a,
-			      CD_CUSTOMER b
-			where 
-				a.CUSTOMER = b.CUSTOMER
-				and a.PLANT = b.SALES_ORG
-				and VISITING_DATE BETWEEN '$sdate' AND '$edate'
+				SURVEY_NO,
+			    SURVEY_DATE,
+			    COORDINATE,
+			    DESCRIPTION,
+				FN_USER_NAME(CREATED_BY) CREATED_BY_NAME
+			from SURVEY a
+			where SURVEY_DATE BETWEEN '$sdate' AND '$edate'
 		";
-		if ($filter['plant'] != '*') {
-			$query .= " and b.SALES_ORG = '".$filter['plant']."'";
-		}
-		if (!empty($exp_customer[0]) && $exp_customer[0] != '*') {
-			$query .= " and b.CUSTOMER = '".$exp_customer[0]."'";
-		}
+		
 		if ($filter['drafter'] != '*') {
 			$query .= " and a.CREATED_BY = '".$filter['drafter']."'";
 		}
-		$query .= " order by VISITING_DATE DESC";
+		$query .= " order by SURVEY_DATE DESC";
         $data = $this->db->query($query)->result_array();
 		// dd($query);
 		return $data;
@@ -1547,7 +1436,7 @@ class survey extends CI_Controller {
         return $generated_no;
     }
 
-    public function upload_image($berkas, $visiting_no, $sequence) {
+    public function upload_image($berkas, $survey_no, $sequence) {
 		$result = "";
 		if ($berkas["name"] != "") {
 			$pathDir 	= "./upload/";
@@ -1557,7 +1446,7 @@ class survey extends CI_Controller {
 			if (trim($berkas['name']) != "") {
 				$_FILES["files"] = $berkas;
 				$stringRandom = random_char(10);
-				$nama = $visiting_no."_".$sequence.$type_file;
+				$nama = $survey_no."_".$sequence.$type_file;
 				$config['upload_path']          = $pathDir;
                 $config['allowed_types']        = 'gif|jpg|png|jpeg';
 

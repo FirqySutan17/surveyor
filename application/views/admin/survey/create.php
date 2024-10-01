@@ -793,12 +793,14 @@
                                     <?= $user['EMPLOYEE_ID'] ?> - <?= $user['FULL_NAME'] ?>
                                 </td>
                                 <td data-label="DATE">
-                                    <input type="date" name="visiting_date" class="form-control" style="font-size: 14px" required>
+                                    <input type="hidden" name="coordinate" id="coordinate">
+                                    <input type="hidden" name="address" id="address">
+                                    <input type="date" name="survey_date" class="form-control" style="font-size: 14px" required>
                                 </td>
                                 <td data-label="LAND TYPE">
-                                    <select id="land_type" class="form-control" style="width: 100%;" name="land_type" required>
-                                        <option value="">SAWAH</option>
-                                        <option value="">PERBUKITAN</option>
+                                    <select class="form-control" style="width: 100%;" name="land_type" required>
+                                        <option value="SAWAH">SAWAH</option>
+                                        <option value="PERBUKITAN">PERBUKITAN</option>
                                     </select>
                                 </td>
                                 <td data-label="LATITUDE">
@@ -908,9 +910,9 @@
                             <tbody class="planting-phase">
                                 <tr style="align-items: flex-end">
                                     <td data-label="PHASE" width="45%" style="vertical-align: top">
-                                        <select id="fasetanam" class="form-control" style="width: 100%; padding: 10px" name="phase_tanam" required>
+                                        <select id="fasetanam" class="form-control" style="width: 100%; padding: 10px" name="current_phase" required>
                                             <option id="persiapan-lahan" value="PERSIAPAN LAHAN" selected>PERSIAPAN LAHAN</option>
-                                            <option id="vegetatif-awal" value="VEGETATIF AWAL">VqEGETATIF AWAL</option>
+                                            <option id="vegetatif-awal" value="VEGETATIF AWAL">VEGETATIF AWAL</option>
                                             <option id="vegetatif-akhir" value="VEGETATIF AKHIR">VEGETATIF AKHIR</option>
                                             <option id="genetatif-awal" value="GENETATIF AWAL">GENETATIF AWAL</option>
                                             <option id="genetatif-akhir" value="GENETATIF AKHIR">GENETATIF AKHIR (PANEN)</option>
@@ -963,12 +965,12 @@
                                             <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000;" placeholder="INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)">
                                         </div> -->
                                         <div class="genetatif-akhir">
-                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="UMUR TANAM (71 - 110)">
-                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="MASUK KE FORMAT HASIL PANEN PADA SHEET HASIL PANEN">
-                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JENIS HERBISIDA / PESTISIDA YANG DIAPLIKASIKAN">
-                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)">
-                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)">
-                                            <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000;" placeholder="INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)">
+                                            <input type="text" name="PLANTING_description[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="UMUR TANAM (71 - 110)">
+                                            <input type="text" name="PLANTING_description[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="MASUK KE FORMAT HASIL PANEN PADA SHEET HASIL PANEN">
+                                            <input type="text" name="PLANTING_description[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JENIS HERBISIDA / PESTISIDA YANG DIAPLIKASIKAN">
+                                            <input type="text" name="PLANTING_description[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)">
+                                            <input type="text" name="PLANTING_description[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)">
+                                            <input type="text" name="PLANTING_description[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000;" placeholder="INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)">
                                         </div>
                                         <!-- <div class="gagal-panen">
                                             <input type="text" name="FM_phone_number[]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="UMUR SAAT PUSO">
@@ -999,6 +1001,7 @@
                                     <th style="width: 10%">%</th>
                                 </tr>
                             </thead>
+<<<<<<< HEAD
                             <tbody class="harvest-phase">
                                 <tr>
                                     <td data-label="SCORE" style="">
@@ -1352,6 +1355,44 @@
                                         <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
                                 </tr>
+=======
+                            <tbody>
+                                <?php for ($i=10; $i >= 0; $i--) { ?>
+                                    <tr>
+                                        <td data-label="SCORE" style="">
+                                            <?= $i ?>
+                                            <input type="hidden" name="HARVEST_score[]" value="<?= $i ?>">
+                                        </td>
+                                        <td data-label="BARIS">
+                                            <input name="baris[]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input name="baris_actual[]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="BIJI">
+                                            <input name="biji[]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input name="biji_actual[]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="BOBOT">
+                                            <input name="bobot[]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input name="bobot_actual[]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+>>>>>>> ad60cd16926a98ae591cf6086d25c64bf5064284
                             </tbody>
                         </table>
                     </div>
@@ -1386,7 +1427,7 @@
             </div>
 
             <div class="content-task mt-5">
-                <h3 class="sub-title">5. Visit Photos</h3>
+                <h3 class="sub-title">5. SURVEY GALLERIES</h3>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
@@ -1404,8 +1445,8 @@
                                 <th style="text-align: right; background: #fff; border: 0px"><button type="button" class="btn cust-btn-add" onclick="addImages()">+</button></th>
                             </tr>
                             <tr>
-                                <td data-label ="DATE / TITLE"><input type="text" name="VR_image_name[]" class="form-control" placeholder="EX : JAN 2024 / TITLE HERE"></td>
-                                <td data-label ="UPLOAD IMAGE"><input type="file" accept="image/png, image/jpeg, image/jpg" name="VR_image_file[]" class="form-control"></td>
+                                <td data-label ="DATE / TITLE"><input type="text" name="SURVEY_IMAGE_TITLE[]" class="form-control" placeholder="EX : JAN 2024 / TITLE HERE"></td>
+                                <td data-label ="UPLOAD IMAGE"><input type="file" accept="image/png, image/jpeg, image/jpg" name="SURVEY_IMAGE[]" class="form-control"></td>
                                 <td><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
                             </tr>
                         </tbody>
@@ -1448,6 +1489,7 @@
 
         lang.innerHTML  = latitude;
         long.innerHTML  = longitude;
+        $("#coordinate").val(latitude + "," + longitude);
         detailPosition(latitude, longitude)
     }
 
@@ -1464,7 +1506,8 @@
             },
             success: function(response) {
                 console.log(response);
-                alert(response);
+                alert(response.data);
+                $("#address").val(response.data.address);
             }
         });
     }
@@ -1499,8 +1542,8 @@
     function addFarmers() {
         let tabledata = `
         <tr>
-            <td data-label="FARMERS" width="45%"><input type="text" name="FM_farmers[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" placeholder="EX : JOHN DOE" id=""></td>
-            <td data-label="PHONE NUMBER" width="50%"><input type="number" name="FM_phone_number[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" placeholder="EX : 08XXXXXXXXXX" id=""></td>
+            <td data-label="FARMERS" width="45%"><input type="text" name="farmer_name[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" placeholder="EX : JOHN DOE" id=""></td>
+            <td data-label="PHONE NUMBER" width="50%"><input type="number" name="farmer_phone[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" placeholder="EX : 08XXXXXXXXXX" id=""></td>
             <td width="5%"><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
         </tr>
         `;
@@ -1512,7 +1555,7 @@
         let tabledata = `
         <tr>
             <td data-label="DATE"><input type="month" name="CL_collection_date[]" class="form-control"></td>
-            <td data-label="PRICE"><input type="number" name="CL_ar_balance[]" class="form-control" placeholder="EX : 200000" onkeyup="onkeyup_data(event)" onkeydown="onkeydown_data(event)"></td>
+            <td data-label="PRICE"><input type="number" name="market_price[]" class="form-control" placeholder="EX : 200000" onkeyup="onkeyup_data(event)" onkeydown="onkeydown_data(event)"></td>
             <td><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
         </tr>
          `;
@@ -1523,8 +1566,8 @@
     function addImages() {
         let tabledata = `
         <tr>
-            <td data-label ="DATE / TITLE"><input type="text" name="VR_image_name[]" class="form-control" placeholder="EX : JAN 2024 / TITLE HERE"></td>
-            <td data-label ="UPLOAD IMAGE"><input type="file" accept="image/png, image/jpeg, image/jpg" name="VR_image_file[]" class="form-control"></td>
+            <td data-label ="DATE / TITLE"><input type="text" name="SURVEY_IMAGE_TITLE[]" class="form-control" placeholder="EX : JAN 2024 / TITLE HERE"></td>
+            <td data-label ="UPLOAD IMAGE"><input type="file" accept="image/png, image/jpeg, image/jpg" name="SURVEY_IMAGE[]" class="form-control"></td>
             <td><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
         </tr>
         `;
