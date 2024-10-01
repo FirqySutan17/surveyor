@@ -1001,7 +1001,7 @@
                                     <th style="width: 10%">%</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="harvest-phase">
                                 <?php for ($i=10; $i >= 0; $i--) { ?>
                                     <tr>
                                         <td data-label="SCORE" style="">
