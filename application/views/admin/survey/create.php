@@ -1153,9 +1153,9 @@
             },
             success: function(response) {
                 let data = JSON.parse(response);
-                console.log(response);
-                alert(response.data);
-                $("#address").val(response.data.address);
+                // console.log(data);
+                alert(data.data);
+                $("#address").val(data.data.address);
             }
         });
     }
