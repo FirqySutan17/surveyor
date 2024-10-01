@@ -323,12 +323,12 @@
         font-size: 12px
     }
 
-    .maps-frame {
+    /* .maps-frame {
         border:2px solid #C1C1C1; 
         border-radius: 10px;
         width: 100%;
         height: 350px;
-    }
+    } */
 
     @media (max-width: 1024px) {
         #region_entry {
