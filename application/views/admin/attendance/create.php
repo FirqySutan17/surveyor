@@ -845,7 +845,7 @@
                                     </td>
                                     <td data-label="TAKE-SELFIE">
                                         <?php $path = $latest_attendance['PLANT'].'/'.$latest_attendance['PLANT'].'_'.$latest_attendance['EMPNO'].'_'.$latest_attendance['ATTEND_DATE'].'_IN.jpg'; ?>
-                                        <img class="selfie-prv" id="selfie_in_prv" src="<?= base_url('uploads/'.$path) ?>" />
+                                        <img class="selfie-prv" src="<?= base_url('uploads/'.$path) ?>" />
                                     </td>
                                     <td></td>
                                 </tr>
@@ -897,7 +897,7 @@
                                         </td>
                                         <td data-label="TAKE-SELFIE">
                                             <?php $path = $latest_attendance['PLANT'].'/'.$latest_attendance['PLANT'].'_'.$latest_attendance['EMPNO'].'_'.$latest_attendance['ATTEND_DATE'].'_OUT.jpg'; ?>
-                                            <img class="selfie-prv" id="selfie_in_prv" src="<?= base_url('uploads/'.$path) ?>" />
+                                            <img class="selfie-prv" src="<?= base_url('uploads/'.$path) ?>" />
                                         </td>
                                         <td></td>
                                     </tr>
