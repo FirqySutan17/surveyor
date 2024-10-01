@@ -191,6 +191,14 @@
                     <i id="arrow" class='bx bx-chevron-right'></i>
                 </a>
                 <ul class="nav-submenu menu-content">
+                    <?php if (in_array('TR003', $user_access) || in_array('*', $user_access)): ?>
+                        <li class="<?= ($this->uri->segment(2) == 'attendance') ? 'active' : '' ?>">
+                            <a href="<?= route('dashboard/attendance') ?>"
+                                class="">
+                                <i class='bx bxs-right-arrow'></i> ATTENDANCE
+                            </a>
+                        </li>
+                    <?php endif ?>
                     <?php if (in_array('TR001', $user_access) || in_array('*', $user_access)): ?>
                         <li class="<?= ($this->uri->segment(2) == 'survey' && $this->uri->segment(3) == 'entry') ? 'active' : '' ?>">
                             <a href="<?= route('dashboard/survey/entry') ?>"

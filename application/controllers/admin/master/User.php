@@ -348,6 +348,7 @@ class User extends CI_Controller {
 			'M006'	=> 'Master - Data Kategori',
 			'TR001'	=> 'Entry - Survey',
 			'TR002'	=> 'Entry - Gudang',
+			'TR003'	=> 'Entry - Attendance',
 			'R001'	=> 'Report - Survey',
 			'R002'	=> 'Report - Gudang',
 		];
