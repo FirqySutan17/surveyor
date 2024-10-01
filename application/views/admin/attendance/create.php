@@ -932,7 +932,7 @@
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLUc8QC0GYh5ozbMbGBcNUm1BBIjvmmg8&callback=myMap"></script> -->
 <script>
     const coordinate = document.getElementById("coordinate");
-    let iframe_gmaps = `<iframe width="100%" height="250" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=_googlemap_coordinate_&amp;key=AIzaSyBxty2H-6okfgQqlKcUb_g5qW62W9ocEVw"></iframe>`;
+    let iframe_gmaps = `<iframe style="height: 300px; width: 300px; margin-top: 10px" width="100%" height="250" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=_googlemap_coordinate_&amp;key=AIzaSyBxty2H-6okfgQqlKcUb_g5qW62W9ocEVw"></iframe>`;
 
     function getLocation() {
         console.log(navigator.geolocation);
