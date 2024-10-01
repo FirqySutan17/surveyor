@@ -825,7 +825,7 @@
                                     <img class="selfie-prv" id="selfie_in_prv" src="#" style="display: none"/>
                                 </td>
                                 <td>
-                                    <a id="do_selfie" href="javascript:void(0)" onclick="getLocation()" style="background: #00c0ff; border-radius: 10px; color: #fff; font-weight: 600; padding: 10px; display:none">TAKE SELFIE</a>
+                                    <a id="selfie_btn" href="javascript:void(0)" onclick="getLocation()" style="background: #00c0ff; border-radius: 10px; color: #fff; font-weight: 600; padding: 10px; display:none">TAKE SELFIE</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -876,7 +876,7 @@
     }
 
     function selfiePhase() {
-        $("#do_selfie").show();
+        $("#selfie_btn").show();
     }
 
     function getMobileOperatingSystem() {
@@ -911,6 +911,8 @@
     });
 
     document.getElementById("selfie_in").addEventListener("change", function () {
+        console.log('onchange');
+
         const inputFile = document.getElementById("selfie_in");
         const btnSubmit = document.getElementById("submit_btn");
         const imgSelfie = document.getElementById("selfie_in_prv");
