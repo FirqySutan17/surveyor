@@ -811,10 +811,12 @@
                         <tbody>
                             <tr>
                                 <td data-label="CHECK-IN">
-                                    <div id="check-in"></div>
+                                    <div id="check-in"><?= date('Y-m-d H:i:s') ?></div>
                                 </td>
                                 <td data-label="COORDINATE">
                                     <input type="hidden" name="coordinate" id="coordinate_input">
+                                    <input type="hidden" name="attend_date" value="<?= date('Ymd') ?>">
+                                    <input type="hidden" name="attend_time" value="<?= date('His') ?>">
                                     <div id="coordinate"></div>
                                     <a id="share-location" href="javascript:void(0)" onclick="getLocation()" style="background: #00c0ff; border-radius: 10px; color: #fff; font-weight: 600; padding: 10px">SHARE LOCATION</a>
                                 </td>
@@ -836,7 +838,7 @@
 
             <div class="form-group row mt-5" style="margin: 20px 0px !important">
                 <div class="col-lg-12 col-sm-12" style="display: flex; padding: 0px">
-                    <a href="<?= admin_url('visit/report') ?>" class="btn btn-primary cust-btn-back" style="width: 50%; height: 50px; display: flex; align-items: center; justify-content: center;">Cancel</a>
+                    <!-- <a href="<?= admin_url('visit/report') ?>" class="btn btn-primary cust-btn-back" style="width: 50%; height: 50px; display: flex; align-items: center; justify-content: center;">Cancel</a> -->
                     <span style="margin: 5px;"></span>
                     <button type="submit" class="btn btn-primary cust-btn-save" style="width: 50%; height: 50px">Save</button>
                 </div>
