@@ -87,8 +87,9 @@ $route['visit/do_create_mobile'] 	= 'Home/do_create_mobile';
 	$route['dashboard/collector/edit/(:any)'] = 'admin/Collector/edit/$1';
 	$route['dashboard/collector/do_update'] 	= 'admin/Collector/do_update';
 
-	$route['dashboard/attendance'] 											= 'admin/Attendance/index';
-	$route['dashboard/attendance/do-attend'] 						= 'admin/Attendance/do_attend';
+	$route['dashboard/attendance'] 						= 'admin/Attendance/index';
+	$route['dashboard/attendance/create'] 				= 'admin/Attendance/create';
+	$route['dashboard/attendance/do-attend'] 		    = 'admin/Attendance/do_attend';
 /* ENTRY ROUTES */
 
 // REPORT ROUTES
