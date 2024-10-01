@@ -60,7 +60,7 @@ class survey extends CI_Controller {
 				return redirect($this->own_link.'/report');
 			}
 
-			// dd($post);
+			dd($post);
 			$survey_no = $this->generateSurveyNo();
 			try {
 				
