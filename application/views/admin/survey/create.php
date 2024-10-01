@@ -1152,6 +1152,7 @@
                 // removeElements();
             },
             success: function(response) {
+                let data = JSON.parse(response);
                 console.log(response);
                 alert(response.data);
                 $("#address").val(response.data.address);
