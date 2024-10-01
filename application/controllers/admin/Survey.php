@@ -1184,13 +1184,15 @@ class survey extends CI_Controller {
 		$edate = date('Ymd', strtotime($filter['edate']));
 		// $date = date('Ymd', strtotime($filter['date']));
 
+		
+		// FN_USER_NAME(CREATED_BY) CREATED_BY_NAME
 		$query = "
 			select 
 				SURVEY_NO,
 			    SURVEY_DATE,
 			    COORDINATE,
 			    DESCRIPTION,
-				FN_USER_NAME(CREATED_BY) CREATED_BY_NAME
+					CREATED_BY
 			from SURVEY a
 			where SURVEY_DATE BETWEEN '$sdate' AND '$edate'
 		";

@@ -828,7 +828,7 @@
                             <tr>
                                 <td data-label="PROVINCE">
                                     <select id="province" class="form-control" style="width: 100%;" name="province" required>
-                                        <?php foreach($province as $item): ?>
+                                        <?php foreach($provinces as $item): ?>
                                             <option value="<?= $item['ID_PROVINCE'] ?>"><?= $item['PROVINCE'] ?></option>
                                         <?php endforeach ?>
                                     </select>
