@@ -825,7 +825,7 @@
                                     <img class="selfie-prv" id="selfie_in_prv" src="#" style="display: none"/>
                                 </td>
                                 <td>
-                                    <a id="selfie_btn" href="javascript:void(0)" onclick="getLocation()" style="background: #00c0ff; border-radius: 10px; color: #fff; font-weight: 600; padding: 10px; display:none">TAKE SELFIE</a>
+                                    <a id="selfie_btn" href="javascript:void(0)" style="background: #00c0ff; border-radius: 10px; color: #fff; font-weight: 600; padding: 10px; display:none">TAKE SELFIE</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -900,7 +900,7 @@
         // return "Android";
     }
 
-    document.getElementById("do_selfie").addEventListener("click", function() {
+    document.getElementById("selfie_btn").addEventListener("click", function() {
         const result = getMobileOperatingSystem();
 
         // if (result != "unknown"){
