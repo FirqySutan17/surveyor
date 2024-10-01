@@ -276,6 +276,12 @@
 	.table-w-message {
 		width: 100%;
 	}
+	.maps-frame {
+        border:2px solid #C1C1C1; 
+        border-radius: 10px;
+        width: 100%;
+        height: 100px;
+    }
 </style>
 
 <div class="main-content pre-posttest">
@@ -319,7 +325,9 @@
                     <td style="text-align: center; vertical-align: middle"><?= $i + 1 ?></td>
                     <td style="text-align: center; vertical-align: middle"><?= $v['SURVEY_NO'] ?></td>
                     <td style="text-align: center; vertical-align: middle"><?= $v['SURVEY_DATE'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['COORDINATE'] ?></td>
+                    <td style="text-align: center; vertical-align: middle">
+											<iframe class="maps-frame" src="https://maps.google.com/maps?q=-<?= $v['COORDINATE'] ?>&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+										</td>
                     <td style="text-align: center; vertical-align: middle"><?= $v['DESCRIPTION'] ?></td>
                     <td style="text-align: center; vertical-align: middle"><?= $v['CREATED_BY_NAME'] ?></td>
                     <td style="text-align: center; vertical-align: middle">
