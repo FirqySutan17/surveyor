@@ -816,20 +816,21 @@
                                 <td data-label="COORDINATE">
                                     <input type="hidden" name="coordinate" id="coordinate_input">
                                     <div id="coordinate"></div>
+                                    <a id="share-location" href="javascript:void(0)" onclick="getLocation()" style="background: #00c0ff; border-radius: 10px; color: #fff; font-weight: 600; padding: 10px">SHARE LOCATION</a>
                                 </td>
                                 <td data-label="TAKE-SELFIE">
                                     <input type="file" name="selfie_in" id="selfie_in" accept="image/*" capture="user" style="display: none">
                                     <img class="selfie-prv" id="selfie_in_prv" src="#" style="display: none"/>
                                 </td>
                                 <td>
-                                    <a id="share-location" href="javascript:void(0)" onclick="getLocation()" style="background: #00c0ff; border-radius: 10px; color: #fff; font-weight: 600; padding: 10px">SHARE LOCATION</a>
-                                    <a id="do_selfie" href="javascript:void(0)" onclick="getLocation()" style="background: #00c0ff; border-radius: 10px; color: #fff; font-weight: 600; padding: 10px">TAKE SELFIE</a>
+                                    <a id="do_selfie" href="javascript:void(0)" onclick="getLocation()" style="background: #00c0ff; border-radius: 10px; color: #fff; font-weight: 600; padding: 10px; display:none">TAKE SELFIE</a>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-
-                    <iframe id="maps-checkin" class="maps-frame" src="https://maps.google.com/maps?q=-6.2336281,106.8214081&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <div id="check-in-maps">
+                    <!-- <iframe id="maps-checkin" class="maps-frame" src="https://maps.google.com/maps?q=-6.2336281,106.8214081&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+                    </div>
                 </div>
             </div>
 
@@ -846,6 +847,7 @@
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLUc8QC0GYh5ozbMbGBcNUm1BBIjvmmg8&callback=myMap"></script> -->
 <script>
     const coordinate = document.getElementById("coordinate");
+    let iframe_gmaps = `<iframe width="100%" height="150" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=_googlemap_coordinate_&amp;key=AIzaSyBxty2H-6okfgQqlKcUb_g5qW62W9ocEVw"></iframe>`;
 
     function getLocation() {
         console.log(navigator.geolocation);
@@ -860,9 +862,19 @@
     function showPosition(position) {
         let latitude    = position.coords.latitude;
         let longitude   = position.coords.longitude;
+        let coordinate  = latitude + "," + longitude;
 
-        $("#coordinate").val(latitude + "," + longitude);
-        $("#coordinate_input").val(latitude + "," + longitude);
+        $("#coordinate").val(coordinate);
+        $("#coordinate_input").text(coordinate);
+        $("#share-location").remove();
+
+        let gmaps_iframe = iframe_gmaps.replace("_googlemap_coordinate_", coordinate);
+        $("#check-in-maps").html(gmaps_iframe);
+        selfiePhase();
+    }
+
+    function selfiePhase() {
+        
     }
 
     document.getElementById("do_selfie").addEventListener("click", function() {
