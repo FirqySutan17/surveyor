@@ -249,7 +249,7 @@ class Attendance extends CI_Controller {
 		}
 
 		$user_access = $session['user_access'];
-		if (!in_array($this->menu_id, $user_access) && !in_array($this->menu_id2, $user_access) && !in_array($this->menu_id3, $user_access) && !in_array('*', $user_access)) {
+		if (!in_array($this->menu_id, $user_access) && !in_array('*', $user_access)) {
 			redirect('dashboard');
 		}
 	}
