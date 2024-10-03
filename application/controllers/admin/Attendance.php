@@ -68,7 +68,7 @@ class Attendance extends CI_Controller {
 			}
 		}
 		$data['attendance_type'] 	= $attendance_type;
-		$data['attend_date']			= !empty($latest_attendance) && empty($latest_attendance['TIME_OUT']) ? $latest_attendance['ATTEND_DATE'] : date('Ymd');
+		$data['attend_date']			= (!empty($latest_attendance) && empty($latest_attendance['TIME_OUT'])) ? $latest_attendance['ATTEND_DATE'] : date('Ymd');
 		$data['latest_attendance'] = $latest_attendance;
 
 		$this->template->_v('attendance/create', $data);
