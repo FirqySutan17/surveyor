@@ -21,13 +21,16 @@ class Attendance extends CI_Controller {
 		$user 			= $this->check_attendanceUserWFH();
 		$data['title'] 	= 'ATTENDANCE';
 		$data['user'] 	= $user;
-		$data['datatable']	= $this->datatable();
+		$data['datatable']	= $this->datatable($user);
 
 		$this->template->_v('attendance/index', $data);
 	}
 
-	public function datatable() {
-		$data = $this->Dbhelper->selectRawQuery("SELECT * FROM HR_ATTENDANCE_WFH ORDER BY ATTEND_DATE ASC");
+	public function datatable($user) {
+		$company 	= $user['userWFH']['COMPANY'];
+		$plant 		= $user['userWFH']['PLANT'];
+		$empno 		= $user['userWFH']['EMPNO'];
+		$data = $this->Dbhelper->selectRawQuery("SELECT * FROM HR_ATTENDANCE_WFH WHERE COMPANY = '$company' AND PLANT = '$plant' AND EMPNO = '$empno' ORDER BY ATTEND_DATE ASC");
 
 		return $data;
 	}
