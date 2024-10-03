@@ -28,7 +28,7 @@ class Attendance extends CI_Controller {
 
 	public function datatable($user) {
 		$where = "";
-		if ($user['userSession']['EMPLOYEE_ID'] != '999999') {
+		if ($user['userSurveyor']['EMPLOYEE_ID'] != '999999') {
 			$company 	= $user['userWFH']['COMPANY'];
 			$plant 		= $user['userWFH']['PLANT'];
 			$empno 		= $user['userWFH']['EMPNO'];
