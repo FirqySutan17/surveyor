@@ -27,10 +27,14 @@ class Attendance extends CI_Controller {
 	}
 
 	public function datatable($user) {
-		$company 	= $user['userWFH']['COMPANY'];
-		$plant 		= $user['userWFH']['PLANT'];
-		$empno 		= $user['userWFH']['EMPNO'];
-		$data = $this->Dbhelper->selectRawQuery("SELECT * FROM HR_ATTENDANCE_WFH WHERE COMPANY = '$company' AND PLANT = '$plant' AND EMPNO = '$empno' ORDER BY ATTEND_DATE ASC");
+		$where = "";
+		if ($user['userSession']['EMPLOYEE_ID'] != '999999') {
+			$company 	= $user['userWFH']['COMPANY'];
+			$plant 		= $user['userWFH']['PLANT'];
+			$empno 		= $user['userWFH']['EMPNO'];
+			$where = "WHERE COMPANY = '$company' AND PLANT = '$plant' AND EMPNO = '$empno'";
+		}
+		$data = $this->Dbhelper->selectRawQuery("SELECT * FROM HR_ATTENDANCE_WFH $where ORDER BY ATTEND_DATE ASC");
 
 		return $data;
 	}
