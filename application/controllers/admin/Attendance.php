@@ -21,18 +21,33 @@ class Attendance extends CI_Controller {
 		$user 			= $this->check_attendanceUserWFH();
 		$data['title'] 	= 'ATTENDANCE';
 		$data['user'] 	= $user;
-		$data['datatable']	= $this->datatable($user);
+		$datemonth 			= date('Y-m-d');
+
+		if ($this->input->server('REQUEST_METHOD') === 'POST') {
+			$datemonth 		= $this->input->post('datemonth');
+		} 
+		$filter = [
+			"datemonth"	=> $datemonth,
+		];
+
+		$data['filter']			= $filter;
+		$data['datatable']	= $this->datatable($user, $filter);
 
 		$this->template->_v('attendance/index', $data);
 	}
 
-	public function datatable($user) {
+	public function datatable($user, $filter) {
 		$where = "";
 		if ($user['userSurveyor']['EMPLOYEE_ID'] != '999999') {
 			$company 	= $user['userWFH']['COMPANY'];
 			$plant 		= $user['userWFH']['PLANT'];
 			$empno 		= $user['userWFH']['EMPNO'];
 			$where = "AND a.COMPANY = '$company' AND a.PLANT = '$plant' AND a.EMPNO = '$empno'";
+		}
+		
+		if (!empty($filter['datemonth'])) {
+			$datemonth = date('Ymd', strtotime($filter['datemonth']));
+			$where .= "AND a.ATTEND_DATE = '$datemonth'";
 		}
 		$data = $this->Dbhelper->selectRawQuery("
 			SELECT a.*, b.FULL_NAME
@@ -41,6 +56,7 @@ class Attendance extends CI_Controller {
 					a.COMPANY = b.COMPANY
 					AND a.PLANT = b.PLANT
 					AND a.EMPNO = b.EMPNO
+					
 					$where
 			ORDER BY a.ATTEND_DATE DESC
 		");
