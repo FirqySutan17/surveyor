@@ -93,7 +93,7 @@ class Attendance extends CI_Controller {
 					"PLANT"				=> $user['userWFH']['PLANT'],
 					"EMPNO"				=> $user['userWFH']['EMPNO'],
 					"ATTEND_DATE"	=> date('Ymd', strtotime($post['attend_date'])),
-					"TIME_IN"			=> date('His', str_replace(":", "", $post['attend_time'])),
+					"TIME_IN"			=> date('His'),
 					"REG_IN_OS"		=> dbClean($post['coordinate']),
 					"REG_IN_IP"		=> $ip,
 					"GMT"					=> 0
@@ -139,7 +139,7 @@ class Attendance extends CI_Controller {
 					$save = $this->Dbhelper->insertData('HR_ATTENDANCE_WFH', $attendance_data);
 				} elseif ($type == 'OUT') {
 					$update_data = [
-						"TIME_OUT"		=> date('His', str_replace(":", "", $post['attend_time'])),
+						"TIME_OUT"		=> date('His'),
 						"REG_OUT_OS"	=> dbClean($post['coordinate']),
 						"REG_OUT_IP"	=> $ip
 					];
