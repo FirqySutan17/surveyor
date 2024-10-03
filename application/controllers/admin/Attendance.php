@@ -32,7 +32,7 @@ class Attendance extends CI_Controller {
 			$company 	= $user['userWFH']['COMPANY'];
 			$plant 		= $user['userWFH']['PLANT'];
 			$empno 		= $user['userWFH']['EMPNO'];
-			$where = "AND COMPANY = '$company' AND PLANT = '$plant' AND EMPNO = '$empno'";
+			$where = "AND a.COMPANY = '$company' AND a.PLANT = '$plant' AND a.EMPNO = '$empno'";
 		}
 		$data = $this->Dbhelper->selectRawQuery("
 			SELECT a.*, b.FULL_NAME
@@ -68,7 +68,7 @@ class Attendance extends CI_Controller {
 			}
 		}
 		$data['attendance_type'] 	= $attendance_type;
-		$data['attend_date']			= !empty($latest_attendance) ? $latest_attendance['ATTEND_DATE'] : date('Ymd');
+		$data['attend_date']			= !empty($latest_attendance) && empty($latest_attendance['TIME_OUT']) ? $latest_attendance['ATTEND_DATE'] : date('Ymd');
 		$data['latest_attendance'] = $latest_attendance;
 
 		$this->template->_v('attendance/create', $data);
