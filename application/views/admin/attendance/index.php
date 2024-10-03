@@ -319,10 +319,10 @@
 					<?php foreach ($datatable as $i => $v): ?>
 							<tr>
 									<td style="text-align: center; vertical-align: middle"><?= $i + 1 ?></td>
-									<td style="text-align: center; vertical-align: middle"><?= date('Y-m-d', $v['ATTEND_DATE']) ?></td>
+									<td style="text-align: center; vertical-align: middle"><?= date('Y-m-d', strtotime($v['ATTEND_DATE'])) ?></td>
 									<td style="text-align: center; vertical-align: middle"><?= $v['FULL_NAME'] ?></td>
-									<td style="text-align: center; vertical-align: middle"><?= $v['TIME_IN'] ?></td>
-									<td style="text-align: center; vertical-align: middle"><?= $v['TIME_OUT'] ?></td>
+									<td style="text-align: center; vertical-align: middle"><?= date('H:i:s', strtotiem($v['TIME_IN'])) ?></td>
+									<td style="text-align: center; vertical-align: middle"><?= !empty($v['TIME_OUT']) ? date('H:i:s', strtotiem($v['TIME_IN'])) : '-' ?></td>
 							</tr>
 					<?php endforeach ?>
         </tbody>
