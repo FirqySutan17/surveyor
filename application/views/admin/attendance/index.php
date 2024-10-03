@@ -310,24 +310,21 @@
             <tr>
                 <th style="text-align: center;">NO</th>
                 <th style="text-align: center;">DATE</th>
-				<th style="text-align: center;">NAME</th>
+								<th style="text-align: center;">NAME</th>
                 <th style="text-align: center;">CHECK IN</th>
                 <th style="text-align: center;">CHECK OUT</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td style="text-align: center; vertical-align: middle">1</td>
-                <td style="text-align: center; vertical-align: middle">27/09/2024</td>
-                <td style="text-align: center; vertical-align: middle">FIRQY SUTANWALIYAH</td>
-				<td style="text-align: center; vertical-align: middle">08:00 <br>27-09-2024</td>
-				<td style="text-align: center; vertical-align: middle">17:00 <br>27-09-2024</td>
-                    <!-- <td style="text-align: center; vertical-align: middle">
-                        <a href="<?= admin_url('survey/edit') ?>" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
-                        <a href="<?= admin_url('survey/drawing') ?>" class="btn btn-sm" title="Drawing"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px"></i></a>
-                        <a href="<?= admin_url('survey/detail') ?>" target="_blank" class="btn btn-sm" title="Detail"><i class="fas fa-eye text-primary"></i></a>
-                    </td> -->
-            </tr>
+					<?php foreach ($datatable as $i => $v): ?>
+							<tr>
+									<td style="text-align: center; vertical-align: middle"><?= $i + 1 ?></td>
+									<td style="text-align: center; vertical-align: middle"><?= date('Y-m-d', $v['ATTEND_DATE']) ?></td>
+									<td style="text-align: center; vertical-align: middle"><?= $v['FULL_NAME'] ?></td>
+									<td style="text-align: center; vertical-align: middle"><?= $v['TIME_IN'] ?></td>
+									<td style="text-align: center; vertical-align: middle"><?= $v['TIME_OUT'] ?></td>
+							</tr>
+					<?php endforeach ?>
         </tbody>
     </table>
 </div>

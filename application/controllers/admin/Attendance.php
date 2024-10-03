@@ -32,9 +32,18 @@ class Attendance extends CI_Controller {
 			$company 	= $user['userWFH']['COMPANY'];
 			$plant 		= $user['userWFH']['PLANT'];
 			$empno 		= $user['userWFH']['EMPNO'];
-			$where = "WHERE COMPANY = '$company' AND PLANT = '$plant' AND EMPNO = '$empno'";
+			$where = "AND COMPANY = '$company' AND PLANT = '$plant' AND EMPNO = '$empno'";
 		}
-		$data = $this->Dbhelper->selectRawQuery("SELECT * FROM HR_ATTENDANCE_WFH $where ORDER BY ATTEND_DATE ASC");
+		$data = $this->Dbhelper->selectRawQuery("
+			SELECT a.*, b.FULL_NAME
+			FROM HR_ATTENDANCE_WFH a, HR_EMPLOYEE_ATTD b
+			WHERE
+					a.COMPANY = b.COMPANY
+					AND a.PLANT = b.PLANT
+					AND a.EMPNO = b.EMPNO
+					$where
+			ORDER BY a.ATTEND_DATE DESC
+		");
 
 		return $data;
 	}
