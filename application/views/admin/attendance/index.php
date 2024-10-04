@@ -392,7 +392,7 @@
 										<td style="text-align: center; vertical-align: middle"><?= date('H:i:s', strtotime($v['TIME_IN'])) ?></td>
 										<td style="text-align: center; vertical-align: middle"><?= !empty($v['TIME_OUT']) ? date('H:i:s', strtotime($v['TIME_OUT'])) : '-' ?></td>
 										<td style="text-align: center; vertical-align: middle">
-											<button class="primary" onclick="window.dialog.showModal();" style="background: none; border: none;"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px; margin-top: 5px"></i></button>
+											<button id="btn-detail-<?= $i ?>" data-name="<?= $v['FULL_NAME'] ?>"  data-tanggal="<?= date('Y-m-d', strtotime($v['ATTEND_DATE'])) ?>" data-timein="<?= date('H:i:s', strtotime($v['TIME_IN'])) ?>" data-coordinatein="<?= $v['REG_IN_OS'] ?>" data-timeout="<?= !empty($v['TIME_OUT']) ? date('H:i:s', strtotime($v['TIME_OUT'])) : '-' ?>" data-coordinateout="<?= $v['REG_OUT_OS'] ?>" class="primary" onclick="showDetail('<?= $i ?>')" style="background: none; border: none;"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px; margin-top: 5px"></i></button>
 											<!-- <a href="<?= admin_url('survey/detail') ?>" target="_blank" class="btn btn-sm" title="Detail"><i class="fas fa-eye text-primary"></i></a> -->
 										</td>
 								</tr>
@@ -401,50 +401,50 @@
 		</table>
 	</div>
     <dialog id="dialog">
-		<h2>USER LOCATION</h2>
-		<table class="table table-bordered" style="margin-bottom: 10px">
-            <thead>
-                <tr>
-                    <th style="text-align: center">EMPLOYEE</th>
-                </tr>
-				
-            </thead>
-            <tbody>
-                <tr>
-                    <td data-label="EMPLOYEE" style="text-align: center">
-                        FIRQY SUTANWALIYAH IKHSAN
-                    </td>
-                </tr>
-				
-            </tbody>
-        </table>
-		<table class="table table-bordered" style="margin-bottom: 10px">
-            <thead>
-				<tr>
-					<th colspan="2" style="text-align: center">CHECK IN</th>
-				</tr>
-            </thead>
-            <tbody>
-				<tr>
-					<th style="text-align: center">13:00 03/30/2024</th>
-					<th><iframe style="height: 300px; width: 100%; margin: 10px 0px" class="maps-frame" src="https://maps.google.com/maps?q=-8.17268913683397,113.69947753493446&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></th>
-				</tr>
-            </tbody>
-        </table>
-		<table class="table table-bordered" style="margin-bottom: 10px">
-            <thead>
-				<tr>
-					<th colspan="2" style="text-align: center">CHECK OUT</th>
-				</tr>
-            </thead>
-            <tbody>
-				<tr>
-					<th style="text-align: center">13:00 03/30/2024</th>
-					<th><iframe style="height: 300px; width: 100%; margin: 10px 0px" class="maps-frame" src="https://maps.google.com/maps?q=-8.17268913683397,113.69947753493446&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></th>
-				</tr>
-            </tbody>
-        </table>
-		<button onclick="window.dialog.close();" aria-label="close" class="x">❌</button>
+			<h2>USER LOCATION</h2>
+			<table class="table table-bordered" style="margin-bottom: 10px">
+							<thead>
+									<tr>
+											<th style="text-align: center">EMPLOYEE</th>
+									</tr>
+					
+							</thead>
+							<tbody>
+									<tr>
+											<td id="detail-name" data-label="EMPLOYEE" style="text-align: center">
+													FIRQY SUTANWALIYAH IKHSAN
+											</td>
+									</tr>
+					
+							</tbody>
+					</table>
+			<table class="table table-bordered" style="margin-bottom: 10px">
+							<thead>
+					<tr>
+						<th colspan="2" style="text-align: center">CHECK IN</th>
+					</tr>
+							</thead>
+							<tbody>
+					<tr>
+						<th style="text-align: center" id="detail-checkin">13:00 03/30/2024</th>
+						<th><iframe id="detail-frame-in" style="height: 300px; width: 100%; margin: 10px 0px" class="maps-frame" src="https://maps.google.com/maps?q=-8.17268913683397,113.69947753493446&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></th>
+					</tr>
+							</tbody>
+					</table>
+			<table class="table table-bordered" style="margin-bottom: 10px">
+							<thead>
+					<tr>
+						<th colspan="2" style="text-align: center">CHECK OUT</th>
+					</tr>
+							</thead>
+							<tbody>
+					<tr>
+						<th style="text-align: center" id="detail-checkout">13:00 03/30/2024</th>
+						<th><iframe id="detail-frame-out" style="height: 300px; width: 100%; margin: 10px 0px" class="maps-frame" src="https://maps.google.com/maps?q=-8.17268913683397,113.69947753493446&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></th>
+					</tr>
+							</tbody>
+					</table>
+			<button onclick="window.dialog.close();" aria-label="close" class="x">❌</button>
 	</dialog>
 </div>
 
@@ -461,6 +461,27 @@
         {"language": {"paginate": { "previous": "&lt","next": "&gt",}}}
       );
     })
+
+		function showDetail(id) {
+			let name = $("#btn-detail-" + id).data('name');
+			let tanggal = $("#btn-detail-" + id).data('tanggal');
+			let coordinatein = $("#btn-detail-" + id).data('coordinatein');
+			let timein = $("#btn-detail-" + id).data('timein');
+			let coordinateout = $("#btn-detail-" + id).data('coordinateout');
+			let timeout = $("#btn-detail-" + id).data('timeout');
+
+			let frame_in = `https://maps.google.com/maps?q=${coordinatein}&output=embed`;
+			let frame_out = `https://maps.google.com/maps?q=${coordinateout}&output=embed`;
+
+			$("#detail-name").text(name);
+			$("#detail-checkin").text(tanggal + " " + timein);
+			$("#detail-checkout").text(tanggal + " " + timeout);
+			$("#detail-frame-in").attr('src', frame_in);
+			if (timeout != '-') {
+				$("#detail-frame-out").attr('src', frame_out);
+			}
+			window.dialog.showModal();
+		}
 
 	$('#warehouse').select2({
         theme: 'bootstrap4',
