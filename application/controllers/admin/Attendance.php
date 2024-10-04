@@ -69,7 +69,7 @@ class Attendance extends CI_Controller {
 		$data['title'] 							= 'ATTANDANCE';
 		$data['user'] 							= $user;
 		// dd($data['user']);
-		$latest_attendance 	= !empty($user['userSurveyor']) ? $this->Dbhelper->selectTabelOne('*', 'HR_ATTENDANCE_WFH', ['COMPANY' => $user['userWFH']['COMPANY'], 'PLANT' => $user['userWFH']['PLANT'], 'EMPNO' => $user['userWFH']['EMPNO']], 'ATTEND_DATE', 'DESC') : [];
+		$latest_attendance 	= !empty($user['userWFH']) ? $this->Dbhelper->selectTabelOne('*', 'HR_ATTENDANCE_WFH', ['COMPANY' => $user['userWFH']['COMPANY'], 'PLANT' => $user['userWFH']['PLANT'], 'EMPNO' => $user['userWFH']['EMPNO']], 'ATTEND_DATE', 'DESC') : [];
 
 		$attendance_type 	= "CHECK-IN";
 		if ($latest_attendance) {
