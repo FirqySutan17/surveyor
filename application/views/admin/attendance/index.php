@@ -465,7 +465,7 @@
 							</tbody>
 					</table>
 			<button onclick="window.dialog.close();" aria-label="close" class="x">❌</button>
-	</dialog>9
+	</dialog>
 </div>
 
 
