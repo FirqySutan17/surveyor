@@ -342,10 +342,28 @@
 	dialog p a:visited {
 	color: rgb(var(--vs-primary));
 	}
+	.table-maps-date {
+		width: 40%
+	}
+	.table-maps-frame {
+		width: 60%
+	}
 	@media (max-width: 1024px) {
 		dialog {
 			padding: 1rem 1.5rem;
 			width: 95%;
+		}
+		.table-maps {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+		.table-maps-date {
+			width: 100%
+		}
+		.table-maps-frame {
+			width: 100%
 		}
 	}
 </style>
@@ -425,9 +443,9 @@
 					</tr>
 							</thead>
 							<tbody>
-					<tr>
-						<th style="text-align: center; width: 40%" id="detail-checkin">-</th>
-						<th style="text-align: center; width: 60%">
+					<tr class="table-maps">
+						<th class="table-maps-date" style="text-align: center;" id="detail-checkin">-</th>
+						<th class="table-maps-frame" style="text-align: center;">
 							<iframe id="detail-frame-in" style="height: 300px; width: 100%; margin: 10px 0px" class="maps-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d32658969.626560632!2d95.9556841630188!3d-2.268827313454851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2c4c07d7496404b7%3A0xe37b4de71badf485!2sIndonesia!5e0!3m2!1sid!2sid!4v1728009870092!5m2!1sid!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 						</th>
 					</tr>
@@ -440,9 +458,9 @@
 					</tr>
 							</thead>
 							<tbody>
-					<tr>
-						<th style="text-align: center; width: 40%" id="detail-checkout">-</th>
-						<th style="text-align: center; width: 60%"><iframe id="detail-frame-out" style="height: 300px; width: 100%; margin: 10px 0px" class="maps-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d32658969.626560632!2d95.9556841630188!3d-2.268827313454851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2c4c07d7496404b7%3A0xe37b4de71badf485!2sIndonesia!5e0!3m2!1sid!2sid!4v1728009870092!5m2!1sid!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></th>
+					<tr class="table-maps">
+						<th class="table-maps-date" style="text-align: center;" id="detail-checkout">-</th>
+						<th class="table-maps-frame" style="text-align: center;"><iframe id="detail-frame-out" style="height: 300px; width: 100%; margin: 10px 0px" class="maps-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d32658969.626560632!2d95.9556841630188!3d-2.268827313454851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2c4c07d7496404b7%3A0xe37b4de71badf485!2sIndonesia!5e0!3m2!1sid!2sid!4v1728009870092!5m2!1sid!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></th>
 					</tr>
 							</tbody>
 					</table>
