@@ -282,6 +282,72 @@
         width: 100%;
         height: 100px;
     }
+
+	dialog {
+	padding: 1rem 3rem;
+	background: white;
+	width: 80%;
+	padding-top: 2rem;
+	border-radius: 20px;
+	border: 0;
+	box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.1);
+	-webkit-animation: fadeIn 1s ease both;
+			animation: fadeIn 1s ease both;
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+	}
+	dialog::-webkit-backdrop {
+	-webkit-animation: fadeIn 1s ease both;
+			animation: fadeIn 1s ease both;
+	background: rgba(255, 255, 255, 0.4);
+	z-index: 2;
+	-webkit-backdrop-filter: blur(5px);
+			backdrop-filter: blur(5px);
+	}
+	dialog::backdrop {
+	-webkit-animation: fadeIn 1s ease both;
+			animation: fadeIn 1s ease both;
+	background: rgba(255, 255, 255, 0.4);
+	z-index: 2;
+	-webkit-backdrop-filter: blur(5px);
+			backdrop-filter: blur(5px);
+	}
+	dialog .x {
+	filter: grayscale(1);
+	border: none;
+	background: none;
+	position: absolute;
+	top: 15px;
+	right: 20px;
+	transition: ease filter, transform 0.3s;
+	cursor: pointer;
+	transform-origin: center;
+	}
+	dialog .x:hover {
+	filter: grayscale(0);
+	transform: scale(1.1);
+	}
+	dialog h2 {
+	font-weight: 600;
+	font-size: 2rem;
+	padding-bottom: 1rem;
+	}
+	dialog p {
+	font-size: 1rem;
+	line-height: 1.3rem;
+	padding: 0.5rem 0;
+	}
+	dialog p a:visited {
+	color: rgb(var(--vs-primary));
+	}
+	@media (max-width: 1024px) {
+		dialog {
+			padding: 1rem 1.5rem;
+			width: 95%;
+		}
+	}
 </style>
 
 <div class="main-content pre-posttest">
@@ -290,7 +356,7 @@
     </h3>
 	<form class="form-horizontal" action="#" method="POST">
         <div class="row" style="padding: 0px 10px; border-bottom: 2px solid #000; padding-bottom: 10px;margin: 0px 0px; margin-bottom: 10px; ">
-			<div class="col-md-4 col-sm-12" style="display: flex;">
+			<div class="col-md-4 col-sm-12" style="display: flex; margin: 10px 0px">
                 <span class="label-span" style="width: 29%; display: inline-block; vertical-align: middle; margin-top: 8px; font-weight: 600">DATE : </span> 
                 <input type="date" name="datemonth" value="<?= $filter['datemonth'] ?>" class="form-control" required>
             </div>
@@ -314,6 +380,7 @@
 									<th style="text-align: center;">NAME</th>
 					<th style="text-align: center;">CHECK IN</th>
 					<th style="text-align: center;">CHECK OUT</th>
+					<th style="text-align: center;">LOCATION</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -324,13 +391,64 @@
 										<td style="text-align: center; vertical-align: middle"><?= $v['FULL_NAME'] ?></td>
 										<td style="text-align: center; vertical-align: middle"><?= date('H:i:s', strtotime($v['TIME_IN'])) ?></td>
 										<td style="text-align: center; vertical-align: middle"><?= !empty($v['TIME_OUT']) ? date('H:i:s', strtotime($v['TIME_OUT'])) : '-' ?></td>
+										<td style="text-align: center; vertical-align: middle">
+											<button class="primary" onclick="window.dialog.showModal();" style="background: none; border: none;"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px; margin-top: 5px"></i></button>
+											<!-- <a href="<?= admin_url('survey/detail') ?>" target="_blank" class="btn btn-sm" title="Detail"><i class="fas fa-eye text-primary"></i></a> -->
+										</td>
 								</tr>
 						<?php endforeach ?>
 			</tbody>
 		</table>
 	</div>
-    
+    <dialog id="dialog">
+		<h2>USER LOCATION</h2>
+		<table class="table table-bordered" style="margin-bottom: 10px">
+            <thead>
+                <tr>
+                    <th style="text-align: center">EMPLOYEE</th>
+                </tr>
+				
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-label="EMPLOYEE" style="text-align: center">
+                        FIRQY SUTANWALIYAH IKHSAN
+                    </td>
+                </tr>
+				
+            </tbody>
+        </table>
+		<table class="table table-bordered" style="margin-bottom: 10px">
+            <thead>
+				<tr>
+					<th colspan="2" style="text-align: center">CHECK IN</th>
+				</tr>
+            </thead>
+            <tbody>
+				<tr>
+					<th style="text-align: center">13:00 03/30/2024</th>
+					<th><iframe style="height: 300px; width: 100%; margin: 10px 0px" class="maps-frame" src="https://maps.google.com/maps?q=-8.17268913683397,113.69947753493446&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></th>
+				</tr>
+            </tbody>
+        </table>
+		<table class="table table-bordered" style="margin-bottom: 10px">
+            <thead>
+				<tr>
+					<th colspan="2" style="text-align: center">CHECK OUT</th>
+				</tr>
+            </thead>
+            <tbody>
+				<tr>
+					<th style="text-align: center">13:00 03/30/2024</th>
+					<th><iframe style="height: 300px; width: 100%; margin: 10px 0px" class="maps-frame" src="https://maps.google.com/maps?q=-8.17268913683397,113.69947753493446&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></th>
+				</tr>
+            </tbody>
+        </table>
+		<button onclick="window.dialog.close();" aria-label="close" class="x">❌</button>
+	</dialog>
 </div>
+
+
 
 <script src="<?= asset('vendor/select2/js/select2.min.js') ?>"></script>
 <script src="<?= asset('vendor/select2/js/en.js') ?>"></script>
