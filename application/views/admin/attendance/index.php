@@ -427,7 +427,7 @@
 							<tbody>
 					<tr>
 						<th style="text-align: center" id="detail-checkin">-</th>
-						<th><iframe id="detail-frame-in" style="height: 300px; width: 100%; margin: 10px 0px" class="maps-frame" src="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></th>
+						<th><iframe id="detail-frame-in" style="height: 300px; width: 100%; margin: 10px 0px" class="maps-frame" src="https://maps.google.com/maps?q=-6.21229072246019, 106.76623055749528&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></th>
 					</tr>
 							</tbody>
 					</table>
@@ -440,7 +440,7 @@
 							<tbody>
 					<tr>
 						<th style="text-align: center" id="detail-checkout">-</th>
-						<th><iframe id="detail-frame-out" style="height: 300px; width: 100%; margin: 10px 0px" class="maps-frame" src="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></th>
+						<th><iframe id="detail-frame-out" style="height: 300px; width: 100%; margin: 10px 0px" class="maps-frame" src="https://maps.google.com/maps?q=-6.21229072246019, 106.76623055749528&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></th>
 					</tr>
 							</tbody>
 					</table>
