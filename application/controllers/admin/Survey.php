@@ -104,7 +104,7 @@ class survey extends CI_Controller {
 					foreach ($post['market_price'] as $i => $v) {
 						$curr_data = [
 							"SURVEY_NO"		=> $survey_no,
-							"SURVEY_DATE"	=> $post['market_date'],
+							"SURVEY_DATE"	=> $post['market_date'][$i],
 							"PRICE"	=> $v
 						];
 
