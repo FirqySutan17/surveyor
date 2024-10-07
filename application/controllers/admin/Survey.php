@@ -90,7 +90,7 @@ class survey extends CI_Controller {
 						$curr_data = [
 							"SURVEY_NO"		=> $survey_no,
 							"SEQUENCE"		=> $i + 1,
-							"SURVEY_DATE"	=> $survey_report['SURVEY_DATE'],
+							"SURVEY_DATE"	=> date('Ymd', strtotime($survey_report['SURVEY_DATE'])),
 							"FARMER_NAME"	=> $v,
 							"FARMER_PHONE"	=> $post['farmer_phone'][$i]
 						];
@@ -104,7 +104,7 @@ class survey extends CI_Controller {
 					foreach ($post['market_price'] as $i => $v) {
 						$curr_data = [
 							"SURVEY_NO"		=> $survey_no,
-							"SURVEY_DATE"	=> $post['market_date'][$i],
+							"SURVEY_DATE"	=> date('Ymd', strtotime($post['market_date'][$i])),
 							"PRICE"	=> $v
 						];
 
@@ -120,7 +120,7 @@ class survey extends CI_Controller {
 					foreach ($post['PLANTING_siklus'] as $siklus_index => $siklus) {
 						foreach ($phase_array as $phase_key) {
 							$phase 	= $post['PLANTING_phase'][$phase_key][$siklus_index];
-							$curr_phase_date 	= $post['PLANTING_date'][$phase_key][$siklus_index];
+							$curr_phase_date 	= date('Ymd', strtotime($post['PLANTING_date'][$phase_key][$siklus_index]));
 							foreach ($post['PLANTING_description'][$phase_key][$siklus_index] as $i => $v) {
 								$curr_data = [
 									"SURVEY_NO"			=> $survey_no,
@@ -141,7 +141,7 @@ class survey extends CI_Controller {
 									$curr_data = [
 										"SURVEY_NO"			=> $survey_no,
 										"SEQUENCE"			=> $i + 1,
-										"SURVEY_DATE"		=> $survey_report['SURVEY_DATE'],
+										"SURVEY_DATE"		=> date('Ymd', strtotime($survey_report['SURVEY_DATE'])),
 										"SCORE"				=> $v,
 										"BARIS"				=> dbClean($post['baris'][$siklus_index][$i]),
 										"BARIS_ACTUAL"		=> dbClean($post['baris_actual'][$siklus_index][$i]),
