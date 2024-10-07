@@ -1172,7 +1172,7 @@ class survey extends CI_Controller {
 			    COORDINATE,
 			    DESCRIPTION,
 					CREATED_BY
-			from SURVEY a
+			from SURVEY
 			where SURVEY_DATE BETWEEN '$sdate' AND '$edate'
 			ORDER BY SURVEY_NO DESC
 		";
