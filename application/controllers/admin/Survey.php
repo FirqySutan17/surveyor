@@ -53,14 +53,15 @@ class survey extends CI_Controller {
 	public function do_create() {
 		if ($this->input->server('REQUEST_METHOD') === 'POST') {
 			$post = $this->input->post();
-			$postjson = json_encode($post);
-			$textfile = date('YmdHis').'_'.$this->session_data['user']['EMPLOYEE_ID'];
-			if (!write_file(APPPATH."logs/log_$textfile.txt", $postjson)) {
-				$this->session->set_flashdata('success', "Unable to logs post");
-				return redirect($this->own_link.'/report');
-			}
+			// $postjson = json_encode($post);
+			// $textfile = date('YmdHis').'_'.$this->session_data['user']['EMPLOYEE_ID'];
+			// if (!write_file(APPPATH."logs/log_$textfile.txt", $postjson)) {
+			// 	$this->session->set_flashdata('success', "Unable to logs post");
+			// 	return redirect($this->own_link.'/report');
+			// }
 
-			dd($post, $_FILES);
+			dd($_FILES, false);
+			dd($post);
 			$survey_no = $this->generateSurveyNo();
 			try {
 				
@@ -135,17 +136,25 @@ class survey extends CI_Controller {
 				}
 
 				$survey_planting_phase = [];
-				if (!empty($post['PLANTING_description'])) {
-					foreach ($post['PLANTING_description'] as $i => $v) {
-						$curr_data = [
-							"SURVEY_NO"			=> $survey_no,
-							"SEQUENCE"			=> $i + 1,
-							"SURVEY_DATE"		=> $survey_report['SURVEY_DATE'],
-							"PHASE"				=> dbClean($post['current_phase']),
-							"DESCRIPTION"		=> dbClean($v),
-						];
-
-						$survey_planting_phase[] = $curr_data;
+				$phase_array = ['persiapan-lahan', 'vegetatif-awal', 'vegetatif-akhir', 'genetatif-awal', 'genetatif-akhir', 'gagal-panen'];
+				if (!empty($post['PLANTING_siklus'])) {
+					foreach ($post['PLANTING_siklus'] as $siklus_index => $siklus) {
+						foreach ($phase_array as $phase_key) {
+							$phase 	= $post['PLANTING_phase'][$phase_key][$siklus_index];
+							$curr_phase_date 	= $post['PLANTING_date'][$phase_key][$siklus_index];
+							foreach ($post['PLANTING_description'][$phase_key][$siklus_index] as $i => $v) {
+								$curr_data = [
+									"SURVEY_NO"			=> $survey_no,
+									"SEQUENCE"			=> $i + 1,
+									"SURVEY_DATE"		=> $curr_phase_date,
+									"PHASE"				=> $phase,
+									"DESCRIPTION"		=> dbClean($v),
+									"SIKLUS"			=> $siklus
+								];
+		
+								$survey_planting_phase[] = $curr_data;
+							}
+						}
 					}
 				}
 
@@ -171,7 +180,12 @@ class survey extends CI_Controller {
 					}
 				}
 
-
+				dd($survey_report, FALSE);
+				dd($survey_farmers, FALSE);
+				dd($survey_market_price, FALSE);
+				dd($survey_harvest_phase, FALSE);
+				dd($survey_planting_phase, FALSE);
+				dd($survey_galleries);
 				$save = $this->Dbhelper->insertData('SURVEY', $survey_report);
 				if (!empty($survey_farmers)) {
 					$save_farmers = $this->db->insert_batch('SURVEY_FARMERS', $survey_farmers);
@@ -272,56 +286,12 @@ class survey extends CI_Controller {
 		$this->template->_v('survey/index', $data);
 	}
 
-	public function report_customer() {
-		$plant = "*";
-		$customer = "*";
-
-		$user 							= $this->session_data['user'];
-		$filter_plant 			= ['HEAD_CODE'	=> 'AB'];
-		$filter_user 				= ['EMPLOYEE_ID !=' => '999999'];
-		$filter_usersuja 				= ['PLANT =' => '3272'];
-		if ($user['PLANT'] != '*') {
-			$plant = $user['PLANT'];
-			$filter_plant['CODE'] = $plant;
-			$filter_user['PLANT'] = $plant;
-		}
-
-		if ($this->input->server('REQUEST_METHOD') === 'POST') {
-			$plant 		= $this->input->post('plant');
-			$customer 	= $this->input->post('customer');
-		}
-
-		$filter = [
-			"plant"	=> $plant,
-			"customer"	=> $customer,
-		];
-
-		$data['title'] 			= 'Visit Report';
-		$data['plant'] 			= $this->Dbhelper->selectTabel('CODE, CODE_NAME', 'CD_CODE', $filter_plant, 'CODE', 'ASC');
-		$data['users'] 			= $this->Dbhelper->selectTabel('EMPLOYEE_ID, FULL_NAME', 'CD_USER', $filter_user, 'EMPLOYEE_ID', 'ASC');
-		$data['userssuja'] 			= $this->Dbhelper->selectTabel('EMPLOYEE_ID, FULL_NAME', 'CD_USER', $filter_usersuja, 'EMPLOYEE_ID', 'ASC');
-		$data['collection_type'] = $this->collection_type();
-		$data['datatable']	= $this->datatable_customer($filter);
-		$data['filter']		= $filter;
-
-		// dd($data['userssuja']);
-
-		$this->template->_v('visit/report_customer', $data);
-	}
-
 	public function detail() {
 		$user	= 	$this->session_data['user'];
 		// $data = $this->get_visitingreport($visiting_no);
 		$data['title'] 				= 'SURVEY';
 		$data['user'] 				= $user;
 		$this->template->_v('survey/detail', $data);
-	}
-
-	public function detail_customer($slug) {
-		$data = $this->get_visitingreportcustomer($slug);
-		dd($data);
-		$data['title'] 				= 'Visit Detail';
-		$this->template->_v('visit/detail', $data);
 	}
 
 	public function edit() {
