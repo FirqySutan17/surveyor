@@ -293,7 +293,7 @@ class survey extends CI_Controller {
 	public function detail($survey_no) {
 		$user	= 	$this->session_data['user'];
 		$data_detail = $this->get_surveydetail($survey_no);
-		dd($data_detail);
+		// dd($data_detail);
 		$data['title'] 				= 'SURVEY';
 		$data['user'] 				= $user;
 		$this->template->_v('survey/detail', $data);
@@ -1171,6 +1171,7 @@ class survey extends CI_Controller {
 					CREATED_BY
 			from SURVEY a
 			where SURVEY_DATE BETWEEN '$sdate' AND '$edate'
+			ORDER BY SURVEY_NO DESC
 		";
 		
 		// if ($filter['drafter'] != '*') {
