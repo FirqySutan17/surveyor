@@ -1180,7 +1180,6 @@ class survey extends CI_Controller {
 		// if ($filter['drafter'] != '*') {
 		// 	$query .= " and a.CREATED_BY = '".$filter['drafter']."'";
 		// }
-		$query .= " order by SURVEY_DATE DESC";
         $data = $this->db->query($query)->result_array();
 		// dd($query);
 		return $data;
