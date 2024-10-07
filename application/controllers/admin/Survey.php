@@ -173,12 +173,12 @@ class survey extends CI_Controller {
 				        $berkas['size']= $_FILES['SURVEY_IMAGE']['size'][$key];
 
 				        $namafile = $this->upload_image($berkas, $survey_no, $no);
-				        $survey_galleries[] = [
-				        	'SURVEY_NO'		=> $survey_no,
-				        	'SEQUENCE'		=> $no,
-				        	'IMAGE_TITLE'	=> !empty($post['SURVEY_IMAGE_TITLE'][$key]) ? $post['SURVEY_IMAGE_TITLE'][$key] : '-',
-				        	'IMAGE_FILENAME'	=> $namafile
-				        ];
+				        // $survey_galleries[] = [
+				        // 	'SURVEY_NO'		=> $survey_no,
+				        // 	'SEQUENCE'		=> $no,
+				        // 	'IMAGE_TITLE'	=> !empty($post['SURVEY_IMAGE_TITLE'][$key]) ? $post['SURVEY_IMAGE_TITLE'][$key] : '-',
+				        // 	'IMAGE_FILENAME'	=> $namafile
+				        // ];
 					}
 				}
 
