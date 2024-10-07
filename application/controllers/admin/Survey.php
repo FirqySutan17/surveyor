@@ -104,7 +104,7 @@ class survey extends CI_Controller {
 					foreach ($post['market_price'] as $i => $v) {
 						$curr_data = [
 							"SURVEY_NO"		=> $survey_no,
-							"SURVEY_DATE"	=> $survey_report['SURVEY_DATE'],
+							"SURVEY_DATE"	=> $post['market_date'],
 							"PRICE"	=> $v
 						];
 
@@ -1204,135 +1204,6 @@ class survey extends CI_Controller {
 		$query .= " order by SURVEY_DATE DESC";
         $data = $this->db->query($query)->result_array();
 		// dd($query);
-		return $data;
-	}
-
-	private function datatable_customer($filter) {
-
-		$exp_customer = explode("|", $filter['customer']);
-		$query = "
-			select 
-					a.CUSTOMER,
-					b.CUSTOMER_NAME,
-					b.SALES_ORG
-			from TR_VR a,
-						CD_CUSTOMER b
-			where 
-					a.CUSTOMER = b.CUSTOMER
-					and a.PLANT = b.SALES_ORG
-		";
-		if ($filter['plant'] != '*') {
-			$query .= " and b.SALES_ORG = '".$filter['plant']."'";
-		}
-		if (!empty($exp_customer[0]) && $exp_customer[0] != '*') {
-			$query .= " and b.CUSTOMER = '".$exp_customer[0]."'";
-		}
-		$query .= "GROUP BY a.CUSTOMER, b.CUSTOMER_NAME, b.SALES_ORG";
-
-		$main_query = "
-			SELECT 
-				c.CUSTOMER,
-				c.CUSTOMER_NAME,
-				c.SALES_ORG,
-				FN_CODE_NAME('AB' ,c.SALES_ORG)   COMPANY_NAME
-			FROM ($query) c
-			ORDER BY c.SALES_ORG ASC, c.CUSTOMER_NAME ASC
-		";
-        $data = $this->db->query($main_query)->result_array();
-		return $data;
-	}
-
-	private function datatable_collector($filter) {
-		$date = date('Ymd', strtotime($filter['date']));
-		$datemonth = date('Ym', strtotime($date));
-		// $query = "
-		// 	SELECT SUBSTR(BUSINESS_AREA,1,3)||'2' AS COMPANY_ID,
-		// 		FN_CODE_NAME('AB' ,SUBSTR(BUSINESS_AREA,1,3)||'2')  AS COMPANY_NAME,
-		// 		FN_CUSTOMER('01',SUBSTR(BUSINESS_AREA,1,3)||'2',CUSTOMER) EMPLOYEE_ID, 
-		// 		FN_HR_EMPLOYEE('02', FN_CUSTOMER('01',SUBSTR(BUSINESS_AREA,1,3)||'2',CUSTOMER)) EMPLOYEE_NAME,
-		// 		SUM(CASE WHEN A.ENDING = A.STOP THEN 0 ELSE A.ENDING END)  AS RUNNING_TARGET,
-		// 		SUM(CASE WHEN A.ENDING = A.STOP THEN 0 ELSE A.CREDIT END)  AS RUNNING_CASH_IN,
-		// 		SUM(CASE WHEN A.ENDING = A.STOP THEN ENDING ELSE 0 END)      AS STOP_TARGET,
-		// 		SUM(CASE WHEN A.ENDING = A.STOP THEN A.CREDIT ELSE 0 END)  AS STOP_CASH_IN 
-		// 	FROM FEED_CUST_REMAINDER_WA A
-		// 	WHERE MMDDYYY = '$date'
-			
-		// ";
-
-		$where = "";
-		if ($filter['plant'] != '*') {
-			$filter['plant'] = substr_replace($filter['plant'], 0, -1);
-			$where .= " and B.BUSINESS_AREA = '".$filter['plant']."'";
-		}
-		$query = "
-			SELECT
-				FN_CODE_NAME('AB' ,D.BUSINESS_AREA) AS COMPANY_NAME,
-				D.BUSINESS_AREA AS COMPANY_ID,
-				D.EMPNO AS EMPLOYEE_ID,
-				FN_HR_EMPLOYEE('02', D.EMPNO) AS EMPLOYEE_NAME,
-				D.RUNNING_TARGET,
-				D.RUNNING_CASH_IN,
-				CASE WHEN D.RUNNING_CASH_IN > 0 AND D.RUNNING_TARGET > 0 THEN ((D.RUNNING_CASH_IN / D.RUNNING_TARGET) * 100) ELSE 0 END as RUNNING_PERCENTAGE,
-				D.STOP_TARGET,
-				D.STOP_CASH_IN,
-				CASE WHEN D.STOP_CASH_IN > 0 AND D.STOP_TARGET > 0 THEN ((D.STOP_CASH_IN / D.STOP_TARGET) * 100) ELSE 0 END as STOP_PERCENTAGE
-			FROM (
-					SELECT
-							SUBSTR(C.BUSINESS_AREA,1,3)||'2' as BUSINESS_AREA,
-							C.EMPNO,
-							SUM(C.RUNNING_TARGET) AS RUNNING_TARGET,
-							SUM(C.STOP_TARGET) AS STOP_TARGET,
-							SUM(CASE WHEN STATUS = 'R' THEN CREDIT ELSE 0 END) AS RUNNING_CASH_IN,
-							SUM(CASE WHEN STATUS = 'S' THEN CREDIT ELSE 0 END) AS STOP_CASH_IN
-					FROM (
-							SELECT 
-									B.BUSINESS_AREA,
-									B.CUSTOMER,
-									B.EMPNO,
-									B.RUNNING_TARGET,
-									B.STOP_TARGET, 
-									(SELECT A.CREDIT FROM FEED_CUST_REMAINDER_WA A WHERE A.BUSINESS_AREA = B.BUSINESS_AREA AND A.CUSTOMER = B.CUSTOMER AND A.MMDDYYY =  '$date') as CREDIT,
-									CASE WHEN RUNNING_TARGET > 0 THEN 'R' ELSE 'S' END AS STATUS
-							FROM TR_MONTHLY_TARGET B
-							WHERE 
-									B.YYMM = '$datemonth'
-									AND (B.RUNNING_TARGET > 0 OR B.STOP_TARGET > 0)
-									AND B.EMPNO != '(none)'
-									$where
-					) C
-					GROUP BY SUBSTR(C.BUSINESS_AREA,1,3)||'2', C.EMPNO
-			) D
-			ORDER BY D.BUSINESS_AREA ASC, D.EMPNO
-		";
-		
-    	$data = $this->db->query($query)->result_array();
-		return $data;
-	}
-
-	private function datatable_overdue($filter) {
-		$date = date('Ymd', strtotime($filter['date']));
-		$exp_customer = explode("|", $filter['customer']);
-		$exp_group_customer = explode("|", $filter['group_customer']);
-		$query = "
-			select * from FEED_CUST_REMAINDER_WA
-			where MMDDYYY = '$date'
-		";
-		
-		if ($filter['plant'] != '*') {
-			$query .= " and BUSINESS_AREA = '".$filter['plant']."'";
-		}
-		if (!empty($exp_group_customer[0]) && $exp_group_customer[0] != '*') {
-			$query .= " and GROUP_CUSTOMER = '".$exp_group_customer[0]."'";
-		}
-		if (!empty($exp_customer[0]) && $exp_customer[0] != '*') {
-			$query .= " and CUSTOMER = '".$exp_customer[0]."'";
-		}
-
-		if ($filter['type'] != '*') {
-			$query .= " and GROUP_CUSTOMER LIKE '".$filter['type']."%'";
-		}
-		// dd($query);
-        $data = $this->db->query($query)->result_array();
 		return $data;
 	}
 
