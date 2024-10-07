@@ -200,8 +200,8 @@ class survey extends CI_Controller {
 				}
 				if (!empty($survey_planting_phase)) {
 					$save_planting_phase = $this->db->insert_batch('SURVEY_PLANTING_PHASE', $survey_planting_phase);
-					dd($save_planting_phase, FALSE);
-					dd($survey_planting_phase);
+					// dd($save_planting_phase, FALSE);
+					// dd($survey_planting_phase);
 				}
 				if (!empty($survey_galleries)) {
 					$save_galleries = $this->db->insert_batch('SURVEY_IMAGES', $survey_galleries);
