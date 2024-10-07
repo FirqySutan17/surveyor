@@ -182,12 +182,12 @@ class survey extends CI_Controller {
 					}
 				}
 
-				dd($survey_report, FALSE);
-				dd($survey_farmers, FALSE);
-				dd($survey_market_price, FALSE);
-				dd($survey_harvest_phase, FALSE);
-				dd($survey_planting_phase, FALSE);
-				dd($survey_galleries);
+				// dd($survey_report, FALSE);
+				// dd($survey_farmers, FALSE);
+				// dd($survey_market_price, FALSE);
+				// dd($survey_harvest_phase, FALSE);
+				// dd($survey_planting_phase, FALSE);
+				// dd($survey_galleries);
 				$save = $this->Dbhelper->insertData('SURVEY', $survey_report);
 				if (!empty($survey_farmers)) {
 					$save_farmers = $this->db->insert_batch('SURVEY_FARMERS', $survey_farmers);
