@@ -1012,21 +1012,18 @@
     }
 
     function detailPosition(latitude, longitude) {
+        let addressAPI = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`;
         $.ajax({
-            url: "<?= base_url('dashboard/survey/ajax_location_detail') ?>",
+            url: addressAPI,
             type: "GET",
-            data: {
-                "latitude": latitude,
-                "longitude": longitude
-            },
             beforeSend: function () {
                 // removeElements();
             },
             success: function(response) {
-                let data = JSON.parse(response);
-                // console.log(data);
-                alert(data.data);
-                $("#address").val(data.data.address);
+                // let data = JSON.parse(response);
+                console.log(response);
+                // alert(data.data);
+                // $("#address").val(data.data.address);
             }
         });
     }
