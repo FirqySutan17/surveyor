@@ -74,7 +74,6 @@ class survey extends CI_Controller {
 					"PROVINCE"			=> dbClean($post['province']),
 					"REGENCY"			=> dbClean($post['regencies']),
 					"DISTRICT"			=> dbClean($post['districts']),
-					"CURRENT_PHASE"		=> dbClean($post['current_phase']),
 					"DESCRIPTION"		=> dbClean($post['address']),
 					"CREATED_AT"		=> date('Ymd His'),
 					"CREATED_BY"		=> $this->session_data['user']['EMPLOYEE_ID'],
@@ -116,22 +115,24 @@ class survey extends CI_Controller {
 				$survey_harvest_phase = [];
 				if (!empty($post['HARVEST_score'])) {
 					foreach ($post['HARVEST_score'] as $i => $v) {
-						$curr_data = [
-							"SURVEY_NO"			=> $survey_no,
-							"SEQUENCE"			=> $i + 1,
-							"SURVEY_DATE"		=> $survey_report['SURVEY_DATE'],
-							"SCORE"				=> $v,
-							"BARIS"				=> dbClean($post['baris'][$i]),
-							"BARIS_ACTUAL"		=> dbClean($post['baris_actual'][$i]),
-							"BARIS"				=> dbClean($post['baris'][$i]),
-							"BARIS_ACTUAL"		=> dbClean($post['baris_actual'][$i]),
-							"BIJI"				=> dbClean($post['biji'][$i]),
-							"BIJI_ACTUAL"		=> dbClean($post['biji_actual'][$i]),
-							"BOBOT"				=> dbClean($post['bobot'][$i]),
-							"BOBOT_ACTUAL"		=> dbClean($post['bobot_actual'][$i]),
-						];
+						if (!empty($post['baris'][$i])) {
+							$curr_data = [
+								"SURVEY_NO"			=> $survey_no,
+								"SEQUENCE"			=> $i + 1,
+								"SURVEY_DATE"		=> $survey_report['SURVEY_DATE'],
+								"SCORE"				=> $v,
+								"BARIS"				=> dbClean($post['baris'][$i]),
+								"BARIS_ACTUAL"		=> dbClean($post['baris_actual'][$i]),
+								"BARIS"				=> dbClean($post['baris'][$i]),
+								"BARIS_ACTUAL"		=> dbClean($post['baris_actual'][$i]),
+								"BIJI"				=> dbClean($post['biji'][$i]),
+								"BIJI_ACTUAL"		=> dbClean($post['biji_actual'][$i]),
+								"BOBOT"				=> dbClean($post['bobot'][$i]),
+								"BOBOT_ACTUAL"		=> dbClean($post['bobot_actual'][$i]),
+							];
 
-						$survey_harvest_phase[] = $curr_data;
+							$survey_harvest_phase[] = $curr_data;
+						}
 					}
 				}
 
@@ -180,6 +181,7 @@ class survey extends CI_Controller {
 					}
 				}
 
+				dd($post, FALSE);
 				dd($survey_report, FALSE);
 				dd($survey_farmers, FALSE);
 				dd($survey_market_price, FALSE);
