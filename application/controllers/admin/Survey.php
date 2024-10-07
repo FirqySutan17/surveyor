@@ -117,6 +117,7 @@ class survey extends CI_Controller {
 				$survey_planting_phase = [];
 				$phase_array = ['persiapan-lahan', 'vegetatif-awal', 'vegetatif-akhir', 'genetatif-awal', 'genetatif-akhir', 'gagal-panen'];
 				if (!empty($post['PLANTING_siklus'])) {
+					$sequence = 1;
 					foreach ($post['PLANTING_siklus'] as $siklus_index => $siklus) {
 						foreach ($phase_array as $phase_key) {
 							$phase 	= $post['PLANTING_phase'][$phase_key][$siklus_index];
@@ -124,13 +125,14 @@ class survey extends CI_Controller {
 							foreach ($post['PLANTING_description'][$phase_key][$siklus_index] as $i => $v) {
 								$curr_data = [
 									"SURVEY_NO"			=> $survey_no,
-									"SEQUENCE"			=> $i + 1,
+									"SEQUENCE"			=> $sequence,
 									"SURVEY_DATE"		=> $curr_phase_date,
 									"PHASE"				=> $phase,
 									"DESCRIPTION"		=> dbClean($v),
 									"SIKLUS"			=> $siklus
 								];
 		
+								$sequence += 1;
 								$survey_planting_phase[] = $curr_data;
 							}
 						}
@@ -296,6 +298,7 @@ class survey extends CI_Controller {
 		dd($data_detail);
 		$data['title'] 				= 'SURVEY';
 		$data['user'] 				= $user;
+		$data['detail']				= $data_detail;
 		$this->template->_v('survey/detail', $data);
 	}
 
@@ -1184,11 +1187,13 @@ class survey extends CI_Controller {
 	}
 
 	private function get_surveydetail($survey_no) {
+		$planting_phase = $this->Dbhelper->selectTabel('*', 'SURVEY_PLANTING_PHASE', array('SURVEY_NO' => $survey_no), 'SEQUENCE', 'ASC');
+		
 		$data['SURVEY'] 		= $this->Dbhelper->selectTabelOne('*', 'SURVEY', array('SURVEY_NO' => $survey_no), 'SURVEY_NO', 'ASC');
 		$data['SURVEY_FARMERS']		= $this->Dbhelper->selectTabel('*', 'SURVEY_FARMERS', array('SURVEY_NO' => $survey_no), 'SEQUENCE', 'ASC');
 		$data['SURVEY_MARKET_PRICES']		=  $this->Dbhelper->selectTabel('*', 'SURVEY_MARKET_PRICES', array('SURVEY_NO' => $survey_no), 'SURVEY_DATE', 'ASC');
 		$data['SURVEY_HARVEST_PHASE']		=  $this->Dbhelper->selectTabel('*', 'SURVEY_HARVEST_PHASE', array('SURVEY_NO' => $survey_no), 'SEQUENCE', 'ASC');
-		$data['SURVEY_PLANTING_PHASE']		=  $this->Dbhelper->selectTabel('*', 'SURVEY_PLANTING_PHASE', array('SURVEY_NO' => $survey_no), 'SEQUENCE', 'ASC');
+		$data['SURVEY_PLANTING_PHASE']		=  [];
 		$data['SURVEY_IMAGES']		= $this->Dbhelper->selectTabel('*', 'SURVEY_IMAGES', array('SURVEY_NO' => $survey_no), 'SEQUENCE', 'ASC');
 		return $data;
 	}

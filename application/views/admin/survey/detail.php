@@ -789,19 +789,16 @@
                         <tbody>
                             <tr>
                                 <td data-label="EMPLOYEE">
-                                    01220023 - FIRQY SUTAN
+                                    <?= $detail['SURVEY']['CREATED_BY'] ?>
                                 </td>
                                 <td data-label="DATE">
-                                    27/09/2024
+                                    <?= date('Y-m-d', strtotime($detail['SURVEY']['SURVEY_DATE'])) ?>
                                 </td>
                                 <td data-label="LAND TYPE">
-                                    PERBUKITAN
+                                    <?= $detail['SURVEY']['LAND_TYPE'] ?>
                                 </td>
-                                <td data-label="LATITUDE">
-                                    <div id="latitude">-6.2336183</div>
-                                </td>
-                                <td data-label="LONGITUDE">
-                                    <div id="longitude">106.8214104</div>
+                                <td data-label="COORDINATE">
+                                    <?= $detail['SURVEY']['COORDINATE'] ?>
                                 </td>
                             </tr>
                         </tbody>
@@ -830,7 +827,7 @@
                         </tbody>
                     </table>
 
-                    <iframe class="maps-frame" src="https://maps.google.com/maps?q=-6.2336281,106.8214081&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe class="maps-frame" src="https://maps.google.com/maps?q=<?= $detail['SURVEY']['COORDINATE'] ?>&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     <table class="table table-bordered" style="margin-bottom: 10px">
                         <thead>
                             <tr>
@@ -839,7 +836,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td data-label="ADDRESS" style="text-transform: uppercase;">Jl. Gatot Subroto No.Kav. 38, RT.6/RW.1, Kuningan Bar., Kec. Mampang Prpt., Jakarta, Daerah Khusus Ibukota Jakarta 12710</td>
+                                <td data-label="ADDRESS" style="text-transform: uppercase;"><?= $detail['SURVEY']['ADDRESS'] ?></td>
                             </tr>   
                         </tbody>
                         
@@ -862,14 +859,15 @@
                                 </tr>
                             </thead>
                             <tbody id="farmersinfo">
-                                <!-- <tr style="align-items: flex-end">
-                                    <th style="text-align: left; background: #fff; border: 0px"><button type="button" class="btn cust-btn-add" onclick="addFarmers()">+</button></th>
-                                </tr> -->
-                                <tr>
-                                    <td data-label="FARMERS" width="50%">JOHN DOE</td>
-                                    <td data-label="PHONE NUMBER" width="50%">08XXXXXXXXXX</td>
-                                    <!-- <td width="5%"><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td> -->
-                                </tr>
+                                <?php if(!empty($detail['SURVEY_FARMERS'])): ?>
+                                    <?php foreach($detail['SURVEY_FARMERS'] as $sf): ?>
+                                        <tr>
+                                            <td data-label="FARMERS" width="50%"><?= $sf['FARMER_NAME'] ?></td>
+                                            <td data-label="PHONE NUMBER" width="50%"><?= $sf['FARMER_PHONE'] ?></td>
+                                            <!-- <td width="5%"><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td> -->
+                                        </tr>
+                                    <?php endforeach ?>
+                                <?php endif ?>
                             </tbody>
                         </table>
                     </div>
@@ -889,6 +887,15 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php if(!empty($detail['SURVEY_FARMERS'])): ?>
+                                    <?php foreach($detail['SURVEY_FARMERS'] as $sf): ?>
+                                        <tr>
+                                            <td data-label="FARMERS" width="50%"><?= $sf['FARMER_NAME'] ?></td>
+                                            <td data-label="PHONE NUMBER" width="50%"><?= $sf['FARMER_PHONE'] ?></td>
+                                            <!-- <td width="5%"><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td> -->
+                                        </tr>
+                                    <?php endforeach ?>
+                                <?php endif ?>
                                 <tr style="align-items: flex-end">
                                     <td data-label="PHASE" width="45%" style="vertical-align: top">
                                         VEGETATIF AWAL
@@ -928,7 +935,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <!-- <tr>
                                     <td data-label="SCORE" style="">
                                         10
                                     </td>
@@ -1279,7 +1286,7 @@
                                     <td data-label="%">
                                         <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
                                     </td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>
@@ -1291,22 +1298,14 @@
                     <table class="table table-bordered" style="margin-bottom: 20px">
                         <thead>
                             <tr>
-                                <!-- <th colspan="3" style="text-align: right; background: #fff; border: 0px"><button type="button" class="btn cust-btn-add" onclick="addMarketprice()">+</button></th> -->
-                            </tr>
-                            <tr>
                                 <th>DATE</th>
                                 <th>PRICE</th>
-                                <!-- <th></th> -->
                             </tr>
                         </thead>
                         <tbody id="marketprice">
-                            <tr style="align-items: flex-end">
-                                <!-- <th style="text-align: right; background: #fff; border: 0px;"><button type="button" class="btn cust-btn-add" onclick="addMarketprice()">+</button></th> -->
-                            </tr>
                             <tr>
                                 <td data-label="DATE">JANUARY 2025</td>
                                 <td data-label="PRICE">RP 250.000</td>
-                                <!-- <td><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td> -->
                             </tr>
                         </tbody>
                     </table>
@@ -1319,22 +1318,14 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <!-- <th colspan="3" style="text-align: right; background: #fff; border: 0px"><button type="button" class="btn cust-btn-add" onclick="addImages()">+</button></th> -->
-                            </tr>
-                            <tr>
                                 <th>DATE / TITLE</th>
-                                <th>UPLOAD IMAGE</th>
-                                <!-- <th></th> -->
+                                <th>IMAGE</th>
                             </tr>
                         </thead>
                         <tbody id="visitimages">
-                            <tr style="align-items: flex-end">
-                                <!-- <th style="text-align: right; background: #fff; border: 0px"><button type="button" class="btn cust-btn-add" onclick="addImages()">+</button></th> -->
-                            </tr>
                             <tr>
                                 <td data-label ="DATE / TITLE">SURVEY LOKASI 27/09/2024</td>
                                 <td data-label ="UPLOAD IMAGE" style="text-align: center"><img src="<?= asset('img/maps-drawing-1.png') ?>" alt="" style="width: 50%; text-align: center; object-fit: cover"></td>
-                                <!-- <td><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td> -->
                             </tr>
                         </tbody>
                     </table>
@@ -1343,7 +1334,7 @@
 
             <div class="form-group row mt-5" style="margin: 20px 0px !important">
                 <div class="col-lg-12 col-sm-12" style="display: flex; padding: 0px">
-                    <a href="<?= admin_url('visit/report') ?>" class="btn btn-primary cust-btn-back" style="width: 50%; height: 50px; display: flex; align-items: center; justify-content: center;">Cancel</a>
+                    <a href="<?= admin_url('survey') ?>" class="btn btn-primary cust-btn-back" style="width: 50%; height: 50px; display: flex; align-items: center; justify-content: center;">Cancel</a>
                     <span style="margin: 5px;"></span>
                     <button type="submit" class="btn btn-primary cust-btn-save" style="width: 50%; height: 50px">Save</button>
                 </div>
