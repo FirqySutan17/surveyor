@@ -887,8 +887,8 @@
                                     <th style="text-align: left; background: #fff; border: 0px"><button type="button" class="btn cust-btn-add" onclick="addFarmers()">+</button></th>
                                 </tr>
                                 <tr>
-                                    <td data-label="FARMERS" width="45%"><input type="text" name="FM_farmers[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" placeholder="EX : JOHN DOE" id=""></td>
-                                    <td data-label="PHONE NUMBER" width="50%"><input type="number" name="FM_phone_number[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" placeholder="EX : 08XXXXXXXXXX" id=""></td>
+                                    <td data-label="FARMERS" width="45%"><input type="text" name="farmer_name[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" placeholder="EX : JOHN DOE" id=""></td>
+                                    <td data-label="PHONE NUMBER" width="50%"><input type="number" name="farmer_phone[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" placeholder="EX : 08XXXXXXXXXX" id=""></td>
                                     <td width="5%"><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
                                 </tr>
                             </tbody>
@@ -978,7 +978,7 @@
         </form>
     </div>
 </div>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLUc8QC0GYh5ozbMbGBcNUm1BBIjvmmg8&callback=myMap"></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLUc8QC0GYh5ozbMbGBcNUm1BBIjvmmg8&callback=myMap"></script> -->
 <script>
     const lang = document.getElementById("latitude");
     const long = document.getElementById("longitude");
@@ -1088,109 +1088,109 @@
                     <tbody class="planting-phase-${index}" style="display: none;">
                         <tr style="align-items: flex-end">
                             <td>
-                                <input type="date" name="PLANTING_date['persiapan-lahan'][${index}]" class="form-control" style="font-size: 14px" >
+                                <input type="date" name="PLANTING_date[persiapan-lahan][${index}]" class="form-control" style="font-size: 14px" >
                             </td>
                             <td data-label="PHASE" width="45%">
-                                <input type="text" name="PLANTING_phase['persiapan-lahan'][${index}]" value="PERSIAPAN LAHAN" class="form-control" style="font-size: 14px" readonly>
+                                <input type="text" name="PLANTING_phase[persiapan-lahan][${index}]" value="PERSIAPAN LAHAN" class="form-control" style="font-size: 14px" readonly>
                             </td>
                             <td data-label="DESCRIPTION" width="50%">
                                 <div class="persiapan-lahan">
-                                    <input type="text" name="PLANTING_description['persiapan-lahan'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="EX : LOREM IPSUM DOLOR SIT AMET" id="">
-                                    <input type="text" name="PLANTING_description['persiapan-lahan'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="EX : LOREM IPSUM DOLOR SIT AMET" id="">
-                                    <input type="text" name="PLANTING_description['persiapan-lahan'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="EX : LOREM IPSUM DOLOR SIT AMET" id="">
-                                    <input type="text" name="PLANTING_description['persiapan-lahan'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="EX : LOREM IPSUM DOLOR SIT AMET" id="">
-                                    <input type="text" name="PLANTING_description['persiapan-lahan'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="EX : LOREM IPSUM DOLOR SIT AMET" id="">
-                                    <input type="text" name="PLANTING_description['persiapan-lahan'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="EX : LOREM IPSUM DOLOR SIT AMET" id="">
-                                    <input type="text" name="PLANTING_description['persiapan-lahan'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" placeholder="EX : LOREM IPSUM DOLOR SIT AMET" id="">
+                                    <input type="text" name="PLANTING_description[persiapan-lahan][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="EX : LOREM IPSUM DOLOR SIT AMET" id="">
+                                    <input type="text" name="PLANTING_description[persiapan-lahan][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="EX : LOREM IPSUM DOLOR SIT AMET" id="">
+                                    <input type="text" name="PLANTING_description[persiapan-lahan][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="EX : LOREM IPSUM DOLOR SIT AMET" id="">
+                                    <input type="text" name="PLANTING_description[persiapan-lahan][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="EX : LOREM IPSUM DOLOR SIT AMET" id="">
+                                    <input type="text" name="PLANTING_description[persiapan-lahan][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="EX : LOREM IPSUM DOLOR SIT AMET" id="">
+                                    <input type="text" name="PLANTING_description[persiapan-lahan][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="EX : LOREM IPSUM DOLOR SIT AMET" id="">
+                                    <input type="text" name="PLANTING_description[persiapan-lahan][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" placeholder="EX : LOREM IPSUM DOLOR SIT AMET" id="">
                                 </div>
                             </td>
                         </tr>
                         <tr style="align-items: flex-end">
-                            <td><input type="date" name="PLANTING_date['vegetatif-awal'][${index}]" class="form-control" style="font-size: 14px" ></td>
+                            <td><input type="date" name="PLANTING_date[vegetatif-awal][${index}]" class="form-control" style="font-size: 14px" ></td>
                             <td data-label="PHASE" width="45%">
-                                <input type="text" name="PLANTING_phase['vegetatif-awal'][${index}]" value="VEGETATIF AWAL" class="form-control" style="font-size: 14px" readonly>
+                                <input type="text" name="PLANTING_phase[vegetatif-awal][${index}]" value="VEGETATIF AWAL" class="form-control" style="font-size: 14px" readonly>
                             </td>
                             <td data-label="DESCRIPTION" width="50%">
                                 <div class="vegetatif-awal">
-                                    <input type="text" name="PLANTING_description['vegetatif-awal'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="UMUR TANAM (1 - 25)">
-                                    <input type="text" name="PLANTING_description['vegetatif-awal'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="TINGGI TANAMAN">
-                                    <input type="text" name="PLANTING_description['vegetatif-awal'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JUMLAH DAUN">
-                                    <input type="text" name="PLANTING_description['vegetatif-awal'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JENIS PUPUK YANG SUDAH DIAPLIKASIKAN">
-                                    <input type="text" name="PLANTING_description['vegetatif-awal'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="ESTIMASI JUMLAH PUPUK DIAPLIKASIKAN(KG)">
-                                    <input type="text" name="PLANTING_description['vegetatif-awal'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JENIS HERBISIDA / PERSTISIDA YANG DIAPLIKASIKAN">
-                                    <input type="text" name="PLANTING_description['vegetatif-awal'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)">
-                                    <input type="text" name="PLANTING_description['vegetatif-awal'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)">
-                                    <input type="text" name="PLANTING_description['vegetatif-awal'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000;" placeholder="INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)">
+                                    <input type="text" name="PLANTING_description[vegetatif-awal][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="UMUR TANAM (1 - 25)">
+                                    <input type="text" name="PLANTING_description[vegetatif-awal][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="TINGGI TANAMAN">
+                                    <input type="text" name="PLANTING_description[vegetatif-awal][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JUMLAH DAUN">
+                                    <input type="text" name="PLANTING_description[vegetatif-awal][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JENIS PUPUK YANG SUDAH DIAPLIKASIKAN">
+                                    <input type="text" name="PLANTING_description[vegetatif-awal][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="ESTIMASI JUMLAH PUPUK DIAPLIKASIKAN(KG)">
+                                    <input type="text" name="PLANTING_description[vegetatif-awal][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JENIS HERBISIDA / PERSTISIDA YANG DIAPLIKASIKAN">
+                                    <input type="text" name="PLANTING_description[vegetatif-awal][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)">
+                                    <input type="text" name="PLANTING_description[vegetatif-awal][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)">
+                                    <input type="text" name="PLANTING_description[vegetatif-awal][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000;" placeholder="INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)">
                                 </div>
                             </td>
                         </tr>
                         <tr style="align-items: flex-end">
-                            <td><input type="date" name="PLANTING_date['vegetatif-akhir'][${index}]" class="form-control" style="font-size: 14px" ></td>
+                            <td><input type="date" name="PLANTING_date[vegetatif-akhir][${index}]" class="form-control" style="font-size: 14px" ></td>
                             <td data-label="PHASE" width="45%">
-                                <input type="text" name="PLANTING_phase['vegetatif-akhir'][${index}]" value="VEGETATIF AKHIR" class="form-control" style="font-size: 14px" readonly>
+                                <input type="text" name="PLANTING_phase[vegetatif-akhir][${index}]" value="VEGETATIF AKHIR" class="form-control" style="font-size: 14px" readonly>
                             </td>
                             <td data-label="DESCRIPTION" width="50%">
                                 <div class="vegetatif-akhir">
-                                    <input type="text" name="PLANTING_description['vegetatif-akhir'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="UMUR TANAM (26 - 50)">
-                                    <input type="text" name="PLANTING_description['vegetatif-akhir'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="TINGGI TANAMAN">
-                                    <input type="text" name="PLANTING_description['vegetatif-akhir'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JUMLAH DAUN">
-                                    <input type="text" name="PLANTING_description['vegetatif-akhir'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="MUNCUL BUNGA JANTAN DAN BETINA (ADA / TIDAK)">
-                                    <input type="text" name="PLANTING_description['vegetatif-akhir'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JENIS PUPUK YANG SUDAH DIAPLIKASIKAN">
-                                    <input type="text" name="PLANTING_description['vegetatif-akhir'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="ESTIMASI JUMLAH PUPUK DIAPLIKASIKAN (KG)">
-                                    <input type="text" name="PLANTING_description['vegetatif-akhir'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JENIS HERBISIDA / PESTISIDA YANG DIAPLIKASIKAN">
-                                    <input type="text" name="PLANTING_description['vegetatif-akhir'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)">
-                                    <input type="text" name="PLANTING_description['vegetatif-akhir'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)">
-                                    <input type="text" name="PLANTING_description['vegetatif-akhir'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000;" placeholder="INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)">
+                                    <input type="text" name="PLANTING_description[vegetatif-akhir][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="UMUR TANAM (26 - 50)">
+                                    <input type="text" name="PLANTING_description[vegetatif-akhir][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="TINGGI TANAMAN">
+                                    <input type="text" name="PLANTING_description[vegetatif-akhir][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JUMLAH DAUN">
+                                    <input type="text" name="PLANTING_description[vegetatif-akhir][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="MUNCUL BUNGA JANTAN DAN BETINA (ADA / TIDAK)">
+                                    <input type="text" name="PLANTING_description[vegetatif-akhir][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JENIS PUPUK YANG SUDAH DIAPLIKASIKAN">
+                                    <input type="text" name="PLANTING_description[vegetatif-akhir][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="ESTIMASI JUMLAH PUPUK DIAPLIKASIKAN (KG)">
+                                    <input type="text" name="PLANTING_description[vegetatif-akhir][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JENIS HERBISIDA / PESTISIDA YANG DIAPLIKASIKAN">
+                                    <input type="text" name="PLANTING_description[vegetatif-akhir][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)">
+                                    <input type="text" name="PLANTING_description[vegetatif-akhir][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)">
+                                    <input type="text" name="PLANTING_description[vegetatif-akhir][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000;" placeholder="INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)">
                                 </div>
                             </td>
                         </tr>
                         <tr style="align-items: flex-end">
-                            <td><input type="date" name="PLANTING_date['genetatif-awal'][${index}]" class="form-control" style="font-size: 14px" ></td>
+                            <td><input type="date" name="PLANTING_date[genetatif-awal][${index}]" class="form-control" style="font-size: 14px" ></td>
                             <td data-label="PHASE" width="45%">
-                                <input type="text" name="PLANTING_phase['genetatif-awal'][${index}]" value="GENETATIF AWAL" class="form-control" style="font-size: 14px" readonly>
+                                <input type="text" name="PLANTING_phase[genetatif-awal][${index}]" value="GENETATIF AWAL" class="form-control" style="font-size: 14px" readonly>
                             </td>
                             <td data-label="DESCRIPTION" width="50%">
                                 <div class="genetatif-awal">
-                                    <input type="text" name="PLANTING_description['genetatif-awal'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="UMUR TANAM (51 - 70)">
-                                    <input type="text" name="PLANTING_description['genetatif-awal'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="MUNCUL BUAH (ADA / TIDAK)">
-                                    <input type="text" name="PLANTING_description['genetatif-awal'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JIKA BUAH ADA MAKA UKURAN BUAH (PANJANG DAN DIAMETER BUAH MUDA)">
-                                    <input type="text" name="PLANTING_description['genetatif-awal'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="MUNCUL BUNGA JANTAN DAN BETINA (ADA / TIDAK)">
-                                    <input type="text" name="PLANTING_description['genetatif-awal'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="KONDISI BUAH MUDAH (HUJAN SEGAR, PUCAT ATAU BUSUK)">
-                                    <input type="text" name="PLANTING_description['genetatif-awal'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="ESTIMASI JUMLAH PUPUK DIAPLIKASIKAN (KG)">
-                                    <input type="text" name="PLANTING_description['genetatif-awal'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JENIS HERBISIDA / PESTISIDA YANG DIAPLIKASIKAN">
-                                    <input type="text" name="PLANTING_description['genetatif-awal'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)">
-                                    <input type="text" name="PLANTING_description['genetatif-awal'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)">
-                                    <input type="text" name="PLANTING_description['genetatif-awal'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000;" placeholder="INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)">
+                                    <input type="text" name="PLANTING_description[genetatif-awal][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="UMUR TANAM (51 - 70)">
+                                    <input type="text" name="PLANTING_description[genetatif-awal][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="MUNCUL BUAH (ADA / TIDAK)">
+                                    <input type="text" name="PLANTING_description[genetatif-awal][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JIKA BUAH ADA MAKA UKURAN BUAH (PANJANG DAN DIAMETER BUAH MUDA)">
+                                    <input type="text" name="PLANTING_description[genetatif-awal][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="MUNCUL BUNGA JANTAN DAN BETINA (ADA / TIDAK)">
+                                    <input type="text" name="PLANTING_description[genetatif-awal][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="KONDISI BUAH MUDAH (HUJAN SEGAR, PUCAT ATAU BUSUK)">
+                                    <input type="text" name="PLANTING_description[genetatif-awal][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="ESTIMASI JUMLAH PUPUK DIAPLIKASIKAN (KG)">
+                                    <input type="text" name="PLANTING_description[genetatif-awal][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JENIS HERBISIDA / PESTISIDA YANG DIAPLIKASIKAN">
+                                    <input type="text" name="PLANTING_description[genetatif-awal][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)">
+                                    <input type="text" name="PLANTING_description[genetatif-awal][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)">
+                                    <input type="text" name="PLANTING_description[genetatif-awal][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000;" placeholder="INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)">
                                 </div>
                             </td>
                         </tr>
                         <tr style="align-items: flex-end">
-                            <td><input type="date" name="PLANTING_date['genetatif-akhir'][${index}]" class="form-control" style="font-size: 14px" ></td>
+                            <td><input type="date" name="PLANTING_date[genetatif-akhir][${index}]" class="form-control" style="font-size: 14px" ></td>
                             <td data-label="PHASE" width="45%">
-                                <input type="text" name="PLANTING_phase['genetatif-akhir'][${index}]" value="GENETATIF AKHIR" class="form-control" style="font-size: 14px" readonly>
+                                <input type="text" name="PLANTING_phase[genetatif-akhir][${index}]" value="GENETATIF AKHIR" class="form-control" style="font-size: 14px" readonly>
                             </td>
                             <td data-label="DESCRIPTION" width="50%">
                                 <div class="genetatif-akhir">
-                                    <input type="text" name="PLANTING_description['genetatif-akhir'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="UMUR TANAM (71 - 110)">
-                                    <input type="text" name="PLANTING_description['genetatif-akhir'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="MASUK KE FORMAT HASIL PANEN PADA SHEET HASIL PANEN">
-                                    <input type="text" name="PLANTING_description['genetatif-akhir'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JENIS HERBISIDA / PESTISIDA YANG DIAPLIKASIKAN">
-                                    <input type="text" name="PLANTING_description['genetatif-akhir'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)">
-                                    <input type="text" name="PLANTING_description['genetatif-akhir'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)">
-                                    <input type="text" name="PLANTING_description['genetatif-akhir'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000;" placeholder="INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)">
+                                    <input type="text" name="PLANTING_description[genetatif-akhir][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="UMUR TANAM (71 - 110)">
+                                    <input type="text" name="PLANTING_description[genetatif-akhir][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="MASUK KE FORMAT HASIL PANEN PADA SHEET HASIL PANEN">
+                                    <input type="text" name="PLANTING_description[genetatif-akhir][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="JENIS HERBISIDA / PESTISIDA YANG DIAPLIKASIKAN">
+                                    <input type="text" name="PLANTING_description[genetatif-akhir][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)">
+                                    <input type="text" name="PLANTING_description[genetatif-akhir][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)">
+                                    <input type="text" name="PLANTING_description[genetatif-akhir][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000;" placeholder="INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)">
                                 </div>
                             </td>
                         </tr>
                         <tr style="align-items: flex-end">
-                            <td><input type="date" name="PLANTING_date['gagal-panen'][${index}]" class="form-control" style="font-size: 14px" ></td>
+                            <td><input type="date" name="PLANTING_date[gagal-panen][${index}]" class="form-control" style="font-size: 14px" ></td>
                             <td data-label="PHASE" width="45%">
-                                <input type="text" name="PLANTING_phase['gagal-panen'][${index}]" value="PUSO / GAGAL PANEN" class="form-control" style="font-size: 14px" readonly>
+                                <input type="text" name="PLANTING_phase[gagal-panen][${index}]" value="PUSO / GAGAL PANEN" class="form-control" style="font-size: 14px" readonly>
                             </td>
                             <td data-label="DESCRIPTION" width="50%">
                                 <div class="gagal-panen">
-                                    <input type="text" name="PLANTING_description['gagal-panen'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="UMUR SAAT PUSO">
-                                    <input type="text" name="PLANTING_description['gagal-panen'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="KONDISI SAAT PUSO (KEKERINGAN / BANJIR)">
-                                    <input type="text" name="PLANTING_description['gagal-panen'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="ESTIMASI LAHAN YANG TERKENA PUSO">
-                                    <input type="text" name="PLANTING_description['gagal-panen'][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000;" placeholder="ESTIMASI PRODUKSI YANG HILANG KARENA PUSO">
+                                    <input type="text" name="PLANTING_description[gagal-panen][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="UMUR SAAT PUSO">
+                                    <input type="text" name="PLANTING_description[gagal-panen][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="KONDISI SAAT PUSO (KEKERINGAN / BANJIR)">
+                                    <input type="text" name="PLANTING_description[gagal-panen][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="ESTIMASI LAHAN YANG TERKENA PUSO">
+                                    <input type="text" name="PLANTING_description[gagal-panen][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000;" placeholder="ESTIMASI PRODUKSI YANG HILANG KARENA PUSO">
                                 </div>
                             </td>
                         </tr>
