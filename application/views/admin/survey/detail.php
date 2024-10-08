@@ -894,7 +894,7 @@
                                         <?php if (!empty($phase['tanggal'])): ?>
                                             <tr>
                                                 <td data-label="fase" width="15%"><?= $phase['fase'] ?></td>
-                                                <td data-label="tanggal" width="15%"><?= date('d M Y', $phase['tanggal']) ?></td>
+                                                <td data-label="tanggal" width="15%"><?= date('d M Y', strtotime($phase['tanggal'])) ?></td>
                                                 <td data-label="data" width="70%">
                                                     <ul style="text-align: left; margin-left: 20px; list-style-type: none">
                                                     <?php foreach($phase['data'] as $deskripsi): ?>
@@ -1299,7 +1299,7 @@
                             <?php if(!empty($detail['SURVEY_MARKET_PRICES'])): ?>
                                 <?php foreach($detail['SURVEY_MARKET_PRICES'] as $sf): ?>
                                     <tr>
-                                        <td data-label="DATE" width="50%"><?= date('d M Y', $sf['SURVEY_DATE']) ?></td>
+                                        <td data-label="DATE" width="50%"><?= date('d M Y', strtotime($sf['SURVEY_DATE'])) ?></td>
                                         <td data-label="PRICE" width="50%"><?= $sf['PRICE'] ?></td>
                                     </tr>
                                 <?php endforeach ?>
