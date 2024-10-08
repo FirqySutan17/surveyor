@@ -30,7 +30,7 @@ class survey extends CI_Controller {
 		$data['title'] 			= 'SURVEY';
 		$data['user'] 			= $user;
 		$data['provinces'] 	= $this->Dbhelper->selectTabel('ID_PROVINCE, PROVINCE', 'CD_PROVINCE', [], 'PROVINCE', 'ASC');
-
+		$data['placeholder'] 	= $this->list_placeholder();
 		// dd($data['user']);
 		$this->template->_v('survey/create', $data);
 	}
