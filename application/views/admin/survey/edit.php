@@ -773,7 +773,7 @@
     </h3>
     <div class="row">
         <form action="<?= admin_url('survey/do_create') ?>" method="POST" enctype="multipart/form-data">
-            <div class="content-task mt-5">
+        <div class="content-task mt-5">
                 <h3 class="sub-title">1. LOCATION INFORMATION</h3>
                 <div class="table-responsive mt-2">
                     <table class="table table-bordered" style="margin-bottom: 10px">
@@ -784,33 +784,21 @@
                                 <th style="text-align: center">LAND TYPE</th>
                                 <th style="text-align: center">LATITUDE</th>
                                 <th style="text-align: center">LONGITUTE</th>
-                                <th style="text-align: center">ACTION</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td data-label="EMPLOYEE">
-                                    <?= $user['EMPLOYEE_ID'] ?> - <?= $user['FULL_NAME'] ?>
+                                    <?= $detail['SURVEY']['CREATED_BY'].' - '.$detail['SURVEY']['CREATED_BY_NAME'] ?>
                                 </td>
                                 <td data-label="DATE">
-                                    <input type="hidden" name="coordinate" id="coordinate">
-                                    <input type="hidden" name="address" id="address">
-                                    <input type="date" name="survey_date" class="form-control" style="font-size: 14px" required>
+                                    <?= date('Y-m-d', strtotime($detail['SURVEY']['SURVEY_DATE'])) ?>
                                 </td>
                                 <td data-label="LAND TYPE">
-                                    <select class="form-control" style="width: 100%;" name="land_type" required>
-                                        <option value="SAWAH">SAWAH</option>
-                                        <option value="PERBUKITAN">PERBUKITAN</option>
-                                    </select>
+                                    <?= $detail['SURVEY']['LAND_TYPE'] ?>
                                 </td>
-                                <td data-label="LATITUDE">
-                                    <div id="latitude"></div>
-                                </td>
-                                <td data-label="LONGITUDE">
-                                    <div id="longitude"></div>
-                                </td>
-                                <td>
-                                    <a href="javascript:void(0)" onclick="getLocation()" style="background: #00c0ff; border-radius: 10px; color: #fff; font-weight: 600; padding: 10px">UPDATE LOCATION</a>
+                                <td data-label="COORDINATE">
+                                    <?= $detail['SURVEY']['COORDINATE'] ?>
                                 </td>
                             </tr>
                         </tbody>
@@ -827,25 +815,19 @@
                         <tbody>
                             <tr>
                                 <td data-label="PROVINCE">
-                                    <select id="province" class="form-control" style="width: 100%;" name="province" required>
-                                        <?php foreach($provinces as $item): ?>
-                                            <option value="<?= $item['ID_PROVINCE'] ?>"><?= $item['PROVINCE'] ?></option>
-                                        <?php endforeach ?>
-                                    </select>
+                                    <?= $detail['SURVEY']['PROVINCE_NAME'] ?>
                                 </td>
                                 <td data-label="REGENCIES">
-                                    <select id="regencies" class="form-control" style="width: 100%;" name="regencies" required>
-                                    </select>
+                                    <?= $detail['SURVEY']['REGENCY_NAME'] ?>
                                 </td>
                                 <td data-label="DISTRICTS">
-                                    <select id="districts" class="form-control" style="width: 100%;" name="districts" required>
-                                    </select>
+                                    <?= $detail['SURVEY']['DISTRICT_NAME'] ?>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
 
-                    <div id="iframe-location"></div>
+                    <iframe class="maps-frame" src="https://maps.google.com/maps?q=<?= $detail['SURVEY']['COORDINATE'] ?>&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     <table class="table table-bordered" style="margin-bottom: 10px">
                         <thead>
                             <tr>
@@ -854,7 +836,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td data-label="ADDRESS" style="text-transform: uppercase;" id="address-info"></td>
+                                <td data-label="ADDRESS" style="text-transform: uppercase;"><?= $detail['SURVEY']['DESCRIPTION'] ?></td>
                             </tr>   
                         </tbody>
                         
@@ -880,11 +862,19 @@
                                 <tr style="align-items: flex-end">
                                     <th style="text-align: left; background: #fff; border: 0px"><button type="button" class="btn cust-btn-add" onclick="addFarmers()">+</button></th>
                                 </tr>
-                                <tr>
-                                    <td data-label="FARMERS" width="45%"><input type="text" name="farmer_name[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" placeholder="EX : JOHN DOE" id=""></td>
-                                    <td data-label="PHONE NUMBER" width="50%"><input type="number" name="farmer_phone[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" placeholder="EX : 08XXXXXXXXXX" id=""></td>
-                                    <td width="5%"><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
-                                </tr>
+                                <?php if(!empty($detail['SURVEY_FARMERS'])): ?>
+                                    <?php foreach($detail['SURVEY_FARMERS'] as $sf): ?>
+                                        <tr>
+                                            <td data-label="FARMERS" width="45%">
+                                                <input type="text" name="farmer_name[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" value="<?= $sf['FARMER_NAME'] ?>" readonly>
+                                            </td>
+                                            <td data-label="PHONE NUMBER" width="50%">
+                                                <input type="number" name="farmer_phone[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" value="<?= $sf['FARMER_PHONE'] ?>" readonly>
+                                            </td>
+                                            <td width="5%"></td>
+                                        </tr>
+                                    <?php endforeach ?>
+                                <?php endif ?>
                             </tbody>
                         </table>
                     </div>
@@ -900,6 +890,103 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php if(!empty($detail['SURVEY_PLANTING_PHASE'])): ?>
+                                    <?php foreach($detail['SURVEY_PLANTING_PHASE'] as $siklus => $planting_phase): ?>
+                                        <?php $index = $siklus - 1; ?>
+                                        <div id="segment-<?= $index ?>"> 
+                                            <table class="table table-bordered" style="margin-bottom: 0px">
+                                                <input type="hidden" name="PLANTING_siklus[<?= $index ?>]" value="<?= $siklus ?>">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="text-align: left; font-size: 13px !important">PLANTING PHASE - CYCLE <?= $siklus ?></th>
+                                                        <th style="text-align: right"></th>
+                                                    </tr>
+                                                    <tr class="planting-phase-<?= $index ?>">
+                                                        <th style="text-align: left">DATE</th>
+                                                        <th style="text-align: left">PHASE</th>
+                                                        <th style="text-align: left">DESCRIPTION</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="planting-phase-<?= $index ?>">
+                                                    <?php foreach($planting_phase as $phase_key => $phase): ?>
+                                                        <tr style="align-items: flex-end">
+                                                            <td>
+                                                                <input type="date" name="PLANTING_date[<?= $phase_key ?>][<?= $index ?>]" class="form-control" style="font-size: 14px" >
+                                                            </td>
+                                                            <td data-label="PHASE" width="45%">
+                                                                <input type="text" name="PLANTING_phase[<?= $phase_key ?>][<?= $index ?>]" value="<?= $phase['fase'] ?>" class="form-control" style="font-size: 14px" readonly>
+                                                            </td>
+                                                            <td data-label="DESCRIPTION" width="50%">
+                                                                <div class="<?= $phase_key ?>">
+                                                                <?php foreach($phase['data'] as $deskripsi): ?>
+                                                                    <input type="text" name="PLANTING_description[<?= $phase_key ?>][<?= $index ?>][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" value="<?= $deskripsi ?>">
+                                                                <?php endforeach ?>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endforeach ?>
+                                                </tbody>
+                                            </table>
+                                            <table class="table table-bordered planting-phase-<?= $index ?>">
+                                                <thead>
+                                                    <tr>
+                                                        <th colspan="9" style="text-align: left; font-size: 13px !important">HARVEST PHASE</th>
+                                                        <th style="text-align: right;"><input style="height: 20px; width: 20px !important" class="harvest-option-<?= $index ?>" type="checkbox" value="1" onchange="harvestChanged(<?= $index ?>)"/></th>
+                                                    </tr>
+                                                    <tr class="harvest-phase-<?= $index ?>">
+                                                        <th style="width: 10%">SCORE</th>
+                                                        <th style="width: 10%">BARIS</th>
+                                                        <th style="width: 10%">ACTUAL</th>
+                                                        <th style="width: 10%">%</th>
+                                                        <th style="width: 10%">BIJI</th>
+                                                        <th style="width: 10%">ACTUAL</th>
+                                                        <th style="width: 10%">%</th>
+                                                        <th style="width: 10%">BOBOT</th>
+                                                        <th style="width: 10%">ACTUAL</th>
+                                                        <th style="width: 10%">%</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="harvest-phase-<?= $index ?>">
+                                                    <?php for ($i=10; $i >= 0; $i--) { ?>
+                                                        <tr>
+                                                            <td data-label="SCORE" style="">
+                                                                <?= $i ?>
+                                                                <input type="hidden" name="HARVEST_score[<?= $index ?>][]" value="<?= $i ?>">
+                                                            </td>
+                                                            <td data-label="BARIS">
+                                                                <input name="baris[<?= $index ?>][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                                            </td>
+                                                            <td data-label="ACTUAL">
+                                                                <input name="baris_actual[<?= $index ?>][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                                            </td>
+                                                            <td data-label="%">
+                                                                <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                                            </td>
+                                                            <td data-label="BIJI">
+                                                                <input name="biji[<?= $index ?>][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                                            </td>
+                                                            <td data-label="ACTUAL">
+                                                                <input name="biji_actual[<?= $index ?>][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                                            </td>
+                                                            <td data-label="%">
+                                                                <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                                            </td>
+                                                            <td data-label="BOBOT">
+                                                                <input name="bobot[<?= $index ?>][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                                            </td>
+                                                            <td data-label="ACTUAL">
+                                                                <input name="bobot_actual[<?= $index ?>][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                                            </td>
+                                                            <td data-label="%">
+                                                                <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                                            </td>
+                                                        </tr>
+                                                    <?php } ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    <?php endforeach ?>
+                                <?php endif ?>
                                 <div id="segment"></div>
                             </tbody>
                         </table>
@@ -921,9 +1008,6 @@
                             </tr>
                         </thead>
                         <tbody id="marketprice">
-                            <tr style="align-items: flex-end">
-                                <th style="text-align: right; background: #fff; border: 0px;"><button type="button" class="btn cust-btn-add" onclick="addMarketprice()">+</button></th>
-                            </tr>
                             <tr>
                                 <td data-label="DATE"><input type="month" name="market_date[]" class="form-control"></td>
                                 <td data-label="PRICE"><input type="number" name="market_price[]" class="form-control" placeholder="EX : 200000" onkeyup="onkeyup_data(event)" onkeydown="onkeydown_data(event)"></td>
@@ -972,137 +1056,8 @@
         </form>
     </div>
 </div>
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLUc8QC0GYh5ozbMbGBcNUm1BBIjvmmg8&callback=myMap"></script> -->
 <script>
-    const lang = document.getElementById("latitude");
-    const long = document.getElementById("longitude");
-    let segmenIndex = 0;
-
-    function getLocation() {
-        console.log('ask this');
-        console.log(navigator.geolocation);
-        if (navigator.geolocation) {
-            
-            console.log('ask this 1');
-            navigator.geolocation.watchPosition(showPosition);
-        } else { 
-            console.log('ask this 2');
-            lang.innerHTML = "Geolocation is not supported by this browser.";
-            long.innerHTML = "Geolocation is not supported by this browser.";
-        }
-    }
-        
-    function showPosition(position) {
-        let latitude    = position.coords.latitude;
-        let longitude   = position.coords.longitude;
-        let coordinate  = latitude + "," + longitude;
-
-        lang.innerHTML  = latitude;
-        long.innerHTML  = longitude;
-        let iframe_gmap = `<iframe class="maps-frame" src="https://maps.google.com/maps?q=${coordinate}&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
-            
-        $("#coordinate").val(coordinate);
-        $("#iframe-location").html(iframe_gmap);
-        
-        detailPosition(latitude, longitude)
-    }
-
-    function detailPosition(latitude, longitude) {
-        let addressAPI = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`;
-        $.ajax({
-            url: addressAPI,
-            type: "GET",
-            beforeSend: function () {
-                // removeElements();
-            },
-            success: function(response) {
-                // let data = JSON.parse(response);
-                console.log(response);
-                // alert(data.data);
-                $("#address").val(response.display_name);
-                $("#address-info").text(response.display_name);
-            }
-        });
-    }
-
-    $('#land_type').select2({
-        theme: 'bootstrap4',
-        language: "en",
-        placeholder: "- SELECT LAND TYPE -",
-    });
-    $('#province').select2({
-        theme: 'bootstrap4',
-        language: "en",
-        placeholder: "- SELECT PROVINCE -",
-    });
-
-    $('#regencies').select2({
-        theme: 'bootstrap4',
-        placeholder: "- SELECT REGENCIES -",
-        ajax: {
-            url: "<?= base_url('ajax/load/kota') ?>",
-            dataType: 'json',
-            data: function (params) {
-                return {
-                q: params.term,
-                provinsi: $("#province option:selected").val()
-                };
-            },
-            processResults: function(data) {
-                return {
-                    results: $.map(data, function(item) {
-                        return {
-                            text: item.ID_REGENCIES + " - " + item.REGENCIES,
-                            id: item.ID_REGENCIES
-                        }
-                    })
-                };
-            }
-        },
-        // templateSelection: function (data, container) {
-        //     // // Add custom attributes to the <option> tag for the selected option
-        //     // $(data.element).attr('data-jsondetail', data.jsondetail);
-        //     // return data.text;
-        // }
-    }).on("select2:select", function (e) {
-        // let data = $("#customer_entry option:selected").val();
-        // let detaildata = $("#customer_entry option:selected").data('jsondetail');
-        // load_datacustomer(detaildata);
-    });
-
-    $('#districts').select2({
-        theme: 'bootstrap4',
-        placeholder: "- SELECT DISTRICTS -",
-        ajax: {
-            url: "<?= base_url('ajax/load/desa') ?>",
-            dataType: 'json',
-            data: function (params) {
-                return {
-                q: params.term,
-                kota: $("#regencies option:selected").val()
-                };
-            },
-            processResults: function(data) {
-                return {
-                    results: $.map(data, function(item) {
-                        return {
-                            text: item.ID_DISTRICTS + " - " + item.DISTRICS,
-                            id: item.ID_DISTRICTS
-                        }
-                    })
-                };
-            }
-        },
-        // templateSelection: function (data, container) {
-        //     // // Add custom attributes to the <option> tag for the selected option
-        //     // $(data.element).attr('data-jsondetail', data.jsondetail);
-        //     // return data.text;
-        // }
-    }).on("select2:select", function (e) {
-        // let data = $("#customer_entry option:selected").val();
-        // let detaildata = $("#customer_entry option:selected").data('jsondetail');
-        // load_datacustomer(detaildata);
-    });
+    let segmenIndex = <?= count($detail['SURVEY_PLANTING_PHASE']) ?>;
 
     $('#fasetanam').select2({
         theme: 'bootstrap4',

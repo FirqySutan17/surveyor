@@ -881,7 +881,7 @@
                             <table class="table table-bordered" style="margin-bottom: 0px">
                                 <thead>
                                     <tr>
-                                        <th colspan="2" style="text-align: left; font-size: 13px !important">PHASE <?= $siklus ?></th>
+                                        <th colspan="3" style="text-align: left; font-size: 13px !important">PHASE <?= $siklus ?></th>
                                     </tr>
                                     <tr>
                                         <th style="text-align: left">FASE</th>
@@ -910,7 +910,7 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th colspan="10" style="text-align: left; font-size: 13px !important">HARVEST PHASE</th>
+                                        <th colspan="10" style="text-align: left; font-size: 13px !important">HARVEST PHASE <?= $siklus ?></th>
                                     </tr>
                                     <tr>
                                         <th style="width: 10%">SCORE</th>
@@ -1321,8 +1321,8 @@
                         </thead>
                         <tbody id="visitimages">
                             <tr>
-                                <td data-label ="DATE / TITLE">SURVEY LOKASI 27/09/2024</td>
-                                <td data-label ="UPLOAD IMAGE" style="text-align: center"><img src="<?= asset('img/maps-drawing-1.png') ?>" alt="" style="width: 50%; text-align: center; object-fit: cover"></td>
+                                <td width="30%" data-label ="DATE / TITLE">SURVEY LOKASI 27/09/2024</td>
+                                <td width="70%" data-label ="UPLOAD IMAGE" style="text-align: center"><img src="<?= asset('img/maps-drawing-1.png') ?>" alt="" style="width: 100%; text-align: center; object-fit: cover"></td>
                             </tr>
                         </tbody>
                     </table>
