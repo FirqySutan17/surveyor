@@ -616,6 +616,52 @@ class Home extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	public function ajax_load_kota() {
+		// $check = $this->onlyRequestPost();
+		// if (!$check) {
+		// 	return json_encode([]);
+		// }
+
+		$provinsi 		= $this->input->get('provi$provinsi');
+		$keyword 	= strtoupper($this->input->get('q'));
+		$this->db->select('
+			ID_REGENCIES,
+			REGENCIES
+		');
+        $this->db->from('CD_REGENCIES');
+        $this->db->where('PROVINCE_ID', $provinsi);
+				$this->db->group_start();
+	        $this->db->like('REGENCIES', $keyword, 'both');
+        $this->db->group_end();
+        $this->db->order_by('REGENCIES', 'ASC');
+
+        $data = $this->db->get()->result_array();
+		echo json_encode($data);
+	}
+
+	public function ajax_load_desa() {
+		// $check = $this->onlyRequestPost();
+		// if (!$check) {
+		// 	return json_encode([]);
+		// }
+
+		$kota 		= $this->input->get('kota');
+		$keyword 	= strtoupper($this->input->get('q'));
+		$this->db->select('
+			ID_DISTRICTS,
+			DISTRICS
+		');
+        $this->db->from('CD_DISTRICTS');
+        $this->db->where('REGENCIES_ID', $kota);
+				$this->db->group_start();
+	        $this->db->like('DISTRICS', $keyword, 'both');
+        $this->db->group_end();
+        $this->db->order_by('DISTRICS', 'ASC');
+
+        $data = $this->db->get()->result_array();
+		echo json_encode($data);
+	}
+
 	private function onlyRequestPost() {
 		$session = $this->session_data;
 		if (empty($session) || $this->input->server('REQUEST_METHOD') != 'POST') {

@@ -108,6 +108,8 @@ $route['ajax/load/customer'] 			= 'Home/ajax_load_customer';
 $route['ajax/load/employee'] 			= 'Home/ajax_load_employee';
 $route['ajax/load/group_customer_reminder'] 	= 'Home/ajax_load_group_customer_reminder';
 $route['ajax/load/customer_reminder'] 	= 'Home/ajax_load_customer_reminder';
+$route['ajax/load/kota'] 	= 'Home/ajax_load_kota';
+$route['ajax/load/desa'] 	= 'Home/ajax_load_desa';
 
 $route['404_override'] 					= '';
 $route['translate_uri_dashes'] 			= FALSE;
