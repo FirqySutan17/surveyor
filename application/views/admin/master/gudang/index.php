@@ -284,20 +284,30 @@
     </h3>
 	<form class="form-horizontal" action="#" method="POST">
         <div class="row" style="padding: 0px 10px; border-bottom: 2px solid #000; padding-bottom: 10px;margin: 0px 0px; margin-bottom: 10px; ">
-			<div class="col-md-8 col-sm-12" style="display: flex;; align-items: center">
+			<div class="col-md-8 col-sm-12" style="display: flex;; align-items: center; margin-bottom: 10px">
                 <span class="label-span" style="width: 17%; display: inline-block; vertical-align: middle; margin-top: 0px; font-weight: 600">WAREHOUSE : </span> 
                 <select id="warehouse" class="form-control" name="warehouse" style="width: 50%">
+					<option value="*" selected>- ALL WAREHOUSE -</option>
                     <?php foreach ($warehouse as $field): ?>
                         <option <?= $filter['warehouse'] == $field['CODE'] ? 'selected' : '' ?> value="<?= $field['CODE'] ?>"><?= $field['NAMA'] ?></option>
                     <?php endforeach ?>
                 </select>
-            </div>            
-            <div class="col-md-2 col-sm-12" style="display: flex; align-items: center">
+            </div>
+			<div class="col-md-8 col-sm-12" style="display: flex;; align-items: center">
+                <span class="label-span" style="width: 17%; display: inline-block; vertical-align: middle; margin-top: 0px; font-weight: 600">AREA : </span> 
+                <select id="area" class="form-control" name="area" style="width: 50%">
+					<option value="*" selected>- ALL AREA -</option>
+                    <?php foreach ($area as $field): ?>
+                        <option <?= $filter['area'] == $field['AREA'] ? 'selected' : '' ?> value="<?= $field['AREA'] ?>"><?= $field['AREA'] ?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>          
+            <div class="col-md-4 col-sm-12" style="display: flex; align-items: center; justify-content: center">
                 <button type="submit" class="btn btn-primary btn-block" style="height: 30px">FILTER</button>
             </div>
-            <div class="col-md-2 col-sm-12" style="display: flex; align-items: center">
+            <!-- <div class="col-md-2 col-sm-12" style="display: flex; align-items: center">
                 <button type="submit" formaction="<?= admin_url('visit/report-collector/excel') ?>" class="btn btn-info btn-block" style="height: 30px">EXCEL</button>
-            </div>
+            </div> -->
         </div>
     </form>
     <table class="table table-bordered table-hover" id="example1">
@@ -345,5 +355,17 @@
       $('#example1').DataTable(
         {"language": {"paginate": { "previous": "&lt","next": "&gt",}}}
       );
-    })
+    });
+
+	$('#warehouse').select2({
+        theme: 'bootstrap4',
+        language: "en",
+        placeholder: "- SELECT WAREHOUSE -",
+    });
+
+	$('#area').select2({
+        theme: 'bootstrap4',
+        language: "en",
+        placeholder: "- SELECT AREA -",
+    });
 </script>

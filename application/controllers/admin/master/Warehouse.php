@@ -16,27 +16,72 @@ class Warehouse extends CI_Controller {
 
 	public function index() {
 		$warehouse = "*";
+		$area = "*";
+		$klasifikasi = "*";
+
+		$user = $this->session_data['user'];
 
 		if ($this->input->server('REQUEST_METHOD') === 'POST') {
 			$warehouse 		= $this->input->post('warehouse');
+			$area 			= $this->input->post('area');
+			$klasifikasi 			= $this->input->post('klasifikasi');
 		}
 
 		$filter = [
-			"warehouse"	=> $warehouse,
+			"warehouse"			=> $warehouse,
+			"area"				=> $area,
+			"klasifikasi"		=> $klasifikasi,
 		];
 
 		$data['title'] 			= 'WAREHOUSE';
-		$data['user']				= $this->session_data['user'];
-		$data['warehouse'] 			= $this->Dbhelper->selectTabel('CODE, NAMA', 'CD_GUDANG');
-		$data['datatable']	= $this->datatable();
-		// dd($data['datatable']);
+		$data['warehouse'] 		= $this->Dbhelper->selectTabel('CODE, NAMA, AREA', 'CD_GUDANG');
+		$data['area'] 			= $this->dataarea();
+		$data['datatable']		= $this->datatable($filter);
+		$data['filter']			= $filter;
+		// dd($data['area']);
 		$this->template->_v('master/gudang/index', $data);
 	}
 
-	public function datatable() {
-		$data = $this->Dbhelper->selectRawQuery("SELECT * FROM CD_GUDANG WHERE IS_DELETED IS NULL ORDER BY CODE ASC");
+	private function datatable($filter) {
+		$warehouse = $filter['warehouse'];
+		$area = $filter['area'];
 
+		$klasifikasi = $filter['klasifikasi'];
+		$query = "
+			select *
+			from CD_GUDANG
+		";
+		if ($filter['warehouse'] != '*') {
+			$query .= " WHERE CODE = '".$filter['warehouse']."'";
+		}
+		if ($filter['area'] != '*') {
+			if ($filter['warehouse'] != '*') {
+				$query .= " and ";
+			} else {
+				$query .= " WHERE ";
+			}
+			$query .= " AREA = '".$filter['area']."'";
+		}
+		$query .= " order by CODE ASC";
+        $data = $this->db->query($query)->result_array();
+		// dd($query);
 		return $data;
+	}
+	private function dataarea() {
+		$query = "
+			SELECT area
+			FROM (
+				SELECT area,
+					ROW_NUMBER() OVER (PARTITION BY area ORDER BY area) as rn
+				FROM CD_GUDANG
+			)
+			WHERE rn = 1
+		";
+		
+		// $query .= " order by CODE ASC";
+        $data = $this->db->query($query)->result_array();
+		return $data;
+		// dd($query);
 	}
 
 	public function create() {
