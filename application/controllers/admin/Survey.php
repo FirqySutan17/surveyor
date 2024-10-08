@@ -131,7 +131,7 @@ class survey extends CI_Controller {
 
 						if (!empty($post['HARVEST_score'])) {
 							foreach ($post['HARVEST_score'][$siklus_index] as $i => $v) {
-								if (!empty($post['baris'][$siklus_index])) {
+								if (!empty($post['baris'][$siklus_index][$i])) {
 									$curr_data = [
 										"SURVEY_NO"			=> $survey_no,
 										"SEQUENCE"			=> $i + 1,
