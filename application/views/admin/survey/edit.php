@@ -1008,11 +1008,15 @@
                             </tr>
                         </thead>
                         <tbody id="marketprice">
-                            <tr>
-                                <td data-label="DATE"><input type="month" name="market_date[]" class="form-control"></td>
-                                <td data-label="PRICE"><input type="number" name="market_price[]" class="form-control" placeholder="EX : 200000" onkeyup="onkeyup_data(event)" onkeydown="onkeydown_data(event)"></td>
-                                <td><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
-                            </tr>
+                            <?php if(!empty($detail['SURVEY_MARKET_PRICES'])): ?>
+                                <?php foreach($detail['SURVEY_MARKET_PRICES'] as $sf): ?>
+                                    <tr>
+                                        <td data-label="DATE"><input type="month" name="market_date[]" value="<?= date('Y-m-d', $sf['SURVEY_DATE']) ?>" class="form-control"></td>
+                                        <td data-label="PRICE"><input type="number" name="market_price[]" class="form-control" value="<?= $sf['PRICE'] ?>" onkeyup="onkeyup_data(event)" onkeydown="onkeydown_data(event)"></td>
+                                        <td></td>
+                                    </tr>
+                                <?php endforeach ?>
+                            <?php endif ?>
                         </tbody>
                     </table>
                 </div>                   
