@@ -1178,7 +1178,11 @@ class survey extends CI_Controller {
 	private function get_surveydetail($survey_no) {
 		$planting_phase = $this->Dbhelper->selectTabel('*', 'SURVEY_PLANTING_PHASE', array('SURVEY_NO' => $survey_no), 'SEQUENCE', 'ASC');
 		
-		$data['SURVEY'] 		= $this->Dbhelper->selectTabelOne('*', 'SURVEY', array('SURVEY_NO' => $survey_no), 'SURVEY_NO', 'ASC');
+		$data['SURVEY'] 		= $this->Dbhelper->selectOneRawQuery("
+			SELECT a.*, FN_USER_NAME(CREATED_BY) CREATED_BY_NAME
+			FROM SURVEY a
+			WHERE a.SURVEY_NO = '$survey_no'
+		");
 		$data['SURVEY_FARMERS']		= $this->Dbhelper->selectTabel('*', 'SURVEY_FARMERS', array('SURVEY_NO' => $survey_no), 'SEQUENCE', 'ASC');
 		$data['SURVEY_MARKET_PRICES']		=  $this->Dbhelper->selectTabel('*', 'SURVEY_MARKET_PRICES', array('SURVEY_NO' => $survey_no), 'SURVEY_DATE', 'ASC');
 		$data['SURVEY_HARVEST_PHASE']		=  $this->Dbhelper->selectTabel('*', 'SURVEY_HARVEST_PHASE', array('SURVEY_NO' => $survey_no), 'SEQUENCE', 'ASC');
