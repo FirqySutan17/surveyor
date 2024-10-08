@@ -346,7 +346,7 @@
 										</td> -->
                     <td style="text-align: center; vertical-align: middle"><?= $v['DESCRIPTION'] ?></td>
                     <td style="text-align: center; vertical-align: middle"><?= $v['CREATED_BY'].' '.$v['CREATED_BY_NAME'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['FARMER_NAMES'] ?></td>
+                    <td style="text-align: center; vertical-align: middle"><?= str_replace(",", "\n", $v['FARMER_NAMES']) ?></td>
                     <td style="text-align: center; vertical-align: middle">
                         <a href="<?= admin_url('survey/edit/'.$v['SURVEY_NO']) ?>" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
                         <!-- <a href="<?= admin_url('survey/drawing') ?>" class="btn btn-sm" title="Drawing"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px"></i></a> -->
