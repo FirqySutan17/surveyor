@@ -1082,7 +1082,7 @@
             data: function (params) {
                 return {
                 q: params.term,
-                kota: $("#kota option:selected").val()
+                kota: $("#regencies option:selected").val()
                 };
             },
             processResults: function(data) {
