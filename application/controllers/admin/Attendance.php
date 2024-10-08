@@ -60,7 +60,7 @@ class Attendance extends CI_Controller {
 					$where
 			ORDER BY a.ATTEND_DATE DESC
 		");
-
+		dd($data);
 		return $data;
 	}
 
