@@ -772,8 +772,9 @@
         <strong>SURVEY ENTRY</strong>
     </h3>
     <div class="row">
-        <form action="<?= admin_url('survey/do_create') ?>" method="POST" enctype="multipart/form-data">
-        <div class="content-task mt-5">
+        <form action="<?= admin_url('survey/do_update') ?>" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="survey_no" value="<?= $detail['SURVEY']['SURVEY_NO'] ?>">
+            <div class="content-task mt-5">
                 <h3 class="sub-title">1. LOCATION INFORMATION</h3>
                 <div class="table-responsive mt-2">
                     <table class="table table-bordered" style="margin-bottom: 10px">

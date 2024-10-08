@@ -158,31 +158,24 @@ class survey extends CI_Controller {
 
 				$survey_galleries = [];
 				if (!empty($_FILES)) {
-					foreach ($_FILES['SURVEY_IMAGE']['name'] as $key => $v) {
-						$no = $key + 1;
-						$berkas = [];
-						$berkas['name']= $v;
-				        $berkas['type']= $_FILES['SURVEY_IMAGE']['type'][$key];
-				        $berkas['tmp_name']= $_FILES['SURVEY_IMAGE']['tmp_name'][$key];
-				        $berkas['error']= $_FILES['SURVEY_IMAGE']['error'][$key];
-				        $berkas['size']= $_FILES['SURVEY_IMAGE']['size'][$key];
+					// foreach ($_FILES['SURVEY_IMAGE']['name'] as $key => $v) {
+					// 	$no = $key + 1;
+					// 	$berkas = [];
+					// 	$berkas['name']= $v;
+				  //       $berkas['type']= $_FILES['SURVEY_IMAGE']['type'][$key];
+				  //       $berkas['tmp_name']= $_FILES['SURVEY_IMAGE']['tmp_name'][$key];
+				  //       $berkas['error']= $_FILES['SURVEY_IMAGE']['error'][$key];
+				  //       $berkas['size']= $_FILES['SURVEY_IMAGE']['size'][$key];
 
-				        $namafile = $this->upload_image($berkas, $survey_no, $no);
-				        // $survey_galleries[] = [
-				        // 	'SURVEY_NO'		=> $survey_no,
-				        // 	'SEQUENCE'		=> $no,
-				        // 	'IMAGE_TITLE'	=> !empty($post['SURVEY_IMAGE_TITLE'][$key]) ? $post['SURVEY_IMAGE_TITLE'][$key] : '-',
-				        // 	'IMAGE_FILENAME'	=> $namafile
-				        // ];
-					}
+				  //       $namafile = $this->upload_image($berkas, $survey_no, $no);
+				  //       $survey_galleries[] = [
+				  //       	'SURVEY_NO'		=> $survey_no,
+				  //       	'SEQUENCE'		=> $no,
+				  //       	'IMAGE_TITLE'	=> !empty($post['SURVEY_IMAGE_TITLE'][$key]) ? $post['SURVEY_IMAGE_TITLE'][$key] : '-',
+				  //       	'IMAGE_FILENAME'	=> $namafile
+				  //       ];
+					// }
 				}
-
-				// dd($survey_report, FALSE);
-				// dd($survey_farmers, FALSE);
-				// dd($survey_market_price, FALSE);
-				// dd($survey_harvest_phase, FALSE);
-				// dd($survey_planting_phase, FALSE);
-				// dd($survey_galleries);
 				$save = $this->Dbhelper->insertData('SURVEY', $survey_report);
 				if (!empty($survey_farmers)) {
 					$save_farmers = $this->db->insert_batch('SURVEY_FARMERS', $survey_farmers);
@@ -309,250 +302,182 @@ class survey extends CI_Controller {
 	public function do_update() {
 		if ($this->input->server('REQUEST_METHOD') === 'POST') {
 			$post = $this->input->post();
-			$visiting_no = $post['visiting_no'];
+			$survey_no = $post['survey_no'];
 			try {
 				dd($post);
 				// VR DATA
-				$visiting_report = [
-					"VISITING_DATE"		=> dbClean(str_replace("-", "", $post['visiting_date'])),
-					"PLANT"				=> dbClean($post['plant']),
-					"CUSTOMER"			=> dbClean($post['customer']),
-					"TRANSDATE_OPEN"	=> dbClean(date('Ymd', strtotime($post['transdate_open']))),
-					"TRANSDATE_CLOSE"	=> dbClean(date('Ymd', strtotime($post['transdate_close']))),
-					"CLOSE_TYPE"		=> dbClean($post['close_type']),
-					"AR_STOP"			=> dbClean(cleanformat($post['ar_stop'])),
-					"AR_CURRENT"		=> dbClean(cleanformat($post['ar_current'])),
-					"COLLATERAL_AMT"	=> dbClean(cleanformat($post['collateral_amt'])),
-					"COLLECTION_TYPE"	=> dbClean($post['collection_type']),
-					"STOPAGE_REASON"	=> dbClean($post['stopage_reason']),
-					"PENDING_FEE_STATUS"	=> dbClean($post['pending_fee_status']),
-					"PIC_OPEN_TS"		=> !empty($post['pic_open_ts']) ? dbClean($post['pic_open_ts']) : '',
-					"PIC_OPEN_ASM"		=> !empty($post['pic_open_asm']) ? dbClean($post['pic_open_asm']) : '',
-					"PIC_OPEN_GSM"		=> !empty($post['pic_open_gsm']) ? dbClean($post['pic_open_gsm']) : '',
-					"PIC_OPEN_CCT"		=> !empty($post['pic_open_cct']) ? dbClean($post['pic_open_cct']) : '',
-					"PIC_CLOSE_TS"		=> !empty($post['pic_close_ts']) ? dbClean($post['pic_close_ts']) : '',
-					"PIC_CLOSE_ASM"		=> !empty($post['pic_close_asm']) ? dbClean($post['pic_close_asm']) : '',
-					"PIC_CLOSE_GSM"		=> !empty($post['pic_close_gsm']) ? dbClean($post['pic_close_gsm']) : '',
-					"PIC_CLOSE_CCT"		=> !empty($post['pic_close_cct']) ? dbClean($post['pic_close_cct']) : '',
-					"STRATEGY_SALES"	=> "",
-					"STRATEGY_CCT"		=> "",
+				$survey = [
 					"UPDATED_AT"		=> date('Ymd His'),
 					"UPDATED_BY"		=> $this->session_data['user']['EMPLOYEE_ID']
 				];
 				
-				$vr_assets = [];
-				if (!empty($post['assets_class1'])) {
-					foreach ($post['assets_class1'] as $i => $v) {
+				$survey_farmers = [];
+				if (!empty($post['farmer_name'])) {
+					foreach ($post['farmer_name'] as $i => $v) {
 						$curr_data = [
-							"VISITING_NO"	=> $visiting_no,
+							"SURVEY_NO"		=> $survey_no,
 							"SEQUENCE"		=> $i + 1,
-							"CLASS1"		=> $v,
-							"CLASS2"		=> $post['assets_class2'][$i],
-							"ASSET_TYPE"		=> $post['asset_type'][$i],
-							"ASSET_SIZE"		=> $post['asset_size'][$i],
-							"ASSET_VALUE"	=> cleanformat($post['asset_value'][$i]),
-							"ASSET_ADDRESS"	=> $post['asset_address'][$i],
-							"DOCS_CERTIFICATE"	=> $post['docs_certificate'][$i],
-							"DOCS_SPPJ"		=> $post['docs_sppj'][$i],
-							"DOCS_HT"	=> $post['docs_ht'][$i],
-							"DOCS_OTHERS"	=> $post['docs_others'][$i]
+							"SURVEY_DATE"	=> date('Ymd', strtotime($survey_report['SURVEY_DATE'])),
+							"FARMER_NAME"	=> $v,
+							"FARMER_PHONE"	=> $post['farmer_phone'][$i]
 						];
 
-						$vr_assets[] = $curr_data;
+						$survey_farmers[] = $curr_data;
 					}
 				}
 
-				$vr_collection_plan = [];
-				if (!empty($post['CL_collection_date'])) {
-					foreach ($post['CL_collection_date'] as $i => $v) {
+				$survey_market_price = [];
+				if (!empty($post['market_price'])) {
+					foreach ($post['market_price'] as $i => $v) {
 						$curr_data = [
-							"VISITING_NO"		=> $visiting_no,
-							"SEQUENCE"			=> $i + 1,
-							"COLLECTION_DATE"	=> date('Ym', strtotime($v)),
-							"AMOUNT"			=> cleanformat($post['CL_amount'][$i]),
-							"AR_BALANCE"		=> cleanformat($post['CL_ar_balance'][$i]),
-							"NOTES"				=> $post['CL_note'][$i]
+							"SURVEY_NO"		=> $survey_no,
+							"SURVEY_DATE"	=> date('Ymd', strtotime($post['market_date'][$i])),
+							"PRICE"	=> $v
 						];
 
-						$vr_collection_plan[] = $curr_data;
+						$survey_market_price[] = $curr_data;
 					}
 				}
 
-				$vr_other_debts = [];
-				if (!empty($post['OT_creditor'])) {
-					foreach ($post['OT_creditor'] as $i => $v) {
-						$curr_data = [
-							"VISITING_NO"		=> $visiting_no,
-							"SEQUENCE"			=> $i + 1,
-							"CREDITOR"			=> $v,
-							"CURRENT_DEBT"		=> cleanformat($post['OT_current_debt'][$i]),
-							"NOTES"				=> $post['OT_note'][$i]
-						];
-
-						$vr_other_debts[] = $curr_data;
-					}
-				}
-
-				$vr_details = [];
-				if (!empty($post['VD_visit_date'])) {
-					foreach ($post['VD_visit_date'] as $i => $v) {
-						$curr_data = [
-							"VISITING_NO"			=> $visiting_no,
-							"SEQUENCE"				=> $i + 1,
-							"VISIT_DATE"			=> date('Ymd', strtotime($v)),
-							"PARTICIPANT_CJ"		=> $post['VD_participant_cj'][$i],
-							"PARTICIPANT_CUST"		=> $post['VD_participant_customer'][$i],
-							"LOCATION"				=> $post['VD_location'][$i],
-							"DESCRIPTION"			=> str_replace('"', '', $post['VD_description'][$i]),
-							"COLLECTION_BD_OPINION"	=> $post['VD_collection_bd_opinion'][$i]
-						];
-
-						$vr_details[] = $curr_data;
-					}
-				}
-
-				$vr_strategy = [];
-				if (!empty($post['VR_strategy_sales'])) {
-					foreach ($post['VR_strategy_sales'] as $i => $v) {
-						$curr_data = [
-							"VISITING_NO"		=> $visiting_no,
-							"SEQUENCE"			=> $i + 1,
-							"STRATEGY_SALES"	=> $v,
-							"STRATEGY_CCT"		=> dbClean($post['VR_strategy_cct'][$i]),
-						];
-
-						$vr_strategy[] = $curr_data;
-					}
-				}
-
-				$vr_galleries = [];
-				if (!empty($post['VR_image_name'])) {
-					foreach ($post['VR_image_name'] as $i => $v) {
-						$no = $i + 1;
-						$namafile = !empty($post['VR_image_filename'][$i]) ? $post['VR_image_filename'][$i] : '';
-						if (!empty($_FILES['VR_image_file']['name'][$i])) {
-							if (!empty($namafile)) {
-								$delete_image = $this->delete_image($namafile);
+				$survey_harvest_phase = [];
+				$survey_planting_phase = [];
+				$phase_array = ['persiapan-lahan', 'vegetatif-awal', 'vegetatif-akhir', 'genetatif-awal', 'genetatif-akhir', 'gagal-panen'];
+				
+				if (!empty($post['PLANTING_siklus'])) {
+					$sequence = 1;
+					foreach ($post['PLANTING_siklus'] as $siklus_index => $siklus) {
+						foreach ($phase_array as $phase_key) {
+							$phase 	= $post['PLANTING_phase'][$phase_key][$siklus_index];
+							$curr_phase_date 	= !empty($post['PLANTING_date'][$phase_key][$siklus_index]) ?  date('Ymd', strtotime($post['PLANTING_date'][$phase_key][$siklus_index])) : '';
+							foreach ($post['PLANTING_description'][$phase_key][$siklus_index] as $i => $v) {
+								$curr_data = [
+									"SURVEY_NO"			=> $survey_no,
+									"SEQUENCE"			=> $sequence,
+									"SURVEY_DATE"		=> $curr_phase_date,
+									"PHASE"				=> $phase,
+									"DESCRIPTION"		=> dbClean($v),
+									"SIKLUS"			=> $siklus
+								];
+		
+								$sequence += 1;
+								$survey_planting_phase[] = $curr_data;
 							}
-							$berkas = [];
-							$berkas['name']= $_FILES['VR_image_file']['name'][$i];
-					        $berkas['type']= $_FILES['VR_image_file']['type'][$i];
-					        $berkas['tmp_name']= $_FILES['VR_image_file']['tmp_name'][$i];
-					        $berkas['error']= $_FILES['VR_image_file']['error'][$i];
-					        $berkas['size']= $_FILES['VR_image_file']['size'][$i];
-
-					        $namafile = $this->upload_image($berkas, $visiting_no, $no);
 						}
-						$vr_galleries[] = [
-				        	'VISITING_NO'	=> $visiting_no,
-				        	'SEQUENCE'		=> $no,
-				        	'IMAGE_NAME'	=> $v,
-				        	'IMAGE_FILENAME'	=> $namafile
-				        ];
-					}
-				} elseif (empty($post['VR_image_name']) && !empty($post['VR_image_filename'])) {
-					foreach ($post['VR_image_filename'] as $i => $v) {
-						$delete_image = $this->delete_image($v);
+
+						if (!empty($post['HARVEST_score'])) {
+							foreach ($post['HARVEST_score'][$siklus_index] as $i => $v) {
+								if (!empty($post['baris'][$siklus_index][$i])) {
+									$curr_data = [
+										"SURVEY_NO"			=> $survey_no,
+										"SEQUENCE"			=> $i + 1,
+										"SURVEY_DATE"		=> date('Ymd', strtotime($survey_report['SURVEY_DATE'])),
+										"SCORE"				=> $v,
+										"BARIS"				=> dbClean($post['baris'][$siklus_index][$i]),
+										"BARIS_ACTUAL"		=> dbClean($post['baris_actual'][$siklus_index][$i]),
+										"BARIS"				=> dbClean($post['baris'][$siklus_index][$i]),
+										"BARIS_ACTUAL"		=> dbClean($post['baris_actual'][$siklus_index][$i]),
+										"BIJI"				=> dbClean($post['biji'][$siklus_index][$i]),
+										"BIJI_ACTUAL"		=> dbClean($post['biji_actual'][$siklus_index][$i]),
+										"BOBOT"				=> dbClean($post['bobot'][$siklus_index][$i]),
+										"BOBOT_ACTUAL"		=> dbClean($post['bobot_actual'][$siklus_index][$i]),
+										'SIKLUS'			=> $siklus
+									];
+		
+									$survey_harvest_phase[] = $curr_data;
+								}
+							}
+						}
 					}
 				}
+
+
+				$survey_galleries = [];
+				if (!empty($_FILES)) {
+					// foreach ($_FILES['SURVEY_IMAGE']['name'] as $key => $v) {
+					// 	$no = $key + 1;
+					// 	$berkas = [];
+					// 	$berkas['name']= $v;
+				  //       $berkas['type']= $_FILES['SURVEY_IMAGE']['type'][$key];
+				  //       $berkas['tmp_name']= $_FILES['SURVEY_IMAGE']['tmp_name'][$key];
+				  //       $berkas['error']= $_FILES['SURVEY_IMAGE']['error'][$key];
+				  //       $berkas['size']= $_FILES['SURVEY_IMAGE']['size'][$key];
+
+				  //       $namafile = $this->upload_image($berkas, $survey_no, $no);
+				  //       $survey_galleries[] = [
+				  //       	'SURVEY_NO'		=> $survey_no,
+				  //       	'SEQUENCE'		=> $no,
+				  //       	'IMAGE_TITLE'	=> !empty($post['SURVEY_IMAGE_TITLE'][$key]) ? $post['SURVEY_IMAGE_TITLE'][$key] : '-',
+				  //       	'IMAGE_FILENAME'	=> $namafile
+				  //       ];
+					// }
+				}
+
+				$save = $this->db->update('SURVEY', $survey, array('SURVEY_NO' => $survey_no));
+				if (!empty($survey_farmers)) {
+					$delete = $this->db->delete('SURVEY_FARMERS', array('SURVEY_NO' => $survey_no));
+					$save_farmers = $this->db->insert_batch('SURVEY_FARMERS', $survey_farmers);
+				}
+				if (!empty($survey_market_price)) {
+					$delete = $this->db->delete('SURVEY_MARKET_PRICES', array('SURVEY_NO' => $survey_no));
+					$save_market_prices = $this->db->insert_batch('SURVEY_MARKET_PRICES', $survey_market_price);
+				}
+				if (!empty($survey_harvest_phase)) {
+					$delete = $this->db->delete('SURVEY_HARVEST_PHASE', array('SURVEY_NO' => $survey_no));
+					$save_harvest_phase = $this->db->insert_batch('SURVEY_HARVEST_PHASE', $survey_harvest_phase);
+				}
+				if (!empty($survey_planting_phase)) {
+					$delete = $this->db->delete('SURVEY_PLANTING_PHASE', array('SURVEY_NO' => $survey_no));
+					$save_planting_phase = $this->db->insert_batch('SURVEY_PLANTING_PHASE', $survey_planting_phase);
+				}
+				if (!empty($survey_galleries)) {
+					$delete = $this->db->delete('SURVEY_IMAGES', array('SURVEY_NO' => $survey_no));
+					$save_galleries = $this->db->insert_batch('SURVEY_IMAGES', $survey_galleries);
+				}
+
+				// $vr_galleries = [];
+				// if (!empty($post['VR_image_name'])) {
+				// 	foreach ($post['VR_image_name'] as $i => $v) {
+				// 		$no = $i + 1;
+				// 		$namafile = !empty($post['VR_image_filename'][$i]) ? $post['VR_image_filename'][$i] : '';
+				// 		if (!empty($_FILES['VR_image_file']['name'][$i])) {
+				// 			if (!empty($namafile)) {
+				// 				$delete_image = $this->delete_image($namafile);
+				// 			}
+				// 			$berkas = [];
+				// 			$berkas['name']= $_FILES['VR_image_file']['name'][$i];
+				// 	        $berkas['type']= $_FILES['VR_image_file']['type'][$i];
+				// 	        $berkas['tmp_name']= $_FILES['VR_image_file']['tmp_name'][$i];
+				// 	        $berkas['error']= $_FILES['VR_image_file']['error'][$i];
+				// 	        $berkas['size']= $_FILES['VR_image_file']['size'][$i];
+
+				// 	        $namafile = $this->upload_image($berkas, $visiting_no, $no);
+				// 		}
+				// 		$vr_galleries[] = [
+				//         	'VISITING_NO'	=> $visiting_no,
+				//         	'SEQUENCE'		=> $no,
+				//         	'IMAGE_NAME'	=> $v,
+				//         	'IMAGE_FILENAME'	=> $namafile
+				//         ];
+				// 	}
+				// } elseif (empty($post['VR_image_name']) && !empty($post['VR_image_filename'])) {
+				// 	foreach ($post['VR_image_filename'] as $i => $v) {
+				// 		$delete_image = $this->delete_image($v);
+				// 	}
+				// }
 				
 
-				$core_logs = [
-					"VISITING_NO"		=> $visiting_no,
-					"TYPE"					=> "EDIT",
-					"CREATED_AT"		=> date('Ymd His'),
-					"CREATED_BY"		=> $this->session_data['user']['EMPLOYEE_ID'],
-				];
-
-				$masterdata_logs = [
-					"ON_TABLE"	=> "TR_VR",
-					"JSONDATA"	=> json_encode($visiting_report)
-				];
-				$masterdata_logs = array_merge($masterdata_logs, $core_logs);
-
-				$assets_logs = [
-					"ON_TABLE"	=> "TR_VR_ASSETS",
-					"JSONDATA"	=> json_encode($vr_assets)
-				];
-				$assets_logs = array_merge($assets_logs, $core_logs);
-
-				$collection_plan_logs = [
-					"ON_TABLE"	=> "TR_VR_COLLECTION_PLAN",
-					"JSONDATA"	=> json_encode($vr_collection_plan)
-				];
-				$collection_plan_logs = array_merge($collection_plan_logs, $core_logs);
-
-				$other_debts_logs = [
-					"ON_TABLE"	=> "TR_VR_OTHER_DEBTS",
-					"JSONDATA"	=> json_encode($vr_other_debts)
-				];
-				$other_debts_logs = array_merge($other_debts_logs, $core_logs);
-
-				$details_logs = [
-					"ON_TABLE"	=> "TR_VR_DETAILS",
-					"JSONDATA"	=> json_encode($vr_other_debts)
-				];
-				$details_logs = array_merge($details_logs, $core_logs);
-
-				$strategy_logs = [
-					"ON_TABLE"	=> "TR_VR_STRATEGY",
-					"JSONDATA"	=> json_encode($vr_strategy)
-				];
-				$strategy_logs = array_merge($strategy_logs, $core_logs);
-
-				$insertbatch_logs = [];
-				$insertbatch_logs[] = $masterdata_logs;
-				$insertbatch_logs[] = $assets_logs;
-				$insertbatch_logs[] = $collection_plan_logs;
-				$insertbatch_logs[] = $other_debts_logs;
-				$insertbatch_logs[] = $details_logs;
-				$insertbatch_logs[] = $strategy_logs;
-				$save_logs = $this->db->insert_batch('LOGS_VISIT_REPORT_DATA', $insertbatch_logs);
-				// dd($save_logs, FALSE);
-
-				// dd($vr_assets, FALSE);
-				// dd($vr_collection_plan, FALSE);
-				// dd($vr_other_debts, FALSE);
-				// dd($vr_details, FALSE);
-				// dd($vr_galleries);
-
-				$save = $this->db->update('TR_VR', $visiting_report, array('VISITING_NO' => $visiting_no));
-				if (!empty($vr_assets)) {
-					$delete = $this->db->delete('TR_VR_ASSETS', array('VISITING_NO' => $visiting_no));
-					$save_assets = $this->db->insert_batch('TR_VR_ASSETS', $vr_assets);
-				}
-				if (!empty($vr_collection_plan)) {
-					$delete = $this->db->delete('TR_VR_COLLECTION_PLAN', array('VISITING_NO' => $visiting_no));
-					$save_collection_plan = $this->db->insert_batch('TR_VR_COLLECTION_PLAN', $vr_collection_plan);
-				}
-				if (!empty($vr_other_debts)) {
-					$delete = $this->db->delete('TR_VR_OTHER_DEBTS', array('VISITING_NO' => $visiting_no));
-					$save_other_debts = $this->db->insert_batch('TR_VR_OTHER_DEBTS', $vr_other_debts);
-				}
-				if (!empty($vr_details)) {
-					$delete = $this->db->delete('TR_VR_DETAILS', array('VISITING_NO' => $visiting_no));
-					$save_details = $this->db->insert_batch('TR_VR_DETAILS', $vr_details);
-				}
-				if (!empty($vr_strategy)) {
-					$delete = $this->db->delete('TR_VR_STRATEGY', array('VISITING_NO' => $visiting_no));
-					$save_strategy = $this->db->insert_batch('TR_VR_STRATEGY', $vr_strategy);
-				}
-				if (!empty($vr_galleries)) {
-					$delete = $this->db->delete('TR_VR_GALLERIES', array('VISITING_NO' => $visiting_no));
-					$save_galleries = $this->db->insert_batch('TR_VR_GALLERIES', $vr_galleries);
-				}
 				if ($save) {
 					$this->session->set_flashdata('success', "Update data success");
-					return redirect($this->own_link."/report");
+					return redirect($this->own_link);
 				}
 			} catch (Exception $e) {
 				dd($e->getMessage());
 			}
 			$this->session->set_flashdata('error', "Update data failed");
-			return redirect($this->own_link."/report");
+			return redirect($this->own_link);
 		}
 		$this->session->set_flashdata('error', "Access denied");
-        return redirect($this->own_link."/report");
+        return redirect($this->own_link);
 	}
 
 	public function drawing() {
