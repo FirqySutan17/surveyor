@@ -783,8 +783,7 @@
                                 <th style="text-align: center">DRAFTER</th>
                                 <th style="text-align: center">DATE</th>
                                 <th style="text-align: center">LAND TYPE</th>
-                                <th style="text-align: center">LATITUDE</th>
-                                <th style="text-align: center">LONGITUTE</th>
+                                <th style="text-align: center">COORDINATE</th>
                             </tr>
                         </thead>
                         <tbody>
