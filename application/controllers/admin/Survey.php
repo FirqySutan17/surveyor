@@ -34,17 +34,9 @@ class survey extends CI_Controller {
 	public function entry() {
 
 		$user 							= $this->session_data['user'];
-		$filter = ['HEAD_CODE'	=> 'AB'];
-		if ($user['PLANT'] != '*') {
-			$filter['CODE'] = $user['PLANT'];
-		}
 		$data['title'] 			= 'SURVEY';
-		$data['plant'] 			= $this->Dbhelper->selectTabel('CODE, CODE_NAME', 'CD_CODE', $filter, 'CODE', 'ASC');
-		$data['collection_type'] = $this->collection_type();
-		$data['user'] = $user;
-		$data['provinces'] 			= $this->Dbhelper->selectTabel('ID_PROVINCE, PROVINCE', 'CD_PROVINCE', [], 'PROVINCE', 'ASC');
-		$data['regencies'] 			= $this->Dbhelper->selectTabel('ID_REGENCIES, PROVINCE_ID, REGENCIES', 'CD_REGENCIES', [], 'REGENCIES', 'ASC');
-		$data['districts'] 			= $this->Dbhelper->selectTabel('ID_DISTRICTS, REGENCIES_ID, DISTRICS', 'CD_DISTRICTS', [], 'DISTRICS', 'ASC');
+		$data['user'] 			= $user;
+		$data['provinces'] 	= $this->Dbhelper->selectTabel('ID_PROVINCE, PROVINCE', 'CD_PROVINCE', [], 'PROVINCE', 'ASC');
 
 		// dd($data['user']);
 		$this->template->_v('survey/create', $data);
@@ -294,6 +286,7 @@ class survey extends CI_Controller {
 
 	public function detail($survey_no) {
 		$user	= 	$this->session_data['user'];
+
 		$data_detail = $this->get_surveydetail($survey_no);
 		dd($data_detail);
 		$data['title'] 				= 'SURVEY';
@@ -302,18 +295,15 @@ class survey extends CI_Controller {
 		$this->template->_v('survey/detail', $data);
 	}
 
-	public function edit() {
+	public function edit($survey_no) {
 		$user 							= $this->session_data['user'];
-		$filter = ['HEAD_CODE'	=> 'AB'];
-		if ($user['PLANT'] != '*') {
-			$filter['CODE'] = $user['PLANT'];
-		}
 
-		// $data 	= $this->get_visitingreport($visiting_no);
-		$data['title'] 				= 'SURVEY';
-		$data['plant'] 				= $this->Dbhelper->selectTabel('CODE, CODE_NAME', 'CD_CODE', $filter, 'CODE', 'ASC');
-		$data['collection_type']	= $this->collection_type();
-		$data['user'] = $user;
+		$data_detail = $this->get_surveydetail($survey_no);
+		dd($data_detail);
+		$data['title'] 			= 'SURVEY';
+		$data['user'] 			= $user;
+		$data['provinces'] 	= $this->Dbhelper->selectTabel('ID_PROVINCE, PROVINCE', 'CD_PROVINCE', [], 'PROVINCE', 'ASC');
+
 		
 		$this->template->_v('survey/edit', $data);
 	}
@@ -323,7 +313,7 @@ class survey extends CI_Controller {
 			$post = $this->input->post();
 			$visiting_no = $post['visiting_no'];
 			try {
-				// dd($post);
+				dd($post);
 				// VR DATA
 				$visiting_report = [
 					"VISITING_DATE"		=> dbClean(str_replace("-", "", $post['visiting_date'])),
@@ -1192,7 +1182,7 @@ class survey extends CI_Controller {
 		$data['SURVEY_FARMERS']		= $this->Dbhelper->selectTabel('*', 'SURVEY_FARMERS', array('SURVEY_NO' => $survey_no), 'SEQUENCE', 'ASC');
 		$data['SURVEY_MARKET_PRICES']		=  $this->Dbhelper->selectTabel('*', 'SURVEY_MARKET_PRICES', array('SURVEY_NO' => $survey_no), 'SURVEY_DATE', 'ASC');
 		$data['SURVEY_HARVEST_PHASE']		=  $this->Dbhelper->selectTabel('*', 'SURVEY_HARVEST_PHASE', array('SURVEY_NO' => $survey_no), 'SEQUENCE', 'ASC');
-		$data['SURVEY_PLANTING_PHASE']		=  [];
+		$data['SURVEY_PLANTING_PHASE']		=  $planting_phase;
 		$data['SURVEY_IMAGES']		= $this->Dbhelper->selectTabel('*', 'SURVEY_IMAGES', array('SURVEY_NO' => $survey_no), 'SEQUENCE', 'ASC');
 		return $data;
 	}

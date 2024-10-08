@@ -835,16 +835,10 @@
                                 </td>
                                 <td data-label="REGENCIES">
                                     <select id="regencies" class="form-control" style="width: 100%;" name="regencies" required>
-                                        <?php foreach($regencies as $item): ?>
-                                            <option value="<?= $item['ID_REGENCIES'] ?>"><?= $item['REGENCIES'] ?></option>
-                                        <?php endforeach ?>
                                     </select>
                                 </td>
                                 <td data-label="DISTRICTS">
                                     <select id="districts" class="form-control" style="width: 100%;" name="districts" required>
-                                        <?php foreach($districts as $item): ?>
-                                            <option value="<?= $item['ID_DISTRICTS'] ?>"><?= $item['DISTRICS'] ?></option>
-                                        <?php endforeach ?>
                                     </select>
                                 </td>
                             </tr>
@@ -860,7 +854,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td data-label="ADDRESS" style="text-transform: uppercase;">Jl. Gatot Subroto No.Kav. 38, RT.6/RW.1, Kuningan Bar., Kec. Mampang Prpt., Jakarta, Daerah Khusus Ibukota Jakarta 12710</td>
+                                <td data-label="ADDRESS" style="text-transform: uppercase;" id="address-info"></td>
                             </tr>   
                         </tbody>
                         
@@ -970,7 +964,7 @@
 
             <div class="form-group row mt-5" style="margin: 20px 0px !important">
                 <div class="col-lg-12 col-sm-12" style="display: flex; padding: 0px">
-                    <a href="<?= admin_url('visit/report') ?>" class="btn btn-primary cust-btn-back" style="width: 50%; height: 50px; display: flex; align-items: center; justify-content: center;">Cancel</a>
+                    <a href="<?= admin_url('survey') ?>" class="btn btn-primary cust-btn-back" style="width: 50%; height: 50px; display: flex; align-items: center; justify-content: center;">Cancel</a>
                     <span style="margin: 5px;"></span>
                     <button type="submit" class="btn btn-primary cust-btn-save" style="width: 50%; height: 50px">Save</button>
                 </div>
@@ -1025,7 +1019,8 @@
                 // let data = JSON.parse(response);
                 console.log(response);
                 // alert(data.data);
-                // $("#address").val(data.data.address);
+                $("#address").val(response.display_name);
+                $("#address-info").text(response.display_name);
             }
         });
     }
