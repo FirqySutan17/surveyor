@@ -622,7 +622,7 @@ class Home extends CI_Controller {
 		// 	return json_encode([]);
 		// }
 
-		$provinsi 		= $this->input->get('provi$provinsi');
+		$provinsi 		= $this->input->get('provinsi');
 		$keyword 	= strtoupper($this->input->get('q'));
 		$this->db->select('
 			ID_REGENCIES,
