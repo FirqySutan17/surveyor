@@ -1062,11 +1062,11 @@
                 };
             }
         },
-        templateSelection: function (data, container) {
-            // // Add custom attributes to the <option> tag for the selected option
-            // $(data.element).attr('data-jsondetail', data.jsondetail);
-            // return data.text;
-        }
+        // templateSelection: function (data, container) {
+        //     // // Add custom attributes to the <option> tag for the selected option
+        //     // $(data.element).attr('data-jsondetail', data.jsondetail);
+        //     // return data.text;
+        // }
     }).on("select2:select", function (e) {
         // let data = $("#customer_entry option:selected").val();
         // let detaildata = $("#customer_entry option:selected").data('jsondetail');
@@ -1096,21 +1096,15 @@
                 };
             }
         },
-        templateSelection: function (data, container) {
-            // // Add custom attributes to the <option> tag for the selected option
-            // $(data.element).attr('data-jsondetail', data.jsondetail);
-            // return data.text;
-        }
+        // templateSelection: function (data, container) {
+        //     // // Add custom attributes to the <option> tag for the selected option
+        //     // $(data.element).attr('data-jsondetail', data.jsondetail);
+        //     // return data.text;
+        // }
     }).on("select2:select", function (e) {
         // let data = $("#customer_entry option:selected").val();
         // let detaildata = $("#customer_entry option:selected").data('jsondetail');
         // load_datacustomer(detaildata);
-    });
-
-    $('#districts').select2({
-        theme: 'bootstrap4',
-        language: "en",
-        placeholder: "- SELECT DISTRICTS -",
     });
 
     $('#fasetanam').select2({
