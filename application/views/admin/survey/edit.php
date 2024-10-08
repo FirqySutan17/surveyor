@@ -898,8 +898,7 @@
                                                 <input type="hidden" name="PLANTING_siklus[<?= $index ?>]" value="<?= $siklus ?>">
                                                 <thead>
                                                     <tr>
-                                                        <th style="text-align: left; font-size: 13px !important">PLANTING PHASE - CYCLE <?= $siklus ?></th>
-                                                        <th style="text-align: right"></th>
+                                                        <th colspan="3" style="text-align: left; font-size: 13px !important">PLANTING PHASE - CYCLE <?= $siklus ?></th>
                                                     </tr>
                                                     <tr class="planting-phase-<?= $index ?>">
                                                         <th style="text-align: left">DATE</th>
@@ -911,7 +910,7 @@
                                                     <?php foreach($planting_phase as $phase_key => $phase): ?>
                                                         <tr style="align-items: flex-end">
                                                             <td>
-                                                                <input type="date" name="PLANTING_date[<?= $phase_key ?>][<?= $index ?>]" class="form-control" style="font-size: 14px" >
+                                                                <input type="date" name="PLANTING_date[<?= $phase_key ?>][<?= $index ?>]" class="form-control" style="font-size: 14px" value="<?= !empty($phase['tanggal']) ? date('Y-m-d', strtotime($phase['tanggal'])) : '' ?>">
                                                             </td>
                                                             <td data-label="PHASE" width="45%">
                                                                 <input type="text" name="PLANTING_phase[<?= $phase_key ?>][<?= $index ?>]" value="<?= $phase['fase'] ?>" class="form-control" style="font-size: 14px" readonly>
