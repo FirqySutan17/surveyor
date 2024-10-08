@@ -249,26 +249,30 @@ class survey extends CI_Controller {
 
 	public function index() {
 
-		$sdate = date('Y-m').'-01';
-		$edate 	= date('Y-m-d');
-		$plant = "*";
+		$sdate 		= date('Y-m').'-01';
+		$edate 		= date('Y-m-d');
+		$plant 		= "*";
+		$surveyor = "*";
 
 		if ($this->input->server('REQUEST_METHOD') === 'POST') {
-			$sdate 		= $this->input->post('sdate');
-			$edate 		= $this->input->post('edate');
-			$plant 		= $this->input->post('plant');
+			$sdate 			= $this->input->post('sdate');
+			$edate 			= $this->input->post('edate');
+			$plant 			= $this->input->post('plant');
+			$surveyor 	= $this->input->post('surveyor');
 		}
 
 		$filter = [
 			"plant"	=> $plant,
 			"sdate"	=> $sdate,
-			"edate"	=> $edate
+			"edate"	=> $edate,
+			"surveyor"	=> $surveyor
 		];
 
 		$data['title'] 			= 'Survey Report';
 		$data['datatable']	= $this->datatable($filter);
 		$data['filter']			= $filter;
 		$data['plant'] 			= $this->Dbhelper->selectTabel('CODE, CODE_NAME', 'CD_CODE', array('HEAD_CODE' => 'AB'), 'CODE', 'ASC');
+		$data['surveyor'] 	= $this->list_surveyor();
 		
 		$this->template->_v('survey/index', $data);
 	}
@@ -1070,10 +1074,15 @@ class survey extends CI_Controller {
 		$sdate = date('Ymd', strtotime($filter['sdate']));
 		$edate = date('Ymd', strtotime($filter['edate']));
 		$plant = $filter['plant'];
+		$surveyor = $filter['surveyor'];
 
 		$where = "";
 		if ($plant != '*') {
-			$where = " and PLANT = '$plant'";
+			$where .= " and PLANT = '$plant'";
+		}
+
+		if ($filter['surveyor'] != "*") {
+			$where .= " and CREATED_BY = '$surveyor'";
 		}
 		
 		$query = "
@@ -1092,6 +1101,20 @@ class survey extends CI_Controller {
 				(SURVEY_DATE BETWEEN '$sdate' AND '$edate')
 				$where
 			ORDER BY SURVEY_NO DESC
+		";
+		$data 				= $this->db->query($query)->result_array();
+		return $data;
+	}
+
+	private function list_surveyor() {
+		$query = "
+			select
+				CREATED_BY,
+				FN_USER_NAME(CREATED_BY) CREATED_BY_NAME
+			from SURVEY
+			WHERE CREATED_BY != '999999'
+			GROUP BY CREATED_BY
+			ORDER BY CREATED_BY ASC
 		";
 		$data 				= $this->db->query($query)->result_array();
 		return $data;

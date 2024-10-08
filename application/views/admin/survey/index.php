@@ -291,24 +291,30 @@
 		<form class="form-horizontal" action="#" method="POST">
         <div class="row" style="padding: 0px 10px; border-bottom: 2px solid #000; padding-bottom: 8px;margin: 0px 0px; margin-bottom: 10px; ">
 						<div class="col-md-6 col-sm-12" style="display: flex; margin-bottom: 10px">
-                <span class="label-span" style="width: 29%; display: inline-block; vertical-align: middle; margin-top: 12px; font-weight: 600">START DATE : </span> 
+                <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 12px; font-weight: 600">START DATE : </span> 
                 <input type="date" name="sdate" value="<?= $filter['sdate'] ?>" class="form-control" required>
             </div>
             <div class="col-md-6 col-sm-12" style="display: flex; margin-bottom: 10px">
-                <span class="label-span" style="width: 29%; display: inline-block; vertical-align: middle; margin-top: 12px; font-weight: 600">END DATE : </span> 
+                <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 12px; font-weight: 600">END DATE : </span> 
                 <input type="date" name="edate" value="<?= $filter['edate'] ?>" class="form-control" required>
             </div>
             <div class="col-md-6 col-sm-12" style="display: flex; margin-bottom: 10px">
-                <span class="label-span" style="width: 22%; display: inline-block; vertical-align: middle; margin-top: 5px; font-weight: 600">PLANT : </span> 
+                <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 5px; font-weight: 600">PLANT : </span> 
                 <select id="plant" class="form-control" name="plant" style="width: 78%">
-                    <option value="*" selected>- ALL PLANT -</option>
                     <?php foreach ($plant as $field): ?>
                         <option <?= $filter['plant'] == $field['CODE'] ? 'selected' : '' ?> value="<?= $field['CODE'] ?>"><?= $field['CODE'] ?> - <?= $field['CODE_NAME'] ?></option>
                     <?php endforeach ?>
                 </select>
             </div>
-           <div class="col-md-2 col-sm-12"></div>
-            <div class="col-md-2 col-sm-12" style="display: flex;">
+						<div class="col-md-6 col-sm-12" style="display: flex; margin-bottom: 10px">
+                <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 5px; font-weight: 600">SURVEYOR : </span> 
+                <select id="surveyor" class="form-control" name="surveyor" style="width: 78%">
+                    <?php foreach ($surveyor as $field): ?>
+                        <option <?= $filter['surveyor'] == $field['CREATED_BY'] ? 'selected' : '' ?> value="<?= $field['CREATED_BY'] ?>"><?= $field['CREATED_BY'] ?> - <?= $field['CREATED_BY_NAME'] ?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+            <div class="col-md-12 col-sm-12" style="display: flex;">
                 <button type="submit" class="btn btn-primary btn-block" style="height: 30px">FILTER</button>
             </div>
         </div>
