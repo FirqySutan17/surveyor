@@ -1001,11 +1001,13 @@
     function showPosition(position) {
         let latitude    = position.coords.latitude;
         let longitude   = position.coords.longitude;
-        let iframe_gmap = `<iframe class="maps-frame" src="https://maps.google.com/maps?q=${latitude,longitude}&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+        let coordinate  = latitude + "," + longitude;
 
         lang.innerHTML  = latitude;
         long.innerHTML  = longitude;
-        $("#coordinate").val(latitude + "," + longitude);
+        let iframe_gmap = `<iframe class="maps-frame" src="https://maps.google.com/maps?q=${coordinate}&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+            
+        $("#coordinate").val(coordinate);
         $("#iframe-location").html(iframe_gmap);
         
         detailPosition(latitude, longitude)

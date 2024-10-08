@@ -436,32 +436,34 @@
 					
 							</tbody>
 					</table>
-			<table class="table table-bordered" style="margin-bottom: 10px">
-							<thead>
-								<tr>
-									<th colspan="2" style="text-align: center">CHECK IN</th>
-								</tr>
-							</thead>
-							<tbody>
-					<tr class="table-maps">
-						<th class="table-maps-date" style="text-align: center;" id="detail-checkin">-</th>
-						<th class="table-maps-frame" style="text-align: center;">
-							<iframe id="detail-frame-in" style="height: 300px; width: 100%; margin: 10px 0px" class="maps-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d32658969.626560632!2d95.9556841630188!3d-2.268827313454851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2c4c07d7496404b7%3A0xe37b4de71badf485!2sIndonesia!5e0!3m2!1sid!2sid!4v1728009870092!5m2!1sid!2sid&zoom=15" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-						</th>
-					</tr>
-							</tbody>
-					</table>
 					<table class="table table-bordered" style="margin-bottom: 10px">
 							<thead>
-								<tr>
-									<th colspan="2" style="text-align: center">CHECK OUT</th>
-								</tr>
+					<tr>
+						<th colspan="3" style="text-align: center">CHECK IN</th>
+					</tr>
 							</thead>
 							<tbody>
 								<tr class="table-maps">
-									<th class="table-maps-date" style="text-align: center;" id="detail-checkout">-</th>
-									<th class="table-maps-frame" style="text-align: center;"><iframe id="detail-frame-out" style="height: 300px; width: 100%; margin: 10px 0px" class="maps-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d32658969.626560632!2d95.9556841630188!3d-2.268827313454851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2c4c07d7496404b7%3A0xe37b4de71badf485!2sIndonesia!5e0!3m2!1sid!2sid!4v1728009870092!5m2!1sid!2sid&zoom=15" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></th>
+									<th class="table-maps-date" style="text-align: center;" id="detail-checkin">-</th>
+									<th class="table-maps-date" style="text-align: center;" id="detail-imagein">-</th>
+									<th class="table-maps-frame" style="text-align: center;">
+										<iframe id="detail-frame-in" style="height: 300px; width: 100%; margin: 10px 0px" class="maps-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d32658969.626560632!2d95.9556841630188!3d-2.268827313454851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2c4c07d7496404b7%3A0xe37b4de71badf485!2sIndonesia!5e0!3m2!1sid!2sid!4v1728009870092!5m2!1sid!2sid&zoom=15" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+									</th>
 								</tr>
+							</tbody>
+					</table>
+			<table class="table table-bordered" style="margin-bottom: 10px">
+							<thead>
+					<tr>
+						<th colspan="3" style="text-align: center">CHECK OUT</th>
+					</tr>
+							</thead>
+							<tbody>
+							<tr class="table-maps">
+								<th class="table-maps-date" style="text-align: center;" id="detail-checkout">-</th>
+								<th class="table-maps-date" style="text-align: center;" id="detail-imageout">-</th>
+								<th class="table-maps-frame" style="text-align: center;"><iframe id="detail-frame-out" style="height: 300px; width: 100%; margin: 10px 0px" class="maps-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d32658969.626560632!2d95.9556841630188!3d-2.268827313454851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2c4c07d7496404b7%3A0xe37b4de71badf485!2sIndonesia!5e0!3m2!1sid!2sid!4v1728009870092!5m2!1sid!2sid&zoom=15" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></th>
+							</tr>
 							</tbody>
 					</table>
 			<button onclick="window.dialog.close();" aria-label="close" class="x">❌</button>
@@ -486,10 +488,15 @@
 			let name = $("#btn-detail-" + id).data('name');
 			let tanggal = $("#btn-detail-" + id).data('tanggal');
 			let coordinatein = $("#btn-detail-" + id).data('coordinatein');
+			let imagein = $("#btn-detail-" + id).data('imagein');
 			let timein = $("#btn-detail-" + id).data('timein');
+
 			let coordinateout = $("#btn-detail-" + id).data('coordinateout');
 			let timeout = $("#btn-detail-" + id).data('timeout');
+			let imageout = $("#btn-detail-" + id).data('imageout');
 
+                                        
+			let image_in = `<img style="height: 300px; width: 300px; margin-top: 10px; object-fit: contain" class="selfie-prv" src="<?= base_url('uploads/') ?>${imagein}" />`;
 			let frame_in = `https://maps.google.com/maps?q=${coordinatein}&output=embed&zoom=15`;
 			let frame_out = `https://maps.google.com/maps?q=${coordinateout}&output=embed&zoom=15`;
 
@@ -497,8 +504,12 @@
 			$("#detail-checkin").text(timein + " " + tanggal);
 			$("#detail-checkout").text(timeout + " " + tanggal);
 			$("#detail-frame-in").attr('src', frame_in);
+			$("#detail-imagein").html(imagein);
 			if (timeout != '-') {
+				                                        
+				let image_in = `<img style="height: 300px; width: 300px; margin-top: 10px; object-fit: contain" class="selfie-prv" src="<?= base_url('uploads/') ?>${imageout}" />`;
 				$("#detail-frame-out").attr('src', frame_out);
+				$("#detail-imageout").html(imageout);
 			}
 			window.dialog.showModal();
 		}

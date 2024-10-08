@@ -324,7 +324,7 @@
                 <tr>
                     <td style="text-align: center; vertical-align: middle"><?= $i + 1 ?></td>
                     <td style="text-align: center; vertical-align: middle"><?= $v['SURVEY_NO'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['SURVEY_DATE'] ?></td>
+                    <td style="text-align: center; vertical-align: middle"><?= date('Y-m-d', strtotime($v['SURVEY_DATE'])) ?></td>
                     <td style="text-align: center; vertical-align: middle">
 											<iframe class="maps-frame" src="https://maps.google.com/maps?q=<?= $v['COORDINATE'] ?>&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 										</td>
