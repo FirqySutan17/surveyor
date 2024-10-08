@@ -23,14 +23,6 @@ class survey extends CI_Controller {
 		$this->load->library('upload');
 	}
 
-	public function index_bak() {
-		
-		$data['title'] 			= 'SURVEY';
-		
-		// dd($data['user']);
-		$this->template->_v('survey/index', $data);
-	}
-
 	public function entry() {
 
 		$user 							= $this->session_data['user'];
@@ -269,13 +261,13 @@ class survey extends CI_Controller {
 
 		$filter = [
 			"plant"	=> $plant,
-			"edate"	=> $edate,
+			"sdate"	=> $sdate,
 			"edate"	=> $edate
 		];
 
 		$data['title'] 			= 'Survey Report';
 		$data['datatable']	= $this->datatable($filter);
-		$data['filter']		= $filter;
+		$data['filter']			= $filter;
 		$data['plant'] 			= $this->Dbhelper->selectTabel('CODE, CODE_NAME', 'CD_CODE', array('HEAD_CODE' => 'AB'), 'CODE', 'ASC');
 		
 		$this->template->_v('survey/index', $data);
