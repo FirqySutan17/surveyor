@@ -301,8 +301,7 @@ class survey extends CI_Controller {
 		$data_detail = $this->get_surveydetail($survey_no);
 		$data['title'] 			= 'SURVEY';
 		$data['user'] 			= $user;
-		$data['provinces'] 	= $this->Dbhelper->selectTabel('ID_PROVINCE, PROVINCE', 'CD_PROVINCE', [], 'PROVINCE', 'ASC');
-
+		$data['detail']				= $data_detail;
 		
 		$this->template->_v('survey/edit', $data);
 	}
