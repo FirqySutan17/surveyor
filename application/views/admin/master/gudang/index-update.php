@@ -276,48 +276,48 @@
 	.table-w-message {
 		width: 100%;
 	}
-	.maps-frame {
-        border:2px solid #C1C1C1; 
-        border-radius: 10px;
-        width: 100%;
-        height: 100px;
-    }
 </style>
 
 <div class="main-content pre-posttest">
     <h3 class="card-title">
-        <strong>DATA - SURVEY</strong>
+        <strong>DATA - WAREHOUSE</strong>
     </h3>
-		<form class="form-horizontal" action="#" method="POST">
-        <div class="row" style="padding: 0px 10px; border-bottom: 2px solid #000; padding-bottom: 8px;margin: 0px 0px; margin-bottom: 10px; ">
-						<div class="col-md-6 col-sm-12" style="display: flex; margin-bottom: 10px">
-                <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 12px; font-weight: 600">START DATE : </span> 
-                <input type="date" name="sdate" value="<?= $filter['sdate'] ?>" class="form-control" required>
-            </div>
-            <div class="col-md-6 col-sm-12" style="display: flex; margin-bottom: 10px">
-                <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 12px; font-weight: 600">END DATE : </span> 
-                <input type="date" name="edate" value="<?= $filter['edate'] ?>" class="form-control" required>
-            </div>
-            <div class="col-md-6 col-sm-12" style="display: flex; margin-bottom: 10px">
-                <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 5px; font-weight: 600">PLANT : </span> 
-                <select id="plant" class="form-control" name="plant" style="width: 78%">
-                    <?php foreach ($plant as $field): ?>
-                        <option <?= $filter['plant'] == $field['CODE'] ? 'selected' : '' ?> value="<?= $field['CODE'] ?>"><?= $field['CODE'] ?> - <?= $field['CODE_NAME'] ?></option>
+	<form class="form-horizontal" action="#" method="POST">
+        <div class="row" style="padding: 0px 10px; border-bottom: 2px solid #000; padding-bottom: 10px;margin: 0px 0px; margin-bottom: 10px; ">
+			<div class="col-md-6 col-sm-12" style="display: flex;; align-items: center; margin-bottom: 10px">
+                <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 0px; font-weight: 600">WAREHOUSE : </span> 
+                <select id="warehouse" class="form-control" name="warehouse" >
+					<option value="*" selected>- ALL WAREHOUSE -</option>
+                    <?php foreach ($warehouse as $field): ?>
+                        <option <?= $filter['warehouse'] == $field['CODE'] ? 'selected' : '' ?> value="<?= $field['CODE'] ?>"><?= $field['NAMA'] ?></option>
                     <?php endforeach ?>
                 </select>
             </div>
-						<div class="col-md-6 col-sm-12" style="display: flex; margin-bottom: 10px">
-                <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 5px; font-weight: 600">SURVEYOR : </span> 
-                <select id="surveyor" class="form-control" name="surveyor" style="width: 78%">
-										<option <?= $filter['surveyor'] == '*' ? 'selected' : '' ?> value="*">* - ALL SURVEYOR </option>
-                    <?php foreach ($surveyor as $field): ?>
-                        <option <?= $filter['surveyor'] == $field['CREATED_BY'] ? 'selected' : '' ?> value="<?= $field['CREATED_BY'] ?>"><?= $field['CREATED_BY'] ?> - <?= $field['CREATED_BY_NAME'] ?></option>
+			<div class="col-md-6 col-sm-12" style="display: flex;; align-items: center">
+                <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 0px; font-weight: 600">AREA : </span> 
+                <select id="area" class="form-control" name="area" >
+					<option value="*" selected>- ALL AREA -</option>
+                    <?php foreach ($area as $field): ?>
+                        <option <?= $filter['area'] == $field['AREA'] ? 'selected' : '' ?> value="<?= $field['AREA'] ?>"><?= $field['AREA'] ?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>  
+			<div class="col-md-6 col-sm-12" style="display: flex;; align-items: center">
+                <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 0px; font-weight: 600">CLASSIFICATION : </span> 
+                <select id="klasifikasi" class="form-control" name="klasifikasi" >
+					<option value="*" selected>- ALL CLASSIFICATION -</option>
+                    <?php foreach ($klasifikasi as $field): ?>
+                        <option <?= $filter['klasifikasi'] == $field['CLASSIFICATION'] ? 'selected' : '' ?> value="<?= $field['CLASSIFICATION'] ?>"><?= $field['CLASSIFICATION'] ?></option>
                     <?php endforeach ?>
                 </select>
             </div>
-            <div class="col-md-12 col-sm-12" style="display: flex;">
+			     
+            <div class="col-md-6 col-sm-12" style="display: flex; align-items: center; justify-content: center">
                 <button type="submit" class="btn btn-primary btn-block" style="height: 30px">FILTER</button>
             </div>
+            <!-- <div class="col-md-2 col-sm-12" style="display: flex; align-items: center">
+                <button type="submit" formaction="<?= admin_url('visit/report-collector/excel') ?>" class="btn btn-info btn-block" style="height: 30px">EXCEL</button>
+            </div> -->
         </div>
     </form>
     <table class="table table-bordered table-hover" id="example1">
@@ -325,12 +325,12 @@
             <tr>
                 <th style="text-align: center;">NO</th>
                 <th style="text-align: center;">CODE</th>
-                <th style="text-align: center;">PLANT</th>
-                <th style="text-align: center;">SURVEYOR</th>
-                <th style="text-align: center;">DATE</th>
-                <!-- <th style="text-align: center;">COORDINATE</th> -->
-                <th style="text-align: center;">ADDRESS</th>
-                <th style="text-align: center;">PETANI</th>
+                <th style="text-align: center;">WAREHOUSE</th>
+                <th style="text-align: center;">PHONE NUMBER</th>
+                <th style="text-align: center;">CLASSIFICATION</th>
+                <th style="text-align: center;">CAPACITY</th>
+                <th style="text-align: center;">CATEGORY</th>
+                <th style="text-align: center;">AREA</th>
                 <th style="text-align: center;">ACTION</th>
             </tr>
         </thead>
@@ -338,19 +338,16 @@
             <?php foreach ($datatable as $i => $v): ?>
                 <tr>
                     <td style="text-align: center; vertical-align: middle"><?= $i + 1 ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['SURVEY_NO'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['PLANT_NAME'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['CREATED_BY'].' - '.$v['CREATED_BY_NAME'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= date('Y-m-d', strtotime($v['SURVEY_DATE'])) ?></td>
-                    <!-- <td style="text-align: center; vertical-align: middle">
-											<iframe class="maps-frame" src="https://maps.google.com/maps?q=<?= $v['COORDINATE'] ?>&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-										</td> -->
-                    <td style="text-align: center; vertical-align: middle; width: 30%"><?= $v['DESCRIPTION'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= str_replace(",", "\n", $v['FARMER_NAMES']) ?></td>
-                    <td style="text-align: center; vertical-align: middle">
-                        <!-- <a href="<?= admin_url('survey/edit/'.$v['SURVEY_NO']) ?>" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a> -->
-                        <!-- <a href="<?= admin_url('survey/drawing') ?>" class="btn btn-sm" title="Drawing"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px"></i></a> -->
-                        <a href="<?= admin_url('survey/detail/'.$v['SURVEY_NO']) ?>" target="_blank" class="btn btn-sm" title="Detail"><i class="fas fa-eye text-primary"></i></a>
+                    <td style="text-align: center; vertical-align: middle"><?= $v['CODE'] ?></td>
+                    <td style="text-align: center; vertical-align: middle"><?= $v['NAMA'] ?></td>
+                    <td style="text-align: center; vertical-align: middle"><?= $v['PHONE_NUMBER'] ?></td>
+                    <td style="text-align: center; vertical-align: middle"><?= $v['CLASSIFICATION'] ?></td>
+                    <td style="text-align: center; vertical-align: middle"><?= $v['CAPACITY'] ?></td>
+                    <td style="text-align: center; vertical-align: middle"><?= $v['KATEGORI'] ?></td>
+                    <td style="text-align: center; vertical-align: middle"><?= $v['AREA'] ?></td><td style="text-align: center; vertical-align: middle">
+                        <!-- <a href="<?= admin_url('master/warehouse/detail/'.$v['CODE']) ?>" class="btn btn-sm"><i class="fas fa-eye text-success"></i></a> -->
+                        <a href="<?= admin_url('master/warehouse/edit/'.$v['CODE']) ?>" class="btn btn-sm"><i class="fas fa-pen text-warning"></i></a>
+                        <!-- <a href="<?= admin_url('master/warehouse/delete/'.$v['CODE']) ?>" class="btn btn-sm"><i class="fas fa-trash text-danger"></i></a> -->
                     </td>
                 </tr>
             <?php endforeach ?>
@@ -368,5 +365,22 @@
       $('#example1').DataTable(
         {"language": {"paginate": { "previous": "&lt","next": "&gt",}}}
       );
-    })
+    });
+
+	$('#warehouse').select2({
+        theme: 'bootstrap4',
+        language: "en",
+        placeholder: "- SELECT WAREHOUSE -",
+    });
+
+	$('#area').select2({
+        theme: 'bootstrap4',
+        language: "en",
+        placeholder: "- SELECT AREA -",
+    });
+	$('#klasifikasi').select2({
+        theme: 'bootstrap4',
+        language: "en",
+        placeholder: "- SELECT CLASSIFICATION -",
+    });
 </script>

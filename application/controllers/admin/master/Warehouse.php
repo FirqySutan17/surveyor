@@ -3,11 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Warehouse extends CI_Controller {
 	var $menu_id = "";
+	var $menu_id1 = "";
+	var $menu_id2 = "";
 	var $session_data = "";
 	public function __Construct() {
 		parent::__construct();
 		$this->menu_id = 'TR002';
 		$this->menu_id1 = 'R002';
+		$this->menu_id2 = 'TR005';
 		$this->session_data = $this->session->userdata('user_dashboard');
 
 		$this->cekLogin();
@@ -42,6 +45,36 @@ class Warehouse extends CI_Controller {
 		// dd($data['area']);
 		$this->template->_v('master/gudang/index', $data);
 	}
+
+	public function index_update() {
+		$warehouse = "*";
+		$area = "*";
+		$klasifikasi = "*";
+
+		$user = $this->session_data['user'];
+
+		if ($this->input->server('REQUEST_METHOD') === 'POST') {
+			$warehouse 		= $this->input->post('warehouse');
+			$area 			= $this->input->post('area');
+			$klasifikasi 			= $this->input->post('klasifikasi');
+		}
+
+		$filter = [
+			"warehouse"			=> $warehouse,
+			"area"				=> $area,
+			"klasifikasi"		=> $klasifikasi,
+		];
+
+		$data['title'] 			= 'WAREHOUSE';
+		$data['warehouse'] 		= $this->Dbhelper->selectTabel('CODE, NAMA, AREA', 'CD_GUDANG');
+		$data['area'] 			= $this->dataarea();
+		$data['klasifikasi'] 	= $this->dataklasifikasi();
+		$data['datatable']		= $this->datatable($filter);
+		$data['filter']			= $filter;
+		// dd($data['area']);
+		$this->template->_v('master/gudang/index-update', $data);
+	}
+
 
 	private function datatable($filter) {
 		$warehouse = $filter['warehouse'];

@@ -175,8 +175,8 @@
             </li>
             <?php endif ?>
 
-            <?php if (in_array('TR001', $user_access) || in_array('TR002', $user_access) || in_array('*', $user_access)): ?>
-            <li class="dropdown <?= (($this->uri->segment(2) == 'survey' && $this->uri->segment(2) == 'remainder') && $this->uri->segment(3) == 'entry')  ? 'active' : '' ?> <?= $this->uri->segment(3) == 'warehouse' ? 'active' : '' ?>">
+            <?php if (in_array('TR001', $user_access) || in_array('TR002', $user_access) || in_array('TR003', $user_access) || in_array('*', $user_access)): ?>
+            <li class="dropdown <?= (($this->uri->segment(2) == 'survey' && $this->uri->segment(2) == 'remainder') && $this->uri->segment(3) == 'entry')  ? 'active' : '' ?>">
                 <a href="javascript:void(0)" class="dropdown-btn">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -214,7 +214,43 @@
                                 <i class='bx bxs-right-arrow'></i> GUDANG ENTRY
                             </a>
                         </li>
-                    <?php endif ?>  
+                    <?php endif ?>
+                </ul>
+            </li>
+            <?php endif ?>
+
+            <?php if (in_array('TR004', $user_access) || in_array('TR005', $user_access) || in_array('*', $user_access)): ?>
+            <li class="dropdown <?= (($this->uri->segment(2) == 'survey' && $this->uri->segment(2) == 'remainder') && $this->uri->segment(3) == 'entry')  ? 'active' : '' ?> ">
+                <a href="javascript:void(0)" class="dropdown-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M14 14V6M14 14L20.1023 17.487C20.5023 17.7156 21 17.4268 21 16.9661V3.03391C21 2.57321 20.5023 2.28439 20.1023 2.51296L14 6M14 14H7C4.79086 14 3 12.2091 3 10V10C3 7.79086 4.79086 6 7 6H14"
+                            stroke-width="1.5" />
+                        <path
+                            d="M7.75716 19.3001L7 14H11L11.6772 18.7401C11.8476 19.9329 10.922 21 9.71716 21C8.73186 21 7.8965 20.2755 7.75716 19.3001Z"
+                            stroke-width="1.5" />
+                    </svg>
+
+                    <span class="link-name">UPDATE DATA</span>
+                    <i id="arrow" class='bx bx-chevron-right'></i>
+                </a>
+                <ul class="nav-submenu menu-content">
+                    <?php if (in_array('TR004', $user_access) || in_array('*', $user_access)): ?>
+                        <li class="">
+                            <a href="<?= route('dashboard/survey/data-update') ?>"
+                                class="">
+                                <i class='bx bxs-right-arrow'></i> SURVEY UPDATE
+                            </a>
+                        </li>
+                    <?php endif ?>
+                    <?php if (in_array('TR005', $user_access) || in_array('*', $user_access)): ?>
+                        <li class="">
+                            <a href="<?= admin_url('master/warehouse/data-update') ?>"
+                                class="">
+                                <i class='bx bxs-right-arrow'></i> GUDANG UPDATE
+                            </a>
+                        </li>
+                    <?php endif ?>
                 </ul>
             </li>
             <?php endif ?>

@@ -12,10 +12,11 @@ class survey extends CI_Controller {
 	var $session_data = "";
 	public function __Construct() {
 		parent::__construct();
-		$this->menu_id 	= 'TR001';
-		$this->menu_id2 = 'R001';
-		$this->menu_id3 = 'R003';
-		$this->menu_id4 = 'R004';
+		$this->menu_id 		= 'TR001';
+		$this->menu_id2 	= 'R001';
+		$this->menu_id3 	= 'R003';
+		$this->menu_id4 	= 'R004';
+		$this->menu_id5 	= 'TR004';
 		$this->session_data = $this->session->userdata('user_dashboard');
 
 		$this->cekLogin();
@@ -268,13 +269,43 @@ class survey extends CI_Controller {
 			"surveyor"	=> $surveyor
 		];
 
-		$data['title'] 				= 'Survey Report';
+		$data['title'] 				= 'SURVEY';
 		$data['datatable']		= $this->datatable($filter);
 		$data['filter']				= $filter;
 		$data['plant'] 				= $this->Dbhelper->selectTabel('CODE, CODE_NAME', 'CD_CODE', array('HEAD_CODE' => 'AB'), 'CODE', 'ASC');
 		$data['surveyor'] 		= $this->list_surveyor();
 		
 		$this->template->_v('survey/index', $data);
+	}
+
+	public function index_update() {
+
+		$sdate 		= date('Y-m').'-01';
+		$edate 		= date('Y-m-d');
+		$plant 		= "*";
+		$surveyor = "*";
+
+		if ($this->input->server('REQUEST_METHOD') === 'POST') {
+			$sdate 			= $this->input->post('sdate');
+			$edate 			= $this->input->post('edate');
+			$plant 			= $this->input->post('plant');
+			$surveyor 	= $this->input->post('surveyor');
+		}
+
+		$filter = [
+			"plant"	=> $plant,
+			"sdate"	=> $sdate,
+			"edate"	=> $edate,
+			"surveyor"	=> $surveyor
+		];
+
+		$data['title'] 				= 'SURVEY';
+		$data['datatable']		= $this->datatable($filter);
+		$data['filter']				= $filter;
+		$data['plant'] 				= $this->Dbhelper->selectTabel('CODE, CODE_NAME', 'CD_CODE', array('HEAD_CODE' => 'AB'), 'CODE', 'ASC');
+		$data['surveyor'] 		= $this->list_surveyor();
+		
+		$this->template->_v('survey/index-update', $data);
 	}
 
 	public function detail($survey_no) {

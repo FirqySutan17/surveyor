@@ -349,6 +349,8 @@ class User extends CI_Controller {
 			'TR001'	=> 'Entry - Survey',
 			'TR002'	=> 'Entry - Gudang',
 			'TR003'	=> 'Entry - Attendance',
+			'TR004'	=> 'Update - Survey',
+			'TR005'	=> 'Update - Gudang',
 			'R001'	=> 'Report - Survey',
 			'R002'	=> 'Report - Gudang',
 			'R003'	=> 'Report - Attendance',

@@ -39,6 +39,7 @@ $route['visit/do_create_mobile'] 	= 'Home/do_create_mobile';
 	$route['dashboard/master/user/excel'] 				= 'admin/master/User/excel';
 
 	$route['dashboard/master/warehouse'] 						= 'admin/master/Warehouse';
+	$route['dashboard/master/warehouse/data-update'] 						= 'admin/master/Warehouse/index_update';
 	$route['dashboard/master/warehouse/create'] 			= 'admin/master/Warehouse/create';
 	$route['dashboard/master/warehouse/do_create'] 		= 'admin/master/Warehouse/do_create';
 	$route['dashboard/master/warehouse/edit/(:any)'] 	= 'admin/master/Warehouse/edit/$1';
@@ -66,6 +67,7 @@ $route['visit/do_create_mobile'] 	= 'Home/do_create_mobile';
 
 /* ENTRY ROUTES */
 	$route['dashboard/survey'] 											= 'admin/Survey/index';
+	$route['dashboard/survey/data-update'] 								= 'admin/Survey/index_update';
 	$route['dashboard/survey/entry'] 								= 'admin/Survey/entry';
 	$route['dashboard/survey/ajax_location_detail'] = 'admin/Survey/ajax_location_detail';
 	$route['dashboard/survey/do_create'] 	= 'admin/Survey/do_create';

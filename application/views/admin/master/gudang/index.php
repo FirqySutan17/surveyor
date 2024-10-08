@@ -331,7 +331,6 @@
                 <th style="text-align: center;">CAPACITY</th>
                 <th style="text-align: center;">CATEGORY</th>
                 <th style="text-align: center;">AREA</th>
-                <th style="text-align: center;">ACTION</th>
             </tr>
         </thead>
         <tbody>
@@ -344,11 +343,12 @@
                     <td style="text-align: center; vertical-align: middle"><?= $v['CLASSIFICATION'] ?></td>
                     <td style="text-align: center; vertical-align: middle"><?= $v['CAPACITY'] ?></td>
                     <td style="text-align: center; vertical-align: middle"><?= $v['KATEGORI'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['AREA'] ?></td><td style="text-align: center; vertical-align: middle">
-                        <!-- <a href="<?= admin_url('master/warehouse/detail/'.$v['CODE']) ?>" class="btn btn-sm"><i class="fas fa-eye text-success"></i></a> -->
+                    <td style="text-align: center; vertical-align: middle"><?= $v['AREA'] ?></td>
+					<!-- <td style="text-align: center; vertical-align: middle">
+                        <a href="<?= admin_url('master/warehouse/detail/'.$v['CODE']) ?>" class="btn btn-sm"><i class="fas fa-eye text-success"></i></a>
                         <a href="<?= admin_url('master/warehouse/edit/'.$v['CODE']) ?>" class="btn btn-sm"><i class="fas fa-pen text-warning"></i></a>
-                        <!-- <a href="<?= admin_url('master/warehouse/delete/'.$v['CODE']) ?>" class="btn btn-sm"><i class="fas fa-trash text-danger"></i></a> -->
-                    </td>
+                        <a href="<?= admin_url('master/warehouse/delete/'.$v['CODE']) ?>" class="btn btn-sm"><i class="fas fa-trash text-danger"></i></a>
+                    </td> -->
                 </tr>
             <?php endforeach ?>
         </tbody>
