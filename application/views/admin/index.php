@@ -453,9 +453,9 @@
     }
 </style>
 
-<div class="main-content" style="background: linear-gradient(0deg, rgba(0,125,195,1) 10%, rgba(161,221,255,1) 98%); min-height: 91.6vh">
-    <img src="<?= asset('img/maps-markers.png') ?>" alt="" style="width: 100%; text-align: center; object-fit: cover; border-radius: 10px; border: 1px solid #fff">
-    <div class="db-table" style="margin-top: 10px">
+<div class="main-content" style="background: linear-gradient(0deg, rgba(0,125,195,1) 10%, rgba(161,221,255,1) 98%); min-height: 91.6vh; display: flex; align-items: center; justify-content: center;">
+    <img src="<?= asset('img/logo.png') ?>" alt="" style="width: 70%; text-align: center; object-fit: cover;">
+    <!-- <div class="db-table" style="margin-top: 10px">
         <div class="db-box" style="height: 250px">
             <h4 style="font-family: cjFont; margin-bottom: 0px; text-align: center; margin-bottom: 5px">TITLE POINT 1</h4>
             <p style="font-weight: 500; color: #fff"><?= convMonth(date('m')).' '.date('Y') ?></p>
@@ -480,7 +480,7 @@
                 
              </div>
         </div>
-    </div>
+    </div> -->
 </div>
 <script type="text/javascript">
     // $("#includeOptionGroup").on('click', function() {
