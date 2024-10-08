@@ -326,10 +326,10 @@
                 <th style="text-align: center;">NO</th>
                 <th style="text-align: center;">CODE</th>
                 <th style="text-align: center;">PLANT</th>
+                <th style="text-align: center;">SURVEYOR</th>
                 <th style="text-align: center;">DATE</th>
                 <!-- <th style="text-align: center;">COORDINATE</th> -->
                 <th style="text-align: center;">ADDRESS</th>
-                <th style="text-align: center;">SURVEYOR</th>
                 <th style="text-align: center;">PETANI</th>
                 <th style="text-align: center;">ACTION</th>
             </tr>
@@ -340,12 +340,12 @@
                     <td style="text-align: center; vertical-align: middle"><?= $i + 1 ?></td>
                     <td style="text-align: center; vertical-align: middle"><?= $v['SURVEY_NO'] ?></td>
                     <td style="text-align: center; vertical-align: middle"><?= $v['PLANT_NAME'] ?></td>
+                    <td style="text-align: center; vertical-align: middle"><?= $v['CREATED_BY'].' '.$v['CREATED_BY_NAME'] ?></td>
                     <td style="text-align: center; vertical-align: middle"><?= date('Y-m-d', strtotime($v['SURVEY_DATE'])) ?></td>
                     <!-- <td style="text-align: center; vertical-align: middle">
 											<iframe class="maps-frame" src="https://maps.google.com/maps?q=<?= $v['COORDINATE'] ?>&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 										</td> -->
                     <td style="text-align: center; vertical-align: middle"><?= $v['DESCRIPTION'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['CREATED_BY'].' '.$v['CREATED_BY_NAME'] ?></td>
                     <td style="text-align: center; vertical-align: middle"><?= str_replace(",", "\n", $v['FARMER_NAMES']) ?></td>
                     <td style="text-align: center; vertical-align: middle">
                         <a href="<?= admin_url('survey/edit/'.$v['SURVEY_NO']) ?>" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
