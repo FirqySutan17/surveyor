@@ -508,12 +508,12 @@
 			$("#detail-checkin").text(timein + " " + tanggal);
 			$("#detail-checkout").text(timeout + " " + tanggal);
 			$("#detail-frame-in").attr('src', frame_in);
-			$("#detail-imagein").html(imagein);
+			$("#detail-imagein").html(image_in);
 			if (timeout != '-') {
 				                                        
 				let image_in = `<img style="height: 300px; width: 300px; margin-top: 10px; object-fit: contain" class="selfie-prv" src="<?= base_url('uploads/') ?>${imageout}" />`;
 				$("#detail-frame-out").attr('src', frame_out);
-				$("#detail-imageout").html(imageout);
+				$("#detail-imageout").html(image_in);
 			}
 			window.dialog.showModal();
 		}
