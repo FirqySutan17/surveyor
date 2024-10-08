@@ -64,11 +64,12 @@ class survey extends CI_Controller {
 					"COORDINATE"		=> dbClean($post['coordinate']),
 					"LAND_TYPE"			=> dbClean($post['land_type']),
 					"PROVINCE"			=> dbClean($post['province']),
-					"REGENCY"			=> dbClean($post['regencies']),
+					"REGENCY"				=> dbClean($post['regencies']),
 					"DISTRICT"			=> dbClean($post['districts']),
 					"DESCRIPTION"		=> dbClean($post['address']),
 					"CREATED_AT"		=> date('Ymd His'),
 					"CREATED_BY"		=> $this->session_data['user']['EMPLOYEE_ID'],
+					"PLANT"					=> $this->session_data['user']['PLANT'] == '*' ? '3212' : $this->session_data['user']['PLANT'],
 				];
 
 				if (empty($survey_report["CREATED_BY"])) {
@@ -1078,23 +1079,22 @@ class survey extends CI_Controller {
 
 		
 		// FN_USER_NAME(CREATED_BY) CREATED_BY_NAME
+		
 		$query = "
 			select 
 				SURVEY_NO,
-			    SURVEY_DATE,
-			    COORDINATE,
-			    DESCRIPTION,
-					CREATED_BY
+				SURVEY_DATE,
+				DESCRIPTION,
+				CREATED_BY,
+				FN_USER_NAME(CREATED_BY) CREATED_BY_NAME,
+				FN_CODE_NAME(PLANT, 'AB') PLANT_NAME,
+				(
+						SELECT WM_CONCAT(FARMER_NAME) as farmer_names FROM SURVEY_FARMERS WHERE SURVEY_NO =SURVEY.SURVEY_NO GROUP BY SURVEY_NO
+				) as FARMER_NAMES
 			from SURVEY
 			where SURVEY_DATE BETWEEN '$sdate' AND '$edate'
 			ORDER BY SURVEY_NO DESC
 		";
-		
-		// if ($filter['drafter'] != '*') {
-		// 	$query .= " and a.CREATED_BY = '".$filter['drafter']."'";
-		// }
-        $data = $this->db->query($query)->result_array();
-		// dd($query);
 		return $data;
 	}
 
