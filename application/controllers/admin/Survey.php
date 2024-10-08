@@ -273,7 +273,6 @@ class survey extends CI_Controller {
 		$data['filter']				= $filter;
 		$data['plant'] 				= $this->Dbhelper->selectTabel('CODE, CODE_NAME', 'CD_CODE', array('HEAD_CODE' => 'AB'), 'CODE', 'ASC');
 		$data['surveyor'] 		= $this->list_surveyor();
-		$data['placeholder'] 	= $this->list_placeholder();
 		
 		$this->template->_v('survey/index', $data);
 	}
@@ -295,6 +294,7 @@ class survey extends CI_Controller {
 		$data['title'] 			= 'SURVEY';
 		$data['user'] 			= $user;
 		$data['detail']				= $data_detail;
+		$data['placeholder'] 	= $this->list_placeholder();
 		
 		$this->template->_v('survey/edit', $data);
 	}
