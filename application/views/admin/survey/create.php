@@ -656,6 +656,9 @@
                     #farmersinfo .cust-btn-add {
                         display: none;
                     }
+                    #segment .cust-btn-add {
+                        display: none;
+                    }
                     #marketprice .cust-btn-add {
                         display: none;
                     }
@@ -756,6 +759,9 @@
                             padding: 15px !important;
                         }
                         #farmersinfo .cust-btn-add {
+                            display: block;
+                        }
+                        #segment .cust-btn-add {
                             display: block;
                         }
                         #marketprice .cust-btn-add {
@@ -899,7 +905,10 @@
                                     <th colspan="3" style="text-align: right; background: #fff; border: 0px"><button type="button" class="btn cust-btn-add" onclick="addSegmentcondition()">+</button></th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="segment">
+                                <tr style="align-items: flex-end">
+                                    <th style="text-align: right; background: #fff; border: 0px;"><button type="button" class="btn cust-btn-add" onclick="addSegmentcondition()">+</button></th>
+                                </tr>
                                 <div id="segment"></div>
                             </tbody>
                         </table>
@@ -1128,12 +1137,19 @@
             <div id="segment-${index}"> 
                 <table class="table table-bordered" style="margin-bottom: 0px">
                     <input type="hidden" name="PLANTING_siklus[${index}]" value="${index + 1}">
+                    <tr>
+                        <th colspan="2" data-label="PLANTING PHASE - CYCLE ${index + 1}" style="text-align: left; font-size: 13px !important; background-color: #E6E6E6;">
+                            <div style="float: left; margin-right: 15px">
+                                <input style="height: 20px; width: 20px !important" class="planting-option-${index}" type="checkbox" value="1" onchange="plantingChanged(${index})"/>
+                            </div>
+                            <div style="display: inline-block; vertical-align: middle; margin-top: 3px">
+                                PLANTING PHASE - CYCLE ${index + 1}
+                            </div> 
+                        </th>
+                        <th style="text-align: right; background-color: #E6E6E6"><a onclick="deleteRowSegment(${index})" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger" style="font-size: 16px; margin-top: 3px"></i></a></th>
+                    </tr>
                     <thead>
-                        <tr>
-                            <th style="text-align: left;"><input style="height: 20px; width: 20px !important" class="planting-option-${index}" type="checkbox" value="1" onchange="plantingChanged(${index})"/></th>
-                            <th style="text-align: left; font-size: 13px !important">PLANTING PHASE - CYCLE ${index + 1}</th>
-                            <th style="text-align: right"><a onclick="deleteRowSegment(${index})" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger" style="font-size: 16px; margin-top: 3px"></i></a></th>
-                        </tr>
+                        
                         <tr class="planting-phase-${index}" style="display: none;">
                             <th style="text-align: left">DATE</th>
                             <th style="text-align: left">PHASE</th>
@@ -1142,7 +1158,7 @@
                     </thead>
                     <tbody class="planting-phase-${index}" style="display: none;">
                         <tr style="align-items: flex-end">
-                            <td>
+                            <td data-label="DATE">
                                 <input type="date" name="PLANTING_date[persiapan-lahan][${index}]" class="form-control" style="font-size: 14px" >
                             </td>
                             <td data-label="PHASE" width="45%">
@@ -1161,7 +1177,7 @@
                             </td>
                         </tr>
                         <tr style="align-items: flex-end">
-                            <td><input type="date" name="PLANTING_date[vegetatif-awal][${index}]" class="form-control" style="font-size: 14px" ></td>
+                            <td data-label="DATE"><input type="date" name="PLANTING_date[vegetatif-awal][${index}]" class="form-control" style="font-size: 14px" ></td>
                             <td data-label="PHASE" width="45%">
                                 <input type="text" name="PLANTING_phase[vegetatif-awal][${index}]" value="VEGETATIF AWAL" class="form-control" style="font-size: 14px" readonly>
                             </td>
@@ -1180,7 +1196,7 @@
                             </td>
                         </tr>
                         <tr style="align-items: flex-end">
-                            <td><input type="date" name="PLANTING_date[vegetatif-akhir][${index}]" class="form-control" style="font-size: 14px" ></td>
+                            <td data-label="DATE"><input type="date" name="PLANTING_date[vegetatif-akhir][${index}]" class="form-control" style="font-size: 14px" ></td>
                             <td data-label="PHASE" width="45%">
                                 <input type="text" name="PLANTING_phase[vegetatif-akhir][${index}]" value="VEGETATIF AKHIR" class="form-control" style="font-size: 14px" readonly>
                             </td>
@@ -1200,7 +1216,7 @@
                             </td>
                         </tr>
                         <tr style="align-items: flex-end">
-                            <td><input type="date" name="PLANTING_date[genetatif-awal][${index}]" class="form-control" style="font-size: 14px" ></td>
+                            <td data-label="DATE"><input type="date" name="PLANTING_date[genetatif-awal][${index}]" class="form-control" style="font-size: 14px" ></td>
                             <td data-label="PHASE" width="45%">
                                 <input type="text" name="PLANTING_phase[genetatif-awal][${index}]" value="GENETATIF AWAL" class="form-control" style="font-size: 14px" readonly>
                             </td>
@@ -1220,7 +1236,7 @@
                             </td>
                         </tr>
                         <tr style="align-items: flex-end">
-                            <td><input type="date" name="PLANTING_date[genetatif-akhir][${index}]" class="form-control" style="font-size: 14px" ></td>
+                            <td data-label="DATE"><input type="date" name="PLANTING_date[genetatif-akhir][${index}]" class="form-control" style="font-size: 14px" ></td>
                             <td data-label="PHASE" width="45%">
                                 <input type="text" name="PLANTING_phase[genetatif-akhir][${index}]" value="GENETATIF AKHIR" class="form-control" style="font-size: 14px" readonly>
                             </td>
@@ -1236,7 +1252,7 @@
                             </td>
                         </tr>
                         <tr style="align-items: flex-end">
-                            <td><input type="date" name="PLANTING_date[gagal-panen][${index}]" class="form-control" style="font-size: 14px" ></td>
+                            <td data-label="DATE"><input type="date" name="PLANTING_date[gagal-panen][${index}]" class="form-control" style="font-size: 14px" ></td>
                             <td data-label="PHASE" width="45%">
                                 <input type="text" name="PLANTING_phase[gagal-panen][${index}]" value="GAGAL PANEN" class="form-control" style="font-size: 14px" readonly>
                             </td>
@@ -1252,11 +1268,18 @@
                     </tbody>
                 </table>
                 <table class="table table-bordered planting-phase-${index}" style="display: none;">
+                    <tr>
+                        <th colspan="10" data-label="HARVEST PHASE" style="text-align: left; font-size: 13px !important; background-color: #E6E6E6;">
+                            <div style="float: left; margin-right: 15px">
+                                <input style="height: 20px; width: 20px !important" class="harvest-option-${index}" type="checkbox" value="1" onchange="harvestChanged(${index})"/>
+                            </div>
+                            <div style="display: inline-block; vertical-align: middle; margin-top: 3px">
+                                HARVEST PHASE
+                            </div> 
+                        </th>
+                    </tr>
                     <thead>
-                        <tr>
-                            <th colspan="9" style="text-align: left; font-size: 13px !important">HARVEST PHASE</th>
-                            <th style="text-align: right;"><input style="height: 20px; width: 20px !important" class="harvest-option-${index}" type="checkbox" value="1" onchange="harvestChanged(${index})"/></th>
-                        </tr>
+                        
                         <tr class="harvest-phase-${index}" style="display: none;">
                             <th style="width: 10%">SCORE</th>
                             <th style="width: 10%">BARIS</th>
@@ -1277,33 +1300,40 @@
                                     <?= $i ?>
                                     <input type="hidden" name="HARVEST_score[${index}][]" value="<?= $i ?>">
                                 </td>
-                                <td data-label="BARIS">
-                                    <input name="baris[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                </td>
-                                <td data-label="ACTUAL">
-                                    <input name="baris_actual[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                </td>
-                                <td data-label="%">
-                                    <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                </td>
-                                <td data-label="BIJI">
-                                    <input name="biji[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                </td>
-                                <td data-label="ACTUAL">
-                                    <input name="biji_actual[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                </td>
-                                <td data-label="%">
-                                    <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                </td>
-                                <td data-label="BOBOT">
-                                    <input name="bobot[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                </td>
-                                <td data-label="ACTUAL">
-                                    <input name="bobot_actual[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                </td>
-                                <td data-label="%">
-                                    <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                </td>
+                                <div class="harvest-mobile" style="display: flex; ">
+                                    <td data-label="BARIS">
+                                        <input name="baris[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input name="baris_actual[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                </div>
+                                <div class="harvest-mobile">
+                                    <td data-label="BIJI">
+                                        <input name="biji[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input name="biji_actual[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                </div>
+                                <div class="harvest-mobile">
+                                    <td data-label="BOBOT">
+                                        <input name="bobot[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input name="bobot_actual[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                    </td>
+                                </div>
+                                
                             </tr>
                         <?php } ?>
                     </tbody>
