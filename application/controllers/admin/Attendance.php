@@ -49,18 +49,19 @@ class Attendance extends CI_Controller {
 			$datemonth = date('Ymd', strtotime($filter['datemonth']));
 			$where .= "AND a.ATTEND_DATE = '$datemonth'";
 		}
-		$data = $this->Dbhelper->selectRawQuery("
+		$query = "
 			SELECT a.*, b.FULL_NAME
 			FROM HR_ATTENDANCE_WFH a, HR_EMPLOYEE_ATTD b
 			WHERE
 					a.COMPANY = b.COMPANY
 					AND a.PLANT = b.PLANT
 					AND a.EMPNO = b.EMPNO
-					
 					$where
 			ORDER BY a.ATTEND_DATE DESC
-		");
-		dd($data);
+		";
+		$data = $this->Dbhelper->selectRawQuery($query);
+		dd($data, FALSE);
+		dd($query);
 		return $data;
 	}
 
