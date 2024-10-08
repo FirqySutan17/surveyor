@@ -1095,6 +1095,7 @@ class survey extends CI_Controller {
 			where SURVEY_DATE BETWEEN '$sdate' AND '$edate'
 			ORDER BY SURVEY_NO DESC
 		";
+		$data 				= $this->db->query($query)->result_array();
 		return $data;
 	}
 
