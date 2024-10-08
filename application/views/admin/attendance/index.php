@@ -403,17 +403,21 @@
 			</thead>
 			<tbody>
 						<?php foreach ($datatable as $i => $v): ?>
-								<tr>
-										<td style="text-align: center; vertical-align: middle"><?= $i + 1 ?></td>
-										<td style="text-align: center; vertical-align: middle"><?= date('Y-m-d', strtotime($v['ATTEND_DATE'])) ?></td>
-										<td style="text-align: center; vertical-align: middle"><?= $v['FULL_NAME'] ?></td>
-										<td style="text-align: center; vertical-align: middle"><?= date('H:i:s', strtotime($v['TIME_IN'])) ?></td>
-										<td style="text-align: center; vertical-align: middle"><?= !empty($v['TIME_OUT']) ? date('H:i:s', strtotime($v['TIME_OUT'])) : '-' ?></td>
-										<td style="text-align: center; vertical-align: middle">
-											<button id="btn-detail-<?= $i ?>" data-name="<?= $v['FULL_NAME'] ?>"  data-tanggal="<?= date('d/m/Y', strtotime($v['ATTEND_DATE'])) ?>" data-timein="<?= date('H:i:s', strtotime($v['TIME_IN'])) ?>" data-coordinatein="<?= $v['REG_IN_OS'] ?>" data-timeout="<?= !empty($v['TIME_OUT']) ? date('H:i:s', strtotime($v['TIME_OUT'])) : '-' ?>" data-coordinateout="<?= $v['REG_OUT_OS'] ?>" class="primary" onclick="showDetail('<?= $i ?>')" style="background: none; border: none;"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px; margin-top: 5px"></i></button>
-											<!-- <a href="<?= admin_url('survey/detail') ?>" target="_blank" class="btn btn-sm" title="Detail"><i class="fas fa-eye text-primary"></i></a> -->
-										</td>
-								</tr>
+							<?php
+								$path_in = $v['PLANT'].'/'.$v['PLANT'].'_'.$v['EMPNO'].'_'.$v['ATTEND_DATE'].'_IN.jpg'; 
+								$path_out = $v['PLANT'].'/'.$v['PLANT'].'_'.$v['EMPNO'].'_'.$v['ATTEND_DATE'].'_OUT.jpg'; 
+							?>
+							<tr>
+									<td style="text-align: center; vertical-align: middle"><?= $i + 1 ?></td>
+									<td style="text-align: center; vertical-align: middle"><?= date('Y-m-d', strtotime($v['ATTEND_DATE'])) ?></td>
+									<td style="text-align: center; vertical-align: middle"><?= $v['FULL_NAME'] ?></td>
+									<td style="text-align: center; vertical-align: middle"><?= date('H:i:s', strtotime($v['TIME_IN'])) ?></td>
+									<td style="text-align: center; vertical-align: middle"><?= !empty($v['TIME_OUT']) ? date('H:i:s', strtotime($v['TIME_OUT'])) : '-' ?></td>
+									<td style="text-align: center; vertical-align: middle">
+										<button id="btn-detail-<?= $i ?>" data-name="<?= $v['FULL_NAME'] ?>"  data-tanggal="<?= date('d/m/Y', strtotime($v['ATTEND_DATE'])) ?>" data-timein="<?= date('H:i:s', strtotime($v['TIME_IN'])) ?>" data-coordinatein="<?= $v['REG_IN_OS'] ?>" data-timeout="<?= !empty($v['TIME_OUT']) ? date('H:i:s', strtotime($v['TIME_OUT'])) : '-' ?>" data-coordinateout="<?= $v['REG_OUT_OS'] ?>" data-imagein="<?= $path_in ?>" data-imageout="<?= $path_out ?>" class="primary" onclick="showDetail('<?= $i ?>')" style="background: none; border: none;"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px; margin-top: 5px"></i></button>
+										<!-- <a href="<?= admin_url('survey/detail') ?>" target="_blank" class="btn btn-sm" title="Detail"><i class="fas fa-eye text-primary"></i></a> -->
+									</td>
+							</tr>
 						<?php endforeach ?>
 			</tbody>
 		</table>
