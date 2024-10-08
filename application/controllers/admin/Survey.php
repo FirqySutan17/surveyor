@@ -1181,7 +1181,7 @@ class survey extends CI_Controller {
 		$data_planting_phase = [];
 		if (!empty($planting_phase)) {
 			foreach ($planting_phase as $ph_data) {
-				$phase 	= strtolower(str_replace(" ", "_", $ph_data['PHASE']));
+				$phase 	= strtolower(str_replace(" ", "-", $ph_data['PHASE']));
 				$siklus = $ph_data['SIKLUS'];
 				if (!array_key_exists($siklus, $data_planting_phase)) {
 					$data_planting_phase[$siklus] = [
