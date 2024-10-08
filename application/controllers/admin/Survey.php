@@ -304,7 +304,7 @@ class survey extends CI_Controller {
 			$post = $this->input->post();
 			$survey_no = $post['survey_no'];
 			try {
-				dd($post);
+				// dd($post);
 				// VR DATA
 				$survey = [
 					"UPDATED_AT"		=> date('Ymd His'),

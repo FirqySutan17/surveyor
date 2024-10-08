@@ -1011,7 +1011,7 @@
                             <?php if(!empty($detail['SURVEY_MARKET_PRICES'])): ?>
                                 <?php foreach($detail['SURVEY_MARKET_PRICES'] as $sf): ?>
                                     <tr>
-                                        <td data-label="DATE"><input type="month" name="market_date[]" value="<?= date('Y-m-d', $sf['SURVEY_DATE']) ?>" class="form-control"></td>
+                                        <td data-label="DATE"><input type="month" name="market_date[]" value="<?= date('Y-m', $sf['SURVEY_DATE']) ?>" class="form-control"></td>
                                         <td data-label="PRICE"><input type="number" name="market_price[]" class="form-control" value="<?= $sf['PRICE'] ?>" onkeyup="onkeyup_data(event)" onkeydown="onkeydown_data(event)"></td>
                                         <td></td>
                                     </tr>
