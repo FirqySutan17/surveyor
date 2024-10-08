@@ -288,7 +288,6 @@ class survey extends CI_Controller {
 		$user	= 	$this->session_data['user'];
 
 		$data_detail = $this->get_surveydetail($survey_no);
-		dd($data_detail);
 		$data['title'] 				= 'SURVEY';
 		$data['user'] 				= $user;
 		$data['detail']				= $data_detail;
