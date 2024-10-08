@@ -309,6 +309,7 @@
 						<div class="col-md-6 col-sm-12" style="display: flex; margin-bottom: 10px">
                 <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 5px; font-weight: 600">SURVEYOR : </span> 
                 <select id="surveyor" class="form-control" name="surveyor" style="width: 78%">
+										<option <?= $filter['surveyor'] == '*' ? 'selected' : '' ?> value="*">* - ALL SURVEYOR </option>
                     <?php foreach ($surveyor as $field): ?>
                         <option <?= $filter['surveyor'] == $field['CREATED_BY'] ? 'selected' : '' ?> value="<?= $field['CREATED_BY'] ?>"><?= $field['CREATED_BY'] ?> - <?= $field['CREATED_BY_NAME'] ?></option>
                     <?php endforeach ?>
