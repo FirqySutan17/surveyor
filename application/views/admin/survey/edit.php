@@ -919,6 +919,7 @@
                                                                 <div class="<?= $phase_key ?>">
                                                                 <?php foreach($phase['data'] as $i_deskripsi => $deskripsi): ?>
                                                                     <?php $form_placeholder = $phase_key == 'persiapan-lahan' ? $placeholder[$phase_key][0] : $placeholder[$phase_key][$i_deskripsi]; ?>
+                                                                    <label for="PLANTING_description[<?= $phase_key ?>][<?= $index ?>][]"><?= $form_placeholder ?></label>
                                                                     <input type="text" name="PLANTING_description[<?= $phase_key ?>][<?= $index ?>][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" value="<?= $deskripsi ?>" placeholder="<?= $form_placeholder ?>">
                                                                 <?php endforeach ?>
                                                                 </div>
