@@ -284,25 +284,35 @@
     </h3>
 	<form class="form-horizontal" action="#" method="POST">
         <div class="row" style="padding: 0px 10px; border-bottom: 2px solid #000; padding-bottom: 10px;margin: 0px 0px; margin-bottom: 10px; ">
-			<div class="col-md-8 col-sm-12" style="display: flex;; align-items: center; margin-bottom: 10px">
-                <span class="label-span" style="width: 17%; display: inline-block; vertical-align: middle; margin-top: 0px; font-weight: 600">WAREHOUSE : </span> 
-                <select id="warehouse" class="form-control" name="warehouse" style="width: 50%">
+			<div class="col-md-6 col-sm-12" style="display: flex;; align-items: center; margin-bottom: 10px">
+                <span class="label-span" style="width: 24%; display: inline-block; vertical-align: middle; margin-top: 0px; font-weight: 600">WAREHOUSE : </span> 
+                <select id="warehouse" class="form-control" name="warehouse" >
 					<option value="*" selected>- ALL WAREHOUSE -</option>
                     <?php foreach ($warehouse as $field): ?>
                         <option <?= $filter['warehouse'] == $field['CODE'] ? 'selected' : '' ?> value="<?= $field['CODE'] ?>"><?= $field['NAMA'] ?></option>
                     <?php endforeach ?>
                 </select>
             </div>
-			<div class="col-md-8 col-sm-12" style="display: flex;; align-items: center">
-                <span class="label-span" style="width: 17%; display: inline-block; vertical-align: middle; margin-top: 0px; font-weight: 600">AREA : </span> 
-                <select id="area" class="form-control" name="area" style="width: 50%">
+			<div class="col-md-6 col-sm-12" style="display: flex;; align-items: center">
+                <span class="label-span" style="width: 24%; display: inline-block; vertical-align: middle; margin-top: 0px; font-weight: 600">AREA : </span> 
+                <select id="area" class="form-control" name="area" >
 					<option value="*" selected>- ALL AREA -</option>
                     <?php foreach ($area as $field): ?>
                         <option <?= $filter['area'] == $field['AREA'] ? 'selected' : '' ?> value="<?= $field['AREA'] ?>"><?= $field['AREA'] ?></option>
                     <?php endforeach ?>
                 </select>
-            </div>          
-            <div class="col-md-4 col-sm-12" style="display: flex; align-items: center; justify-content: center">
+            </div>  
+			<div class="col-md-6 col-sm-12" style="display: flex;; align-items: center">
+                <span class="label-span" style="width: 24%; display: inline-block; vertical-align: middle; margin-top: 0px; font-weight: 600">CLASSIFICATION : </span> 
+                <select id="klasifikasi" class="form-control" name="klasifikasi" >
+					<option value="*" selected>- ALL CLASSIFICATION -</option>
+                    <?php foreach ($klasifikasi as $field): ?>
+                        <option <?= $filter['klasifikasi'] == $field['CLASSIFICATION'] ? 'selected' : '' ?> value="<?= $field['CLASSIFICATION'] ?>"><?= $field['CLASSIFICATION'] ?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+			     
+            <div class="col-md-6 col-sm-12" style="display: flex; align-items: center; justify-content: center">
                 <button type="submit" class="btn btn-primary btn-block" style="height: 30px">FILTER</button>
             </div>
             <!-- <div class="col-md-2 col-sm-12" style="display: flex; align-items: center">
@@ -367,5 +377,10 @@
         theme: 'bootstrap4',
         language: "en",
         placeholder: "- SELECT AREA -",
+    });
+	$('#klasifikasi').select2({
+        theme: 'bootstrap4',
+        language: "en",
+        placeholder: "- SELECT CLASSIFICATION -",
     });
 </script>

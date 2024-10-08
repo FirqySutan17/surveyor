@@ -36,6 +36,7 @@ class Warehouse extends CI_Controller {
 		$data['title'] 			= 'WAREHOUSE';
 		$data['warehouse'] 		= $this->Dbhelper->selectTabel('CODE, NAMA, AREA', 'CD_GUDANG');
 		$data['area'] 			= $this->dataarea();
+		$data['klasifikasi'] 	= $this->dataklasifikasi();
 		$data['datatable']		= $this->datatable($filter);
 		$data['filter']			= $filter;
 		// dd($data['area']);
@@ -62,9 +63,19 @@ class Warehouse extends CI_Controller {
 			}
 			$query .= " AREA = '".$filter['area']."'";
 		}
+		if ($filter['klasifikasi'] != '*') {
+			
+			if ($filter['area'] != '*' || $filter['warehouse'] != '*') {
+				$query .= " and ";
+			} else {
+				$query .= " WHERE ";
+			}
+			$query .= " CLASSIFICATION = '".$filter['klasifikasi']."'";
+		}
 		$query .= " order by CODE ASC";
-        $data = $this->db->query($query)->result_array();
 		// dd($query);
+        $data = $this->db->query($query)->result_array();
+		
 		return $data;
 	}
 	private function dataarea() {
@@ -73,6 +84,23 @@ class Warehouse extends CI_Controller {
 			FROM (
 				SELECT area,
 					ROW_NUMBER() OVER (PARTITION BY area ORDER BY area) as rn
+				FROM CD_GUDANG
+			)
+			WHERE rn = 1
+		";
+		
+		// $query .= " order by CODE ASC";
+        $data = $this->db->query($query)->result_array();
+		return $data;
+		// dd($query);
+	}
+
+	private function dataklasifikasi() {
+		$query = "
+			SELECT classification
+			FROM (
+				SELECT classification,
+					ROW_NUMBER() OVER (PARTITION BY classification ORDER BY classification) as rn
 				FROM CD_GUDANG
 			)
 			WHERE rn = 1
@@ -108,7 +136,10 @@ class Warehouse extends CI_Controller {
 			$post_data['CODE']		= $gudang_code;
 			$post_data['KATEGORI'] = $kategori;
 
+			// dd($post_data);
+
 			$save = $this->Dbhelper->insertData('CD_GUDANG', $post_data);
+			// dd($save);
 			if ($save) {
 				$this->session->set_flashdata('success', "Create data success");
 				return redirect($this->own_link);
@@ -159,10 +190,11 @@ class Warehouse extends CI_Controller {
 	}
 
 	private function generateGudangCode() {
-		$generated_no = "WHS";
+		$generated_no = "WH";
 		$no = 1;
-		$data = $this->Dbhelper->selectTabel('CODE', 'CD_GUDANG', array(), 'CODE', 'DESC');
-		$no 	= count($data) + 1;
+		$data = $this->Dbhelper->selectTabelOne('CODE', 'CD_GUDANG', array(), 'CODE', 'DESC');
+		
+		$no 	= str_replace("WH", "", $data['CODE']) + 1;
 		if ($no < 10) {
 				$no = "000".$no;
 		} elseif ($no >= 10 && $no < 100) {
@@ -170,7 +202,6 @@ class Warehouse extends CI_Controller {
 		} elseif ($no >= 100 && $no < 1000) {
 				$no = "0".$no;
 		}
-
 		$generated_no = $generated_no.$no;
 		return $generated_no;
 }

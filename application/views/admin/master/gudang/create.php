@@ -1054,7 +1054,8 @@
                         <thead>
                             <tr>
                                 <th style="text-align: left">PHONE NUMBER</th>
-                                <th style="text-align: left">LOCATION (CITY)</th>
+                                <th style="text-align: left">AREA (PROVINCE)</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -1062,9 +1063,10 @@
                                 <td data-label="phone number">
                                     <input type="number" name="phone_number" class="form-control" placeholder="EX : 08XXXXXXXXXX" autocomplete="off" style="font-size: 14px !important; text-align: left" required>
                                 </td>
-                                <td data-label="location (city)">
-                                    <input type="text" name="location" class="form-control" placeholder="EX : BOGOR" autocomplete="off" style="font-size: 14px !important; text-align: left" required>
+                                <td data-label="area (province)">
+                                    <input type="text" name="area" class="form-control" placeholder="EX : JAWA BARAT" autocomplete="off" style="font-size: 14px !important; text-align: left" required>
                                 </td>
+                                
                             </tr>
                         </tbody>
                     </table>
@@ -1081,14 +1083,14 @@
                                     <select id="klasifikasi" class="form-control" name="classification">
                                         <option value="" selected>- SELECT CLASSIFICATION -</option>
                                         <?php foreach ($classification as $field): ?>
-                                            <option value="<?= $field['CODE'] ?>"><?= $field['CODE'] ?> - <?= $field['CLASSIFICATION'] ?></option>
+                                            <option value="<?= $field['CLASSIFICATION'] ?>"><?= $field['CLASSIFICATION'] ?></option>
                                         <?php endforeach ?>
                                     </select>
                                 </td>
                                 <td data-label="category" class="tb-width">
                                     <select id="category" class="form-control" name="kategori[]" multiple>
                                         <?php foreach ($category as $field): ?>
-                                            <option value="<?= $field['CODE'] ?>"><?= $field['CATEGORY'] ?></option>
+                                            <option value="<?= $field['CATEGORY'] ?>"><?= $field['CATEGORY'] ?></option>
                                         <?php endforeach ?>
                                     </select>
                                 </td>
@@ -1098,21 +1100,28 @@
                     <table class="table table-bordered" style="margin-bottom: 0px">
                         <thead>
                             <tr>
-                                <th style="text-align: left">AREA (PROVINCE)</th>
+                                <th style="text-align: left">LOCATION (CITY)</th>
                                 <th style="text-align: left">CAPACITY</th>
                                 <th style="text-align: left">FACILITY</th>
+                                <th style="text-align: left">ACTIVE</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td data-label="area (province)">
-                                    <input type="text" name="area" class="form-control" placeholder="EX : JAWA BARAT" autocomplete="off" style="font-size: 14px !important; text-align: left" required>
+                                <td data-label="location (city)">
+                                    <input type="text" name="location" class="form-control" placeholder="EX : BOGOR" autocomplete="off" style="font-size: 14px !important; text-align: left" required>
                                 </td>
                                 <td data-label="capacity">
                                     <input type="text" name="capacity" class="form-control" placeholder="EX : > 100 / 100" autocomplete="off" style="font-size: 14px !important; text-align: left" required>
                                 </td>
                                 <td data-label="facility">
                                     <input type="text" name="fasilitas" class="form-control" placeholder="EX : LANTAI JEMUR, BADDRYER" autocomplete="off" style="font-size: 14px !important; text-align: left" required>
+                                </td>
+                                <td data-label="active">
+                                    <select id="active" class="form-control" name="is_active" style="width: 100%; text-align: left">
+                                        <option value="Y">ACTIVE</option>
+                                        <option value="N">CLOSED</option>
+                                    </select>
                                 </td>
                             </tr>
                         </tbody>
@@ -1163,6 +1172,11 @@
             theme: 'bootstrap4',
             language: "en",
             placeholder: "- SELECT CATEGORY -",
+      });
+      $('#active').select2({
+            theme: 'bootstrap4',
+            language: "en",
+            placeholder: "- STATUS WAREHOUSE -",
       });
     });
 </script>
