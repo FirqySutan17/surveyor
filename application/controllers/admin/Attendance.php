@@ -60,8 +60,6 @@ class Attendance extends CI_Controller {
 			ORDER BY a.ATTEND_DATE DESC
 		";
 		$data = $this->Dbhelper->selectRawQuery($query);
-		dd($data, FALSE);
-		dd($query);
 		return $data;
 	}
 
