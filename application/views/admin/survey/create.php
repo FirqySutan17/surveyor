@@ -1238,7 +1238,7 @@
                         <tr style="align-items: flex-end">
                             <td><input type="date" name="PLANTING_date[gagal-panen][${index}]" class="form-control" style="font-size: 14px" ></td>
                             <td data-label="PHASE" width="45%">
-                                <input type="text" name="PLANTING_phase[gagal-panen][${index}]" value="PUSO / GAGAL PANEN" class="form-control" style="font-size: 14px" readonly>
+                                <input type="text" name="PLANTING_phase[gagal-panen][${index}]" value="GAGAL PANEN" class="form-control" style="font-size: 14px" readonly>
                             </td>
                             <td data-label="DESCRIPTION" width="50%">
                                 <div class="gagal-panen">

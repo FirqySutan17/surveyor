@@ -1178,15 +1178,65 @@ class survey extends CI_Controller {
 	private function get_surveydetail($survey_no) {
 		$planting_phase = $this->Dbhelper->selectTabel('*', 'SURVEY_PLANTING_PHASE', array('SURVEY_NO' => $survey_no), 'SEQUENCE', 'ASC');
 		
+		$data_planting_phase = [];
+		if (!empty($planting_phase)) {
+			foreach ($planting_phase as $ph_data) {
+				$phase 	= strtolower(str_replace(" ", "_", $ph_data['PHASE']));
+				$siklus = $ph_data['SIKLUS'];
+				if (!array_key_exists($siklus, $data_planting_phase)) {
+					$data_planting_phase[$siklus] = [
+						'persiapan-lahan'	=> [
+							'tanggal'	=> '',
+							'fase'		=> '',
+							'data'		=> []
+						],
+						'vegetatif-awal'	=> [
+							'tanggal'	=> '',
+							'fase'		=> '',
+							'data'		=> []
+						],
+						'genetatif-awal'	=> [
+							'tanggal'	=> '',
+							'fase'		=> '',
+							'data'		=> []
+						], 
+						'genetatif-akhir' => [
+							'tanggal'	=> '',
+							'fase'		=> '',
+							'data'		=> []
+						], 
+						'gagal-panen'			=> [
+							'tanggal'	=> '',
+							'fase'		=> '',
+							'data'		=> []
+						]
+					];
+				}
+
+				$data_planting_phase[$siklus][$phase]['tanggal'] 	= $ph_data['SURVEY_DATE'];
+				$data_planting_phase[$siklus][$phase]['fase'] 		= $ph_data['PHASE'];
+				$data_planting_phase[$siklus][$phase]['data'][] 	= $ph_data['DESCRIPTION'];
+			}
+		}
+		
 		$data['SURVEY'] 		= $this->Dbhelper->selectOneRawQuery("
-			SELECT a.*, FN_USER_NAME(CREATED_BY) CREATED_BY_NAME
-			FROM SURVEY a
-			WHERE a.SURVEY_NO = '$survey_no'
+			SELECT 
+					a.*, 
+					FN_USER_NAME(CREATED_BY) CREATED_BY_NAME,
+					p.PROVINCE as PROVINCE_NAME,
+					r.REGENCIES as REGENCY_NAME,
+					d.DISTRICS as DISTRICT_NAME
+			FROM SURVEY a, CD_PROVINCE p, CD_REGENCIES r, CD_DISTRICTS d
+			WHERE 
+					p.ID_PROVINCE = a.PROVINCE
+					AND r.ID_REGENCIES = a.REGENCY
+					AND d.ID_DISTRICTS = A.DISTRICT
+					AND a.SURVEY_NO = '$survey_no'
 		");
 		$data['SURVEY_FARMERS']		= $this->Dbhelper->selectTabel('*', 'SURVEY_FARMERS', array('SURVEY_NO' => $survey_no), 'SEQUENCE', 'ASC');
 		$data['SURVEY_MARKET_PRICES']		=  $this->Dbhelper->selectTabel('*', 'SURVEY_MARKET_PRICES', array('SURVEY_NO' => $survey_no), 'SURVEY_DATE', 'ASC');
 		$data['SURVEY_HARVEST_PHASE']		=  $this->Dbhelper->selectTabel('*', 'SURVEY_HARVEST_PHASE', array('SURVEY_NO' => $survey_no), 'SEQUENCE', 'ASC');
-		$data['SURVEY_PLANTING_PHASE']		=  $planting_phase;
+		$data['SURVEY_PLANTING_PHASE']		=  $data_planting_phase;
 		$data['SURVEY_IMAGES']		= $this->Dbhelper->selectTabel('*', 'SURVEY_IMAGES', array('SURVEY_NO' => $survey_no), 'SEQUENCE', 'ASC');
 		return $data;
 	}
