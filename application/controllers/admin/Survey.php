@@ -259,23 +259,25 @@ class survey extends CI_Controller {
 
 		$sdate = date('Y-m').'-01';
 		$edate 	= date('Y-m-d');
+		$plant = "*";
 
 		if ($this->input->server('REQUEST_METHOD') === 'POST') {
 			$sdate 		= $this->input->post('sdate');
 			$edate 		= $this->input->post('edate');
+			$plant 		= $this->input->post('plant');
 		}
 
 		$filter = [
-			"sdate"	=> $sdate,
+			"plant"	=> $plant,
+			"edate"	=> $edate,
 			"edate"	=> $edate
 		];
 
 		$data['title'] 			= 'Survey Report';
 		$data['datatable']	= $this->datatable($filter);
 		$data['filter']		= $filter;
-
-		// dd($data['userssuja']);
-
+		$data['plant'] 			= $this->Dbhelper->selectTabel('CODE, CODE_NAME', 'CD_CODE', array('HEAD_CODE' => 'AB'), 'CODE', 'ASC');
+		
 		$this->template->_v('survey/index', $data);
 	}
 
@@ -1075,10 +1077,12 @@ class survey extends CI_Controller {
 	private function datatable($filter) {
 		$sdate = date('Ymd', strtotime($filter['sdate']));
 		$edate = date('Ymd', strtotime($filter['edate']));
-		// $date = date('Ymd', strtotime($filter['date']));
+		$plant = $filter['plant'];
 
-		
-		// FN_USER_NAME(CREATED_BY) CREATED_BY_NAME
+		$where = "";
+		if ($plant != '*') {
+			$where = " and PLANT = '$plant'";
+		}
 		
 		$query = "
 			select 
@@ -1092,7 +1096,9 @@ class survey extends CI_Controller {
 						SELECT WM_CONCAT(FARMER_NAME) as farmer_names FROM SURVEY_FARMERS WHERE SURVEY_NO =SURVEY.SURVEY_NO GROUP BY SURVEY_NO
 				) as FARMER_NAMES
 			from SURVEY
-			where SURVEY_DATE BETWEEN '$sdate' AND '$edate'
+			where 
+				(SURVEY_DATE BETWEEN '$sdate' AND '$edate')
+				$where
 			ORDER BY SURVEY_NO DESC
 		";
 		$data 				= $this->db->query($query)->result_array();
