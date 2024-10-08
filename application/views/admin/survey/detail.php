@@ -789,7 +789,7 @@
                         <tbody>
                             <tr>
                                 <td data-label="EMPLOYEE">
-                                    <?= $detail['SURVEY']['CREATED_BY'] ?>
+                                    <?= $detail['SURVEY']['CREATED_BY'].' - '.$detail['SURVEY']['CREATED_BY_NAME'] ?>
                                 </td>
                                 <td data-label="DATE">
                                     <?= date('Y-m-d', strtotime($detail['SURVEY']['SURVEY_DATE'])) ?>
@@ -815,13 +815,13 @@
                         <tbody>
                             <tr>
                                 <td data-label="PROVINCE">
-                                    DKI JAKARTA
+                                    <?= $detail['SURVEY']['PROVINCE_NAME'] ?>
                                 </td>
                                 <td data-label="REGENCIES">
-                                    KUNINGAN BARAT
+                                    <?= $detail['SURVEY']['REGENCY_NAME'] ?>
                                 </td>
                                 <td data-label="DISTRICTS">
-                                    MAMPANG PRPT.
+                                    <?= $detail['SURVEY']['DISTRICT_NAME'] ?>
                                 </td>
                             </tr>
                         </tbody>
@@ -836,7 +836,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td data-label="ADDRESS" style="text-transform: uppercase;"><?= $detail['SURVEY']['ADDRESS'] ?></td>
+                                <td data-label="ADDRESS" style="text-transform: uppercase;"><?= $detail['SURVEY']['DESCRIPTION'] ?></td>
                             </tr>   
                         </tbody>
                         
@@ -875,421 +875,414 @@
 
             <div class="content-task mt-5">
                 <h3 class="sub-title">3. SEGMENT CONDITION</h3>
-                    <div class="table-responsive">
-                        <table class="table table-bordered" style="margin-bottom: 0px">
-                            <thead>
-                                <tr>
-                                    <th colspan="2" style="text-align: left; font-size: 13px !important">PLANTING PHASE</th>
-                                </tr>
-                                <tr>
-                                    <th style="text-align: left">PHASE</th>
-                                    <th style="text-align: left">DESCRIPTION</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php if(!empty($detail['SURVEY_FARMERS'])): ?>
-                                    <?php foreach($detail['SURVEY_FARMERS'] as $sf): ?>
-                                        <tr>
-                                            <td data-label="FARMERS" width="50%"><?= $sf['FARMER_NAME'] ?></td>
-                                            <td data-label="PHONE NUMBER" width="50%"><?= $sf['FARMER_PHONE'] ?></td>
-                                            <!-- <td width="5%"><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td> -->
-                                        </tr>
+                <?php if(!empty($detail['SURVEY_PLANTING_PHASE'])): ?>
+                    <?php foreach($detail['SURVEY_PLANTING_PHASE'] as $siklus => $planting_phase): ?>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" style="margin-bottom: 0px">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2" style="text-align: left; font-size: 13px !important">PHASE <?= $siklus ?></th>
+                                    </tr>
+                                    <tr>
+                                        <th style="text-align: left">FASE</th>
+                                        <th style="text-align: left">TANGGAL</th>
+                                        <th style="text-align: left">DESCRIPTION</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach($planting_phase as $phase): ?>
+                                        <?php if (!empty($phase['tanggal'])): ?>
+                                            <tr>
+                                                <td data-label="fase" width="15%"><?= $phase['fase'] ?></td>
+                                                <td data-label="tanggal" width="15%"><?= date('d M Y', $phase['tanggal']) ?></td>
+                                                <td data-label="data" width="70%">
+                                                    <ul style="text-align: left; margin-left: 20px; list-style-type: none">
+                                                    <?php foreach($phase['data'] as $deskripsi): ?>
+                                                            <li><?= $deskripsi ?></li>
+                                                    <?php endforeach ?>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        <?php endif ?>
                                     <?php endforeach ?>
-                                <?php endif ?>
-                                <tr style="align-items: flex-end">
-                                    <td data-label="PHASE" width="45%" style="vertical-align: top">
-                                        VEGETATIF AWAL
-                                    </td>
-                                    <td data-label="DESCRIPTION" width="50%">
-                                        <ul style="text-align: left; margin-left: 20px; list-style-type: none">
-                                            <li>UMUR TANAM = 30</li>
-                                            <li>TINGGI TANAMAN = 170cm</li>
-                                            <li>JUMLAH DAUN = 5 DAUN</li>
-                                            <li>PUPUK HIDROGEN</li>
-                                            <li>5kg</li>
-                                            <li>JENIS YANG SANGAT BAIK SEKALI</li>
-                                            <li>CUACA GERIMIS</li>
-                                            <li>SEMINGGU 2x</li>
-                                            <li>INTENSITAS HUJAN = SEDANG</li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th colspan="10" style="text-align: left; font-size: 13px !important">HARVEST PHASE</th>
-                                </tr>
-                                <tr>
-                                    <th style="width: 10%">SCORE</th>
-                                    <th style="width: 10%">BARIS</th>
-                                    <th style="width: 10%">ACTUAL</th>
-                                    <th style="width: 10%">%</th>
-                                    <th style="width: 10%">BIJI</th>
-                                    <th style="width: 10%">ACTUAL</th>
-                                    <th style="width: 10%">%</th>
-                                    <th style="width: 10%">BOBOT</th>
-                                    <th style="width: 10%">ACTUAL</th>
-                                    <th style="width: 10%">%</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- <tr>
-                                    <td data-label="SCORE" style="">
-                                        10
-                                    </td>
-                                    <td data-label="BARIS">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="BIJI">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="BOBOT">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="SCORE" style="">
-                                        9
-                                    </td>
-                                    <td data-label="BARIS">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="BIJI">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="BOBOT">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="SCORE" style="">
-                                        8
-                                    </td>
-                                    <td data-label="BARIS">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="BIJI">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="BOBOT">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="SCORE" style="">
-                                        7
-                                    </td>
-                                    <td data-label="BARIS">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="BIJI">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="BOBOT">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="SCORE" style="">
-                                        6
-                                    </td>
-                                    <td data-label="BARIS">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="BIJI">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="BOBOT">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="SCORE" style="">
-                                        5
-                                    </td>
-                                    <td data-label="BARIS">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="BIJI">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="BOBOT">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="SCORE" style="">
-                                        4
-                                    </td>
-                                    <td data-label="BARIS">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="BIJI">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="BOBOT">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="SCORE" style="">
-                                        3
-                                    </td>
-                                    <td data-label="BARIS">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="BIJI">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="BOBOT">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="SCORE" style="">
-                                        2
-                                    </td>
-                                    <td data-label="BARIS">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="BIJI">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="BOBOT">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="SCORE" style="">
-                                        1
-                                    </td>
-                                    <td data-label="BARIS">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="BIJI">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="BOBOT">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td data-label="SCORE" style="">
-                                        0
-                                    </td>
-                                    <td data-label="BARIS">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="BIJI">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="BOBOT">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="ACTUAL">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                    <td data-label="%">
-                                        <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                    </td>
-                                </tr> -->
-                            </tbody>
-                        </table>
-                    </div>
+                                </tbody>
+                            </table>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th colspan="10" style="text-align: left; font-size: 13px !important">HARVEST PHASE</th>
+                                    </tr>
+                                    <tr>
+                                        <th style="width: 10%">SCORE</th>
+                                        <th style="width: 10%">BARIS</th>
+                                        <th style="width: 10%">ACTUAL</th>
+                                        <th style="width: 10%">%</th>
+                                        <th style="width: 10%">BIJI</th>
+                                        <th style="width: 10%">ACTUAL</th>
+                                        <th style="width: 10%">%</th>
+                                        <th style="width: 10%">BOBOT</th>
+                                        <th style="width: 10%">ACTUAL</th>
+                                        <th style="width: 10%">%</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- <tr>
+                                        <td data-label="SCORE" style="">
+                                            10
+                                        </td>
+                                        <td data-label="BARIS">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="BIJI">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="BOBOT">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="SCORE" style="">
+                                            9
+                                        </td>
+                                        <td data-label="BARIS">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="BIJI">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="BOBOT">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="SCORE" style="">
+                                            8
+                                        </td>
+                                        <td data-label="BARIS">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="BIJI">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="BOBOT">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="SCORE" style="">
+                                            7
+                                        </td>
+                                        <td data-label="BARIS">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="BIJI">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="BOBOT">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="SCORE" style="">
+                                            6
+                                        </td>
+                                        <td data-label="BARIS">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="BIJI">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="BOBOT">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="SCORE" style="">
+                                            5
+                                        </td>
+                                        <td data-label="BARIS">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="BIJI">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="BOBOT">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="SCORE" style="">
+                                            4
+                                        </td>
+                                        <td data-label="BARIS">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="BIJI">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="BOBOT">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="SCORE" style="">
+                                            3
+                                        </td>
+                                        <td data-label="BARIS">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="BIJI">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="BOBOT">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="SCORE" style="">
+                                            2
+                                        </td>
+                                        <td data-label="BARIS">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="BIJI">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="BOBOT">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="SCORE" style="">
+                                            1
+                                        </td>
+                                        <td data-label="BARIS">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="BIJI">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="BOBOT">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="SCORE" style="">
+                                            0
+                                        </td>
+                                        <td data-label="BARIS">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="BIJI">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="BOBOT">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="ACTUAL">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                        <td data-label="%">
+                                            <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
+                                        </td>
+                                    </tr> -->
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php endforeach ?>
+                <?php endif ?>
             </div>
 
             <div class="content-task mt-5">
@@ -1303,17 +1296,21 @@
                             </tr>
                         </thead>
                         <tbody id="marketprice">
-                            <tr>
-                                <td data-label="DATE">JANUARY 2025</td>
-                                <td data-label="PRICE">RP 250.000</td>
-                            </tr>
+                            <?php if(!empty($detail['SURVEY_MARKET_PRICES'])): ?>
+                                <?php foreach($detail['SURVEY_MARKET_PRICES'] as $sf): ?>
+                                    <tr>
+                                        <td data-label="DATE" width="50%"><?= date('d M Y', $sf['SURVEY_DATE']) ?></td>
+                                        <td data-label="PRICE" width="50%"><?= $sf['PRICE'] ?></td>
+                                    </tr>
+                                <?php endforeach ?>
+                            <?php endif ?>
                         </tbody>
                     </table>
                 </div>                   
             </div>
 
             <div class="content-task mt-5">
-                <h3 class="sub-title">5. Visit Photos</h3>
+                <h3 class="sub-title">5. SURVEY GALLERIES</h3>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
@@ -1334,9 +1331,7 @@
 
             <div class="form-group row mt-5" style="margin: 20px 0px !important">
                 <div class="col-lg-12 col-sm-12" style="display: flex; padding: 0px">
-                    <a href="<?= admin_url('survey') ?>" class="btn btn-primary cust-btn-back" style="width: 50%; height: 50px; display: flex; align-items: center; justify-content: center;">Cancel</a>
-                    <span style="margin: 5px;"></span>
-                    <button type="submit" class="btn btn-primary cust-btn-save" style="width: 50%; height: 50px">Save</button>
+                    <a href="<?= admin_url('survey') ?>" class="btn btn-primary cust-btn-back" style="width: 100%; height: 50px; display: flex; align-items: center; justify-content: center;">KEMBALI</a>
                 </div>
             </div>
         </form>

@@ -145,6 +145,7 @@ class survey extends CI_Controller {
 										"BIJI_ACTUAL"		=> dbClean($post['biji_actual'][$siklus_index][$i]),
 										"BOBOT"				=> dbClean($post['bobot'][$siklus_index][$i]),
 										"BOBOT_ACTUAL"		=> dbClean($post['bobot_actual'][$siklus_index][$i]),
+										'SIKLUS'			=> $siklus
 									];
 		
 									$survey_harvest_phase[] = $curr_data;
