@@ -268,11 +268,12 @@ class survey extends CI_Controller {
 			"surveyor"	=> $surveyor
 		];
 
-		$data['title'] 			= 'Survey Report';
-		$data['datatable']	= $this->datatable($filter);
-		$data['filter']			= $filter;
-		$data['plant'] 			= $this->Dbhelper->selectTabel('CODE, CODE_NAME', 'CD_CODE', array('HEAD_CODE' => 'AB'), 'CODE', 'ASC');
-		$data['surveyor'] 	= $this->list_surveyor();
+		$data['title'] 				= 'Survey Report';
+		$data['datatable']		= $this->datatable($filter);
+		$data['filter']				= $filter;
+		$data['plant'] 				= $this->Dbhelper->selectTabel('CODE, CODE_NAME', 'CD_CODE', array('HEAD_CODE' => 'AB'), 'CODE', 'ASC');
+		$data['surveyor'] 		= $this->list_surveyor();
+		$data['placeholder'] 	= $this->list_placeholder();
 		
 		$this->template->_v('survey/index', $data);
 	}
@@ -1117,6 +1118,19 @@ class survey extends CI_Controller {
 			ORDER BY CREATED_BY ASC
 		";
 		$data 				= $this->db->query($query)->result_array();
+		return $data;
+	}
+
+	private function list_placeholder() {
+		$data = [];
+
+		$data['persiapan-lahan'] 	= ["STANDARD / KETERANGAN PERSIAPAN LAHAN"];
+		$data['vegetatif-awal'] 	= ["UMUR TANAM (1 - 25)", "TINGGI TANAMAN", "JUMLAH DAUN", "JENIS PUPUK YANG SUDAH DIAPLIKASIKAN", "ESTIMASI JUMLAH PUPUK DIAPLIKASIKAN (KG)", "JENIS HERBISIDA / PERSTISIDA YANG DIAPLIKASIKAN", "CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)", "FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)", "INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)"];
+		$data['vegetatif-akhir'] 	= ["UMUR TANAM (26 - 50)", "TINGGI TANAMAN", "JUMLAH DAUN", "MUNCUL BUNGA JANTAN DAN BETINA (ADA / TIDAK)", "JENIS PUPUK YANG SUDAH DIAPLIKASIKAN", "ESTIMASI JUMLAH PUPUK DIAPLIKASIKAN (KG)", "JENIS HERBISIDA / PESTISIDA YANG DIAPLIKASIKAN", "CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)", "FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)", "INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)"];
+		$data['genetatif-awal'] 	= ["UMUR TANAM (51 - 70)", "MUNCUL BUAH (ADA / TIDAK)", "JIKA BUAH ADA MAKA UKURAN BUAH (PANJANG DAN DIAMETER BUAH MUDA)", "MUNCUL BUNGA JANTAN DAN BETINA (ADA / TIDAK)", "KONDISI BUAH MUDAH (HUJAN SEGAR, PUCAT ATAU BUSUK)", "ESTIMASI JUMLAH PUPUK DIAPLIKASIKAN (KG)", "JENIS HERBISIDA / PESTISIDA YANG DIAPLIKASIKAN", "CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)", "FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)", "INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)"];
+		$data['genetatif-akhir']	= ["UMUR TANAM (71 - 110)", "MASUK KE FORMAT HASIL PANEN PADA SHEET HASIL PANEN", "JENIS HERBISIDA / PESTISIDA YANG DIAPLIKASIKAN", "CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)", "FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)", "INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)"];
+		$data['gagal-panen']			= ["UMUR SAAT PUSO", "KONDISI SAAT PUSO (KEKERINGAN / BANJIR)", "ESTIMASI LAHAN YANG TERKENA PUSO", "ESTIMASI PRODUKSI YANG HILANG KARENA PUSO"];
+
 		return $data;
 	}
 
