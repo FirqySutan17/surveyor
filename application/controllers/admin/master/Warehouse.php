@@ -128,23 +128,6 @@ class Warehouse extends CI_Controller {
 		// dd($query);
 	}
 
-	private function dataklasifikasi() {
-		$query = "
-			SELECT classification
-			FROM (
-				SELECT classification,
-					ROW_NUMBER() OVER (PARTITION BY classification ORDER BY classification) as rn
-				FROM CD_GUDANG
-			)
-			WHERE rn = 1
-		";
-		
-		// $query .= " order by CODE ASC";
-        $data = $this->db->query($query)->result_array();
-		return $data;
-		// dd($query);
-	}
-
 	public function create() {
 		$data['title'] 				= 'WAREHOUSE';
 		$data['classification'] 	= $this->Dbhelper->selectTabel('CODE, CLASSIFICATION', 'CD_KLASIFIKASI');
