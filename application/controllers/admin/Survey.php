@@ -63,6 +63,7 @@ class survey extends CI_Controller {
 					"CREATED_AT"		=> date('Ymd His'),
 					"CREATED_BY"		=> $this->session_data['user']['EMPLOYEE_ID'],
 					"PLANT"					=> $this->session_data['user']['PLANT'] == '*' ? '3212' : $this->session_data['user']['PLANT'],
+					"CURRENT_PHASE"	=> ""
 				];
 
 				if (empty($survey_report["CREATED_BY"])) {
@@ -101,6 +102,7 @@ class survey extends CI_Controller {
 				$survey_harvest_phase = [];
 
 				$survey_planting_phase = [];
+				$current_phase 	= "";
 				$phase_array = ['persiapan-lahan', 'vegetatif-awal', 'vegetatif-akhir', 'genetatif-awal', 'genetatif-akhir', 'gagal-panen'];
 				if (!empty($post['PLANTING_siklus'])) {
 					$sequence = 1;
@@ -108,6 +110,10 @@ class survey extends CI_Controller {
 						foreach ($phase_array as $phase_key) {
 							$phase 	= $post['PLANTING_phase'][$phase_key][$siklus_index];
 							$curr_phase_date 	= !empty($post['PLANTING_date'][$phase_key][$siklus_index]) ?  date('Ymd', strtotime($post['PLANTING_date'][$phase_key][$siklus_index])) : '';
+
+							if (!empty($curr_phase_date)) {
+								$current_phase = $phase;
+							}
 							foreach ($post['PLANTING_description'][$phase_key][$siklus_index] as $i => $v) {
 								$curr_data = [
 									"SURVEY_NO"			=> $survey_no,
@@ -170,6 +176,7 @@ class survey extends CI_Controller {
 				  //       ];
 					// }
 				}
+				$survey_report['CURRENT_PHASE'] = $current_phase;
 				$save = $this->Dbhelper->insertData('SURVEY', $survey_report);
 				if (!empty($survey_farmers)) {
 					$save_farmers = $this->db->insert_batch('SURVEY_FARMERS', $survey_farmers);
@@ -254,21 +261,25 @@ class survey extends CI_Controller {
 		$edate 		= date('Y-m-d');
 		$plant 		= "*";
 		$surveyor = "*";
+		$phase 		= "*";
 
 		if ($this->input->server('REQUEST_METHOD') === 'POST') {
 			$sdate 			= $this->input->post('sdate');
 			$edate 			= $this->input->post('edate');
 			$plant 			= $this->input->post('plant');
 			$surveyor 	= $this->input->post('surveyor');
+			$phase 	= $this->input->post('phase');
 		}
 
 		$filter = [
 			"plant"	=> $plant,
 			"sdate"	=> $sdate,
 			"edate"	=> $edate,
-			"surveyor"	=> $surveyor
+			"surveyor"	=> $surveyor,
+			"phase"	=> $phase
 		];
 
+		$data['phase']				=	$this->list_phase();
 		$data['title'] 				= 'SURVEY';
 		$data['datatable']		= $this->datatable($filter);
 		$data['filter']				= $filter;
@@ -284,21 +295,25 @@ class survey extends CI_Controller {
 		$edate 		= date('Y-m-d');
 		$plant 		= "*";
 		$surveyor = "*";
+		$phase 		= "*";
 
 		if ($this->input->server('REQUEST_METHOD') === 'POST') {
 			$sdate 			= $this->input->post('sdate');
 			$edate 			= $this->input->post('edate');
 			$plant 			= $this->input->post('plant');
 			$surveyor 	= $this->input->post('surveyor');
+			$phase 	= $this->input->post('phase');
 		}
 
 		$filter = [
 			"plant"	=> $plant,
 			"sdate"	=> $sdate,
 			"edate"	=> $edate,
-			"surveyor"	=> $surveyor
+			"surveyor"	=> $surveyor,
+			"phase"	=> $phase
 		];
 
+		$data['phase']				=	$this->list_phase();
 		$data['title'] 				= 'SURVEY';
 		$data['datatable']		= $this->datatable($filter);
 		$data['filter']				= $filter;
@@ -338,6 +353,7 @@ class survey extends CI_Controller {
 				// dd($post);
 				// VR DATA
 				$survey = [
+					"CURRENT_PHASE"	=> "",
 					"UPDATED_AT"		=> date('Ymd His'),
 					"UPDATED_BY"		=> $this->session_data['user']['EMPLOYEE_ID']
 				];
@@ -373,13 +389,16 @@ class survey extends CI_Controller {
 				$survey_harvest_phase = [];
 				$survey_planting_phase = [];
 				$phase_array = ['persiapan-lahan', 'vegetatif-awal', 'vegetatif-akhir', 'genetatif-awal', 'genetatif-akhir', 'gagal-panen'];
-				
+				$current_phase = "";
 				if (!empty($post['PLANTING_siklus'])) {
 					$sequence = 1;
 					foreach ($post['PLANTING_siklus'] as $siklus_index => $siklus) {
 						foreach ($phase_array as $phase_key) {
 							$phase 	= $post['PLANTING_phase'][$phase_key][$siklus_index];
 							$curr_phase_date 	= !empty($post['PLANTING_date'][$phase_key][$siklus_index]) ?  date('Ymd', strtotime($post['PLANTING_date'][$phase_key][$siklus_index])) : '';
+							if (!empty($curr_phase_date)) {
+								$current_phase = $phase;
+							}
 							foreach ($post['PLANTING_description'][$phase_key][$siklus_index] as $i => $v) {
 								$curr_data = [
 									"SURVEY_NO"			=> $survey_no,
@@ -443,6 +462,7 @@ class survey extends CI_Controller {
 					// }
 				}
 
+				$survey["CURRENT_PHASE"] = $current_phase;
 				$save = $this->db->update('SURVEY', $survey, array('SURVEY_NO' => $survey_no));
 				if (!empty($survey_farmers)) {
 					$delete = $this->db->delete('SURVEY_FARMERS', array('SURVEY_NO' => $survey_no));
@@ -1107,6 +1127,7 @@ class survey extends CI_Controller {
 		$edate = date('Ymd', strtotime($filter['edate']));
 		$plant = $filter['plant'];
 		$surveyor = $filter['surveyor'];
+		$phase = $filter['phase'];
 
 		$where = "";
 		if ($plant != '*') {
@@ -1117,6 +1138,10 @@ class survey extends CI_Controller {
 			$where .= " and CREATED_BY = '$surveyor'";
 		}
 		
+		if ($filter['phase'] != "*") {
+			$where .= " and CURRENT_PHASE = '$phase'";
+		}
+
 		$query = "
 			select 
 				SURVEY_NO,
@@ -1149,6 +1174,18 @@ class survey extends CI_Controller {
 			ORDER BY CREATED_BY ASC
 		";
 		$data 				= $this->db->query($query)->result_array();
+		return $data;
+	}
+
+	private function list_phase() {
+		$data = [];
+
+		$data[] 	= ["CODE" => 'persiapan-lahan', "CODE_NAME" => 'PERSIAPAN LAHAN'];
+		$data[] 	= ["CODE" => 'vegetatif-awal', 	"CODE_NAME" => 'VEGETATIF AWAL'];
+		$data[] 	= ["CODE" => 'vegetatif-akhir', "CODE_NAME" => 'VEGETATIF AKHIR'];
+		$data[] 	= ["CODE" => 'genetatif-awal', 	"CODE_NAME" => 'GENETATIF AWAL'];
+		$data[] 	= ["CODE" => 'genetatif-akhir', "CODE_NAME" => 'GENETATIF AKHIR'];
+		$data[] 	= ["CODE" => 'gagal-panen', 		"CODE_NAME" => 'GAGAL PANEN'];
 		return $data;
 	}
 

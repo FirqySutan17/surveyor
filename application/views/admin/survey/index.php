@@ -315,6 +315,15 @@
                     <?php endforeach ?>
                 </select>
             </div>
+						<div class="col-md-6 col-sm-12" style="display: flex; margin-bottom: 10px">
+                <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 5px; font-weight: 600">PHASE : </span> 
+                <select id="phase" class="form-control" name="phase" style="width: 78%">
+								<option <?= $filter['surveyor'] == '*' ? 'selected' : '' ?> value="*">* - ALL PHASE </option>
+                    <?php foreach ($phase as $field): ?>
+                        <option <?= $filter['phase'] == $field['CODE'] ? 'selected' : '' ?> value="<?= $field['CODE'] ?>"><?= $field['CODE'] ?> - <?= $field['CODE_NAME'] ?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
             <div class="col-md-12 col-sm-12" style="display: flex;">
                 <button type="submit" class="btn btn-primary btn-block" style="height: 30px">FILTER</button>
             </div>
