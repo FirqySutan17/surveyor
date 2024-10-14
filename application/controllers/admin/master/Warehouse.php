@@ -128,7 +128,7 @@ class Warehouse extends CI_Controller {
 		// dd($query);
 	}
 
-	private function dataklasifikasi() {
+	public function dataklasifikasi() {
 		$query = "
 			SELECT classification
 			FROM (
