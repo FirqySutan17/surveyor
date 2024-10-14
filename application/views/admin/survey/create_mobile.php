@@ -362,7 +362,7 @@
         </div>
 
         <main class="page-wrapper">
-            <div id="main" class="main open-main">
+            <div id="main">
                 <style>
                     .pre-posttest h3 {
                         font-weight: 700;
@@ -1145,7 +1145,7 @@
                     <div class="row">
                         <form action="<?= base_url('survey/do_create_mobile') ?>" method="POST" enctype="multipart/form-data">
                             
-                            <input type="hidden" name="employee_id_sess" value="<?= $employee_id ?>">
+                            <input type="hidden" name="employee_id_sess" value="<?= $$user['EMPLOYEE_ID'] ?>">
                             <div class="content-task mt-5">
                                 <h3 class="sub-title">1. LOCATION INFORMATION</h3>
                                 <div class="table-responsive mt-2">
