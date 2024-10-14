@@ -1426,7 +1426,7 @@
          `;                                   
         $("#segment").append(tabledata);
         $(`.baris-actual-${index}`).on('keyup', function() {
-
+            calculateBarisHarvest(index);
         });
         segmenIndex += 1;
     }
