@@ -112,7 +112,7 @@ class survey extends CI_Controller {
 							$curr_phase_date 	= !empty($post['PLANTING_date'][$phase_key][$siklus_index]) ?  date('Ymd', strtotime($post['PLANTING_date'][$phase_key][$siklus_index])) : '';
 
 							if (!empty($curr_phase_date)) {
-								$current_phase = $phase;
+								$current_phase = $phase_key;
 							}
 							foreach ($post['PLANTING_description'][$phase_key][$siklus_index] as $i => $v) {
 								$curr_data = [
@@ -397,7 +397,7 @@ class survey extends CI_Controller {
 							$phase 	= $post['PLANTING_phase'][$phase_key][$siklus_index];
 							$curr_phase_date 	= !empty($post['PLANTING_date'][$phase_key][$siklus_index]) ?  date('Ymd', strtotime($post['PLANTING_date'][$phase_key][$siklus_index])) : '';
 							if (!empty($curr_phase_date)) {
-								$current_phase = $phase;
+								$current_phase = $phase_key;
 							}
 							foreach ($post['PLANTING_description'][$phase_key][$siklus_index] as $i => $v) {
 								$curr_data = [
