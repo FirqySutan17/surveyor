@@ -1426,30 +1426,35 @@
          `;                                   
         $("#segment").append(tabledata);
         $(`.baris-actual-${index}`).on('keyup', function() {
-            calculateBarisHarvest(index);
+            calculateHarvest('baris', index);
+        });
+        $(`.biji-actual-${index}`).on('keyup', function() {
+            calculateHarvest('biji', index);
+        });
+        $(`.bobot-actual-${index}`).on('keyup', function() {
+            calculateHarvest('bobot', index);
         });
         segmenIndex += 1;
     }
 
-    function calculateBarisHarvest(index) {
+    function calculateHarvest(column,index) {
         let total = 0;
         // get total sum
-        $('.baris-actual-' + index).each(function() {
+        $(`.${column}-actual-${index}`).each(function() {
             let score   = $(this).data('score');
             let amount  = Number($(this).val());
-            console.log('score : ' + score, 'amount : ' + amount);
             total += amount;
         });
 
         // set percentage
-        $('.baris-actual-' + index).each(function() {
+        $(`.${column}-actual-${index}`).each(function() {
             let score   = $(this).data('score');
             let amount  = Number($(this).val());
 
             let percentage = (amount / total) * 100;
-            $(`#baris-percentage-${index}-${score}`).val(percentage.toFixed(2).toString());
+            $(`#${column}-percentage-${index}-${score}`).val(percentage.toFixed(2).toString());
         });
-        $(`#baris-total-${index}`).text(total.toString());
+        $(`#${column}-total-${index}`).text(total.toString());
     }
 
     function addMarketprice() {
