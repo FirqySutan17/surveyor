@@ -11,9 +11,9 @@ $route['logout'] 				= 'auth/logout';
 $route['dashboard'] 			= 'admin/dashboard';
 $route['profile'] 				= 'Home/profile';
 $route['profile/do_update'] 	= 'Home/profile_update';
-$route['visit/detail_mobile/(:any)'] 	= 'Home/detail_mobile/$1';
-$route['visit/entry_mobile/(:any)'] 	= 'Home/entry_mobile/$1';
-$route['visit/do_create_mobile'] 	= 'Home/do_create_mobile';
+$route['survey/detail_mobile/(:any)'] 	= 'Home/detail_mobile/$1';
+$route['survey/entry_mobile/(:any)'] 	= 'Home/entry_mobile/$1';
+$route['survey/do_create_mobile'] 	= 'Home/do_create_mobile';
 /* MASTER DATA ROUTES */
 	$route['dashboard/master/common_code'] 				= 'admin/master/CommonCode';
 	$route['dashboard/master/common_code/create'] 		= 'admin/master/CommonCode/create';
