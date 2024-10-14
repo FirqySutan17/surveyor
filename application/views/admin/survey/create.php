@@ -1410,11 +1410,33 @@
                             </tr>
                         <?php } ?>
                     </tbody>
+                    <tfoot>
+                        <tr class="harvest-phase-${index}" style="display: none;">
+                            <td style="width: 10%" colspan="2"></td>
+                            <td style="width: 10%" id="baris-total-${index}">0</td>
+                            <td style="width: 10%" colspan="2"></td>
+                            <td style="width: 10%" id="biji-total-${index}">0</td>
+                            <td style="width: 10%" colspan="2"></td>
+                            <td style="width: 10%" id="bobot-total-${index}">0</td>
+                            <td style="width: 10%"></td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
          `;                                   
         $("#segment").append(tabledata);
+        $(`.baris-actual-${index}`).on('keyup', function() {
+
+        });
         segmenIndex += 1;
+    }
+
+    function calculateBarisHarvest(index) {
+        $('.baris-actual-' + index).each(function() {
+            let score   = $(this).data('score');
+            let amount  = $(this).val();
+            console.log('score : ' + score, 'amount : ' + amount);
+        });
     }
 
     function addMarketprice() {
