@@ -986,7 +986,6 @@
     const lang = document.getElementById("latitude");
     const long = document.getElementById("longitude");
     let segmenIndex = 0;
-    let list_harvest = JSON.parse(`<?= json_encode($harvest) ?>`);
 
     function getLocation() {
         console.log('ask this');
@@ -1377,7 +1376,7 @@
                                 </td>
                                 <div class="harvest-mobile" style="display: flex; ">
                                     <td data-label="BARIS">
-                                        <input name="baris[${index}][]" value="<?= $list_harvest[$i]['BARIS'] ?>" type="text" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" readonly>
+                                        <input name="baris[${index}][]" value="<?= $harvest[$i]['BARIS'] ?>" type="text" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" readonly>
                                     </td>
                                     <td data-label="ACTUAL">
                                         <input name="baris_actual[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" id="baris-actual-${index}-<?= $i ?>" class="baris-actual-${index}" data-score="<?= $i ?>">
@@ -1388,7 +1387,7 @@
                                 </div>
                                 <div class="harvest-mobile">
                                     <td data-label="BIJI">
-                                        <input name="biji[${index}][]" value="<?= $list_harvest[$i]['BIJI'] ?>" type="text" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" readonly>
+                                        <input name="biji[${index}][]" value="<?= $harvest[$i]['BIJI'] ?>" type="text" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" readonly>
                                     </td>
                                     <td data-label="ACTUAL">
                                         <input name="biji_actual[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" id="biji-actual-${index}-<?= $i ?>" class="biji-actual-${index}" data-score="<?= $i ?>">
@@ -1399,7 +1398,7 @@
                                 </div>
                                 <div class="harvest-mobile">
                                     <td data-label="BOBOT">
-                                        <input name="bobot[${index}][]" value="<?= $list_harvest[$i]['BOBOT'] ?>" type="text" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" readonly>
+                                        <input name="bobot[${index}][]" value="<?= $harvest[$i]['BOBOT'] ?>" type="text" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" readonly>
                                     </td>
                                     <td data-label="ACTUAL">
                                         <input name="bobot_actual[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" id="bobot-actual-${index}-<?= $i ?>" class="bobot-actual-${index}" data-score="<?= $i ?>">
