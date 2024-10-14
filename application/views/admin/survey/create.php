@@ -1447,7 +1447,7 @@
             let amount  = Number($(this).val());
 
             let percentage = (amount / total) * 100;
-            $(`#baris-percentage-${index}-${score}`).val(percentage.toString());
+            $(`#baris-percentage-${index}-${score}`).val(percentage.toFixed(2).toString());
         });
         $(`#baris-total-${index}`).text(total.toString());
     }
