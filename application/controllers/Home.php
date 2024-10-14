@@ -236,6 +236,173 @@ class Home extends CI_Controller {
 		}
 	}
 
+	private function generateSurveyNo() {
+		$generated_no = "SURVEY".date('Ymd');
+		$no = 1;
+		$today = date('Ymd');
+		$this->db->select('SURVEY_NO, CREATED_AT');
+		$this->db->from('SURVEY');
+		$this->db->like('CREATED_AT', $today, 'after');
+		$this->db->order_by('CREATED_AT', 'DESC');
+		$this->db->order_by('SURVEY_NO', 'DESC');
+		$latest_data = $this->db->get()->row();
+		if (!empty($latest_data)) {
+				$no = substr($latest_data->SURVEY_NO, -4);
+
+				$date = date('Y-m-d', strtotime($latest_data->CREATED_AT));
+				$hour = date('H', strtotime($latest_data->CREATED_AT));
+				$no += 1;
+		}
+		if ($no < 10) {
+				$no = "000".$no;
+		} elseif ($no >= 10 && $no < 100) {
+				$no = "00".$no;
+		} elseif ($no >= 100 && $no < 1000) {
+				$no = "0".$no;
+		}
+
+		$generated_no = $generated_no.$no;
+		return $generated_no;
+	}
+
+	private function list_surveyor() {
+		$query = "
+			select
+				CREATED_BY,
+				FN_USER_NAME(CREATED_BY) CREATED_BY_NAME
+			from SURVEY
+			WHERE CREATED_BY != '999999'
+			GROUP BY CREATED_BY
+			ORDER BY CREATED_BY ASC
+		";
+		$data 				= $this->db->query($query)->result_array();
+		return $data;
+	}
+
+	private function list_phase() {
+		$data = [];
+
+		$data[] 	= ["CODE" => 'persiapan-lahan', "CODE_NAME" => 'PERSIAPAN LAHAN'];
+		$data[] 	= ["CODE" => 'vegetatif-awal', 	"CODE_NAME" => 'VEGETATIF AWAL'];
+		$data[] 	= ["CODE" => 'vegetatif-akhir', "CODE_NAME" => 'VEGETATIF AKHIR'];
+		$data[] 	= ["CODE" => 'genetatif-awal', 	"CODE_NAME" => 'GENETATIF AWAL'];
+		$data[] 	= ["CODE" => 'genetatif-akhir', "CODE_NAME" => 'GENETATIF AKHIR'];
+		$data[] 	= ["CODE" => 'gagal-panen', 		"CODE_NAME" => 'GAGAL PANEN'];
+		return $data;
+	}
+
+	private function list_placeholder() {
+		$data = [];
+
+		$data['persiapan-lahan'] 	= ["STANDARD / KETERANGAN PERSIAPAN LAHAN"];
+		$data['vegetatif-awal'] 	= ["UMUR TANAM (1 - 25)", "TINGGI TANAMAN", "JUMLAH DAUN", "JENIS PUPUK YANG SUDAH DIAPLIKASIKAN", "ESTIMASI JUMLAH PUPUK DIAPLIKASIKAN (KG)", "JENIS HERBISIDA / PERSTISIDA YANG DIAPLIKASIKAN", "CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)", "FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)", "INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)"];
+		$data['vegetatif-akhir'] 	= ["UMUR TANAM (26 - 50)", "TINGGI TANAMAN", "JUMLAH DAUN", "MUNCUL BUNGA JANTAN DAN BETINA (ADA / TIDAK)", "JENIS PUPUK YANG SUDAH DIAPLIKASIKAN", "ESTIMASI JUMLAH PUPUK DIAPLIKASIKAN (KG)", "JENIS HERBISIDA / PESTISIDA YANG DIAPLIKASIKAN", "CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)", "FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)", "INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)"];
+		$data['genetatif-awal'] 	= ["UMUR TANAM (51 - 70)", "MUNCUL BUAH (ADA / TIDAK)", "JIKA BUAH ADA MAKA UKURAN BUAH (PANJANG DAN DIAMETER BUAH MUDA)", "MUNCUL BUNGA JANTAN DAN BETINA (ADA / TIDAK)", "KONDISI BUAH MUDAH (HUJAN SEGAR, PUCAT ATAU BUSUK)", "ESTIMASI JUMLAH PUPUK DIAPLIKASIKAN (KG)", "JENIS HERBISIDA / PESTISIDA YANG DIAPLIKASIKAN", "CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)", "FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)", "INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)"];
+		$data['genetatif-akhir']	= ["UMUR TANAM (71 - 110)", "MASUK KE FORMAT HASIL PANEN PADA SHEET HASIL PANEN", "JENIS HERBISIDA / PESTISIDA YANG DIAPLIKASIKAN", "CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)", "FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)", "INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)"];
+		$data['gagal-panen']			= ["UMUR SAAT PUSO", "KONDISI SAAT PUSO (KEKERINGAN / BANJIR)", "ESTIMASI LAHAN YANG TERKENA PUSO", "ESTIMASI PRODUKSI YANG HILANG KARENA PUSO"];
+
+		return $data;
+	}
+
+	private function list_harvest() {
+		$result = [];
+		
+		$result[0] = [
+			"BARIS"	=> '0 - 5',
+			"BIJI"	=> '0',
+			"BOBOT"			=> '0'
+		];
+
+		$result[1] = [
+			"BARIS"	=> '6',
+			"BIJI"	=> '1-50',
+			"BOBOT"			=> '1-9'
+		];
+
+		$result[2] = [
+			"BARIS"	=> '7',
+			"BIJI"	=> '51-100',
+			"BOBOT"			=> '10-40'
+		];
+
+		$result[3] = [
+			"BARIS"	=> '8-9',
+			"BIJI"	=> '101-150',
+			"BOBOT"			=> '41-80'
+		];
+
+		$result[4] = [
+			"BARIS"	=> '10',
+			"BIJI"	=> '151-200',
+			"BOBOT"			=> '81-120'
+		];
+
+		$result[5] = [
+			"BARIS"	=> '11',
+			"BIJI"	=> '201-250',
+			"BOBOT"			=> '121-160'
+		];
+
+		$result[6] = [
+			"BARIS"	=> '12',
+			"BIJI"	=> '251-300',
+			"BOBOT"			=> '161-200'
+		];
+
+		$result[7] = [
+			"BARIS"	=> '13',
+			"BIJI"	=> '301-350',
+			"BOBOT"			=> '201-240'
+		];
+
+		$result[8] = [
+			"BARIS"	=> '14',
+			"BIJI"	=> '351-400',
+			"BOBOT"			=> '241-280'
+		];
+
+		$result[9] = [
+			"BARIS"	=> '15',
+			"BIJI"	=> '401-450',
+			"BOBOT"			=> '281-320'
+		];
+
+		$result[10] = [
+			"BARIS"	=> '16',
+			"BIJI"	=> '451-500',
+			"BOBOT"			=> '321-350'
+		];
+
+		return $result;
+	}
+
+	public function upload_image($berkas, $survey_no, $sequence) {
+		$result = "";
+		if ($berkas["name"] != "") {
+			$pathDir 	= "./upload/";
+			// chmod($pathDir, 777);
+			$temp = explode(".", $berkas["name"]);
+			$type_file = '.'.end($temp);
+			if (trim($berkas['name']) != "") {
+				$_FILES["files"] = $berkas;
+				$stringRandom = random_char(10);
+				$nama = $survey_no."_".$sequence.$type_file;
+				$config['upload_path']          = $pathDir;
+								$config['allowed_types']        = 'gif|jpg|png|jpeg';
+
+								$config['file_name'] = $nama;
+								$this->upload->initialize($config);
+								if ( ! $this->upload->do_upload('files')) {
+										$result = array('error' => $this->upload->display_errors());
+								} else {
+										$result = $nama;
+								}
+			}
+		}
+
+	return $result;
+	}
+
 	private function collection_type() {
 		$data = [
 			'CICILAN', 'SEGERA', 'TRANSAKSI_ULANG', 'JALUR_HUKUM', 'TAKE_OVER_ASSET', 'AMBIL_JAMINAN', 'SULIT_COLLECTION', 'SHM'
@@ -318,302 +485,276 @@ class Home extends CI_Controller {
         return $generated_no;
     }
 
-    public function upload_image($berkas, $visiting_no, $sequence) {
-		$result = "";
-		if ($berkas["name"] != "") {
-			$pathDir 	= "./upload/";
-			// chmod($pathDir, 777);
-			$temp = explode(".", $berkas["name"]);
-			$type_file = '.'.end($temp);
-			if (trim($berkas['name']) != "") {
-				$_FILES["files"] = $berkas;
-				$stringRandom = random_char(10);
-				$nama = $visiting_no."_".$sequence.$type_file;
-				$config['upload_path']          = $pathDir;
-                $config['allowed_types']        = 'gif|jpg|png|jpeg';
 
-                $config['file_name'] = $nama;
-                $this->upload->initialize($config);
-                if ( ! $this->upload->do_upload('files')) {
-                    $result = array('error' => $this->upload->display_errors());
-                } else {
-                    $result = $nama;
-                }
+		private function delete_image($filename) {
+			$path_to_file = './upload/'.$filename;
+			if(unlink($path_to_file)) {
+					return true;
+			}
+			else {
+					return false;
 			}
 		}
 
-		return $result;
-	}
-
-	private function delete_image($filename) {
-		$path_to_file = './upload/'.$filename;
-		if(unlink($path_to_file)) {
-		     return true;
+		public function profile() {
+			$this->cekLogin();
+			$data['title'] 	= 'My Profile';
+			$data['user']	= $this->session_data['user'];
+			$this->template->_v('profile/index', $data);
 		}
-		else {
-		     return false;
-		}
-	}
 
-	public function profile() {
-		$this->cekLogin();
-		$data['title'] 	= 'My Profile';
-		$data['user']	= $this->session_data['user'];
-		$this->template->_v('profile/index', $data);
-	}
+		public function profile_update() {
+			if ($this->input->server('REQUEST_METHOD') === 'POST') {
+				$post = $this->input->post();
+				$update_data = [];
 
-	public function profile_update() {
-		if ($this->input->server('REQUEST_METHOD') === 'POST') {
-			$post = $this->input->post();
-			$update_data = [];
+				$user = $this->session_data['user'];
+				if (!password_verify($post['CURRENT_PASSWORD'], $user['PASSWORD'])) {
+					$this->session->set_flashdata('error', "Update data failed");
+					return redirect(base_url()."/profile");
+				}
 
-			$user = $this->session_data['user'];
-			if (!password_verify($post['CURRENT_PASSWORD'], $user['PASSWORD'])) {
+				if (!empty($post['NEW_PASSWORD'])) {
+					$update_data['PASSWORD'] = password_hash(dbClean($post['NEW_PASSWORD']), PASSWORD_DEFAULT);
+				}
+
+				if (!empty($update_data)) {
+					$save 	= $this->Dbhelper->updateData("CD_USER", array('EMPLOYEE_ID' => $user['EMPLOYEE_ID']), $update_data);		
+					if ($save) {
+						$this->session->set_flashdata('success', "Update data success");
+						return redirect(base_url('dashboard'));
+					}
+				}
 				$this->session->set_flashdata('error', "Update data failed");
 				return redirect(base_url()."/profile");
 			}
-
-			if (!empty($post['NEW_PASSWORD'])) {
-				$update_data['PASSWORD'] = password_hash(dbClean($post['NEW_PASSWORD']), PASSWORD_DEFAULT);
-			}
-
-			if (!empty($update_data)) {
-				$save 	= $this->Dbhelper->updateData("CD_USER", array('EMPLOYEE_ID' => $user['EMPLOYEE_ID']), $update_data);		
-				if ($save) {
-					$this->session->set_flashdata('success', "Update data success");
+			$this->session->set_flashdata('error', "Access denied");
 					return redirect(base_url('dashboard'));
-				}
+		}
+		
+		public function ajax_load_customer() {
+			// $check = $this->onlyRequestPost();
+			// if (!$check) {
+			// 	return json_encode([]);
+			// }
+
+			$plant = $this->input->get('plant');
+			$keyword = strtoupper($this->input->get('q'));
+			$this->db->select('
+				CD_CUSTOMER.SALES_ORG as COMPANY_CODE,
+				COMPANY.CODE_NAME as COMPANY_NAME,  
+				CD_CUSTOMER.CUSTOMER,
+				CD_CUSTOMER.CUSTOMER_NAME as CUSTOMER_NAME,
+				REGION.CODE_NAME as REGION_NAME,
+				SALES_OFFICE.CODE_NAME as SALES_OFFICE_NAME,
+				CD_CUSTOMER.TELEPHONE_2,
+				CD_CUSTOMER.STREET,
+				CD_CUSTOMER.CHIEF,
+				CD_CUSTOMER.CHIEF_ID
+			');
+					$this->db->from('CD_CUSTOMER');
+					$this->db->join('CD_CODE COMPANY', "CD_CUSTOMER.SALES_ORG = COMPANY.CODE AND COMPANY.HEAD_CODE = 'AB'");
+					$this->db->join('CD_CODE SALES_OFFICE', "CD_CUSTOMER.SALES_OFFICE = SALES_OFFICE.CODE AND SALES_OFFICE.HEAD_CODE = 'AC01'", "left");
+					$this->db->join('CD_CODE REGION', "CD_CUSTOMER.REGION = REGION.CODE AND REGION.HEAD_CODE = 'CS02'", "left");
+					if (!empty($plant) && $plant != '*') {
+						$this->db->where('CD_CUSTOMER.SALES_ORG', $plant);
+					}
+					$this->db->group_start();
+						$this->db->like('CD_CUSTOMER.CUSTOMER_NAME', $keyword, 'both');
+						$this->db->or_like('CD_CUSTOMER.CUSTOMER', $keyword, 'both');
+					$this->db->group_end();
+					$this->db->order_by('CD_CUSTOMER.CUSTOMER_NAME', 'ASC');
+
+					$data = $this->db->get()->result_array();
+			echo json_encode($data);
+		}
+
+		public function ajax_load_employee() {
+			// $check = $this->onlyRequestPost();
+			// if (!$check) {
+			// 	return json_encode([]);
+			// }
+
+			$plant 		= $this->input->get('plant');
+			$keyword 	= strtoupper($this->input->get('q'));
+			$attr 		= $this->input->get('attribute_name');
+
+			$roles 		= [];
+			// if (!empty($attr)) {
+			// 	if ($attr == 'pic_open_ts') {
+			// 		$roles = ['TS'];
+			// 	} elseif ($attr == 'pic_open_cct') {
+			// 		$roles = ['CCT'];
+			// 	} elseif ($attr == 'pic_open_asm') {
+			// 		$roles = ['ASM'];
+			// 	} elseif ($attr == 'pic_open_gsm') {
+			// 		$roles = ['GSM'];
+			// 	}
+			// }
+			$this->db->select('
+				HR_EMPLOYEE.EMPNO,
+				HR_EMPLOYEE.FULL_NAME
+			');
+					$this->db->from('HR_EMPLOYEE');
+					$this->db->where('HR_EMPLOYEE.PLANT', $plant);
+					$this->db->where('HR_EMPLOYEE.CONDITION_IN_OFFICE', '1');
+					if (!empty($roles)) {
+						$this->db->where_in('HR_EMPLOYEE.TS_ASM_GSM_CCT', $roles);
+					}
+					$this->db->group_start();
+						$this->db->like('HR_EMPLOYEE.FULL_NAME', $keyword, 'both');
+						$this->db->or_like('HR_EMPLOYEE.EMPNO', $keyword, 'both');
+					$this->db->group_end();
+					$this->db->order_by('HR_EMPLOYEE.FULL_NAME', 'ASC');
+
+					$data = $this->db->get()->result_array();
+			echo json_encode($data);
+		}
+
+		public function ajax_load_group_customer_reminder() {
+			// $check = $this->onlyRequestPost();
+			// if (!$check) {
+			// 	return json_encode([]);
+			// }
+			$all_plant = [
+				['GROUP_CUSTOMER' => '*', 'GROUP_CUSTOMER_NM' => 'ALL GROUP CUSTOMER']
+			];
+
+			$plant = $this->input->get('plant');
+			$keyword = strtoupper($this->input->get('q'));
+			$this->db->select('
+				GROUP_CUSTOMER, GROUP_CUSTOMER_NM
+			');
+					$this->db->from('FEED_CUST_REMAINDER_WA');
+					if (!empty($plant) && $plant != '*') {
+						$this->db->where('FEED_CUST_REMAINDER_WA.BUSINESS_AREA', $plant);
+					}
+					$this->db->group_start();
+						$this->db->like('FEED_CUST_REMAINDER_WA.CUSTOMER_NM', $keyword, 'both');
+						$this->db->or_like('FEED_CUST_REMAINDER_WA.CUSTOMER', $keyword, 'both');
+					$this->db->group_end();
+					$this->db->group_by('GROUP_CUSTOMER, GROUP_CUSTOMER_NM');
+					$this->db->order_by('FEED_CUST_REMAINDER_WA.GROUP_CUSTOMER_NM', 'ASC');
+
+					$data = $this->db->get()->result_array();
+					$data = array_merge($all_plant, $data);
+			echo json_encode($data);
+		}
+
+		public function ajax_load_customer_reminder() {
+			// $check = $this->onlyRequestPost();
+			// if (!$check) {
+			// 	return json_encode([]);
+			// }
+			$all_plant = [
+				['CUSTOMER' => '*', 'CUSTOMER_NM' => 'ALL CUSTOMER']
+			];
+
+			$plant = $this->input->get('plant');
+			$group_customer = $this->input->get('group_customer');
+			$exp_group_customer = explode("|", $group_customer);
+			$keyword = strtoupper($this->input->get('q'));
+			$this->db->select('
+				CUSTOMER, CUSTOMER_NM
+			');
+					$this->db->from('FEED_CUST_REMAINDER_WA');
+					if (!empty($plant) && $plant != '*') {
+						$this->db->where('FEED_CUST_REMAINDER_WA.BUSINESS_AREA', $plant);
+					}
+					if (!empty($exp_group_customer[0]) && $exp_group_customer[0] != '*') {
+				$this->db->where('FEED_CUST_REMAINDER_WA.GROUP_CUSTOMER', $exp_group_customer[0]);
 			}
-			$this->session->set_flashdata('error', "Update data failed");
-			return redirect(base_url()."/profile");
-		}
-		$this->session->set_flashdata('error', "Access denied");
-        return redirect(base_url('dashboard'));
-	}
-	
-	public function ajax_load_customer() {
-		// $check = $this->onlyRequestPost();
-		// if (!$check) {
-		// 	return json_encode([]);
-		// }
+					$this->db->group_start();
+						$this->db->like('FEED_CUST_REMAINDER_WA.CUSTOMER_NM', $keyword, 'both');
+						$this->db->or_like('FEED_CUST_REMAINDER_WA.CUSTOMER', $keyword, 'both');
+					$this->db->group_end();
+					$this->db->group_by('CUSTOMER, CUSTOMER_NM');
+					$this->db->order_by('FEED_CUST_REMAINDER_WA.CUSTOMER_NM', 'ASC');
 
-		$plant = $this->input->get('plant');
-		$keyword = strtoupper($this->input->get('q'));
-		$this->db->select('
-			CD_CUSTOMER.SALES_ORG as COMPANY_CODE,
-			COMPANY.CODE_NAME as COMPANY_NAME,  
-			CD_CUSTOMER.CUSTOMER,
-			CD_CUSTOMER.CUSTOMER_NAME as CUSTOMER_NAME,
-			REGION.CODE_NAME as REGION_NAME,
-			SALES_OFFICE.CODE_NAME as SALES_OFFICE_NAME,
-			CD_CUSTOMER.TELEPHONE_2,
-			CD_CUSTOMER.STREET,
-			CD_CUSTOMER.CHIEF,
-			CD_CUSTOMER.CHIEF_ID
-		');
-        $this->db->from('CD_CUSTOMER');
-        $this->db->join('CD_CODE COMPANY', "CD_CUSTOMER.SALES_ORG = COMPANY.CODE AND COMPANY.HEAD_CODE = 'AB'");
-        $this->db->join('CD_CODE SALES_OFFICE', "CD_CUSTOMER.SALES_OFFICE = SALES_OFFICE.CODE AND SALES_OFFICE.HEAD_CODE = 'AC01'", "left");
-        $this->db->join('CD_CODE REGION', "CD_CUSTOMER.REGION = REGION.CODE AND REGION.HEAD_CODE = 'CS02'", "left");
-        if (!empty($plant) && $plant != '*') {
-        	$this->db->where('CD_CUSTOMER.SALES_ORG', $plant);
-        }
-        $this->db->group_start();
-	        $this->db->like('CD_CUSTOMER.CUSTOMER_NAME', $keyword, 'both');
-	        $this->db->or_like('CD_CUSTOMER.CUSTOMER', $keyword, 'both');
-        $this->db->group_end();
-        $this->db->order_by('CD_CUSTOMER.CUSTOMER_NAME', 'ASC');
-
-        $data = $this->db->get()->result_array();
-		echo json_encode($data);
-	}
-
-	public function ajax_load_employee() {
-		// $check = $this->onlyRequestPost();
-		// if (!$check) {
-		// 	return json_encode([]);
-		// }
-
-		$plant 		= $this->input->get('plant');
-		$keyword 	= strtoupper($this->input->get('q'));
-		$attr 		= $this->input->get('attribute_name');
-
-		$roles 		= [];
-		// if (!empty($attr)) {
-		// 	if ($attr == 'pic_open_ts') {
-		// 		$roles = ['TS'];
-		// 	} elseif ($attr == 'pic_open_cct') {
-		// 		$roles = ['CCT'];
-		// 	} elseif ($attr == 'pic_open_asm') {
-		// 		$roles = ['ASM'];
-		// 	} elseif ($attr == 'pic_open_gsm') {
-		// 		$roles = ['GSM'];
-		// 	}
-		// }
-		$this->db->select('
-			HR_EMPLOYEE.EMPNO,
-			HR_EMPLOYEE.FULL_NAME
-		');
-        $this->db->from('HR_EMPLOYEE');
-        $this->db->where('HR_EMPLOYEE.PLANT', $plant);
-				$this->db->where('HR_EMPLOYEE.CONDITION_IN_OFFICE', '1');
-				if (!empty($roles)) {
-					$this->db->where_in('HR_EMPLOYEE.TS_ASM_GSM_CCT', $roles);
-				}
-        $this->db->group_start();
-	        $this->db->like('HR_EMPLOYEE.FULL_NAME', $keyword, 'both');
-	        $this->db->or_like('HR_EMPLOYEE.EMPNO', $keyword, 'both');
-        $this->db->group_end();
-        $this->db->order_by('HR_EMPLOYEE.FULL_NAME', 'ASC');
-
-        $data = $this->db->get()->result_array();
-		echo json_encode($data);
-	}
-
-	public function ajax_load_group_customer_reminder() {
-		// $check = $this->onlyRequestPost();
-		// if (!$check) {
-		// 	return json_encode([]);
-		// }
-		$all_plant = [
-			['GROUP_CUSTOMER' => '*', 'GROUP_CUSTOMER_NM' => 'ALL GROUP CUSTOMER']
-		];
-
-		$plant = $this->input->get('plant');
-		$keyword = strtoupper($this->input->get('q'));
-		$this->db->select('
-			GROUP_CUSTOMER, GROUP_CUSTOMER_NM
-		');
-        $this->db->from('FEED_CUST_REMAINDER_WA');
-        if (!empty($plant) && $plant != '*') {
-        	$this->db->where('FEED_CUST_REMAINDER_WA.BUSINESS_AREA', $plant);
-        }
-        $this->db->group_start();
-	        $this->db->like('FEED_CUST_REMAINDER_WA.CUSTOMER_NM', $keyword, 'both');
-	        $this->db->or_like('FEED_CUST_REMAINDER_WA.CUSTOMER', $keyword, 'both');
-        $this->db->group_end();
-        $this->db->group_by('GROUP_CUSTOMER, GROUP_CUSTOMER_NM');
-        $this->db->order_by('FEED_CUST_REMAINDER_WA.GROUP_CUSTOMER_NM', 'ASC');
-
-        $data = $this->db->get()->result_array();
-        $data = array_merge($all_plant, $data);
-		echo json_encode($data);
-	}
-
-	public function ajax_load_customer_reminder() {
-		// $check = $this->onlyRequestPost();
-		// if (!$check) {
-		// 	return json_encode([]);
-		// }
-		$all_plant = [
-			['CUSTOMER' => '*', 'CUSTOMER_NM' => 'ALL CUSTOMER']
-		];
-
-		$plant = $this->input->get('plant');
-		$group_customer = $this->input->get('group_customer');
-		$exp_group_customer = explode("|", $group_customer);
-		$keyword = strtoupper($this->input->get('q'));
-		$this->db->select('
-			CUSTOMER, CUSTOMER_NM
-		');
-        $this->db->from('FEED_CUST_REMAINDER_WA');
-        if (!empty($plant) && $plant != '*') {
-        	$this->db->where('FEED_CUST_REMAINDER_WA.BUSINESS_AREA', $plant);
-        }
-        if (!empty($exp_group_customer[0]) && $exp_group_customer[0] != '*') {
-			$this->db->where('FEED_CUST_REMAINDER_WA.GROUP_CUSTOMER', $exp_group_customer[0]);
-		}
-        $this->db->group_start();
-	        $this->db->like('FEED_CUST_REMAINDER_WA.CUSTOMER_NM', $keyword, 'both');
-	        $this->db->or_like('FEED_CUST_REMAINDER_WA.CUSTOMER', $keyword, 'both');
-        $this->db->group_end();
-        $this->db->group_by('CUSTOMER, CUSTOMER_NM');
-        $this->db->order_by('FEED_CUST_REMAINDER_WA.CUSTOMER_NM', 'ASC');
-
-        $data = $this->db->get()->result_array();
-        $data = array_merge($all_plant, $data);
-		echo json_encode($data);
-	}
-
-	public function ajax_load_kota() {
-		// $check = $this->onlyRequestPost();
-		// if (!$check) {
-		// 	return json_encode([]);
-		// }
-
-		$provinsi 		= $this->input->get('provinsi');
-		$keyword 	= strtoupper($this->input->get('q'));
-		$this->db->select('
-			ID_REGENCIES,
-			REGENCIES
-		');
-        $this->db->from('CD_REGENCIES');
-        $this->db->where('PROVINCE_ID', $provinsi);
-				$this->db->group_start();
-	        $this->db->like('REGENCIES', $keyword, 'both');
-        $this->db->group_end();
-        $this->db->order_by('REGENCIES', 'ASC');
-
-        $data = $this->db->get()->result_array();
-		echo json_encode($data);
-	}
-
-	public function ajax_load_desa() {
-		// $check = $this->onlyRequestPost();
-		// if (!$check) {
-		// 	return json_encode([]);
-		// }
-
-		$kota 		= $this->input->get('kota');
-		$keyword 	= strtoupper($this->input->get('q'));
-		$this->db->select('
-			ID_DISTRICTS,
-			DISTRICS
-		');
-        $this->db->from('CD_DISTRICTS');
-        $this->db->where('REGENCIES_ID', $kota);
-				$this->db->group_start();
-	        $this->db->like('DISTRICS', $keyword, 'both');
-        $this->db->group_end();
-        $this->db->order_by('DISTRICS', 'ASC');
-
-        $data = $this->db->get()->result_array();
-		echo json_encode($data);
-	}
-
-	private function onlyRequestPost() {
-		$session = $this->session_data;
-		if (empty($session) || $this->input->server('REQUEST_METHOD') != 'POST') {
-			return false;
-		}
-		return true;
-	}
-
-	// DONT CHANGE THIS
-	private function cekLogin() {
-		$session = $this->session_data;
-		if (empty($session)) {
-			redirect('login_dashboard');
-		}
-	}
-	private function validation($post_data) {
-		$errMessage 	= [];
-		$id 			= isset($post_data["id"]) ? $post_data["id"] : null;
-		$surat_id		= isset($post_data['surat_id']) ? $post_data['surat_id'] : null;
-
-		if (!empty($id)) {
-			$data = $this->Surat_model->find($id);
-			if (empty($data)) {
-				$this->session->set_flashdata('error', "Data not found");
-	        	return redirect('pengajuan-surat');
-	        }
-	        $user = $this->session_data['user'];
-	        if ($data->user_id != $user['id']) {
-	        	$this->session->set_flashdata('error', "Data not found");
-	        	return redirect('pengajuan-surat');
-	        }
+					$data = $this->db->get()->result_array();
+					$data = array_merge($all_plant, $data);
+			echo json_encode($data);
 		}
 
-		return $errMessage;
-	}
+		public function ajax_load_kota() {
+			// $check = $this->onlyRequestPost();
+			// if (!$check) {
+			// 	return json_encode([]);
+			// }
+
+			$provinsi 		= $this->input->get('provinsi');
+			$keyword 	= strtoupper($this->input->get('q'));
+			$this->db->select('
+				ID_REGENCIES,
+				REGENCIES
+			');
+					$this->db->from('CD_REGENCIES');
+					$this->db->where('PROVINCE_ID', $provinsi);
+					$this->db->group_start();
+						$this->db->like('REGENCIES', $keyword, 'both');
+					$this->db->group_end();
+					$this->db->order_by('REGENCIES', 'ASC');
+
+					$data = $this->db->get()->result_array();
+			echo json_encode($data);
+		}
+
+		public function ajax_load_desa() {
+			// $check = $this->onlyRequestPost();
+			// if (!$check) {
+			// 	return json_encode([]);
+			// }
+
+			$kota 		= $this->input->get('kota');
+			$keyword 	= strtoupper($this->input->get('q'));
+			$this->db->select('
+				ID_DISTRICTS,
+				DISTRICS
+			');
+					$this->db->from('CD_DISTRICTS');
+					$this->db->where('REGENCIES_ID', $kota);
+					$this->db->group_start();
+						$this->db->like('DISTRICS', $keyword, 'both');
+					$this->db->group_end();
+					$this->db->order_by('DISTRICS', 'ASC');
+
+					$data = $this->db->get()->result_array();
+			echo json_encode($data);
+		}
+
+		private function onlyRequestPost() {
+			$session = $this->session_data;
+			if (empty($session) || $this->input->server('REQUEST_METHOD') != 'POST') {
+				return false;
+			}
+			return true;
+		}
+
+		// DONT CHANGE THIS
+		private function cekLogin() {
+			$session = $this->session_data;
+			if (empty($session)) {
+				redirect('login_dashboard');
+			}
+		}
+		private function validation($post_data) {
+			$errMessage 	= [];
+			$id 			= isset($post_data["id"]) ? $post_data["id"] : null;
+			$surat_id		= isset($post_data['surat_id']) ? $post_data['surat_id'] : null;
+
+			if (!empty($id)) {
+				$data = $this->Surat_model->find($id);
+				if (empty($data)) {
+					$this->session->set_flashdata('error', "Data not found");
+							return redirect('pengajuan-surat');
+						}
+						$user = $this->session_data['user'];
+						if ($data->user_id != $user['id']) {
+							$this->session->set_flashdata('error', "Data not found");
+							return redirect('pengajuan-surat');
+						}
+			}
+
+			return $errMessage;
+		}
 }
