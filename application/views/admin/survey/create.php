@@ -1132,7 +1132,6 @@
     }
 
     function addSegmentcondition() {
-        console.log('harvest', list_harvest);
         let index = segmenIndex;
         let tabledata = `
             <div id="segment-${index}"> 
