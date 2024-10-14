@@ -986,7 +986,7 @@
     const lang = document.getElementById("latitude");
     const long = document.getElementById("longitude");
     let segmenIndex = 0;
-    let list_harvest = `<?= $harvest ?>`;
+    let list_harvest = JSON.parse(`<?= json_encode($harvest) ?>`);
 
     function getLocation() {
         console.log('ask this');
