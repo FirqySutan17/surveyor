@@ -31,6 +31,8 @@ class survey extends CI_Controller {
 		$data['user'] 			= $user;
 		$data['provinces'] 	= $this->Dbhelper->selectTabel('ID_PROVINCE, PROVINCE', 'CD_PROVINCE', [], 'PROVINCE', 'ASC');
 		$data['placeholder'] 	= $this->list_placeholder();
+		$data['harvest'] 	= $this->list_harvest();
+		
 		// dd($data['user']);
 		$this->template->_v('survey/create', $data);
 	}
@@ -341,6 +343,7 @@ class survey extends CI_Controller {
 		$data['user'] 			= $user;
 		$data['detail']				= $data_detail;
 		$data['placeholder'] 	= $this->list_placeholder();
+		$data['harvest'] 	= $this->list_harvest();
 		
 		$this->template->_v('survey/edit', $data);
 	}
@@ -1200,6 +1203,78 @@ class survey extends CI_Controller {
 		$data['gagal-panen']			= ["UMUR SAAT PUSO", "KONDISI SAAT PUSO (KEKERINGAN / BANJIR)", "ESTIMASI LAHAN YANG TERKENA PUSO", "ESTIMASI PRODUKSI YANG HILANG KARENA PUSO"];
 
 		return $data;
+	}
+
+	private function list_harvest() {
+		$result = [];
+		
+		$result[0] = [
+			"BARIS"	=> '0 - 5',
+			"BIJI"	=> '0',
+			"0"			=> ''
+		];
+
+		$result[1] = [
+			"BARIS"	=> '6',
+			"BIJI"	=> '1-50',
+			"0"			=> '1-9'
+		];
+
+		$result[2] = [
+			"BARIS"	=> '7',
+			"BIJI"	=> '51-100',
+			"0"			=> '10-40'
+		];
+
+		$result[3] = [
+			"BARIS"	=> '8-9',
+			"BIJI"	=> '101-150',
+			"0"			=> '41-80'
+		];
+
+		$result[4] = [
+			"BARIS"	=> '10',
+			"BIJI"	=> '151-200',
+			"0"			=> '81-120'
+		];
+
+		$result[5] = [
+			"BARIS"	=> '11',
+			"BIJI"	=> '201-250',
+			"0"			=> '121-160'
+		];
+
+		$result[6] = [
+			"BARIS"	=> '12',
+			"BIJI"	=> '251-300',
+			"0"			=> '161-200'
+		];
+
+		$result[7] = [
+			"BARIS"	=> '13',
+			"BIJI"	=> '301-350',
+			"0"			=> '201-240'
+		];
+
+		$result[8] = [
+			"BARIS"	=> '14',
+			"BIJI"	=> '351-400',
+			"0"			=> '241-280'
+		];
+
+		$result[9] = [
+			"BARIS"	=> '15',
+			"BIJI"	=> '401-450',
+			"0"			=> '281-320'
+		];
+
+		$result[10] = [
+			"BARIS"	=> '16',
+			"BIJI"	=> '451-500',
+			"0"			=> '321-350'
+		];
+
+		return $result;
 	}
 
 	private function get_surveydetail($survey_no) {
