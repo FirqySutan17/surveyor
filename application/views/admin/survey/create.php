@@ -1432,11 +1432,24 @@
     }
 
     function calculateBarisHarvest(index) {
+        let total = 0;
+        // get total sum
         $('.baris-actual-' + index).each(function() {
             let score   = $(this).data('score');
-            let amount  = $(this).val();
+            let amount  = Number($(this).val());
             console.log('score : ' + score, 'amount : ' + amount);
+            total += amount;
         });
+
+        // set percentage
+        $('.baris-actual-' + index).each(function() {
+            let score   = $(this).data('score');
+            let amount  = Number($(this).val());
+
+            let percentage = (amount / total) * 100;
+            $(`#baris-percentage-${index}-${score}`).text(percentage.toString());
+        });
+        $(`#baris-total-${index}`).text(total.toString());
     }
 
     function addMarketprice() {
