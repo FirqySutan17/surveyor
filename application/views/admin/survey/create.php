@@ -788,8 +788,8 @@
                                 <th style="text-align: center">DRAFTER</th>
                                 <th style="text-align: center">DATE</th>
                                 <th style="text-align: center">LAND TYPE</th>
-                                <th style="text-align: center">LATITUDE</th>
-                                <th style="text-align: center">LONGITUTE</th>
+                                <th style="text-align: center">LAND AREA (Ha)</th>
+                                <th style="text-align: center">COORDINATE</th>
                                 <th style="text-align: center">ACTION</th>
                             </tr>
                         </thead>
@@ -809,11 +809,11 @@
                                         <option value="PERBUKITAN">PERBUKITAN</option>
                                     </select>
                                 </td>
-                                <td data-label="LATITUDE">
-                                    <div id="latitude"></div>
+                                <td data-label="LAND AREA">
+                                    <input type="text" name="luas_lahan" class="form-control" style="font-size: 14px" required>
                                 </td>
-                                <td data-label="LONGITUDE">
-                                    <div id="longitude"></div>
+                                <td data-label="COORDINATE">
+                                    <div id="coordinateText"></div>
                                 </td>
                                 <td>
                                     <a href="javascript:void(0)" onclick="getLocation()" style="background: #00c0ff; border-radius: 10px; color: #fff; font-weight: 600; padding: 10px">UPDATE LOCATION</a>
@@ -983,8 +983,7 @@
 </div>
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLUc8QC0GYh5ozbMbGBcNUm1BBIjvmmg8&callback=myMap"></script> -->
 <script>
-    const lang = document.getElementById("latitude");
-    const long = document.getElementById("longitude");
+    const lang = document.getElementById("coordinateText");
     let segmenIndex = 0;
 
     function getLocation() {
@@ -997,7 +996,6 @@
         } else { 
             console.log('ask this 2');
             lang.innerHTML = "Geolocation is not supported by this browser.";
-            long.innerHTML = "Geolocation is not supported by this browser.";
         }
     }
         
@@ -1006,8 +1004,7 @@
         let longitude   = position.coords.longitude;
         let coordinate  = latitude + "," + longitude;
 
-        lang.innerHTML  = latitude;
-        long.innerHTML  = longitude;
+        lang.innerHTML  = coordinate;
         let iframe_gmap = `<iframe class="maps-frame" src="https://maps.google.com/maps?q=${coordinate}&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
             
         $("#coordinate").val(coordinate);

@@ -62,6 +62,7 @@ class survey extends CI_Controller {
 					"REGENCY"				=> dbClean($post['regencies']),
 					"DISTRICT"			=> dbClean($post['districts']),
 					"DESCRIPTION"		=> dbClean($post['address']),
+					"LUAS_LAHAN"		=> dbClean($post['luas_lahan']),
 					"CREATED_AT"		=> date('Ymd His'),
 					"CREATED_BY"		=> $this->session_data['user']['EMPLOYEE_ID'],
 					"PLANT"					=> $this->session_data['user']['PLANT'] == '*' ? '3212' : $this->session_data['user']['PLANT'],
