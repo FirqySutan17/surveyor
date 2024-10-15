@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <style>
     .db-box h4 {
         font-weight: 700;
@@ -451,26 +452,14 @@
     .btn-primary {
         font-size: 12px;
     }
-    #map {
+    #mapid {
         height: 400px;
       }
 </style>
 
-<div class="main-content" style="background: linear-gradient(0deg, rgba(0,125,195,1) 10%, rgba(161,221,255,1) 98%); min-height: 91.6vh; display: flex; align-items: center; justify-content: center;">
+<div class="main-content" style="background: linear-gradient(0deg, rgba(0,125,195,1) 10%, rgba(161,221,255,1) 98%);">
     <!-- <img src="<?= asset('img/logo.png') ?>" alt="" style="width: 70%; text-align: center; object-fit: cover;"> -->
     <!-- <div class="db-table" style="margin-top: 10px">
-        <div class="db-box" style="height: 250px">
-            <h4 style="font-family: cjFont; margin-bottom: 0px; text-align: center; margin-bottom: 5px">TITLE POINT 1</h4>
-            <p style="font-weight: 500; color: #fff"><?= convMonth(date('m')).' '.date('Y') ?></p>
-            
-        </div>
-        <div class="db-box" style="box-shadow: none; padding: 0px;height: 250px">
-            <div style="padding: 20px 10px; border-radius: 10px; margin-bottom: 20px">
-                <h4 style="font-family: cjFont; margin-bottom: 0px; text-align: center; margin-bottom: 5px;">TITLE POINT 2</h4>
-                <p style="font-weight: 500; color: #fff"><?= date('Y') ?></p>
-                
-             </div>
-        </div>
         <div class="db-box" style="height: 250px">
             <h4 style="font-family: cjFont; margin-bottom: 0px; text-align: center; margin-bottom: 5px">TITLE POINT 3</h4>
             <p style="font-weight: 500; color: #fff"><?= convMonth(date('m')).' '.date('Y') ?></p>
@@ -484,25 +473,13 @@
              </div>
         </div>
     </div> -->
-    <div id="map"></div>
+    <div id="map" style="height: 450px; z-index: 1; border-radius: 10px;"></div>
     
 </div>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script type="text/javascript">
-    // $("#includeOptionGroup").on('click', function() {
-    //     $("#includeOption").trigger('change');
-    // });
-    $(".date-flow").on('click', function() {
-        $("#form-filter").attr('action', `<?= admin_url('summary-report') ?>`);
-        $("#form-filter").submit();
-    })
-    $("#includeOption").on('change', function() {
-        $("#form-filter").submit();
-    });
-</script>
 <script>
       // Inisialisasi peta
-      var map = L.map("map").setView([-7.250445, 112.768845], 5); // Koordinat awal dan zoom
+      var map = L.map("map").setView([-4.199249737560975, 122.85021421757004], 5); // Koordinat awal dan zoom
 
       // Tambahkan layer peta
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -513,16 +490,16 @@
       // Data marker
       var markers = [
         {
-          coords: [-7.250445, 112.768845],
-          info: "<strong>Marker 1:</strong><br>Surabaya<br>Info tambahan",
+          coords: [-6.196272919843322, 106.83224670972295],
+          info: "<strong>Marker 1:</strong><br>Jakarta<br>Info tambahan",
         },
         {
-          coords: [-7.15092, 112.650211],
-          info: "<strong>Marker 2:</strong><br>Malang<br>Info tambahan",
+          coords: [5.547944609773346, 95.31874503129693],
+          info: "<strong>Marker 2:</strong><br>Banda Aceh<br>Info tambahan",
         },
         {
-          coords: [-7.257172, 112.752106],
-          info: "<strong>Marker 3:</strong><br>Sidoarjo<br>Info tambahan",
+          coords: [-6.615515539869791, 144.1303116562076],
+          info: "<strong>Marker 3:</strong><br>Papua Nugini<br>Info tambahan",
         },
       ];
 
@@ -531,4 +508,4 @@
         var markerInstance = L.marker(marker.coords).addTo(map);
         markerInstance.bindPopup(marker.info); // Mengikat info box dengan marker
       });
-    </script>
+</script>
