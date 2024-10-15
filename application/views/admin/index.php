@@ -457,7 +457,7 @@
       }
 </style>
 
-<div class="main-content" style="background: linear-gradient(0deg, rgba(0,125,195,1) 10%, rgba(161,221,255,1) 98%);">
+<div class="main-content" style="background: linear-gradient(0deg, rgba(0,125,195,1) 10%, rgba(161,221,255,1) 98%);min-height: 91.5vh">
     <!-- <img src="<?= asset('img/logo.png') ?>" alt="" style="width: 70%; text-align: center; object-fit: cover;"> -->
     <!-- <div class="db-table" style="margin-top: 10px">
         <div class="db-box" style="height: 250px">
@@ -474,6 +474,11 @@
         </div>
     </div> -->
     <div id="map" style="height: 450px; z-index: 1; border-radius: 10px;"></div>
+    <div style="margin-top: 50px; display: flex; align-content: center; justify-content: center; align-items: center;">
+        <h3 style="font-family: cjFont; margin-bottom: 0px; text-align: center; line-height: 40px; font-weight: 700; color: #fff; letter-spacing: 1px">
+            WELCOME, <br> <?= $user['FULL_NAME'] ?>
+        </h3>
+    </div>
     
 </div>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
