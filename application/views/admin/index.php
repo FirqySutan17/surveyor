@@ -451,10 +451,13 @@
     .btn-primary {
         font-size: 12px;
     }
+    #map {
+        height: 400px;
+      }
 </style>
 
 <div class="main-content" style="background: linear-gradient(0deg, rgba(0,125,195,1) 10%, rgba(161,221,255,1) 98%); min-height: 91.6vh; display: flex; align-items: center; justify-content: center;">
-    <img src="<?= asset('img/logo.png') ?>" alt="" style="width: 70%; text-align: center; object-fit: cover;">
+    <!-- <img src="<?= asset('img/logo.png') ?>" alt="" style="width: 70%; text-align: center; object-fit: cover;"> -->
     <!-- <div class="db-table" style="margin-top: 10px">
         <div class="db-box" style="height: 250px">
             <h4 style="font-family: cjFont; margin-bottom: 0px; text-align: center; margin-bottom: 5px">TITLE POINT 1</h4>
@@ -481,7 +484,10 @@
              </div>
         </div>
     </div> -->
+    <div id="map"></div>
+    
 </div>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script type="text/javascript">
     // $("#includeOptionGroup").on('click', function() {
     //     $("#includeOption").trigger('change');
@@ -494,3 +500,35 @@
         $("#form-filter").submit();
     });
 </script>
+<script>
+      // Inisialisasi peta
+      var map = L.map("map").setView([-7.250445, 112.768845], 5); // Koordinat awal dan zoom
+
+      // Tambahkan layer peta
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: "© OpenStreetMap",
+      }).addTo(map);
+
+      // Data marker
+      var markers = [
+        {
+          coords: [-7.250445, 112.768845],
+          info: "<strong>Marker 1:</strong><br>Surabaya<br>Info tambahan",
+        },
+        {
+          coords: [-7.15092, 112.650211],
+          info: "<strong>Marker 2:</strong><br>Malang<br>Info tambahan",
+        },
+        {
+          coords: [-7.257172, 112.752106],
+          info: "<strong>Marker 3:</strong><br>Sidoarjo<br>Info tambahan",
+        },
+      ];
+
+      // Tambahkan marker ke peta
+      markers.forEach(function (marker) {
+        var markerInstance = L.marker(marker.coords).addTo(map);
+        markerInstance.bindPopup(marker.info); // Mengikat info box dengan marker
+      });
+    </script>

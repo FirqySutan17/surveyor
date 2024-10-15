@@ -43,6 +43,7 @@
     <link rel="stylesheet" href="<?= asset('vendor/datatables.net-bs/css/buttons.dataTables.min.css') ?>">
     <link rel="stylesheet" href="<?= asset('vendor/lightbox2/dist/css/lightbox.min.css') ?>">
     <link rel="stylesheet" href="<?= asset('vendor/sweetalert2/sweetalert2.min.css') ?>">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     
     <link href="<?= asset('css/style-master.css') ?>" rel="stylesheet">
     <style>
