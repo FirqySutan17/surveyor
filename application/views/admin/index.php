@@ -461,6 +461,7 @@
         margin: 20px 0px;
         border-radius: 10px;
         border: 2px solid red;
+        min-height: 250px
     }
 
     .information-box hr {
@@ -514,7 +515,8 @@
             INFORMATION
         </h3>
         <hr>
-        <ul>
+        <p style="margin: 0px; text-align: center; padding: 65px 0px">NO INFORMATION YET</p>
+        <!-- <ul>
             <li>
                 <b>#SURVEY202409100001</b> : SURVEY PADA LOKASI INI SEDANG DALAM TAHAP <b>(GENETATIF AKHIR)</b>
                 <a href="#" target="_blank" class="btn btn-sm" title="Detail" style="float: right;"><i class="fas fa-eye text-primary" style="font-size: 22px"></i></a>
@@ -531,7 +533,7 @@
                 <b>#SURVEY202409100001</b> : SURVEY PADA LOKASI INI SEDANG DALAM TAHAP <b>(GENETATIF AKHIR)</b>
                 <a href="#" target="_blank" class="btn btn-sm" title="Detail" style="float: right;"><i class="fas fa-eye text-primary" style="font-size: 22px"></i></a>
             </li>
-        </ul>
+        </ul> -->
     </div>
 </div>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
