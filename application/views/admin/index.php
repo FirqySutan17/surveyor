@@ -452,9 +452,44 @@
     .btn-primary {
         font-size: 12px;
     }
-    #mapid {
-        height: 400px;
-      }
+    #map{
+        border: 2px solid #fff;
+    }
+    .information-box {
+        background: #fff;
+        padding: 20px;
+        margin: 20px 0px;
+        border-radius: 10px;
+        border: 2px solid red;
+    }
+
+    .information-box hr {
+        margin: 5px 0px;
+        height: 2px;
+        color: red;
+    }
+    .information-box ul li {
+        padding-top: 10px;
+        margin-left: 20px;
+        border-bottom : 1px solid #000;
+        padding-bottom: 10px
+    }
+    .information-box ul li:last-child {
+        border-bottom: none;
+    }
+    .information-box svg {
+        font-size: 22px !important; 
+        margin-top: -7px
+    }
+
+    @media (max-width: 600px) {
+        .information-box ul li {
+            padding-bottom: 30px
+        }
+        .information-box svg {
+            margin-top: 10px
+        }
+    }
 </style>
 
 <div class="main-content" style="background: linear-gradient(0deg, rgba(0,125,195,1) 10%, rgba(161,221,255,1) 98%);min-height: 91.5vh">
@@ -474,12 +509,30 @@
         </div>
     </div> -->
     <div id="map" style="height: 450px; z-index: 1; border-radius: 10px;"></div>
-    <div style="margin-top: 50px; display: flex; align-content: center; justify-content: center; align-items: center;">
-        <h3 style="font-family: cjFont; margin-bottom: 0px; text-align: center; line-height: 40px; font-weight: 700; color: #fff; letter-spacing: 1px">
-            WELCOME, <br> <?= $user['FULL_NAME'] ?>
+    <div class="information-box">
+        <h3 style="font-family: cjFont; margin-bottom: 0px;line-height: 40px; font-weight: 700; letter-spacing: 1px">
+            INFORMATION
         </h3>
+        <hr>
+        <ul>
+            <li>
+                <b>#SURVEY202409100001</b> : SURVEY PADA LOKASI INI SEDANG DALAM TAHAP <b>(GENETATIF AKHIR)</b>
+                <a href="#" target="_blank" class="btn btn-sm" title="Detail" style="float: right;"><i class="fas fa-eye text-primary" style="font-size: 22px"></i></a>
+            </li>
+            <li>
+                <b>#SURVEY202409100001</b> : SURVEY PADA LOKASI INI SEDANG DALAM TAHAP <b>(GENETATIF AKHIR)</b>
+                <a href="#" target="_blank" class="btn btn-sm" title="Detail" style="float: right;"><i class="fas fa-eye text-primary" style="font-size: 22px"></i></a>
+            </li>
+            <li>
+                <b>#SURVEY202409100001</b> : SURVEY PADA LOKASI INI SEDANG DALAM TAHAP <b>(GENETATIF AKHIR)</b>
+                <a href="#" target="_blank" class="btn btn-sm" title="Detail" style="float: right;"><i class="fas fa-eye text-primary" style="font-size: 22px"></i></a>
+            </li>
+            <li>
+                <b>#SURVEY202409100001</b> : SURVEY PADA LOKASI INI SEDANG DALAM TAHAP <b>(GENETATIF AKHIR)</b>
+                <a href="#" target="_blank" class="btn btn-sm" title="Detail" style="float: right;"><i class="fas fa-eye text-primary" style="font-size: 22px"></i></a>
+            </li>
+        </ul>
     </div>
-    
 </div>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
