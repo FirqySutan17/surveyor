@@ -866,6 +866,8 @@
                                             <!-- <td width="5%"><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td> -->
                                         </tr>
                                     <?php endforeach ?>
+                                <?php else: ?>
+                                    <h3>NO DATA YET</h3> 
                                 <?php endif ?>
                             </tbody>
                         </table>
