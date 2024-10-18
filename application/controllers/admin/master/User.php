@@ -346,14 +346,16 @@ class User extends CI_Controller {
 			'M004'	=> 'Master - Data User',
 			'M005'	=> 'Master - Data Klasifikasi',
 			'M006'	=> 'Master - Data Kategori',
+			'M007'	=> 'Master - Data Districts',
 			'TR001'	=> 'Entry - Survey',
 			'TR002'	=> 'Entry - Gudang',
 			'TR003'	=> 'Entry - Attendance',
 			'TR004'	=> 'Update - Survey',
 			'TR005'	=> 'Update - Gudang',
-			'R001'	=> 'Report - Survey',
+			'R001'	=> 'Report - Report by Surveyor',
 			'R002'	=> 'Report - Gudang',
 			'R003'	=> 'Report - Attendance',
+			'R004'	=> 'Report - Report by Districts',
 		];
 	}
 

@@ -37,6 +37,27 @@
 			$hasil = $this->db->get($tabel);
 			return $hasil->row_array();
 		}
+
+		public function get_districts_with_regencies($code) {
+			$query = $this->db->query("
+				SELECT 
+					A.ID_DISTRICTS, 
+					A.DISTRICS as DISTRICT_NAME, 
+					A.PLANT_AREA, 
+					A.SEGMENT,
+					B.REGENCIES as REGENCIES_NAME,
+					C.PROVINCE as PROVINCE_NAME
+				FROM 
+					CD_DISTRICTS A
+				JOIN 
+					CD_REGENCIES B ON A.REGENCIES_ID = B.ID_REGENCIES
+				JOIN 
+					CD_PROVINCE C ON B.PROVINCE_ID = C.ID_PROVINCE
+				WHERE 
+					A.ID_DISTRICTS = ?", array($code)); // Filter berdasarkan $code
+			
+			return $query->row_array(); // Mengembalikan satu baris data
+		}
 		
 		function selectRawQuery($query) {
 			return $this->db->query($query)->result_array();

@@ -63,6 +63,14 @@ $route['survey/do_create_mobile'] 	= 'Home/do_create_mobile';
 	$route['dashboard/master/kategori/do_update'] 		= 'admin/master/Kategori/do_update';
 	$route['dashboard/master/kategori/detail/(:any)'] 	= 'admin/master/Kategori/detail/$1';
 	$route['dashboard/master/kategori/delete/(:any)']	= 'admin/master/Kategori/delete/$1';
+
+	$route['dashboard/master/districts'] 				= 'admin/master/districts';
+	$route['dashboard/master/districts/create'] 		= 'admin/master/districts/create';
+	$route['dashboard/master/districts/do_create'] 		= 'admin/master/districts/do_create';
+	$route['dashboard/master/districts/edit/(:any)'] 	= 'admin/master/districts/edit/$1';
+	$route['dashboard/master/districts/do_update'] 		= 'admin/master/districts/do_update';
+	$route['dashboard/master/districts/detail/(:any)'] 	= 'admin/master/districts/detail/$1';
+	$route['dashboard/master/districts/delete/(:any)']	= 'admin/master/districts/delete/$1';
 /* MASTER DATA ROUTES */
 
 /* ENTRY ROUTES */
@@ -76,6 +84,8 @@ $route['survey/do_create_mobile'] 	= 'Home/do_create_mobile';
 	$route['dashboard/survey/do_update'] 	= 'admin/Survey/do_update';
 	$route['dashboard/survey/drawing'] 	= 'admin/Survey/drawing';
 	$route['dashboard/visit/export/(:any)'] = 'admin/Visit/export/$1';
+
+	$route['dashboard/survey/report-by-districts'] 											= 'admin/Survey/report';
 
 	$route['dashboard/remainder'] 					= 'admin/Remainder/index';
 	$route['dashboard/remainder/entry'] 		= 'admin/Remainder/entry';

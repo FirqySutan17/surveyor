@@ -107,7 +107,7 @@
                 </a>
             </li>
 
-            <?php if (in_array('M001', $user_access) || in_array('M002', $user_access) || in_array('M003', $user_access) || in_array('M004', $user_access) || in_array('*', $user_access)): ?>
+            <?php if (in_array('M001', $user_access) || in_array('M002', $user_access) || in_array('M003', $user_access) || in_array('M004', $user_access) || in_array('M007', $user_access) || in_array('*', $user_access)): ?>
             <li class="dropdown <?= $this->uri->segment(3) == 'common_code' ? 'active' : '' ?> <?= $this->uri->segment(3) == 'user' ? 'active' : '' ?> <?= $this->uri->segment(3) == 'customer' ? 'active' : '' ?>">
                 <a href="javascript:void(0)" class="dropdown-btn">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -168,6 +168,14 @@
                             <a href="<?= route('dashboard/master/kategori') ?>"
                                 class="">
                                 <i class='bx bxs-right-arrow'></i> CATEGORY
+                            </a>
+                        </li>
+                    <?php endif ?>
+                    <?php if (in_array('M007', $user_access) || in_array('*', $user_access)): ?>
+                        <li class="<?= $this->uri->segment(3) == 'districts' ? 'active' : '' ?>">
+                            <a href="<?= route('dashboard/master/districts') ?>"
+                                class="">
+                                <i class='bx bxs-right-arrow'></i> DISTRICTS
                             </a>
                         </li>
                     <?php endif ?>
@@ -271,14 +279,23 @@
                     <i id="arrow" class='bx bx-chevron-right'></i>
                 </a>
                 <ul class="nav-submenu menu-content">
+                    <?php if (in_array('R004', $user_access) || in_array('*', $user_access)): ?>
+                        <li class="<?= ($this->uri->segment(2) == 'visit' && $this->uri->segment(3) == 'report') ? 'active' : '' ?>">
+                            <a href="<?= route('dashboard/survey/report-by-districts') ?>"
+                                class="">
+                                <i class='bx bxs-right-arrow'></i> REPORT BY DISTRICTS
+                            </a>
+                        </li>
+                    <?php endif ?>
                     <?php if (in_array('R001', $user_access) || in_array('*', $user_access)): ?>
                         <li class="<?= ($this->uri->segment(2) == 'visit' && $this->uri->segment(3) == 'report') ? 'active' : '' ?>">
                             <a href="<?= route('dashboard/survey') ?>"
                                 class="">
-                                <i class='bx bxs-right-arrow'></i> SURVEY REPORT
+                                <i class='bx bxs-right-arrow'></i> REPORT BY SURVEYOR
                             </a>
                         </li>
                     <?php endif ?>
+                   
                     <?php if (in_array('R002', $user_access) || in_array('*', $user_access)): ?>
                         <li class="<?= ($this->uri->segment(2) == 'visit' && $this->uri->segment(3) == 'customer') ? 'active' : '' ?>">
                             <a href="<?= route('dashboard/master/warehouse') ?>"
