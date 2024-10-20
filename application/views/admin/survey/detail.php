@@ -782,6 +782,7 @@
                                 <th style="text-align: center">DRAFTER</th>
                                 <th style="text-align: center">DATE</th>
                                 <th style="text-align: center">LAND TYPE</th>
+                                <th style="text-align: center">LAND AREA / LUAS TANAH (Ha)</th>
                                 <th style="text-align: center">COORDINATE</th>
                             </tr>
                         </thead>
@@ -795,6 +796,9 @@
                                 </td>
                                 <td data-label="LAND TYPE">
                                     <?= $detail['SURVEY']['LAND_TYPE'] ?>
+                                </td>
+                                <td data-label="LAND TYPE">
+                                    <?= $detail['SURVEY']['LAND_AREA'] ?>
                                 </td>
                                 <td data-label="COORDINATE">
                                     <?= $detail['SURVEY']['COORDINATE'] ?>

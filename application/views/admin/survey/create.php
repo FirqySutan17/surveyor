@@ -788,7 +788,7 @@
                                 <th style="text-align: center">DRAFTER</th>
                                 <th style="text-align: center">DATE</th>
                                 <th style="text-align: center">LAND TYPE</th>
-                                <th style="text-align: center">LAND AREA (Ha)</th>
+                                <th style="text-align: center">LUAS TANAH (Ha)</th>
                                 <th style="text-align: center">COORDINATE</th>
                                 <th style="text-align: center">ACTION</th>
                             </tr>
@@ -810,7 +810,7 @@
                                     </select>
                                 </td>
                                 <td data-label="LAND AREA">
-                                    <input type="text" name="luas_lahan" class="form-control" style="font-size: 14px" required>
+                                    <input type="number" name="luas_lahan" class="form-control" style="font-size: 14px" required>
                                 </td>
                                 <td data-label="COORDINATE">
                                     <div id="coordinateText"></div>

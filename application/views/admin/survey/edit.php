@@ -953,45 +953,75 @@
                                                         <th style="width: 10%">%</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody class="harvest-phase-<?= $index ?>">
+                                                <tbody class="harvest-phase-<?= $index ?>" style="display: none;">
                                                     <?php for ($i=10; $i >= 0; $i--) { ?>
                                                         <tr>
                                                             <td data-label="SCORE" style="">
                                                                 <?= $i ?>
                                                                 <input type="hidden" name="HARVEST_score[<?= $index ?>][]" value="<?= $i ?>">
                                                             </td>
-                                                            <td data-label="BARIS">
-                                                                <input name="baris[<?= $index ?>][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                                            </td>
-                                                            <td data-label="ACTUAL">
-                                                                <input name="baris_actual[<?= $index ?>][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                                            </td>
-                                                            <td data-label="%">
-                                                                <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                                            </td>
-                                                            <td data-label="BIJI">
-                                                                <input name="biji[<?= $index ?>][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                                            </td>
-                                                            <td data-label="ACTUAL">
-                                                                <input name="biji_actual[<?= $index ?>][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                                            </td>
-                                                            <td data-label="%">
-                                                                <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                                            </td>
-                                                            <td data-label="BOBOT">
-                                                                <input name="bobot[<?= $index ?>][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                                            </td>
-                                                            <td data-label="ACTUAL">
-                                                                <input name="bobot_actual[<?= $index ?>][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                                            </td>
-                                                            <td data-label="%">
-                                                                <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                                            </td>
+                                                            <div class="harvest-mobile" style="display: flex; ">
+                                                                <td data-label="BARIS">
+                                                                    <input name="baris[<?= $index ?>][]" value="<?= $harvest[$i]['BARIS'] ?>" type="text" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" readonly>
+                                                                </td>
+                                                                <td data-label="ACTUAL">
+                                                                    <input name="baris_actual[<?= $index ?>][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" id="baris-actual-<?= $index ?>-<?= $i ?>" class="baris-actual-<?= $index ?>" data-score="<?= $i ?>">
+                                                                </td>
+                                                                <td data-label="%">
+                                                                    <input type="text" id="baris-percentage-<?= $index ?>-<?= $i ?>" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" readonly>
+                                                                </td>
+                                                            </div>
+                                                            <div class="harvest-mobile">
+                                                                <td data-label="BIJI">
+                                                                    <input name="biji[<?= $index ?>][]" value="<?= $harvest[$i]['BIJI'] ?>" type="text" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" readonly>
+                                                                </td>
+                                                                <td data-label="ACTUAL">
+                                                                    <input name="biji_actual[<?= $index ?>][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" id="biji-actual-<?= $index ?>-<?= $i ?>" class="biji-actual-<?= $index ?>" data-score="<?= $i ?>">
+                                                                </td>
+                                                                <td data-label="%">
+                                                                    <input type="text" id="biji-percentage-<?= $index ?>-<?= $i ?>" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" readonly>
+                                                                </td>
+                                                            </div>
+                                                            <div class="harvest-mobile">
+                                                                <td data-label="BOBOT">
+                                                                    <input name="bobot[<?= $index ?>][]" value="<?= $harvest[$i]['BOBOT'] ?>" type="text" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" readonly>
+                                                                </td>
+                                                                <td data-label="ACTUAL">
+                                                                    <input name="bobot_actual[<?= $index ?>][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" id="bobot-actual-<?= $index ?>-<?= $i ?>" class="bobot-actual-<?= $index ?>" data-score="<?= $i ?>">
+                                                                </td>
+                                                                <td data-label="%">
+                                                                    <input type="text" id="bobot-percentage-<?= $index ?>-<?= $i ?>" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" readonly>
+                                                                </td>
+                                                            </div>
+                                                            
                                                         </tr>
                                                     <?php } ?>
                                                 </tbody>
+                                                <tfoot>
+                                                    <tr class="harvest-phase-<?= $index ?>" style="display: none;">
+                                                        <td style="width: 10%" colspan="2"></td>
+                                                        <td style="width: 10%" id="baris-total-<?= $index ?>">0</td>
+                                                        <td style="width: 10%" colspan="2"></td>
+                                                        <td style="width: 10%" id="biji-total-<?= $index ?>">0</td>
+                                                        <td style="width: 10%" colspan="2"></td>
+                                                        <td style="width: 10%" id="bobot-total-<?= $index ?>">0</td>
+                                                        <td style="width: 10%"></td>
+                                                    </tr>
+                                                </tfoot>
                                             </table>
                                         </div>
+                                        <script>
+                                            $(`.baris-actual-<?= $index ?>`).on('keyup', function() {
+                                                calculateHarvest('baris', <?= $index ?>);
+                                            });
+                                            $(`.biji-actual-<?= $index ?>`).on('keyup', function() {
+                                                calculateHarvest('biji', <?= $index ?>);
+                                            });
+                                            $(`.bobot-actual-<?= $index ?>`).on('keyup', function() {
+                                                calculateHarvest('bobot', <?= $index ?>);
+                                            });
+
+                                        </script>
                                     <?php endforeach ?>
                                 <?php endif ?>
                                 <div id="segment"></div>
@@ -1088,6 +1118,7 @@
         $("#farmersinfo").append(tabledata);
     }
 
+    
     function addSegmentcondition() {
         let index = segmenIndex;
         let tabledata = `
@@ -1318,41 +1349,88 @@
                                     <?= $i ?>
                                     <input type="hidden" name="HARVEST_score[${index}][]" value="<?= $i ?>">
                                 </td>
-                                <td data-label="BARIS">
-                                    <input name="baris[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                </td>
-                                <td data-label="ACTUAL">
-                                    <input name="baris_actual[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                </td>
-                                <td data-label="%">
-                                    <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                </td>
-                                <td data-label="BIJI">
-                                    <input name="biji[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                </td>
-                                <td data-label="ACTUAL">
-                                    <input name="biji_actual[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                </td>
-                                <td data-label="%">
-                                    <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                </td>
-                                <td data-label="BOBOT">
-                                    <input name="bobot[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                </td>
-                                <td data-label="ACTUAL">
-                                    <input name="bobot_actual[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                </td>
-                                <td data-label="%">
-                                    <input type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" >
-                                </td>
+                                <div class="harvest-mobile" style="display: flex; ">
+                                    <td data-label="BARIS">
+                                        <input name="baris[${index}][]" value="<?= $harvest[$i]['BARIS'] ?>" type="text" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" readonly>
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input name="baris_actual[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" id="baris-actual-${index}-<?= $i ?>" class="baris-actual-${index}" data-score="<?= $i ?>">
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="text" id="baris-percentage-${index}-<?= $i ?>" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" readonly>
+                                    </td>
+                                </div>
+                                <div class="harvest-mobile">
+                                    <td data-label="BIJI">
+                                        <input name="biji[${index}][]" value="<?= $harvest[$i]['BIJI'] ?>" type="text" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" readonly>
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input name="biji_actual[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" id="biji-actual-${index}-<?= $i ?>" class="biji-actual-${index}" data-score="<?= $i ?>">
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="text" id="biji-percentage-${index}-<?= $i ?>" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" readonly>
+                                    </td>
+                                </div>
+                                <div class="harvest-mobile">
+                                    <td data-label="BOBOT">
+                                        <input name="bobot[${index}][]" value="<?= $harvest[$i]['BOBOT'] ?>" type="text" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" readonly>
+                                    </td>
+                                    <td data-label="ACTUAL">
+                                        <input name="bobot_actual[${index}][]" type="number" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" id="bobot-actual-${index}-<?= $i ?>" class="bobot-actual-${index}" data-score="<?= $i ?>">
+                                    </td>
+                                    <td data-label="%">
+                                        <input type="text" id="bobot-percentage-${index}-<?= $i ?>" placeholder="0" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000" readonly>
+                                    </td>
+                                </div>
+                                
                             </tr>
                         <?php } ?>
                     </tbody>
+                    <tfoot>
+                        <tr class="harvest-phase-${index}" style="display: none;">
+                            <td style="width: 10%" colspan="2"></td>
+                            <td style="width: 10%" id="baris-total-${index}">0</td>
+                            <td style="width: 10%" colspan="2"></td>
+                            <td style="width: 10%" id="biji-total-${index}">0</td>
+                            <td style="width: 10%" colspan="2"></td>
+                            <td style="width: 10%" id="bobot-total-${index}">0</td>
+                            <td style="width: 10%"></td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
-         `;                                   
+         `;                             
         $("#segment").append(tabledata);
+        $(`.baris-actual-${index}`).on('keyup', function() {
+            calculateHarvest('baris', index);
+        });
+        $(`.biji-actual-${index}`).on('keyup', function() {
+            calculateHarvest('biji', index);
+        });
+        $(`.bobot-actual-${index}`).on('keyup', function() {
+            calculateHarvest('bobot', index);
+        });
         segmenIndex += 1;
+    }
+
+    function calculateHarvest(column,index) {
+        let total = 0;
+        // get total sum
+        $(`.${column}-actual-${index}`).each(function() {
+            let score   = $(this).data('score');
+            let amount  = Number($(this).val());
+            total += amount;
+        });
+
+        // set percentage
+        $(`.${column}-actual-${index}`).each(function() {
+            let score   = $(this).data('score');
+            let amount  = Number($(this).val());
+
+            let percentage = (amount / total) * 100;
+            $(`#${column}-percentage-${index}-${score}`).val(percentage.toFixed(2).toString());
+        });
+        $(`#${column}-total-${index}`).text(total.toString());
     }
 
     function addMarketprice() {
