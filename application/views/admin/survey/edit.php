@@ -926,7 +926,7 @@
                                                                     <?php if ($phase_key != 'persiapan-lahan'): ?>
                                                                         <label for="PLANTING_description[<?= $phase_key ?>][<?= $index ?>][]"><?= $form_placeholder ?></label>
                                                                     <?php endif ?>
-                                                                    <input type="text" name="PLANTING_description[<?= $phase_key ?>][<?= $index ?>][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" value="<?= $deskripsi ?>" placeholder="<?= $form_placeholder ?>">
+                                                                    <input type="<?= str_contains($form_placeholder, 'UMUR TANAM') ? 'number' : 'text' ?>" name="PLANTING_description[<?= $phase_key ?>][<?= $index ?>][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" value="<?= $deskripsi ?>" placeholder="<?= $form_placeholder ?>">
                                                                 <?php endforeach ?>
                                                                 </div>
                                                             </td>
@@ -1167,7 +1167,7 @@
                             <td data-label="DESCRIPTION" width="50%">
                                 <div class="vegetatif-awal">
                                     <label>UMUR TANAM (1 - 25)</label>
-                                    <input type="text" name="PLANTING_description[vegetatif-awal][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="UMUR TANAM (1 - 25)">
+                                    <input type="number" name="PLANTING_description[vegetatif-awal][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="UMUR TANAM (1 - 25)">
 
                                     <label>TINGGI TANAMAN</label>
                                     <input type="text" name="PLANTING_description[vegetatif-awal][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="TINGGI TANAMAN">
@@ -1203,7 +1203,7 @@
                             <td data-label="DESCRIPTION" width="50%">
                                 <div class="vegetatif-akhir">
                                     <label>UMUR TANAM (26 - 50)</label>
-                                    <input type="text" name="PLANTING_description[vegetatif-akhir][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="UMUR TANAM (26 - 50)">
+                                    <input type="number" name="PLANTING_description[vegetatif-akhir][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="UMUR TANAM (26 - 50)">
 
                                     <label>TINGGI TANAMAN</label>
                                     <input type="text" name="PLANTING_description[vegetatif-akhir][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="TINGGI TANAMAN">
@@ -1242,7 +1242,7 @@
                             <td data-label="DESCRIPTION" width="50%">
                                 <div class="genetatif-awal">
                                     <label>UMUR TANAM (51 - 70)</label>
-                                    <input type="text" name="PLANTING_description[genetatif-awal][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="UMUR TANAM (51 - 70)">
+                                    <input type="number" name="PLANTING_description[genetatif-awal][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="UMUR TANAM (51 - 70)">
 
                                     <label>MUNCUL BUAH (ADA / TIDAK)</label>
                                     <input type="text" name="PLANTING_description[genetatif-awal][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="MUNCUL BUAH (ADA / TIDAK)">
@@ -1281,7 +1281,7 @@
                             <td data-label="DESCRIPTION" width="50%">
                                 <div class="genetatif-akhir">
                                     <label>"UMUR TANAM (71 - 110)</label>
-                                    <input type="text" name="PLANTING_description[genetatif-akhir][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="UMUR TANAM (71 - 110)">
+                                    <input type="number" name="PLANTING_description[genetatif-akhir][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="UMUR TANAM (71 - 110)">
 
                                     <label>MASUK KE FORMAT HASIL PANEN PADA SHEET HASIL PANEN</label>
                                     <input type="text" name="PLANTING_description[genetatif-akhir][${index}][]" style="width: 100%; padding: 8px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; margin-bottom: 10px" placeholder="MASUK KE FORMAT HASIL PANEN PADA SHEET HASIL PANEN">
