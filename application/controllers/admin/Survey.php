@@ -528,10 +528,34 @@ class survey extends CI_Controller {
 		$data['title'] 				= 'SURVEY';
 		// $data['datatable']		= $this->datatable($filter);
 		$data['filter']				= $filter;
-		$data['province'] 			= $this->Dbhelper->selectTabel('ID_PROVINCE, PROVINCE', 'CD_PROVINCE');
-		$data['regencies'] 			= $this->Dbhelper->selectTabel('ID_REGENCIES, REGENCIES', 'CD_REGENCIES');
+		$data['province'] 			= $this->dataprovince();
+		$data['regencies'] 			= $this->dataregencies();
 		
 		$this->template->_v('survey/report', $data);
+	}
+
+	private function dataprovince() {
+		$query = "
+			SELECT ID_PROVINCE, PROVINCE
+			FROM CD_PROVINCE
+		";
+		
+		// $query .= " order by CODE ASC";
+        $data = $this->db->query($query)->result_array();
+		return $data;
+		// dd($query);
+	}
+	
+	private function dataregencies() {
+		$query = "
+			SELECT ID_REGENCIES, REGENCIES
+			FROM CD_REGENCIES
+		";
+		
+		// $query .= " order by CODE ASC";
+        $data = $this->db->query($query)->result_array();
+		return $data;
+		// dd($query);
 	}
 
 	public function drawing() {

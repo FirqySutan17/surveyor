@@ -402,9 +402,37 @@
         placeholder: "- SELECT PROVINCE -",
     });
 
-    $('#regencies').select2({
+	$('#regencies').select2({
         theme: 'bootstrap4',
-        language: "en",
-        placeholder: "- SELECT PROVINCE -",
+        placeholder: "- SELECT REGENCIES -",
+        ajax: {
+            url: "<?= base_url('ajax/load/kota') ?>",
+            dataType: 'json',
+            data: function (params) {
+                return {
+                q: params.term,
+                provinsi: $("#province option:selected").val()
+                };
+            },
+            processResults: function(data) {
+                return {
+                    results: $.map(data, function(item) {
+                        return {
+                            text: item.ID_REGENCIES + " - " + item.REGENCIES,
+                            id: item.ID_REGENCIES
+                        }
+                    })
+                };
+            }
+        },
+        // templateSelection: function (data, container) {
+        //     // // Add custom attributes to the <option> tag for the selected option
+        //     // $(data.element).attr('data-jsondetail', data.jsondetail);
+        //     // return data.text;
+        // }
+    }).on("select2:select", function (e) {
+        // let data = $("#customer_entry option:selected").val();
+        // let detaildata = $("#customer_entry option:selected").data('jsondetail');
+        // load_datacustomer(detaildata);
     });
 </script>
