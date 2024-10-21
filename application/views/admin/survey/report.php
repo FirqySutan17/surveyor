@@ -350,14 +350,14 @@
             <tr>
                 <td style="white-space: nowrap;"><?= $v['PROVINCE'] ?> - <?= $v['REGENCIES'] ?></td>
                 <td style="white-space: nowrap;"><?= $v['DISTRICTS'] ?></td>
-                <td style="text-align: center"><?= $v['PLANT_AREA'] ?></td>
-                <td style="text-align: center"><?= $v['PLANT_AREA_ESTIMATE'] ?></td>
-                <td style="text-align: center"><?= $v['TOTAL_LAHAN'] ?></td>
-                <td style="text-align: center">0%</td>
-                <td style="text-align: center">90%</td>
-                <td style="text-align: center">10%</td>
-                <td style="text-align: center">0%</td>
-                <td style="text-align: center">0%</td>
+                <td style="text-align: center"><?= number_format($v['PLANT_AREA']) ?></td>
+                <td style="text-align: center"><?= $v['PLANT_AREA_ESTIMATE'] < 1 ? '0'.$v['PLANT_AREA_ESTIMATE'] : $v['PLANT_AREA_ESTIMATE'] ?>%</td>
+                <td style="text-align: center"><?= number_format($v['TOTAL_LAHAN']) ?></td>
+                <td style="text-align: center"><?= number_format($v['TOTAL_PRODUKSI']) ?></td>
+                <td style="text-align: center"><?= $v['DAY30'] ?>%</td>
+                <td style="text-align: center"><?= $v['DAY60'] ?>%</td>
+                <td style="text-align: center"><?= $v['DAY90'] ?>%</td>
+                <td style="text-align: center"><?= $v['DAY90PLUS'] ?>%</td>
                 <td style="text-align: center">00 MT</td>
                 <td style="text-align: center">00 MT</td>
                 <td style="text-align: center">00 MT</td>
