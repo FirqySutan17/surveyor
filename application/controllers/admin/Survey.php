@@ -695,6 +695,7 @@ class survey extends CI_Controller {
 					report.DISTRICS as DISTRICTS,
 					report.PLANT_AREA,
 					report.TOTAL_LAHAN,
+					report.TOTAL_PRODUKSI,
 					CASE 
 											WHEN report.PLANT_AREA > 0 AND report.TOTAL_LAHAN > 0 
 											THEN ROUND((report.TOTAL_LAHAN / report.PLANT_AREA) * 100, 2) ELSE 0
@@ -710,7 +711,11 @@ class survey extends CI_Controller {
 					CASE 
 											WHEN report.TOTAL > 0 AND report.TOTAL_90HARI > 0 
 											THEN ROUND((report.TOTAL_90HARI / report.TOTAL) * 100, 2) ELSE 0
-					END as day90
+					END as day90,
+					CASE 
+											WHEN report.TOTAL > 0 AND report.TOTAL_90UPHARI > 0 
+											THEN ROUND((report.TOTAL_90UPHARI / report.TOTAL) * 100, 2) ELSE 0
+					END as day90plus
 			FROM (
 					SELECT 
 							C.PROVINCE, B.REGENCIES, A.DISTRICS, A.PLANT_AREA, 
