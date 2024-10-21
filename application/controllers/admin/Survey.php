@@ -633,34 +633,34 @@ class survey extends CI_Controller {
 		$province 	= $filter['province'];
 		$regencies 	= $filter['regencies'];
 
-		$query = "
-			SELECT 
-				DISTRICTS.ID_DISTRICTS, 
-				DISTRICTS.PLANT_AREA, 
-				DISTRICTS.SEGMENT, 
-				DISTRICTS.DISTRICS AS DISTRICT_NAME, 
-				REGENCIES.REGENCIES AS REGENCIES_NAME, 
-				PROVINCE.PROVINCE AS PROVINCE_NAME
-			FROM 
-				CD_DISTRICTS DISTRICTS
-			JOIN 
-				CD_REGENCIES REGENCIES ON DISTRICTS.REGENCIES_ID = REGENCIES.ID_REGENCIES
-			JOIN 
-				CD_PROVINCE PROVINCE ON REGENCIES.PROVINCE_ID = PROVINCE.ID_PROVINCE
-			JOIN 
-				SURVEY SURVEY ON DISTRICTS._ID_DISTRICT = SURVEY.DISTRICT
-		";
-		if ($filter['province'] != '*') {
-			$query .= " WHERE ID_PROVINCE = '".$filter['province']."'";
-		}
-		if ($filter['regencies'] != '*') {
-			if ($filter['province'] != '*') {
-				$query .= " and ";
-			} else {
-				$query .= " WHERE ";
-			}
-			$query .= " ID_REGENCIES = '".$filter['regencies']."'";
-		}
+		// $query = "
+		// 	SELECT 
+		// 		DISTRICTS.ID_DISTRICTS, 
+		// 		DISTRICTS.PLANT_AREA, 
+		// 		DISTRICTS.SEGMENT, 
+		// 		DISTRICTS.DISTRICS AS DISTRICT_NAME, 
+		// 		REGENCIES.REGENCIES AS REGENCIES_NAME, 
+		// 		PROVINCE.PROVINCE AS PROVINCE_NAME
+		// 	FROM 
+		// 		CD_DISTRICTS DISTRICTS
+		// 	JOIN 
+		// 		CD_REGENCIES REGENCIES ON DISTRICTS.REGENCIES_ID = REGENCIES.ID_REGENCIES
+		// 	JOIN 
+		// 		CD_PROVINCE PROVINCE ON REGENCIES.PROVINCE_ID = PROVINCE.ID_PROVINCE
+		// 	JOIN 
+		// 		SURVEY SURVEY ON DISTRICTS._ID_DISTRICT = SURVEY.DISTRICT
+		// ";
+		// if ($filter['province'] != '*') {
+		// 	$query .= " WHERE ID_PROVINCE = '".$filter['province']."'";
+		// }
+		// if ($filter['regencies'] != '*') {
+		// 	if ($filter['province'] != '*') {
+		// 		$query .= " and ";
+		// 	} else {
+		// 		$query .= " WHERE ";
+		// 	}
+		// 	$query .= " ID_REGENCIES = '".$filter['regencies']."'";
+		// }
 		// if ($filter['districts'] != '*') {
 			
 		// 	if ($filter['regencies'] != '*' || $filter['province'] != '*') {
@@ -670,10 +670,86 @@ class survey extends CI_Controller {
 		// 	}
 		// 	$query .= " ID_DISTRICTS = '".$filter['districts']."'";
 		// }
-		$query .= " order by ID_DISTRICTS ASC";
-		$query .= " order by ID_DISTRICTS ASC";
+		// $query .= " order by ID_DISTRICTS ASC";
+		// $query .= " order by ID_DISTRICTS ASC";
 		// dd($query);
-        $data = $this->db->query($query)->result_array();
+    
+		$where_inside = "";
+		if ($filter['province'] != '*') {
+			$where_inside .= " AND C.PROVINCE_ID = ".$filter['province'];
+		}
+		if ($filter['regencies'] != '*') {
+			$where_inside .= " AND B.ID_REGENCIES = ".$filter['regencies'];
+		}
+
+		// override if filter is all *
+		$where_outside = "";
+		if (empty($where_inside)) {
+			$where_outside = "WHERE report.TOTAL_PRODUKSI > 0";
+		}
+
+		$query = "
+			SELECT 
+					report.PROVINCE,
+					report.REGENCIES,
+					report.DISTRICS as DISTRICTS,
+					report.PLANT_AREA,
+					report.TOTAL_LAHAN,
+					CASE 
+											WHEN report.PLANT_AREA > 0 AND report.TOTAL_LAHAN > 0 
+											THEN ROUND((report.TOTAL_LAHAN / report.PLANT_AREA) * 100, 2) ELSE 0
+					END as PLANT_AREA_ESTIMATE,
+					CASE 
+											WHEN report.TOTAL > 0 AND report.TOTAL_30HARI > 0 
+											THEN ROUND((report.TOTAL_30HARI / report.TOTAL) * 100, 2) ELSE 0
+					END as day30,
+					CASE 
+											WHEN report.TOTAL > 0 AND report.TOTAL_60HARI > 0 
+											THEN ROUND((report.TOTAL_60HARI / report.TOTAL) * 100, 2) ELSE 0
+					END as day60,
+					CASE 
+											WHEN report.TOTAL > 0 AND report.TOTAL_90HARI > 0 
+											THEN ROUND((report.TOTAL_90HARI / report.TOTAL) * 100, 2) ELSE 0
+					END as day90
+			FROM (
+					SELECT 
+							C.PROVINCE, B.REGENCIES, A.DISTRICS, A.PLANT_AREA, 
+							COALESCE((SELECT SUM(LUAS_LAHAN) FROM SURVEY D WHERE D.DISTRICT = A.ID_DISTRICTS GROUP BY D.DISTRICT), 0) as TOTAL_LAHAN,
+							(COALESCE((SELECT SUM(LUAS_LAHAN) FROM SURVEY D WHERE D.DISTRICT = A.ID_DISTRICTS GROUP BY D.DISTRICT), 0) * 5.5) as TOTAL_PRODUKSI,
+							COALESCE(  
+									(SELECT COUNT(UMUR_TANAM) FROM SURVEY D
+									WHERE CURRENT_PHASE IS NOT NULL AND (UMUR_TANAM BETWEEN 0 AND 30)  AND D.DISTRICT = A.ID_DISTRICTS GROUP BY D.DISTRICT)
+							, 0) as TOTAL_30hari,
+							COALESCE(  
+									(SELECT COUNT(UMUR_TANAM) FROM SURVEY D
+									WHERE CURRENT_PHASE IS NOT NULL AND (UMUR_TANAM BETWEEN 31 AND 60)  AND D.DISTRICT = A.ID_DISTRICTS GROUP BY D.DISTRICT)
+							, 0) as TOTAL_60hari,
+							COALESCE(  
+									(SELECT COUNT(UMUR_TANAM) FROM SURVEY D
+									WHERE CURRENT_PHASE IS NOT NULL AND (UMUR_TANAM BETWEEN 61 AND 90)  AND D.DISTRICT = A.ID_DISTRICTS GROUP BY D.DISTRICT)
+							, 0) as TOTAL_90hari,
+							COALESCE(  
+									(SELECT COUNT(UMUR_TANAM) FROM SURVEY D
+									WHERE CURRENT_PHASE IS NOT NULL AND UMUR_TANAM >= 61  AND D.DISTRICT = A.ID_DISTRICTS GROUP BY D.DISTRICT)
+							, 0) as TOTAL_90Uphari,
+							COALESCE(  
+									(SELECT COUNT(UMUR_TANAM) FROM SURVEY D
+									WHERE CURRENT_PHASE IS NOT NULL AND UMUR_TANAM >= 0  AND D.DISTRICT = A.ID_DISTRICTS GROUP BY D.DISTRICT)
+							, 0) as TOTAL
+					FROM 
+							CD_DISTRICTS A,
+							CD_REGENCIES B,
+							CD_PROVINCE C
+					WHERE
+							A.REGENCIES_ID = B.ID_REGENCIES
+							AND B.PROVINCE_ID = C.ID_PROVINCE
+							AND A.REGENCIES_ID = 3523
+							$where_inside
+			)  report
+			$where_outside
+			ORDER BY report.TOTAL_PRODUKSI DESC
+		";
+		$data = $this->db->query($query)->result_array();
 		
 		return $data;
 	}
