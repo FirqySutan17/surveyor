@@ -26,6 +26,8 @@ class Dashboard extends CI_Controller {
             }
         }
 
+		$data['titik_post']			= $this->Dbhelper->selectTabel('*', 'SURVEY', array(), 'CURRENT_PHASE', 'ASC');
+		dd($data['titik_post']);
 		$data['title'] 				= 'DASHBOARD';
 		$data['user']				= $this->session_data['user'];
 		$data['survey'] 			= $survey_result;
