@@ -326,7 +326,6 @@
         <thead>
             <tr>
                 <th rowspan="2">AREA</th>
-                <th rowspan="2">DATE</th>
                 <th rowspan="2">KECAMATAN</th>
                 <th rowspan="2">EST. AREA TANAM (HA)</th>
                 <th rowspan="2">EST. AREA TANAM (%)</th>
@@ -347,14 +346,14 @@
             </tr>
         </thead>
         <tbody>
+			<?php foreach ($datatable as $i => $v): ?>
             <tr>
-                <td style="white-space: nowrap;">JAWA TIMUR - TUBAN</td>
-                <td style="white-space: nowrap;">11 JAN 2024</td>
-                <td style="white-space: nowrap;">GRABAGAN</td>
-                <td style="text-align: center">8.412</td>
-                <td style="text-align: center">90%</td>
-                <td style="text-align: center">7.571</td>
-                <td style="text-align: center">45.425</td>
+                <td style="white-space: nowrap;"><?= $v['PROVINCE'] ?> - <?= $v['REGENCIES'] ?></td>
+                <td style="white-space: nowrap;"><?= $v['DISTRICTS'] ?></td>
+                <td style="text-align: center"><?= $v['PLANT_AREA'] ?></td>
+                <td style="text-align: center"><?= $v['PLANT_AREA_ESTIMATE'] ?></td>
+                <td style="text-align: center"><?= $v['TOTAL_LAHAN'] ?></td>
+                <td style="text-align: center">0%</td>
                 <td style="text-align: center">90%</td>
                 <td style="text-align: center">10%</td>
                 <td style="text-align: center">0%</td>
@@ -363,22 +362,7 @@
                 <td style="text-align: center">00 MT</td>
                 <td style="text-align: center">00 MT</td>
             </tr>
-            <tr>
-                <td style="white-space: nowrap;">JAWA TIMUR - TUBAN</td>
-                <td style="white-space: nowrap;">17 JAN 2024</td>
-                <td style="white-space: nowrap;">SEMANDING</td>
-                <td style="text-align: center">8.412</td>
-                <td style="text-align: center">90%</td>
-                <td style="text-align: center">7.571</td>
-                <td style="text-align: center">45.425</td>
-                <td style="text-align: center">90%</td>
-                <td style="text-align: center">10%</td>
-                <td style="text-align: center">0%</td>
-                <td style="text-align: center">0%</td>
-                <td style="text-align: center">00 MT</td>
-                <td style="text-align: center">00 MT</td>
-                <td style="text-align: center">00 MT</td>
-            </tr>
+			<?php endforeach ?>
             <!-- Tambahkan baris lainnya sesuai dengan data -->
         </tbody>
     </table>

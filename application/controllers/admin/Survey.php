@@ -542,7 +542,7 @@ class survey extends CI_Controller {
 		$data['filter']				= $filter;
 		$data['province'] 			= $this->dataprovince();
 		$data['regencies'] 			= $this->dataregencies();
-		
+		// dd($data);
 		$this->template->_v('survey/report', $data);
 	}
 
