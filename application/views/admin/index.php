@@ -539,6 +539,8 @@
       }).addTo(map);
 
       // Data marker
+      var markers_data = JSON.parse('<?= json_encode($titik_post) ?>');
+      console.log(markers_data);
       var markers = [
         {
           coords: [-6.196272919843322, 106.83224670972295],
