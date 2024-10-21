@@ -798,7 +798,7 @@
                                     <?= $detail['SURVEY']['LAND_TYPE'] ?>
                                 </td>
                                 <td data-label="LAND TYPE">
-                                    <?= $detail['SURVEY']['LAND_AREA'] ?>
+                                    <?= $detail['SURVEY']['LUAS_LAHAN'] ?>
                                 </td>
                                 <td data-label="COORDINATE">
                                     <?= $detail['SURVEY']['COORDINATE'] ?>
