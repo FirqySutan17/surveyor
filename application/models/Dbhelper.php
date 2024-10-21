@@ -58,6 +58,48 @@
 			
 			return $query->row_array(); // Mengembalikan satu baris data
 		}
+
+		public function get_all_survey_data() {
+			$this->db->select('*');
+			$this->db->from('SURVEY');
+			$query = $this->db->get();
+			return $query->result_array(); // Mengembalikan data dalam bentuk array
+		}
+	
+		// Fungsi untuk mendapatkan data yang mendekati status selanjutnya
+		public function get_near_next_status($umur_tanam) {
+			// Tentukan status kondisi
+			if ($umur_tanam >= 1 && $umur_tanam <= 25) {
+				$current_status = 'VEGETATIF AWAL';
+				$next_min = 26;
+				$next_max = 50;
+			} elseif ($umur_tanam >= 26 && $umur_tanam <= 50) {
+				$current_status = 'VEGETATIF AKHIR';
+				$next_min = 51;
+				$next_max = 70;
+			} elseif ($umur_tanam >= 51 && $umur_tanam <= 70) {
+				$current_status = 'GENETATIF AWAL';
+				$next_min = 71;
+				$next_max = 110;
+			} elseif ($umur_tanam >= 71 && $umur_tanam <= 110) {
+				$current_status = 'GENETATIF AKHIR';
+				$next_min = null;
+				$next_max = null;
+			} else {
+				return []; // Jika umur_tanam di luar kisaran
+			}
+	
+			// Query untuk mendapatkan data dengan jarak 5 angka dari status selanjutnya
+			$this->db->select('*');
+			$this->db->from('SURVEY');
+			if ($next_min !== null && $next_max !== null) {
+				$this->db->where('UMUR_TANAM >=', $next_min - 5);
+				$this->db->where('UMUR_TANAM <=', $next_min + 5);
+			}
+			$query = $this->db->get();
+			
+			return $query->result_array();
+		}
 		
 		function selectRawQuery($query) {
 			return $this->db->query($query)->result_array();

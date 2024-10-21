@@ -10,8 +10,25 @@ class Dashboard extends CI_Controller {
 	}
 
 	public function index() {
+		$all_survey_data = $this->Dbhelper->get_all_survey_data();
+
+		$survey_result = [];
+		foreach ($all_survey_data as $survey) {
+            $umur_tanam = $survey['UMUR_TANAM'];
+
+            // Dapatkan data yang mendekati status selanjutnya
+            $near_status_data = $this->Dbhelper->get_near_next_status($umur_tanam);
+
+            // Gabungkan data yang memenuhi syarat ke dalam array hasil
+            if (!empty($near_status_data)) {
+                $survey_result = array_merge($survey_result, $near_status_data);
+            }
+        }
+
 		$data['title'] 				= 'DASHBOARD';
 		$data['user']				= $this->session_data['user'];
+		$data['survey'] 			= $survey_result;
+		dd($data['survey']);
 		$this->template->_v('index', $data);
 	}
 

@@ -325,8 +325,8 @@
     <table class="table table-bordered table-hover" id="example1">
         <thead>
             <tr>
+				<th rowspan="2">KECAMATAN</th>
                 <th rowspan="2">AREA</th>
-                <th rowspan="2">KECAMATAN</th>
                 <th rowspan="2">EST. AREA TANAM (HA)</th>
                 <th rowspan="2">EST. AREA TANAM (%)</th>
                 <th rowspan="2">ACTUAL TANAM (HA)</th>
@@ -348,8 +348,8 @@
         <tbody>
 			<?php foreach ($datatable as $i => $v): ?>
             <tr>
+				<td style="white-space: nowrap;"><?= $v['DISTRICTS'] ?></td>
                 <td style="white-space: nowrap;"><?= $v['PROVINCE'] ?> - <?= $v['REGENCIES'] ?></td>
-                <td style="white-space: nowrap;"><?= $v['DISTRICTS'] ?></td>
                 <td style="text-align: center"><?= number_format($v['PLANT_AREA']) ?></td>
                 <td style="text-align: center"><?= $v['PLANT_AREA_ESTIMATE'] < 1 ? '0'.$v['PLANT_AREA_ESTIMATE'] : $v['PLANT_AREA_ESTIMATE'] ?>%</td>
                 <td style="text-align: center"><?= number_format($v['TOTAL_LAHAN']) ?></td>
