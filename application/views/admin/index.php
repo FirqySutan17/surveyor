@@ -520,7 +520,7 @@
         <ul>
             <?php foreach ($survey as $i => $v): ?>
                 <li>
-                    <b>#<?= $v['SURVEY_NO'] ?></b> : SURVEY PADA LOKASI INI <b> <?= $v['interval_to_next_status'] ?> HARI</b> MENUJU STATUS <b>( <?= $v['next_status'] ?> )</b>
+                    <b>#<?= $v['SURVEY_NO'] ?></b> : SURVEY PADA LOKASI INI <b> <?= $v['interval_to_next_status'] ?> HARI</b> MENUJU STATUS <b><?= $v['next_status'] ?></b>
                     <a href="<?= admin_url('survey/detail/'.$v['SURVEY_NO']) ?>" target="_blank" class="btn btn-sm" title="Detail" style="float: right;"><i class="fas fa-eye text-primary" style="font-size: 22px"></i></a>
                 </li>
             <?php endforeach ?>
