@@ -526,7 +526,7 @@ class survey extends CI_Controller {
 		];
 
 		$data['title'] 				= 'SURVEY';
-		// $data['datatable']		= $this->datatable($filter);
+		$data['datatable']		= $this->datatable_report($filter);
 		$data['filter']				= $filter;
 		$data['province'] 			= $this->dataprovince();
 		$data['regencies'] 			= $this->dataregencies();
@@ -545,7 +545,7 @@ class survey extends CI_Controller {
 		return $data;
 		// dd($query);
 	}
-	
+
 	private function dataregencies() {
 		$query = "
 			SELECT ID_REGENCIES, REGENCIES
@@ -612,6 +612,57 @@ class survey extends CI_Controller {
 			ORDER BY SURVEY_NO DESC
 		";
 		$data 				= $this->db->query($query)->result_array();
+		return $data;
+	}
+
+	private function datatable_report($filter) {
+		$sdate = date('Ymd', strtotime($filter['sdate']));
+		$edate = date('Ymd', strtotime($filter['edate']));
+		$province 	= $filter['province'];
+		$regencies 	= $filter['regencies'];
+
+		$query = "
+			SELECT 
+				DISTRICTS.ID_DISTRICTS, 
+				DISTRICTS.PLANT_AREA, 
+				DISTRICTS.SEGMENT, 
+				DISTRICTS.DISTRICS AS DISTRICT_NAME, 
+				REGENCIES.REGENCIES AS REGENCIES_NAME, 
+				PROVINCE.PROVINCE AS PROVINCE_NAME
+			FROM 
+				CD_DISTRICTS DISTRICTS
+			JOIN 
+				CD_REGENCIES REGENCIES ON DISTRICTS.REGENCIES_ID = REGENCIES.ID_REGENCIES
+			JOIN 
+				CD_PROVINCE PROVINCE ON REGENCIES.PROVINCE_ID = PROVINCE.ID_PROVINCE
+			JOIN 
+				SURVEY SURVEY ON DISTRICTS._ID_DISTRICT = SURVEY.DISTRICT
+		";
+		if ($filter['province'] != '*') {
+			$query .= " WHERE ID_PROVINCE = '".$filter['province']."'";
+		}
+		if ($filter['regencies'] != '*') {
+			if ($filter['province'] != '*') {
+				$query .= " and ";
+			} else {
+				$query .= " WHERE ";
+			}
+			$query .= " ID_REGENCIES = '".$filter['regencies']."'";
+		}
+		if ($filter['districts'] != '*') {
+			
+			if ($filter['regencies'] != '*' || $filter['province'] != '*') {
+				$query .= " and ";
+			} else {
+				$query .= " WHERE ";
+			}
+			$query .= " ID_DISTRICTS = '".$filter['districts']."'";
+		}
+		$query .= " order by ID_DISTRICTS ASC";
+		$query .= " order by ID_DISTRICTS ASC";
+		// dd($query);
+        $data = $this->db->query($query)->result_array();
+		
 		return $data;
 	}
 
