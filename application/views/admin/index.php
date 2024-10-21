@@ -529,36 +529,46 @@
 </div>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-      // Inisialisasi peta
-      var map = L.map("map").setView([-4.199249737560975, 122.85021421757004], 5); // Koordinat awal dan zoom
+        // Inisialisasi peta
+        var map = L.map("map").setView([-4.199249737560975, 122.85021421757004], 5); // Koordinat awal dan zoom
 
-      // Tambahkan layer peta
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        maxZoom: 19,
-        attribution: "© OpenStreetMap",
-      }).addTo(map);
+        // Tambahkan layer peta
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            maxZoom: 19,
+            attribution: "© OpenStreetMap",
+        }).addTo(map);
 
       // Data marker
-      var markers_data = JSON.parse('<?= json_encode($titik_post) ?>');
-      console.log(markers_data);
-      var markers = [
-        {
-          coords: [-6.196272919843322, 106.83224670972295],
-          info: "<strong>Marker 1:</strong><br>Jakarta<br>Info tambahan",
-        },
-        {
-          coords: [5.547944609773346, 95.31874503129693],
-          info: "<strong>Marker 2:</strong><br>Banda Aceh<br>Info tambahan",
-        },
-        {
-          coords: [-6.615515539869791, 144.1303116562076],
-          info: "<strong>Marker 3:</strong><br>Papua Nugini<br>Info tambahan",
-        },
-      ];
+    //   var markers = [
+    //     {
+    //       coords: [-6.196272919843322, 106.83224670972295],
+    //       info: "<strong>Marker 1:</strong><br>Jakarta<br>Info tambahan",
+    //     },
+    //     {
+    //       coords: [5.547944609773346, 95.31874503129693],
+    //       info: "<strong>Marker 2:</strong><br>Banda Aceh<br>Info tambahan",
+    //     },
+    //     {
+    //       coords: [-6.615515539869791, 144.1303116562076],
+    //       info: "<strong>Marker 3:</strong><br>Papua Nugini<br>Info tambahan",
+    //     },
+    //   ];
+        var markers = [];
+        var markers_data = JSON.parse('<?= json_encode($titik_post) ?>');
+        markers_data.forEach(marker => {
+            let coordinate = marker.COORDINATE.split(",");
+            let obj = {
+                coords: [coordinate[0], coordinate[1]],
+                info: `<strong>${marker.SURVEY_NO}:</strong><br>${marker.ADDRESS}`
+            };
+            markers.push(obj);
+        });
+        console.log(markers_data);
+        console.log(markers);
 
-      // Tambahkan marker ke peta
-      markers.forEach(function (marker) {
-        var markerInstance = L.marker(marker.coords).addTo(map);
-        markerInstance.bindPopup(marker.info); // Mengikat info box dengan marker
-      });
+        // Tambahkan marker ke peta
+        markers.forEach(function (marker) {
+            var markerInstance = L.marker(marker.coords).addTo(map);
+            markerInstance.bindPopup(marker.info); // Mengikat info box dengan marker
+        });
 </script>
