@@ -461,7 +461,7 @@
         margin: 20px 0px;
         border-radius: 10px;
         border: 2px solid red;
-        min-height: 250px
+        height: auto;
     }
 
     .information-box hr {
