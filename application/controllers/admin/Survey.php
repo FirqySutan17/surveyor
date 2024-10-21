@@ -67,7 +67,8 @@ class survey extends CI_Controller {
 					"CREATED_BY"		=> $this->session_data['user']['EMPLOYEE_ID'],
 					"PLANT"					=> $this->session_data['user']['PLANT'] == '*' ? '3212' : $this->session_data['user']['PLANT'],
 					"CURRENT_PHASE"	=> "",
-					"UMUR_TANAM"		=> 0
+					"UMUR_TANAM"		=> 0,
+					"CURRENT_PHASE_DATE"	=> ""
 				];
 
 				if (empty($survey_report["CREATED_BY"])) {
@@ -107,6 +108,7 @@ class survey extends CI_Controller {
 
 				$survey_planting_phase = [];
 				$current_phase 	= "";
+				$current_phase_date = "";
 				$umur_tanam 		= 0;
 				$phase_array = ['persiapan-lahan', 'vegetatif-awal', 'vegetatif-akhir', 'genetatif-awal', 'genetatif-akhir', 'gagal-panen'];
 				if (!empty($post['PLANTING_siklus'])) {
@@ -118,6 +120,7 @@ class survey extends CI_Controller {
 
 							if (!empty($curr_phase_date)) {
 								$current_phase = $phase_key;
+								$current_phase_date = $curr_phase_date;
 							}
 							foreach ($post['PLANTING_description'][$phase_key][$siklus_index] as $i => $v) {
 								if ($i == 0 && $current_phase == $phase_key) {
@@ -185,6 +188,7 @@ class survey extends CI_Controller {
 					// }
 				}
 				$survey_report['CURRENT_PHASE'] = $current_phase;
+				$survey_report['CURRENT_PHASE_DATE'] = $current_phase_date;
 				$survey_report['UMUR_TANAM'] 		= $umur_tanam;
 				$save = $this->Dbhelper->insertData('SURVEY', $survey_report);
 				if (!empty($survey_farmers)) {
@@ -333,7 +337,8 @@ class survey extends CI_Controller {
 				// dd($post);
 				// VR DATA
 				$survey = [
-					"CURRENT_PHASE"	=> "",
+					"CURRENT_PHASE"				=> "",
+					"CURRENT_PHASE_DATE"	=> "",
 					"UMUR_TANAM"		=> 0,
 					"UPDATED_AT"		=> date('Ymd His'),
 					"UPDATED_BY"		=> $this->session_data['user']['EMPLOYEE_ID']
@@ -370,7 +375,8 @@ class survey extends CI_Controller {
 				$survey_harvest_phase = [];
 				$survey_planting_phase = [];
 				$phase_array = ['persiapan-lahan', 'vegetatif-awal', 'vegetatif-akhir', 'genetatif-awal', 'genetatif-akhir', 'gagal-panen'];
-				$current_phase = "";
+				$current_phase 			= "";
+				$current_phase_date = "";
 				$umur_tanam = 0;
 				if (!empty($post['PLANTING_siklus'])) {
 					$sequence = 1;
@@ -380,6 +386,7 @@ class survey extends CI_Controller {
 							$curr_phase_date 	= !empty($post['PLANTING_date'][$phase_key][$siklus_index]) ?  date('Ymd', strtotime($post['PLANTING_date'][$phase_key][$siklus_index])) : '';
 							if (!empty($curr_phase_date)) {
 								$current_phase = $phase_key;
+								$current_phase_date = $curr_phase_date;
 							}
 							foreach ($post['PLANTING_description'][$phase_key][$siklus_index] as $i => $v) {
 								if ($i == 0 && $current_phase == $phase_key) {
@@ -448,6 +455,7 @@ class survey extends CI_Controller {
 				}
 
 				$survey["CURRENT_PHASE"] 	= $current_phase;
+				$survey["CURRENT_PHASE_DATE"] 	= $current_phase_date;
 				$survey["UMUR_TANAM"] 		= $umur_tanam;
 				$save = $this->db->update('SURVEY', $survey, array('SURVEY_NO' => $survey_no));
 				if (!empty($survey_farmers)) {
