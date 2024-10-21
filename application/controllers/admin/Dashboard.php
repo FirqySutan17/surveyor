@@ -15,9 +15,10 @@ class Dashboard extends CI_Controller {
 		$survey_result = [];
 		foreach ($all_survey_data as $survey) {
             $umur_tanam = $survey['UMUR_TANAM'];
+            $current_phase_date = $survey['CURRENT_PHASE_DATE']; // Ambil tanggal dari field CURRENT_PHASE_DATE
 
-            // Dapatkan data yang mendekati status selanjutnya
-            $near_status_data = $this->Dbhelper->get_near_next_status($umur_tanam);
+            // Dapatkan data yang mendekati status selanjutnya berdasarkan perhitungan umur_tanam dan current_phase_date
+            $near_status_data = $this->Dbhelper->get_near_next_status($umur_tanam, $current_phase_date);
 
             // Gabungkan data yang memenuhi syarat ke dalam array hasil
             if (!empty($near_status_data)) {
@@ -28,7 +29,7 @@ class Dashboard extends CI_Controller {
 		$data['title'] 				= 'DASHBOARD';
 		$data['user']				= $this->session_data['user'];
 		$data['survey'] 			= $survey_result;
-		dd($data['survey']);
+		// dd($data['survey']);
 		$this->template->_v('index', $data);
 	}
 

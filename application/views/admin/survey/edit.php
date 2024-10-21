@@ -878,7 +878,7 @@
                                             <td width="5%"></td>
                                         </tr>
                                     <?php endforeach ?>
-                                <?php endif ?>
+                                
                             </tbody>
                         </table>
                     </div>

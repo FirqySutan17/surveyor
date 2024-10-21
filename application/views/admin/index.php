@@ -515,25 +515,16 @@
             INFORMATION
         </h3>
         <hr>
-        <p style="margin: 0px; text-align: center; padding: 65px 0px">NO INFORMATION YET</p>
-        <!-- <ul>
-            <li>
-                <b>#SURVEY202409100001</b> : SURVEY PADA LOKASI INI SEDANG DALAM TAHAP <b>(GENETATIF AKHIR)</b>
-                <a href="#" target="_blank" class="btn btn-sm" title="Detail" style="float: right;"><i class="fas fa-eye text-primary" style="font-size: 22px"></i></a>
-            </li>
-            <li>
-                <b>#SURVEY202409100001</b> : SURVEY PADA LOKASI INI SEDANG DALAM TAHAP <b>(GENETATIF AKHIR)</b>
-                <a href="#" target="_blank" class="btn btn-sm" title="Detail" style="float: right;"><i class="fas fa-eye text-primary" style="font-size: 22px"></i></a>
-            </li>
-            <li>
-                <b>#SURVEY202409100001</b> : SURVEY PADA LOKASI INI SEDANG DALAM TAHAP <b>(GENETATIF AKHIR)</b>
-                <a href="#" target="_blank" class="btn btn-sm" title="Detail" style="float: right;"><i class="fas fa-eye text-primary" style="font-size: 22px"></i></a>
-            </li>
-            <li>
-                <b>#SURVEY202409100001</b> : SURVEY PADA LOKASI INI SEDANG DALAM TAHAP <b>(GENETATIF AKHIR)</b>
-                <a href="#" target="_blank" class="btn btn-sm" title="Detail" style="float: right;"><i class="fas fa-eye text-primary" style="font-size: 22px"></i></a>
-            </li>
-        </ul> -->
+        <!-- <p style="margin: 0px; text-align: center; padding: 65px 0px">NO INFORMATION YET</p> -->
+         
+        <ul>
+            <?php foreach ($survey as $i => $v): ?>
+                <li>
+                    <b>#<?= $v['SURVEY_NO'] ?></b> : SURVEY PADA LOKASI <b> <?= $v['interval_to_next_status'] ?> HARI</b> MENUJU STATUS <b>( <?= $v['next_status'] ?> )</b>
+                    <a href="<?= admin_url('survey/detail/'.$v['SURVEY_NO']) ?>" target="_blank" class="btn btn-sm" title="Detail" style="float: right;"><i class="fas fa-eye text-primary" style="font-size: 22px"></i></a>
+                </li>
+            <?php endforeach ?>
+        </ul>
     </div>
 </div>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>

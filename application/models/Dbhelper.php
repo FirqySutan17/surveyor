@@ -66,39 +66,68 @@
 			return $query->result_array(); // Mengembalikan data dalam bentuk array
 		}
 	
-		// Fungsi untuk mendapatkan data yang mendekati status selanjutnya
-		public function get_near_next_status($umur_tanam) {
-			// Tentukan status kondisi
-			if ($umur_tanam >= 1 && $umur_tanam <= 25) {
+		// Fungsi untuk mendapatkan data yang mendekati status selanjutnya berdasarkan kondisi waktu
+		public function get_near_next_status($umur_tanam, $current_phase_date) {
+			// Hitung selisih hari dari current_phase_date sampai sekarang
+			$today = new DateTime(); // Tanggal hari ini
+			$phase_date = new DateTime($current_phase_date); // Ubah current_phase_date menjadi objek DateTime
+			$interval = $phase_date->diff($today); // Selisih waktu
+			$days_passed = $interval->days; // Jumlah hari yang telah berlalu
+			
+			// Tambahkan selisih hari ke umur_tanam
+			$updated_umur_tanam = $umur_tanam + $days_passed;
+	
+			// Tentukan status kondisi dan kondisi selanjutnya
+			if ($updated_umur_tanam >= 1 && $updated_umur_tanam <= 25) {
 				$current_status = 'VEGETATIF AWAL';
+				$next_status = 'VEGETATIF AKHIR';
 				$next_min = 26;
 				$next_max = 50;
-			} elseif ($umur_tanam >= 26 && $umur_tanam <= 50) {
+			} elseif ($updated_umur_tanam >= 26 && $updated_umur_tanam <= 50) {
 				$current_status = 'VEGETATIF AKHIR';
+				$next_status = 'GENETATIF AWAL';
 				$next_min = 51;
 				$next_max = 70;
-			} elseif ($umur_tanam >= 51 && $umur_tanam <= 70) {
+			} elseif ($updated_umur_tanam >= 51 && $updated_umur_tanam <= 70) {
 				$current_status = 'GENETATIF AWAL';
+				$next_status = 'GENETATIF AKHIR';
 				$next_min = 71;
 				$next_max = 110;
-			} elseif ($umur_tanam >= 71 && $umur_tanam <= 110) {
+			} elseif ($updated_umur_tanam >= 71 && $updated_umur_tanam <= 110) {
 				$current_status = 'GENETATIF AKHIR';
+				$next_status = null;
 				$next_min = null;
 				$next_max = null;
 			} else {
 				return []; // Jika umur_tanam di luar kisaran
 			}
 	
-			// Query untuk mendapatkan data dengan jarak 5 angka dari status selanjutnya
-			$this->db->select('*');
-			$this->db->from('SURVEY');
+			// Hitung jarak 5 hari sebelum status kondisi selanjutnya
 			if ($next_min !== null && $next_max !== null) {
-				$this->db->where('UMUR_TANAM >=', $next_min - 5);
-				$this->db->where('UMUR_TANAM <=', $next_min + 5);
+				$target_days_before_next_status = $next_min - 5;
+	
+				// Jika umur_tanam berada dalam 5 hari sebelum status selanjutnya
+				if ($updated_umur_tanam >= $target_days_before_next_status && $updated_umur_tanam < $next_min) {
+					// Dapatkan data yang memenuhi kriteria dari tabel survey
+					$this->db->select('*');
+					$this->db->from('SURVEY');
+					$this->db->where('UMUR_TANAM', $umur_tanam); // Gunakan nilai umur_tanam asli dari database
+					$query = $this->db->get();
+	
+					// Ambil hasil query
+					$result = $query->result_array();
+	
+					// Tambahkan status selanjutnya dan interval jarak ke setiap data
+					foreach ($result as &$row) {
+						$row['next_status'] = $next_status;
+						$row['interval_to_next_status'] = $next_min - $updated_umur_tanam; // Hitung jarak dalam angka
+					}
+					
+					return $result;
+				}
 			}
-			$query = $this->db->get();
 			
-			return $query->result_array();
+			return []; // Jika tidak ada data yang mendekati status selanjutnya
 		}
 		
 		function selectRawQuery($query) {
