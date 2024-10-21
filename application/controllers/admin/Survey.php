@@ -661,15 +661,15 @@ class survey extends CI_Controller {
 			}
 			$query .= " ID_REGENCIES = '".$filter['regencies']."'";
 		}
-		if ($filter['districts'] != '*') {
+		// if ($filter['districts'] != '*') {
 			
-			if ($filter['regencies'] != '*' || $filter['province'] != '*') {
-				$query .= " and ";
-			} else {
-				$query .= " WHERE ";
-			}
-			$query .= " ID_DISTRICTS = '".$filter['districts']."'";
-		}
+		// 	if ($filter['regencies'] != '*' || $filter['province'] != '*') {
+		// 		$query .= " and ";
+		// 	} else {
+		// 		$query .= " WHERE ";
+		// 	}
+		// 	$query .= " ID_DISTRICTS = '".$filter['districts']."'";
+		// }
 		$query .= " order by ID_DISTRICTS ASC";
 		$query .= " order by ID_DISTRICTS ASC";
 		// dd($query);
