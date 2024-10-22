@@ -559,7 +559,7 @@
             let coordinate = marker.COORDINATE.split(",");
             let obj = {
                 coords: [coordinate[0], coordinate[1]],
-                info: `<strong>${marker.SURVEY_NO}:</strong><br>${marker.ADDRESS}`
+                info: `<strong>${marker.CURRENT_PHASE.replace('-', ' ').toUpperCase()}:</strong><br>${marker.ADDRESS}`
             };
             markers.push(obj);
         });
