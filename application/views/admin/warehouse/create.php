@@ -1001,10 +1001,6 @@
 </div>
 
 <script>
-    $(function () {
-      $('#example1').DataTable(
-        {"language": {"paginate": { "previous": "&lt","next": "&gt",}}}
-    );
 
     $('#wh_name').select2({
         theme: 'bootstrap4',
@@ -1012,7 +1008,7 @@
         placeholder: "- SELECT WAREHOUSE -",
     });
 
-    $('#province').select2({
+   $('#province').select2({
         theme: 'bootstrap4',
         language: "en",
         placeholder: "- SELECT PROVINCE -",
