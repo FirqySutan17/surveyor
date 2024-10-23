@@ -1022,7 +1022,7 @@
         theme: 'bootstrap4',
         placeholder: "- SELECT REGENCIES -",
         ajax: {
-            url: "<?= ('ajax/load/kota') ?>",
+            url: "<?= base_url('ajax/load/kota') ?>",
             dataType: 'json',
             data: function (params) {
                 return {
@@ -1080,11 +1080,10 @@
         //     // $(data.element).attr('data-jsondetail', data.jsondetail);
         //     // return data.text;
         // }
-        }).on("select2:select", function (e) {
-            // let data = $("#customer_entry option:selected").val();
-            // let detaildata = $("#customer_entry option:selected").data('jsondetail');
-            // load_datacustomer(detaildata);
-        });
+    }).on("select2:select", function (e) {
+        // let data = $("#customer_entry option:selected").val();
+        // let detaildata = $("#customer_entry option:selected").data('jsondetail');
+        // load_datacustomer(detaildata);
     });
 
     function addCorn() {
