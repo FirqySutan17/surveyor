@@ -211,7 +211,7 @@ class Warehouse extends CI_Controller {
 		$data['user'] 				= $user;
 		$data['detail']				= $data_detail;
 		
-		dd($data['detail']);
+		// dd($data['detail']);
 		$this->template->_v('warehouse/edit', $data);
 	}
 
@@ -335,11 +335,12 @@ class Warehouse extends CI_Controller {
 					FN_USER_NAME(CREATED_BY) CREATED_BY_NAME,
 					p.PROVINCE as PROVINCE_NAME,
 					r.REGENCIES as REGENCY_NAME,
-					d.DISTRICS as DISTRICT_NAME
-			FROM WAREHOUSE a, CD_PROVINCE p, CD_REGENCIES r, CD_DISTRICTS d
+					d.DISTRICS as DISTRICT_NAME,
+					e.NAMA as WAREHOUSE_NAME
+			FROM WAREHOUSE a, CD_PROVINCE p, CD_REGENCIES r, CD_DISTRICTS d, CD_GUDANG e
 			WHERE 
 					p.ID_PROVINCE = a.PROVINCE
-					AND r.ID_REGENCIES = a.REGENCY
+					AND r.ID_REGENCIES = a.REGENCIES
 					AND d.ID_DISTRICTS = A.DISTRICT
 					AND a.WH_NO = '$wh_no'
 		");

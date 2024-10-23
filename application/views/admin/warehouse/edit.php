@@ -779,7 +779,8 @@
         <strong>CREATE WAREHOUSE</strong>
     </h3>
     <div class="row" style="align-items: center; justify-content: center; min-height: 80vh">
-        <form class="form-category"  action="<?= admin_url('warehouse/do_create') ?>" method="POST" enctype="multipart/form-data">
+        <form class="form-category"  action="<?= admin_url('warehouse/do_update') ?>" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="wh_no" value="<?= $detail['WAREHOUSE']['WH_NO'] ?>">
             <div class="content-task">
                 <h3 class="sub-title">1. WAREHOUSE INFORMATION</h3>
                 <div class="table-responsive mt-2">
@@ -793,15 +794,10 @@
                         <tbody>
                             <tr>
                                 <td data-label="DATE">
-                                    <input type="date" name="wh_date" class="form-control" style="font-size: 14px; width: 100%" required>
+                                    <?= date('Y-m-d', strtotime($detail['WAREHOUSE']['WH_DATE'])) ?>
                                 </td> 
                                 <td data-label="NAME">
-                                    <select id="wh_name" class="form-control" style="width: 100%;" name="wh_name" required>
-                                        <option value="0">- SELECT WAREHOUSE -</option>
-                                        <?php foreach($warehouses as $item): ?>
-                                            <option value="<?= $item['CODE'] ?>"><?= $item['NAMA'] ?></option>
-                                        <?php endforeach ?>
-                                    </select>
+                                    <?= $detail['WAREHOUSE']['WAREHOUSE_NAME'] ?>
                                 </td> 
                             </tr>
                         </tbody>
@@ -817,20 +813,13 @@
                         <tbody>
                             <tr>
                                 <td data-label="PROVINCE">
-                                    <select id="province" class="form-control" style="width: 100%;" name="province" required>
-                                        <option value="0">- SELECT PROVINCE -</option>
-                                        <?php foreach($provinces as $item): ?>
-                                            <option value="<?= $item['ID_PROVINCE'] ?>"><?= $item['PROVINCE'] ?></option>
-                                        <?php endforeach ?>
-                                    </select>
+                                    <?= $detail['WAREHOUSE']['PROVINCE_NAME'] ?>
                                 </td>
                                 <td data-label="REGENCIES">
-                                    <select id="regencies" class="form-control" style="width: 100%;" name="regencies" required>
-                                    </select>
+                                    <?= $detail['WAREHOUSE']['REGENCY_NAME'] ?>
                                 </td>
                                 <td data-label="DISTRICTS">
-                                    <select id="districts" class="form-control" style="width: 100%;" name="districts" required>
-                                    </select>
+                                    <?= $detail['WAREHOUSE']['DISTRICT_NAME'] ?>
                                 </td>
                             </tr>
                         </tbody>
@@ -850,16 +839,16 @@
                         <tbody>
                             <tr>
                                 <td data-label="STOCK SILO">
-                                    <input type="number" placeholder="0" name="stock_silo" class="form-control" style="font-size: 14px">
+                                    <input  type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" placeholder="0" name="stock_silo" value="<?= number_format($detail['WAREHOUSE']['STOCK_SILO'])  ?>" class="form-control" style="font-size: 14px">
                                 </td>
                                 <td data-label="STOCK FLAT WH">
-                                    <input type="number" placeholder="0" name="stock_flat" class="form-control" style="font-size: 14px">
+                                    <input  type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" placeholder="0" name="stock_flat" value="<?= number_format($detail['WAREHOUSE']['STOCK_FLAT']) ?>" class="form-control" style="font-size: 14px">
                                 </td>
                                 <td data-label="STOCK LANTAI JEMUR">
-                                    <input type="number" placeholder="0" name="stock_lj" class="form-control" style="font-size: 14px">
+                                    <input  type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" placeholder="0" name="stock_lj" value="<?= number_format($detail['WAREHOUSE']['STOCK_LJ']) ?>" class="form-control" style="font-size: 14px">
                                 </td>
                                 <td data-label="STOCK DRYER">
-                                    <input type="number" placeholder="0" name="stock_dryer" class="form-control" style="font-size: 14px">
+                                    <input  type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" placeholder="0" name="stock_dryer" value="<?= number_format($detail['WAREHOUSE']['STOCK_DRYER']) ?>" class="form-control" style="font-size: 14px"> 
                                 </td>
                             </tr>
                         </tbody>
@@ -880,16 +869,17 @@
                         <tbody>
                             <tr>
                                 <td data-label="DAILY RECEIVE 15%">
-                                    <input type="number" name="daily_15" placeholder="0" class="form-control" style="font-size: 14px">
+                                    <input  type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" placeholder="0" name="daily_15" value="<?= number_format($detail['WAREHOUSE']['DAILY_15']) ?>" class="form-control" style="font-size: 14px"> 
                                 </td>
                                 <td data-label="DAILY RECEIVE 17%">
-                                    <input type="number" name="daily_17" placeholder="0" class="form-control" style="font-size: 14px">
+                                    <input  type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" placeholder="0" name="daily_17" value="<?= number_format($detail['WAREHOUSE']['DAILY_17']) ?>" class="form-control" style="font-size: 14px"> 
                                 </td>
                                 <td data-label="BUYING PRICE 15%">
-                                    <input type="number" name="buying_15" placeholder="0" class="form-control" style="font-size: 14px">
+                                    <input  type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" placeholder="0" name="buying_15" value="<?= number_format($detail['WAREHOUSE']['BUYING_15']) ?>" class="form-control" style="font-size: 14px">
                                 </td>
                                 <td data-label="BUYING PRICE 17%">
-                                    <input type="number" name="buying_17" placeholder="0" class="form-control" style="font-size: 14px">
+                                    <input  type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" placeholder="0" name="buying_17" value="<?= number_format($detail['WAREHOUSE']['BUYING_17']) ?>" class="form-control" style="font-size: 14px">
+                                    
                                 </td>
                             </tr>
                         </tbody>
@@ -908,13 +898,13 @@
                         <tbody>
                             <tr>
                                 <td data-label="TRADERS">
-                                    <input type="number" name="sales_traders" placeholder="0" class="form-control" style="font-size: 14px">
+                                    <input  type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" name="sales_traders" placeholder="0" class="form-control" style="font-size: 14px" value="<?= number_format($detail['WAREHOUSE']['SALES_TRADERS']) ?>">
                                 </td>
                                 <td data-label="FEEDMILL">
-                                    <input type="number" name="sales_feedmill" placeholder="0" class="form-control" style="font-size: 14px">
+                                    <input  type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" name="sales_feedmill" placeholder="0" class="form-control" style="font-size: 14px" value="<?= number_format($detail['WAREHOUSE']['SALES_FEEDMILL']) ?>">
                                 </td>
                                 <td colspan="2" data-label="SALES PRICE">
-                                    <input type="number" name="sales_price" placeholder="0" class="form-control" style="font-size: 14px">
+                                    <input type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" name="sales_price" placeholder="0" class="form-control" style="font-size: 14px" value="<?= number_format($detail['WAREHOUSE']['SALES_PRICE']) ?>">
                                 </td>
                             </tr>
                         </tbody>
@@ -928,7 +918,7 @@
                         <tbody>
                             <tr>
                                 <td data-label="REMARKS">
-                                    <textarea type="text" name="descript" class="form-control" placeholder="EX : LOREM IPSUM DOLOR SIT AMET" style="font-size: 14px !important; text-align: left" required rows="6"></textarea>
+                                    <textarea type="text" name="descript" class="form-control" placeholder="EX : LOREM IPSUM DOLOR SIT AMET" style="font-size: 14px !important; text-align: left" required rows="6"><?= $detail['WAREHOUSE']['DESCRIPT'] ?></textarea>
                                 </td>
                             </tr>
                         </tbody>
@@ -954,11 +944,15 @@
                                 <tr style="align-items: flex-end">
                                     <th style="text-align: left; background: #fff; border: 0px"><button type="button" class="btn cust-btn-add" onclick="addCorn()">+</button></th>
                                 </tr>
-                                <tr>
-                                    <td data-label="REGION" width="45%"><input type="text" name="region[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; text-transform: uppercase" placeholder="EX : DKI JAKARTA" id=""></td>
-                                    <td data-label="AMOUNT (TON)" width="50%"><input type="number" name="amount_ton[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: center; border: 1px solid #000" placeholder="0" id=""></td>
-                                    <td width="5%"><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
-                                </tr>
+                                <?php if(!empty($detail['WAREHOUSE_CORN'])): ?>
+                                    <?php foreach($detail['WAREHOUSE_CORN'] as $sf): ?>
+                                        <tr>
+                                            <td data-label="REGION" width="45%"><input value="<?= $sf['REGION'] ?>" type="text" name="region[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; text-transform: uppercase" placeholder="EX : DKI JAKARTA" id=""></td>
+                                            <td data-label="AMOUNT (TON)" width="50%"><input value="<?= number_format($sf['AMOUNT_TON']) ?>"  type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" name="amount_ton[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: center; border: 1px solid #000" placeholder="0" id=""></td>
+                                            <td width="5%"><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
+                                        </tr>
+                                    <?php endforeach ?>
+                                <?php endif ?>
                             </tbody>
                         </table>
                     </div>
@@ -979,11 +973,19 @@
                                 </tr>
                             </thead>
                             <tbody id="surveyimages">
-                                <tr>
-                                    <td><input type="text" name="image_title[]" class="form-control" placeholder="Type here.."></td>
-                                    <td><input type="file" accept="image/png, image/jpeg, image/jpg" name="image_file[]" class="form-control"></td>
-                                    <td><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
-                                </tr>
+                                <?php if(!empty($detail['WAREHOUSE_IMAGES'])): ?>
+                                    <?php foreach($detail['WAREHOUSE_IMAGES'] as $sf): ?>
+                                    <tr>
+                                        <td><input type="text" name="image_title[]" class="form-control" placeholder="Type here.." value="<?= $sf['IMAGE_TITLE'] ?>"></td>
+                                        <td>
+                                            <img src="<?= base_url('upload/') ?><?= $sf['IMAGE_FILE'] ?>" alt="" style="height: 170px; width: 170px; object-fit: cover;margin-bottom:20px">
+                                            <br/>
+                                            <input type="file" accept="image/png, image/jpeg, image/jpg" name="image_file[]" class="form-control">
+                                        </td>
+                                        <td><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
+                                    </tr>
+                                    <?php endforeach ?>
+                                <?php endif ?>
                             </tbody>
                         </table>
                 </div>
@@ -1086,7 +1088,7 @@
         let tabledata = `
         <tr>
             <td data-label="REGION" width="45%"><input type="text" name="region[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; text-tranform: uppercase" placeholder="EX : DKI JAKARTA" id=""></td>
-            <td data-label="AMOUNT (TON)" width="50%"><input type="number" name="amount_ton[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: center; border: 1px solid #000" placeholder="0" id=""></td>
+            <td data-label="AMOUNT (TON)" width="50%"><input  type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" name="amount_ton[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: center; border: 1px solid #000" placeholder="0" id=""></td>
             <td width="5%"><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
         </tr>
         `;
@@ -1094,15 +1096,47 @@
         $("#corninfo").append(tabledata);
     }
 
-    function addImages() {
+    function addImages(data = undefined) {
+        if (data == undefined) {
+            data = [];
+            data.IMAGE_TITLE = '';
+            data.IMAGE_FILE = '';
+        } else {
+            data.IMAGE_TITLE     = checkNull(data.IMAGE_TITLE);
+            data.IMAGE_FILE = checkNull(data.IMAGE_FILE);
+        }
+
+        let imagefile_load = '';
+        if (data.IMAGE_FILE != '') {
+            imagefile_load = `
+                <img src="<?= base_url('upload/') ?>${data.IMAGE_FILE}" alt="" style="height: 170px; width: 170px; object-fit: cover;margin-bottom:20px">
+                <br/>
+            `;
+        }
         let tabledata = `
             <tr>
-                <td><input type="text" name="image_title[]" class="form-control" placeholder="Type here.."></td>
-                <td><input type="file" accept="image/png, image/jpeg, image/jpg" name="image_file[]" class="form-control"></td>
+                <td><input type="text" name="image_title[]" class="form-control" placeholder="Type here.." value="${data.IMAGE_TITLE}"></td>
+                <td>
+                    ${imagefile_load}
+                    <input type="file" accept="image/png, image/jpeg, image/jpg" name="image_file[]" class="form-control">
+                </td>
                 <td><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
             </tr>
         `;
 
         $("#surveyimages").append(tabledata);
+    }
+
+    function deleteRow(e) {
+        Swal.fire({
+            type: "warning",
+            title: "Delete Row",
+            showCancelButton: true,
+            text: "Are you sure want to delete this data ?"
+        }).then((result) => {
+            if (result.value) {
+                $(e).parent().parent().remove();
+            }
+        });
     }
 </script>
