@@ -839,16 +839,16 @@
                         <tbody>
                             <tr>
                                 <td data-label="STOCK SILO">
-                                    <input  type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" placeholder="0" name="stock_silo" value="<?= number_format($detail['WAREHOUSE']['STOCK_SILO'])  ?>" class="form-control" style="font-size: 14px">
+                                    <input type="text" placeholder="0" name="stock_silo" value="<?= number_format($detail['WAREHOUSE']['STOCK_SILO'])  ?>" class="form-control" style="font-size: 14px">
                                 </td>
                                 <td data-label="STOCK FLAT WH">
-                                    <input  type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" placeholder="0" name="stock_flat" value="<?= number_format($detail['WAREHOUSE']['STOCK_FLAT']) ?>" class="form-control" style="font-size: 14px">
+                                    <input  type="text" placeholder="0" name="stock_flat" value="<?= number_format($detail['WAREHOUSE']['STOCK_FLAT']) ?>" class="form-control" style="font-size: 14px">
                                 </td>
                                 <td data-label="STOCK LANTAI JEMUR">
-                                    <input  type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" placeholder="0" name="stock_lj" value="<?= number_format($detail['WAREHOUSE']['STOCK_LJ']) ?>" class="form-control" style="font-size: 14px">
+                                    <input  type="text" placeholder="0" name="stock_lj" value="<?= number_format($detail['WAREHOUSE']['STOCK_LJ']) ?>" class="form-control" style="font-size: 14px">
                                 </td>
                                 <td data-label="STOCK DRYER">
-                                    <input  type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" placeholder="0" name="stock_dryer" value="<?= number_format($detail['WAREHOUSE']['STOCK_DRYER']) ?>" class="form-control" style="font-size: 14px"> 
+                                    <input  type="text" placeholder="0" name="stock_dryer" value="<?= number_format($detail['WAREHOUSE']['STOCK_DRYER']) ?>" class="form-control" style="font-size: 14px"> 
                                 </td>
                             </tr>
                         </tbody>
@@ -869,16 +869,16 @@
                         <tbody>
                             <tr>
                                 <td data-label="DAILY RECEIVE 15%">
-                                    <input  type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" placeholder="0" name="daily_15" value="<?= number_format($detail['WAREHOUSE']['DAILY_15']) ?>" class="form-control" style="font-size: 14px"> 
+                                    <input  type="text" placeholder="0" name="daily_15" value="<?= number_format($detail['WAREHOUSE']['DAILY_15']) ?>" class="form-control" style="font-size: 14px"> 
                                 </td>
                                 <td data-label="DAILY RECEIVE 17%">
-                                    <input  type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" placeholder="0" name="daily_17" value="<?= number_format($detail['WAREHOUSE']['DAILY_17']) ?>" class="form-control" style="font-size: 14px"> 
+                                    <input  type="text" placeholder="0" name="daily_17" value="<?= number_format($detail['WAREHOUSE']['DAILY_17']) ?>" class="form-control" style="font-size: 14px"> 
                                 </td>
                                 <td data-label="BUYING PRICE 15%">
-                                    <input  type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" placeholder="0" name="buying_15" value="<?= number_format($detail['WAREHOUSE']['BUYING_15']) ?>" class="form-control" style="font-size: 14px">
+                                    <input  type="text" placeholder="0" name="buying_15" value="<?= number_format($detail['WAREHOUSE']['BUYING_15']) ?>" class="form-control" style="font-size: 14px">
                                 </td>
                                 <td data-label="BUYING PRICE 17%">
-                                    <input  type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" placeholder="0" name="buying_17" value="<?= number_format($detail['WAREHOUSE']['BUYING_17']) ?>" class="form-control" style="font-size: 14px">
+                                    <input  type="text" placeholder="0" name="buying_17" value="<?= number_format($detail['WAREHOUSE']['BUYING_17']) ?>" class="form-control" style="font-size: 14px">
                                     
                                 </td>
                             </tr>
@@ -898,13 +898,13 @@
                         <tbody>
                             <tr>
                                 <td data-label="TRADERS">
-                                    <input  type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" name="sales_traders" placeholder="0" class="form-control" style="font-size: 14px" value="<?= number_format($detail['WAREHOUSE']['SALES_TRADERS']) ?>">
+                                    <input  type="text" name="sales_traders" placeholder="0" class="form-control" style="font-size: 14px" value="<?= number_format($detail['WAREHOUSE']['SALES_TRADERS']) ?>">
                                 </td>
                                 <td data-label="FEEDMILL">
-                                    <input  type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" name="sales_feedmill" placeholder="0" class="form-control" style="font-size: 14px" value="<?= number_format($detail['WAREHOUSE']['SALES_FEEDMILL']) ?>">
+                                    <input  type="text" name="sales_feedmill" placeholder="0" class="form-control" style="font-size: 14px" value="<?= number_format($detail['WAREHOUSE']['SALES_FEEDMILL']) ?>">
                                 </td>
                                 <td colspan="2" data-label="SALES PRICE">
-                                    <input type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" name="sales_price" placeholder="0" class="form-control" style="font-size: 14px" value="<?= number_format($detail['WAREHOUSE']['SALES_PRICE']) ?>">
+                                    <input type="text" name="sales_price" placeholder="0" class="form-control" style="font-size: 14px" value="<?= number_format($detail['WAREHOUSE']['SALES_PRICE']) ?>">
                                 </td>
                             </tr>
                         </tbody>
@@ -948,7 +948,7 @@
                                     <?php foreach($detail['WAREHOUSE_CORN'] as $sf): ?>
                                         <tr>
                                             <td data-label="REGION" width="45%"><input value="<?= $sf['REGION'] ?>" type="text" name="region[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; text-transform: uppercase" placeholder="EX : DKI JAKARTA" id=""></td>
-                                            <td data-label="AMOUNT (TON)" width="50%"><input value="<?= number_format($sf['AMOUNT_TON']) ?>"  type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" name="amount_ton[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: center; border: 1px solid #000" placeholder="0" id=""></td>
+                                            <td data-label="AMOUNT (TON)" width="50%"><input value="<?= number_format($sf['AMOUNT_TON']) ?>"  type="text" name="amount_ton[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: center; border: 1px solid #000" placeholder="0" id=""></td>
                                             <td width="5%"><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
                                         </tr>
                                     <?php endforeach ?>
@@ -1088,7 +1088,7 @@
         let tabledata = `
         <tr>
             <td data-label="REGION" width="45%"><input type="text" name="region[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: left; border: 1px solid #000; text-tranform: uppercase" placeholder="EX : DKI JAKARTA" id=""></td>
-            <td data-label="AMOUNT (TON)" width="50%"><input  type="text" inputmode="numeric" pattern="[0-9\s]{13,19}" name="amount_ton[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: center; border: 1px solid #000" placeholder="0" id=""></td>
+            <td data-label="AMOUNT (TON)" width="50%"><input  type="text" name="amount_ton[]" style="width: 100%; padding: 10px 10px; border-radius: 5px; text-align: center; border: 1px solid #000" placeholder="0" id=""></td>
             <td width="5%"><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
         </tr>
         `;
