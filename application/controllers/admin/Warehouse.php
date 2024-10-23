@@ -153,18 +153,20 @@ class Warehouse extends CI_Controller {
 				}
 
 				$wh_galleries = [];
-				if (!empty($_FILES['image_file'])) {  
+				if (!empty($_FILES['image_file']['name'])) {
 					foreach ($_FILES['image_file']['name'] as $key => $v) {
 						$no = $key + 1;
 
-						// Panggil fungsi upload_image tanpa perlu mengoper $berkas
-						$namafile = $this->upload_image($wh_no, $no);  
-						$wh_galleries[] = [
-							'WH_NO'       => $wh_no,
-							'SEQUENCE'    => $no,
-							'IMAGE_TITLE' => $post['image_title'][$key],
-							'IMAGE_FILE'  => $namafile
-						];
+						// Panggil fungsi upload_image dan kirim file sesuai dengan indexnya
+						$namafile = $this->upload_image($wh_no, $no, $key);  
+						if ($namafile) {
+							$wh_galleries[] = [
+								'WH_NO'       => $wh_no,
+								'SEQUENCE'    => $no,
+								'IMAGE_TITLE' => $post['image_title'][$key],
+								'IMAGE_FILE'  => $namafile
+							];
+						}
 					}
 				}
 
@@ -508,11 +510,13 @@ class Warehouse extends CI_Controller {
         return $generated_no;
     }
 
-    public function upload_image($wh_no, $sequence) {
+    public function upload_image($wh_no, $sequence, $index) {
 		$result = "";
-		if (!empty($_FILES['image_file']['name'])) {
-			$pathDir 	= "./upload/";
-			$temp       = explode(".", $_FILES['image_file']['name']);
+	
+		// Cek apakah file pada index yang bersangkutan ada
+		if (!empty($_FILES['image_file']['name'][$index])) {
+			$pathDir    = "./upload/";
+			$temp       = explode(".", $_FILES['image_file']['name'][$index]);
 			$type_file  = '.' . end($temp);  // Mendapatkan extension file
 	
 			// Generate nama file berdasarkan $wh_no dan $sequence
@@ -526,8 +530,10 @@ class Warehouse extends CI_Controller {
 	
 			// Initialize dan lakukan upload
 			$this->upload->initialize($config);
-			if (!$this->upload->do_upload('image_file')) {  
-				// Jika gagal upload, tampilkan error dan return
+			
+			// Proses upload berdasarkan index file yang dikirimkan
+			if (!$this->upload->do_upload('image_file', $index)) {
+				// Jika gagal upload, tampilkan error (opsional bisa simpan ke log) dan return
 				$result = "";  // Bisa diganti dengan log error jika perlu
 			} else {
 				// Jika berhasil upload, return nama file
