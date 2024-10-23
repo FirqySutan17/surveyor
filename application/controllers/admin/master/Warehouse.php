@@ -181,7 +181,7 @@ class Warehouse extends CI_Controller {
 			return redirect($this->own_link."/create");
 		}
 		$this->session->set_flashdata('error', "Access denied");
-    return redirect($this->own_link);
+    	return redirect($this->own_link);
 	}
 
 	public function edit($code) {

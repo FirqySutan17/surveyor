@@ -1011,6 +1011,7 @@
         $("#iframe-location").html(iframe_gmap);
         
         detailPosition(latitude, longitude)
+        detailWeather(latitude, longitude)
     }
 
     function detailPosition(latitude, longitude) {
@@ -1023,13 +1024,36 @@
             },
             success: function(response) {
                 // let data = JSON.parse(response);
-                console.log(response);
+                // console.log(response);
                 // alert(data.data);
                 $("#address").val(response.display_name);
                 $("#address-info").text(response.display_name);
             }
         });
     }
+
+    function detailWeather(latitude, longitude) {
+        let apiKey = 'e663257c57d1ae4e5ac7cfb52b2375bc'; 
+        let weatherAPI = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+        // console.log(weatherAPI); 
+
+        $.ajax({
+            url: weatherAPI,
+            type: "GET",
+            beforeSend: function () {
+            
+            },
+            success: function(response) {
+                // console.log(response);
+                // let temperature = response.weather;
+                // alert("Temperature: " + temperature + "°C");
+            },
+            error: function(error) {
+                console.error("Error fetching weather data: ", error);
+            }
+        });
+    }
+
 
     $('#land_type').select2({
         theme: 'bootstrap4',

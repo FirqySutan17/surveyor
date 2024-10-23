@@ -102,6 +102,15 @@ $route['survey/do_create_mobile'] 	= 'Home/do_create_mobile';
 	$route['dashboard/attendance'] 						= 'admin/Attendance/index';
 	$route['dashboard/attendance/create'] 				= 'admin/Attendance/create';
 	$route['dashboard/attendance/do-attend'] 		    = 'admin/Attendance/do_attend';
+
+	$route['dashboard/warehouse'] 						= 'admin/Warehouse';
+	$route['dashboard/warehouse/data-update'] 			= 'admin/Warehouse/index_update';
+	$route['dashboard/warehouse/entry'] 				= 'admin/Warehouse/entry';
+	$route['dashboard/warehouse/do_create'] 			= 'admin/Warehouse/do_create';
+	$route['dashboard/warehouse/edit/(:any)'] 			= 'admin/Warehouse/edit/$1';
+	$route['dashboard/warehouse/do_update'] 			= 'admin/Warehouse/do_update';
+	$route['dashboard/warehouse/detail/(:any)'] 		= 'admin/Warehouse/detail/$1';
+	$route['dashboard/warehouse/delete/(:any)']			= 'admin/Warehouse/delete/$1';
 /* ENTRY ROUTES */
 
 // REPORT ROUTES

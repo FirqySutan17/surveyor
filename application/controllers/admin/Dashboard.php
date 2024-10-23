@@ -30,7 +30,7 @@ class Dashboard extends CI_Controller {
 		$data['title'] 				= 'DASHBOARD';
 		$data['user']				= $this->session_data['user'];
 		$data['survey'] 			= $survey_result;
-		// dd($data['survey']);
+		// dd($data['titik_post']);
 		$this->template->_v('index', $data);
 	}
 

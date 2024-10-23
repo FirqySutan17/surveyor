@@ -217,9 +217,9 @@
                     <?php endif ?>
                     <?php if (in_array('TR002', $user_access) || in_array('*', $user_access)): ?>
                         <li class="<?= $this->uri->segment(3) == 'warehouse' ? 'active' : '' ?>">
-                            <a href="<?= admin_url('master/warehouse/create') ?>"
+                            <a href="<?= admin_url('warehouse/entry') ?>"
                                 class="">
-                                <i class='bx bxs-right-arrow'></i> GUDANG ENTRY
+                                <i class='bx bxs-right-arrow'></i> WAREHOUSE ENTRY
                             </a>
                         </li>
                     <?php endif ?>
@@ -298,7 +298,7 @@
                    
                     <?php if (in_array('R002', $user_access) || in_array('*', $user_access)): ?>
                         <li class="<?= ($this->uri->segment(2) == 'visit' && $this->uri->segment(3) == 'customer') ? 'active' : '' ?>">
-                            <a href="<?= route('dashboard/master/warehouse') ?>"
+                            <a href="<?= route('dashboard/warehouse') ?>"
                                 class="">
                                 <i class='bx bxs-right-arrow'></i> GUDANG REPORT
                             </a>

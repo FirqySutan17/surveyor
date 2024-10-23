@@ -239,6 +239,23 @@ class survey extends CI_Controller {
 		echo json_encode(["status" => true, "message" => "success get detail coordinate", "data" => $data]);
 	}
 
+	public function ajax_weather_detail() {
+		$api_key = "74ebb634f79be8ce902a4280d7cbf8df";
+		$latitude = $this->input->get('latitude');
+		$longitude = $this->input->get('longitude');
+		
+		$addressURL = "http://api.openweathermap.org/data/2.5/weather?lat={$latitude}&lon={$longitude}&appid={$api_key}&units=metric";
+		$geocode	= file_get_contents($addressURL);
+		
+		$json 		= json_decode($addressURL);
+
+		$address = $json['display_name'];
+		
+		$data["address"] 	= $address;
+		dd($data["address"]);
+		echo json_encode(["status" => true, "message" => "success get detail coordinate", "data" => $data]);
+	}
+
 	public function index() {
 		$sdate 		= date('Y-m').'-01';
 		$edate 		= date('Y-m-d');
