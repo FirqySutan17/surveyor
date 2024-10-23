@@ -789,19 +789,19 @@
                         <tbody>
                             <tr>
                                 <td data-label="EMPLOYEE">
-                                    <?= $detail['SURVEY']['CREATED_BY'].' - '.$detail['SURVEY']['CREATED_BY_NAME'] ?>
+                                    <?= $detail['CREATED_BY'].' - '.$detail['CREATED_BY_NAME'] ?>
                                 </td>
                                 <td data-label="DATE">
-                                    <?= date('Y-m-d', strtotime($detail['SURVEY']['SURVEY_DATE'])) ?>
+                                    <?= date('Y-m-d', strtotime($detail['SURVEY_DATE'])) ?>
                                 </td>
                                 <td data-label="LAND TYPE">
-                                    <?= $detail['SURVEY']['LAND_TYPE'] ?>
+                                    <?= $detail['LAND_TYPE'] ?>
                                 </td>
                                 <td data-label="LAND TYPE">
-                                    <?= $detail['SURVEY']['LUAS_LAHAN'] ?>
+                                    <?= $detail['LUAS_LAHAN'] ?>
                                 </td>
                                 <td data-label="COORDINATE">
-                                    <?= $detail['SURVEY']['COORDINATE'] ?>
+                                    <?= $detail['COORDINATE'] ?>
                                 </td>
                             </tr>
                         </tbody>
@@ -818,19 +818,19 @@
                         <tbody>
                             <tr>
                                 <td data-label="PROVINCE">
-                                    <?= $detail['SURVEY']['PROVINCE_NAME'] ?>
+                                    <?= $detail['PROVINCE_NAME'] ?>
                                 </td>
                                 <td data-label="REGENCIES">
-                                    <?= $detail['SURVEY']['REGENCY_NAME'] ?>
+                                    <?= $detail['REGENCY_NAME'] ?>
                                 </td>
                                 <td data-label="DISTRICTS">
-                                    <?= $detail['SURVEY']['DISTRICT_NAME'] ?>
+                                    <?= $detail['DISTRICT_NAME'] ?>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
 
-                    <iframe class="maps-frame" src="https://maps.google.com/maps?q=<?= $detail['SURVEY']['COORDINATE'] ?>&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe class="maps-frame" src="https://maps.google.com/maps?q=<?= $detail['COORDINATE'] ?>&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     <table class="table table-bordered" style="margin-bottom: 10px">
                         <thead>
                             <tr>
@@ -839,7 +839,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td data-label="ADDRESS" style="text-transform: uppercase;"><?= $detail['SURVEY']['DESCRIPTION'] ?></td>
+                                <td data-label="ADDRESS" style="text-transform: uppercase;"><?= $detail['DESCRIPTION'] ?></td>
                             </tr>   
                         </tbody>
                         

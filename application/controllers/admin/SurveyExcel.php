@@ -141,7 +141,7 @@ class SurveyExcel extends CI_Controller {
 		$data['title'] 			= 'SURVEY EXCEL';
 		$data['user'] 			= $user;
 		$data['detail']				= $data_detail;
-		
+		dd($data);
 		$this->template->_v('survey-excel/edit', $data);
 	}
 
