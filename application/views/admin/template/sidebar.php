@@ -222,6 +222,12 @@
                                 <i class='bx bxs-right-arrow'></i> SURVEY ENTRY
                             </a>
                         </li>
+                        <li class="<?= ($this->uri->segment(2) == 'survey-excel' && $this->uri->segment(3) == 'entry') ? 'active' : '' ?>">
+                            <a href="<?= route('dashboard/survey-excel/entry') ?>"
+                                class="">
+                                <i class='bx bxs-right-arrow'></i> SURVEY EXCEL ENTRY
+                            </a>
+                        </li>
                     <?php endif ?>
                     <?php if (in_array('TR002', $user_access) || in_array('*', $user_access)): ?>
                         <li class="<?= $this->uri->segment(3) == 'warehouse' ? 'active' : '' ?>">
