@@ -153,11 +153,12 @@ class Warehouse extends CI_Controller {
 				}
 
 				$wh_galleries = [];
-				if (!empty($_FILES['image_file'])) {  // Ubah dari image_title ke image_file
+				if (!empty($_FILES['image_file'])) {  
 					foreach ($_FILES['image_file']['name'] as $key => $v) {
 						$no = $key + 1;
 
-						$namafile = $this->upload_image($_FILES['image_file'], $wh_no, $no);  // Pastikan fungsi upload_image menerima $_FILES['image_file']
+						// Panggil fungsi upload_image tanpa perlu mengoper $berkas
+						$namafile = $this->upload_image($wh_no, $no);  
 						$wh_galleries[] = [
 							'WH_NO'       => $wh_no,
 							'SEQUENCE'    => $no,
@@ -166,7 +167,7 @@ class Warehouse extends CI_Controller {
 						];
 					}
 				}
-	
+
 				$save = $this->Dbhelper->insertData('WAREHOUSE', $warehouse_report);
 				if (!empty($warehouse_corn)) {
 					$save_corn = $this->db->insert_batch('WAREHOUSE_CORN', $warehouse_corn);
@@ -507,33 +508,36 @@ class Warehouse extends CI_Controller {
         return $generated_no;
     }
 
-    public function upload_image($berkas, $wh_no, $sequence) {
+    public function upload_image($wh_no, $sequence) {
 		$result = "";
-		if ($berkas["name"] != "") {
+		if (!empty($_FILES['image_file']['name'])) {
 			$pathDir 	= "./upload/";
-			// chmod($pathDir, 777);
-			$temp = explode(".", $berkas["name"]);
-			$type_file = '.'.end($temp);
-			if (trim($berkas['name']) != "") {
-				$_FILES["files"] = $berkas;
-				$stringRandom = random_char(10);
-				$nama = $visiting_no."_".$sequence.$type_file;
-				$config['upload_path']          = $pathDir;
-                $config['allowed_types']        = 'gif|jpg|png|jpeg';
-
-                $config['file_name'] = $nama;
-                $this->upload->initialize($config);
-                if ( ! $this->upload->do_upload('files')) {
-                    $result = array('error' => $this->upload->display_errors());
-                } else {
-                    $result = $nama;
-                }
+			$temp       = explode(".", $_FILES['image_file']['name']);
+			$type_file  = '.' . end($temp);  // Mendapatkan extension file
+	
+			// Generate nama file berdasarkan $wh_no dan $sequence
+			$stringRandom = random_char(10);  // Fungsi random_char harus sudah didefinisikan
+			$nama = $wh_no . "_" . $sequence . $type_file;
+	
+			// Konfigurasi upload
+			$config['upload_path']   = $pathDir;
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$config['file_name']     = $nama;
+	
+			// Initialize dan lakukan upload
+			$this->upload->initialize($config);
+			if (!$this->upload->do_upload('image_file')) {  
+				// Jika gagal upload, tampilkan error dan return
+				$result = "";  // Bisa diganti dengan log error jika perlu
+			} else {
+				// Jika berhasil upload, return nama file
+				$result = $nama;
 			}
 		}
-
+	
 		return $result;
 	}
-
+	
 	private function delete_image($filename) {
 		$path_to_file = './upload/'.$filename;
 		if(unlink($path_to_file)) {
