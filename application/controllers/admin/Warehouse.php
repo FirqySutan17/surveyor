@@ -172,8 +172,8 @@ class Warehouse extends CI_Controller {
 				if (!empty($warehouse_corn)) {
 					$save_corn = $this->db->insert_batch('WAREHOUSE_CORN', $warehouse_corn);
 				}
-				if (!empty($warehouse_galleries)) {
-					$save_galleries = $this->db->insert_batch('WAREHOUSE_IMAGES', $warehouse_galleries);
+				if (!empty($wh_galleries)) {
+					$save_galleries = $this->db->insert_batch('WAREHOUSE_IMAGES', $wh_galleries);
 				}
 				if ($save) {
 					$this->session->set_flashdata('success', "Create data success");
