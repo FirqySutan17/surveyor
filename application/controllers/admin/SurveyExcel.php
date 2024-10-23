@@ -39,7 +39,7 @@ class SurveyExcel extends CI_Controller {
 					"PROVINCE"			=> dbClean($post['province']),
 					"REGENCY"				=> dbClean($post['regencies']),
 					"TITLE"					=> dbClean($post['title']),
-					"DESCRIPTION"		=> dbClean($post['description']),
+					"DESCRIPTION"		=> dbClean($post['DESCRIPTION']),
 					"SURVEY_FILE"		=> "",
 					"CREATED_AT"		=> date('Ymd His'),
 					"CREATED_BY"		=> $this->session_data['user']['EMPLOYEE_ID'],
@@ -153,7 +153,7 @@ class SurveyExcel extends CI_Controller {
 				$survey = [
 					"SURVEY_DATE"		=> date('Ymd', strtotime($post['survey_date'])),
 					"TITLE"					=> dbClean($post['title']),
-					"DESCRIPTION"		=> dbClean($post['description']),
+					"DESCRIPTION"		=> dbClean($post['DESCRIPTION']),
 					"UPDATED_AT"		=> date('Ymd His'),
 					"UPDATED_BY"		=> $this->session_data['user']['EMPLOYEE_ID']
 				];
@@ -206,7 +206,7 @@ class SurveyExcel extends CI_Controller {
 				TITLE,
 				CREATED_BY,
 				FN_USER_NAME(CREATED_BY) CREATED_BY_NAME,
-				FN_CODE_NAME(PLANT, 'AB') PLANT_NAME,
+				FN_CODE_NAME(PLANT, 'AB') PLANT_NAME
 			from SURVEY_EXCEL
 			where 
 				(SURVEY_DATE BETWEEN '$sdate' AND '$edate')
