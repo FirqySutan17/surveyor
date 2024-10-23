@@ -352,7 +352,7 @@
 				</td>
 				<td style="text-align: center; vertical-align: middle">
 					<a href="<?= admin_url('warehouse/edit/'.$v['WH_NO']) ?>"class="btn btn-sm"><i class="fas fa-pen text-warning"></i></a>
-					<a href="<?= admin_url('warehouse/detail/'.$v['WH_NO']) ?>" class="btn btn-sm"><i class="fas fa-eye text-success"></i></a>
+					<!-- <a href="<?= admin_url('warehouse/detail/'.$v['WH_NO']) ?>" class="btn btn-sm"><i class="fas fa-eye text-success"></i></a> -->
 				</td>
 			</tr>
 		<?php endforeach ?>

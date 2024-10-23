@@ -46,7 +46,7 @@ class Warehouse extends CI_Controller {
 		$data['districts'] 			= $this->datadistricts();
 		$data['datatable']			= $this->datatable($filter);
 		$data['filter']				= $filter;
-		// dd($data['districts']);
+		// dd($data['datatable']);
 		
 		$this->template->_v('warehouse/index', $data);
 	}
@@ -76,7 +76,7 @@ class Warehouse extends CI_Controller {
 		$data['districts'] 			= $this->datadistricts();
 		$data['datatable']			= $this->datatable($filter);
 		$data['filter']				= $filter;
-		// dd($data['districts']);
+		// dd($data['datatable']);
 		
 		$this->template->_v('warehouse/index-update', $data);
 	}
@@ -193,14 +193,15 @@ class Warehouse extends CI_Controller {
         return redirect($this->own_link);
 	}
 
-	public function detail($survey_no) {
+	public function detail($wh_no) {
 		$user	= 	$this->session_data['user'];
 
-		$data_detail = $this->get_surveydetail($survey_no);
+		$data_detail = $this->get_whdetail($wh_no);
 		$data['title'] 				= 'SURVEY';
 		$data['user'] 				= $user;
 		$data['detail']				= $data_detail;
-		$this->template->_v('survey/detail', $data);
+		// dd($data['detail']);
+		$this->template->_v('warehouse/detail', $data);
 	}
 
 	public function edit($wh_no) {
@@ -211,11 +212,11 @@ class Warehouse extends CI_Controller {
 		$data['user'] 				= $user;
 		$data['detail']				= $data_detail;
 		
-		dd($data['detail']);
+		// dd($data['detail']);
 		$this->template->_v('warehouse/edit', $data);
 	}
 
-	public function do_update($wh_no) {
+	public function do_update() {
 		if ($this->input->server('REQUEST_METHOD') === 'POST') {
 			$post = $this->input->post();
 			$postjson = json_encode($post);
@@ -225,26 +226,23 @@ class Warehouse extends CI_Controller {
 				$this->session->set_flashdata('success', "Unable to log post");
 				return redirect($this->own_link . '/report');
 			}
+
+			$wh_no = $post['wh_no'];
 	
 			try {
 				// SURVEY DATA
 				$warehouse_report = [
-					"WH_DATE"          => date('Ymd', strtotime($post['wh_date'])),
-					"PROVINCE"         => dbClean($post['province']),
-					"REGENCIES"        => dbClean($post['regencies']),
-					"DISTRICT"         => dbClean($post['districts']),
-					"WH_NAME"          => dbClean($post['wh_name']),
-					"STOCK_SILO"       => dbClean($post['stock_silo']),
-					"STOCK_FLAT"       => dbClean($post['stock_flat']),
-					"STOCK_LJ"         => dbClean($post['stock_lj']),
-					"STOCK_DRYER"      => dbClean($post['stock_dryer']),
-					"DAILY_17"         => dbClean($post['daily_17']),
-					"DAILY_15"         => dbClean($post['daily_15']),
-					"BUYING_17"        => dbClean($post['buying_17']),
-					"BUYING_15"        => dbClean($post['buying_15']),
-					"SALES_TRADERS"    => dbClean($post['sales_traders']),
-					"SALES_FEEDMILL"   => dbClean($post['sales_feedmill']),
-					"SALES_PRICE"      => dbClean($post['sales_price']),
+					"STOCK_SILO"       => cleanformat($post['stock_silo']),
+					"STOCK_FLAT"       => cleanformat($post['stock_flat']),
+					"STOCK_LJ"         => cleanformat($post['stock_lj']),
+					"STOCK_DRYER"      => cleanformat($post['stock_dryer']),
+					"DAILY_17"         => cleanformat($post['daily_17']),
+					"DAILY_15"         => cleanformat($post['daily_15']),
+					"BUYING_17"        => cleanformat($post['buying_17']),
+					"BUYING_15"        => cleanformat($post['buying_15']),
+					"SALES_TRADERS"    => cleanformat($post['sales_traders']),
+					"SALES_FEEDMILL"   => cleanformat($post['sales_feedmill']),
+					"SALES_PRICE"      => cleanformat($post['sales_price']),
 					"DESCRIPT"         => dbClean($post['descript']),
 					"UPDATED_AT"       => date('Ymd His'),
 					"UPDATED_BY"       => $this->session_data['user']['EMPLOYEE_ID'],
@@ -255,10 +253,12 @@ class Warehouse extends CI_Controller {
 					$this->session->set_flashdata('error', "User log-in not found");
 					return redirect($this->own_link . '/report');
 				}
+
+				// dd($warehouse_report);
 	
 				// Update WAREHOUSE table berdasarkan WH_NO
-				$update = $this->Dbhelper->updateData('WAREHOUSE', $warehouse_report, ['WH_NO' => $wh_no]);
-	
+				$update = $this->db->update('WAREHOUSE', $warehouse_report, ['WH_NO' => $wh_no]);
+				// dd($update);
 				// Update WAREHOUSE_CORN
 				$warehouse_corn = [];
 				if (!empty($post['region'])) {
@@ -267,7 +267,7 @@ class Warehouse extends CI_Controller {
 							"WH_NO"        => $wh_no,
 							"SEQUENCE"     => $i + 1,
 							"REGION"       => $v,
-							"AMOUNT_TON"   => $post['amount_ton'][$i]
+							"AMOUNT_TON"   => cleanformat($post['amount_ton'][$i])
 						];
 	
 						$warehouse_corn[] = $curr_data;
@@ -303,15 +303,19 @@ class Warehouse extends CI_Controller {
 							];
 						}
 					}
+				} elseif (empty($post['image_title']) && !empty($post['image_file'])) {
+					foreach ($post['image_file'] as $i => $v) {
+						$delete_image = $this->delete_image($v);
+					}
 				}
 	
-				// Hapus data images lama dan insert ulang jika ada gambar baru
-				$this->db->delete('WAREHOUSE_IMAGES', ['WH_NO' => $wh_no]);
+				
 				if (!empty($wh_galleries)) {
 					$save_galleries = $this->db->insert_batch('WAREHOUSE_IMAGES', $wh_galleries);
 				}
 	
 				if ($update) {
+					// dd($update);
 					$this->session->set_flashdata('success', "Update data success");
 					return redirect($this->own_link);
 				}
@@ -335,11 +339,12 @@ class Warehouse extends CI_Controller {
 					FN_USER_NAME(CREATED_BY) CREATED_BY_NAME,
 					p.PROVINCE as PROVINCE_NAME,
 					r.REGENCIES as REGENCY_NAME,
-					d.DISTRICS as DISTRICT_NAME
-			FROM WAREHOUSE a, CD_PROVINCE p, CD_REGENCIES r, CD_DISTRICTS d
+					d.DISTRICS as DISTRICT_NAME,
+					e.NAMA as WAREHOUSE_NAME
+			FROM WAREHOUSE a, CD_PROVINCE p, CD_REGENCIES r, CD_DISTRICTS d, CD_GUDANG e
 			WHERE 
 					p.ID_PROVINCE = a.PROVINCE
-					AND r.ID_REGENCIES = a.REGENCY
+					AND r.ID_REGENCIES = a.REGENCIES
 					AND d.ID_DISTRICTS = A.DISTRICT
 					AND a.WH_NO = '$wh_no'
 		");
@@ -392,11 +397,14 @@ class Warehouse extends CI_Controller {
 		$query = "
 			SELECT 
 				WH.*,
+				GUDANG.NAMA AS GUDANG_NAME,
 				DISTRICTS.DISTRICS AS DISTRICT_NAME, 
 				REGENCIES.REGENCIES AS REGENCIES_NAME, 
 				PROVINCE.PROVINCE AS PROVINCE_NAME
 			FROM
 				WAREHOUSE WH
+			JOIN 
+				CD_GUDANG GUDANG ON WH.WH_NAME = GUDANG.CODE
 			LEFT JOIN 
 				CD_DISTRICTS DISTRICTS ON WH.DISTRICT = DISTRICTS.ID_DISTRICTS
 			LEFT JOIN 
