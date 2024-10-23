@@ -266,9 +266,9 @@ class SurveyExcel extends CI_Controller {
 	public function upload_file($berkas, $survey_no) {
 		$result = "";
 		if ($berkas["name"] != "") {
-			$pathDir 	= "./upload/";
-			if (!file_exists('./upload/excel')) {
-					mkdir('./uploads/excel', 0777, true);
+			$pathDir 	= "./upload/excel/";
+			if (!file_exists($pathDir)) {
+					mkdir($pathDir, 0777, true);
 			}
 			// chmod($pathDir, 777);
 			$temp = explode(".", $berkas["name"]);
