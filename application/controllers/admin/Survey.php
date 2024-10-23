@@ -168,25 +168,29 @@ class survey extends CI_Controller {
 
 
 				$survey_galleries = [];
-				if (!empty($_FILES)) {
+				if (!empty($_FILES['SURVEY_IMAGE']['name'])) {
 					foreach ($_FILES['SURVEY_IMAGE']['name'] as $key => $v) {
 						$no = $key + 1;
+
 						$berkas = [];
 						$berkas['name']= $v;
 						$berkas['type']= $_FILES['SURVEY_IMAGE']['type'][$key];
 						$berkas['tmp_name']= $_FILES['SURVEY_IMAGE']['tmp_name'][$key];
 						$berkas['error']= $_FILES['SURVEY_IMAGE']['error'][$key];
 						$berkas['size']= $_FILES['SURVEY_IMAGE']['size'][$key];
-
-						$namafile = $this->upload_image($berkas, $survey_no, $no);
-						$survey_galleries[] = [
-							'SURVEY_NO'		=> $survey_no,
-							'SEQUENCE'		=> $no,
-							'IMAGE_TITLE'	=> !empty($post['SURVEY_IMAGE_TITLE'][$key]) ? $post['SURVEY_IMAGE_TITLE'][$key] : '-',
-							'IMAGE_FILENAME'	=> $namafile
-						];
+						
+						$namafile = $this->upload_image($berkas, $survey_no, $no); 
+						if ($namafile) {
+							$survey_galleries[] = [
+								'SURVEY_NO'		=> $survey_no,
+								'SEQUENCE'		=> $no,
+								'IMAGE_TITLE'	=> !empty($post['SURVEY_IMAGE_TITLE'][$key]) ? $post['SURVEY_IMAGE_TITLE'][$key] : '-',
+								'IMAGE_FILENAME'	=> $namafile
+							];
+						}
 					}
 				}
+
 				$survey_report['CURRENT_PHASE'] = $current_phase;
 				$survey_report['CURRENT_PHASE_DATE'] = $current_phase_date;
 				$survey_report['UMUR_TANAM'] 		= $umur_tanam;
@@ -471,25 +475,37 @@ class survey extends CI_Controller {
 						}
 					}
 				}
-				// if (!empty($_FILES)) {
-					// foreach ($_FILES['SURVEY_IMAGE']['name'] as $key => $v) {
-					// 	$no = $key + 1;
-					// 	$berkas = [];
-					// 	$berkas['name']= $v;
-				  //       $berkas['type']= $_FILES['SURVEY_IMAGE']['type'][$key];
-				  //       $berkas['tmp_name']= $_FILES['SURVEY_IMAGE']['tmp_name'][$key];
-				  //       $berkas['error']= $_FILES['SURVEY_IMAGE']['error'][$key];
-				  //       $berkas['size']= $_FILES['SURVEY_IMAGE']['size'][$key];
 
-				        // $namafile = $this->upload_image($berkas, $survey_no, $no);
-				        // $survey_galleries[] = [
-				        // 	'SURVEY_NO'		=> $survey_no,
-				        // 	'SEQUENCE'		=> $no,
-				        // 	'IMAGE_TITLE'	=> !empty($post['SURVEY_IMAGE_TITLE'][$key]) ? $post['SURVEY_IMAGE_TITLE'][$key] : '-',
-				        // 	'IMAGE_FILENAME'	=> $namafile
-				        // ];
-					// }
-				// }
+				$survey_galleries = [];
+				if (!empty($post['SURVEY_IMAGE_TITLE'])) {
+					foreach ($post['SURVEY_IMAGE_TITLE'] as $i => $v) {
+						$no = $i + 1;
+						$namafile = !empty($post['IMAGE_FILENAME'][$i]) ? $post['IMAGE_FILENAME'][$i] : '';
+						if (!empty($_FILES['SURVEY_IMAGE']['name'][$i])) {
+							if (!empty($namafile)) {
+								$delete_image = $this->delete_image($namafile);
+							}
+							$berkas = [];
+							$berkas['name']= $_FILES['SURVEY_IMAGE']['name'][$i];
+							$berkas['type']= $_FILES['SURVEY_IMAGE']['type'][$i];
+							$berkas['tmp_name']= $_FILES['SURVEY_IMAGE']['tmp_name'][$i];
+							$berkas['error']= $_FILES['SURVEY_IMAGE']['error'][$i];
+							$berkas['size']= $_FILES['SURVEY_IMAGE']['size'][$i];
+
+							$namafile = $this->upload_image($berkas, $survey_no, $no);
+						}
+						$survey_galleries[] = [
+							'SURVEY_NO'		=> $survey_no,
+							'SEQUENCE'		=> $no,
+							'IMAGE_TITLE'	=> !empty($post['SURVEY_IMAGE_TITLE'][$i]) ? $post['SURVEY_IMAGE_TITLE'][$i] : '-',
+							'IMAGE_FILENAME'	=> $namafile
+						];
+					}
+				} elseif (empty($post['SURVEY_IMAGE_TITLE']) && !empty($post['IMAGE_FILENAME'])) {
+					foreach ($post['IMAGE_FILENAME'] as $i => $v) {
+						$delete_image = $this->delete_image($v);
+					}
+				}
 
 				$survey["CURRENT_PHASE"] 	= $current_phase;
 				$survey["CURRENT_PHASE_DATE"] 	= $current_phase_date;

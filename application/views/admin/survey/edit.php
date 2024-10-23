@@ -774,6 +774,11 @@
     <div class="row">
         <form action="<?= admin_url('survey/do_update') ?>" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="survey_no" value="<?= $detail['SURVEY']['SURVEY_NO'] ?>">
+            <?php if (!empty($detail['SURVEY_IMAGES'])): ?>
+                <?php foreach ($detail['SURVEY_IMAGES'] as $vg): ?>
+                    <input type="hidden" name="IMAGE_FILENAME[]" value="<?= $vg['IMAGE_FILENAME'] ?>">
+                <?php endforeach ?>
+            <?php endif ?>
             <div class="content-task mt-5">
                 <h3 class="sub-title">1. LOCATION INFORMATION</h3>
                 <div class="table-responsive mt-2">
@@ -1077,11 +1082,15 @@
                             <tr style="align-items: flex-end">
                                 <th style="text-align: right; background: #fff; border: 0px"><button type="button" class="btn cust-btn-add" onclick="addImages()">+</button></th>
                             </tr>
-                            <tr>
-                                <td data-label ="DATE / TITLE"><input type="text" name="SURVEY_IMAGE_TITLE[]" class="form-control" placeholder="EX : JAN 2024 / TITLE HERE"></td>
-                                <td data-label ="UPLOAD IMAGE"><input type="file" accept="image/png, image/jpeg, image/jpg" name="SURVEY_IMAGE[]" class="form-control"></td>
-                                <td><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
-                            </tr>
+                            <?php if(!empty($detail['SURVEY_IMAGES'])): ?>
+                                <?php foreach($detail['SURVEY_IMAGES'] as $sf): ?>
+                                    <tr>
+                                        <td data-label ="DATE / TITLE"><input type="text" name="SURVEY_IMAGE_TITLE[]" class="form-control" placeholder="EX : JAN 2024 / TITLE HERE"></td>
+                                        <td data-label ="UPLOAD IMAGE"><input type="file" accept="image/png, image/jpeg, image/jpg" name="SURVEY_IMAGE[]" class="form-control"></td>
+                                        <td><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
+                                    </tr>
+                                <?php endforeach ?>
+                            <?php endif ?>
                         </tbody>
                     </table>
                 </div>
