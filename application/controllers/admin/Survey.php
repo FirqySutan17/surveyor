@@ -169,23 +169,23 @@ class survey extends CI_Controller {
 
 				$survey_galleries = [];
 				if (!empty($_FILES)) {
-					// foreach ($_FILES['SURVEY_IMAGE']['name'] as $key => $v) {
-					// 	$no = $key + 1;
-					// 	$berkas = [];
-					// 	$berkas['name']= $v;
-				  //       $berkas['type']= $_FILES['SURVEY_IMAGE']['type'][$key];
-				  //       $berkas['tmp_name']= $_FILES['SURVEY_IMAGE']['tmp_name'][$key];
-				  //       $berkas['error']= $_FILES['SURVEY_IMAGE']['error'][$key];
-				  //       $berkas['size']= $_FILES['SURVEY_IMAGE']['size'][$key];
+					foreach ($_FILES['SURVEY_IMAGE']['name'] as $key => $v) {
+						$no = $key + 1;
+						$berkas = [];
+						$berkas['name']= $v;
+						$berkas['type']= $_FILES['SURVEY_IMAGE']['type'][$key];
+						$berkas['tmp_name']= $_FILES['SURVEY_IMAGE']['tmp_name'][$key];
+						$berkas['error']= $_FILES['SURVEY_IMAGE']['error'][$key];
+						$berkas['size']= $_FILES['SURVEY_IMAGE']['size'][$key];
 
-				  //       $namafile = $this->upload_image($berkas, $survey_no, $no);
-				  //       $survey_galleries[] = [
-				  //       	'SURVEY_NO'		=> $survey_no,
-				  //       	'SEQUENCE'		=> $no,
-				  //       	'IMAGE_TITLE'	=> !empty($post['SURVEY_IMAGE_TITLE'][$key]) ? $post['SURVEY_IMAGE_TITLE'][$key] : '-',
-				  //       	'IMAGE_FILENAME'	=> $namafile
-				  //       ];
-					// }
+						$namafile = $this->upload_image($berkas, $survey_no, $no);
+						$survey_galleries[] = [
+							'SURVEY_NO'		=> $survey_no,
+							'SEQUENCE'		=> $no,
+							'IMAGE_TITLE'	=> !empty($post['SURVEY_IMAGE_TITLE'][$key]) ? $post['SURVEY_IMAGE_TITLE'][$key] : '-',
+							'IMAGE_FILENAME'	=> $namafile
+						];
+					}
 				}
 				$survey_report['CURRENT_PHASE'] = $current_phase;
 				$survey_report['CURRENT_PHASE_DATE'] = $current_phase_date;
@@ -202,8 +202,6 @@ class survey extends CI_Controller {
 				}
 				if (!empty($survey_planting_phase)) {
 					$save_planting_phase = $this->db->insert_batch('SURVEY_PLANTING_PHASE', $survey_planting_phase);
-					// dd($save_planting_phase, FALSE);
-					// dd($survey_planting_phase);
 				}
 				if (!empty($survey_galleries)) {
 					$save_galleries = $this->db->insert_batch('SURVEY_IMAGES', $survey_galleries);
@@ -451,7 +449,29 @@ class survey extends CI_Controller {
 
 
 				$survey_galleries = [];
-				if (!empty($_FILES)) {
+				if (!empty($_FILES['SURVEY_IMAGE']['name'])) {
+					foreach ($_FILES['SURVEY_IMAGE']['name'] as $key => $v) {
+						$no = $key + 1;
+
+						$berkas = [];
+						$berkas['name']= $v;
+						$berkas['type']= $_FILES['SURVEY_IMAGE']['type'][$key];
+						$berkas['tmp_name']= $_FILES['SURVEY_IMAGE']['tmp_name'][$key];
+						$berkas['error']= $_FILES['SURVEY_IMAGE']['error'][$key];
+						$berkas['size']= $_FILES['SURVEY_IMAGE']['size'][$key];
+						
+						$namafile = $this->upload_image($berkas, $survey_no, $no); 
+						if ($namafile) {
+							$survey_galleries[] = [
+								'SURVEY_NO'		=> $survey_no,
+								'SEQUENCE'		=> $no,
+								'IMAGE_TITLE'	=> !empty($post['SURVEY_IMAGE_TITLE'][$key]) ? $post['SURVEY_IMAGE_TITLE'][$key] : '-',
+								'IMAGE_FILENAME'	=> $namafile
+							];
+						}
+					}
+				}
+				// if (!empty($_FILES)) {
 					// foreach ($_FILES['SURVEY_IMAGE']['name'] as $key => $v) {
 					// 	$no = $key + 1;
 					// 	$berkas = [];
@@ -461,15 +481,15 @@ class survey extends CI_Controller {
 				  //       $berkas['error']= $_FILES['SURVEY_IMAGE']['error'][$key];
 				  //       $berkas['size']= $_FILES['SURVEY_IMAGE']['size'][$key];
 
-				  //       $namafile = $this->upload_image($berkas, $survey_no, $no);
-				  //       $survey_galleries[] = [
-				  //       	'SURVEY_NO'		=> $survey_no,
-				  //       	'SEQUENCE'		=> $no,
-				  //       	'IMAGE_TITLE'	=> !empty($post['SURVEY_IMAGE_TITLE'][$key]) ? $post['SURVEY_IMAGE_TITLE'][$key] : '-',
-				  //       	'IMAGE_FILENAME'	=> $namafile
-				  //       ];
+				        // $namafile = $this->upload_image($berkas, $survey_no, $no);
+				        // $survey_galleries[] = [
+				        // 	'SURVEY_NO'		=> $survey_no,
+				        // 	'SEQUENCE'		=> $no,
+				        // 	'IMAGE_TITLE'	=> !empty($post['SURVEY_IMAGE_TITLE'][$key]) ? $post['SURVEY_IMAGE_TITLE'][$key] : '-',
+				        // 	'IMAGE_FILENAME'	=> $namafile
+				        // ];
 					// }
-				}
+				// }
 
 				$survey["CURRENT_PHASE"] 	= $current_phase;
 				$survey["CURRENT_PHASE_DATE"] 	= $current_phase_date;
@@ -962,35 +982,35 @@ class survey extends CI_Controller {
 	}
 
 	private function generateSurveyNo() {
-        $generated_no = "SURVEY".date('Ymd');
-        $no = 1;
-        $today = date('Ymd');
-        $this->db->select('SURVEY_NO, CREATED_AT');
-        $this->db->from('SURVEY');
-        $this->db->like('CREATED_AT', $today, 'after');
-        $this->db->order_by('CREATED_AT', 'DESC');
-        $this->db->order_by('SURVEY_NO', 'DESC');
-        $latest_data = $this->db->get()->row();
-        if (!empty($latest_data)) {
-            $no = substr($latest_data->SURVEY_NO, -4);
+			$generated_no = "SURVEY".date('Ymd');
+			$no = 1;
+			$today = date('Ymd');
+			$this->db->select('SURVEY_NO, CREATED_AT');
+			$this->db->from('SURVEY');
+			$this->db->like('CREATED_AT', $today, 'after');
+			$this->db->order_by('CREATED_AT', 'DESC');
+			$this->db->order_by('SURVEY_NO', 'DESC');
+			$latest_data = $this->db->get()->row();
+			if (!empty($latest_data)) {
+					$no = substr($latest_data->SURVEY_NO, -4);
 
-            $date = date('Y-m-d', strtotime($latest_data->CREATED_AT));
-            $hour = date('H', strtotime($latest_data->CREATED_AT));
-            $no += 1;
-        }
-        if ($no < 10) {
-            $no = "000".$no;
-        } elseif ($no >= 10 && $no < 100) {
-            $no = "00".$no;
-        } elseif ($no >= 100 && $no < 1000) {
-            $no = "0".$no;
-        }
+					$date = date('Y-m-d', strtotime($latest_data->CREATED_AT));
+					$hour = date('H', strtotime($latest_data->CREATED_AT));
+					$no += 1;
+			}
+			if ($no < 10) {
+					$no = "000".$no;
+			} elseif ($no >= 10 && $no < 100) {
+					$no = "00".$no;
+			} elseif ($no >= 100 && $no < 1000) {
+					$no = "0".$no;
+			}
 
-        $generated_no = $generated_no.$no;
-        return $generated_no;
-    }
+			$generated_no = $generated_no.$no;
+			return $generated_no;
+	}
 
-    public function upload_image($berkas, $survey_no, $sequence) {
+	public function upload_image($berkas, $survey_no, $sequence) {
 		$result = "";
 		if ($berkas["name"] != "") {
 			$pathDir 	= "./upload/";
@@ -1002,15 +1022,15 @@ class survey extends CI_Controller {
 				$stringRandom = random_char(10);
 				$nama = $survey_no."_".$sequence.$type_file;
 				$config['upload_path']          = $pathDir;
-                $config['allowed_types']        = 'gif|jpg|png|jpeg';
+				$config['allowed_types']        = 'gif|jpg|png|jpeg';
 
-                $config['file_name'] = $nama;
-                $this->upload->initialize($config);
-                if ( ! $this->upload->do_upload('files')) {
-                    $result = array('error' => $this->upload->display_errors());
-                } else {
-                    $result = $nama;
-                }
+				$config['file_name'] = $nama;
+				$this->upload->initialize($config);
+				if ( ! $this->upload->do_upload('files')) {
+						// $result = array('error' => $this->upload->display_errors()); 
+				} else {
+						$result = $nama;
+				}
 			}
 		}
 
