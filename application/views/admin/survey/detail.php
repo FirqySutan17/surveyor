@@ -907,7 +907,7 @@
                                                             <li>
                                                                 <?php if ($phase_key != 'persiapan-lahan'): ?>
                                                                     <?php $form_placeholder = $phase_key == 'persiapan-lahan' ? $placeholder[$phase_key][0] : $placeholder[$phase_key][$i_deskripsi]; ?>
-                                                                    <label for=""><?= $form_placeholder ?></label>
+                                                                    <label for=""><?= $form_placeholder ?> : </label>
                                                                 <?php endif ?>
                                                                 <label for=""><?= $deskripsi ?></label>
                                                             </li>
