@@ -266,7 +266,7 @@ class Warehouse extends CI_Controller {
 							"WH_NO"        => $wh_no,
 							"SEQUENCE"     => $i + 1,
 							"REGION"       => $v,
-							"AMOUNT_TON"   => $post['amount_ton'][$i]
+							"AMOUNT_TON"   => cleanformat($post['amount_ton'][$i])
 						];
 	
 						$warehouse_corn[] = $curr_data;
