@@ -780,7 +780,7 @@
     <div class="row">
         <form action="<?= admin_url('survey-excel/do_update') ?>" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="survey_no" value="<?= $detail['SURVEY_NO'] ?>">
-        <input type="hidden" name="SURYEY_FILE_OLD" value="<?= $detail['SURYEY_FILE'] ?>">
+        <input type="hidden" name="SURYEY_FILE_OLD" value="<?= $detail['SURVEY_FILE'] ?>">
             <div class="content-task mt-5">
                 <div class="table-responsive mt-2">
                     <table class="table table-bordered" style="margin-bottom: 10px">
