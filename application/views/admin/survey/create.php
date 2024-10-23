@@ -804,13 +804,13 @@
                                     <input type="date" name="survey_date" class="form-control" style="font-size: 14px" required>
                                 </td>
                                 <td data-label="LAND TYPE">
-                                    <select class="form-control" style="width: 100%;" name="land_type" required>
+                                    <select class="form-control" style="width: 100%; text-align: center" name="land_type" required>
                                         <option value="SAWAH">SAWAH</option>
                                         <option value="PERBUKITAN">PERBUKITAN</option>
                                     </select>
                                 </td>
                                 <td data-label="LAND AREA">
-                                    <input type="number" name="luas_lahan" class="form-control" style="font-size: 14px" required>
+                                    <input type="number" name="luas_lahan" class="form-control" placeholder="0" style="font-size: 14px" required>
                                 </td>
                                 <td data-label="COORDINATE">
                                     <div id="coordinateText"></div>
@@ -998,6 +998,10 @@
             lang.innerHTML = "Geolocation is not supported by this browser.";
         }
     }
+
+    $(document).ready(function() {
+        getLocation();
+    });
         
     function showPosition(position) {
         let latitude    = position.coords.latitude;

@@ -156,12 +156,6 @@ class Warehouse extends CI_Controller {
 				if (!empty($_FILES)) {
 					foreach ($_FILES['image_title']['name'] as $key => $v) {
 						$no = $key + 1;
-						$berkas = [];
-						$berkas['name']= $v;
-				        $berkas['type']= $_FILES['image_title']['type'][$key];
-				        $berkas['tmp_name']= $_FILES['image_title']['tmp_name'][$key];
-				        $berkas['error']= $_FILES['image_title']['error'][$key];
-				        $berkas['size']= $_FILES['image_title']['size'][$key];
 
 				        $namafile = $this->upload_image($berkas, $wh_no, $no);
 				        $wh_galleries[] = [
