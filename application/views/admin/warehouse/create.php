@@ -779,7 +779,7 @@
         <strong>CREATE WAREHOUSE</strong>
     </h3>
     <div class="row" style="align-items: center; justify-content: center; min-height: 80vh">
-        <form class="form-category"  action="<?= admin_url('master/warehouse/do_create') ?>" method="POST" enctype="multipart/form-data">
+        <form class="form-category"  action="<?= admin_url('warehouse/do_create') ?>" method="POST" enctype="multipart/form-data">
             <div class="content-task">
                 <h3 class="sub-title">1. WAREHOUSE INFORMATION</h3>
                 <div class="table-responsive mt-2">
