@@ -1022,9 +1022,9 @@
         theme: 'bootstrap4',
         placeholder: "- SELECT REGENCIES -",
         ajax: {
-            url: "<?= base_url('ajax/load/kota') ?>",
+            url: "<?= ('ajax/load/kota') ?>",
             dataType: 'json',
-            data: function (params) {
+            data: function (parambase_urls) {
                 return {
                 q: params.term,
                 provinsi: $("#province option:selected").val()

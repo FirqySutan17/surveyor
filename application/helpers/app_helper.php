@@ -36,6 +36,9 @@
 	}
 
 	function dbClean($input){
+		if (empty($input)) {
+			return "";
+		}
 		$input = str_replace('"', ' ', str_replace("'", " ", $input));
 		$inputer = trim(stripslashes(html_escape(htmlspecialchars($input))));
 		return $inputer;

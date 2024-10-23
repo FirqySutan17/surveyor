@@ -1,0 +1,1 @@
+{"wh_date":"2024-10-23","wh_name":"WH0075","province":"0","stock_silo":"5","stock_flat":"10","stock_lj":"15","stock_dryer":"20","daily_15":"25","daily_17":"30","buying_15":"35","buying_17":"40","sales_traders":"45","sales_feedmill":"50","sales_price":"55","descript":"TEST","region":["TEST"],"amount_ton":["5000"],"image_title":["TES"]}

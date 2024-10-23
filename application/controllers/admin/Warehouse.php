@@ -132,7 +132,6 @@ class Warehouse extends CI_Controller {
 					"CREATED_AT"		=> date('Ymd His'),
 					"CREATED_BY"		=> $this->session_data['user']['EMPLOYEE_ID'],
 				];
-
 				if (empty($warehouse_report["CREATED_BY"])) {
 					$this->session->set_flashdata('error', "User log-in not found");
 						return redirect($this->own_link.'/report');
@@ -152,13 +151,21 @@ class Warehouse extends CI_Controller {
 					}
 				}
 
+				dd($warehouse_report, FALSE);
 				$wh_galleries = [];
 				if (!empty($_FILES['image_file']['name'])) {
 					foreach ($_FILES['image_file']['name'] as $key => $v) {
 						$no = $key + 1;
 
+						$berkas = [];
+						$berkas['name']= $v;
+				        $berkas['type']= $_FILES['image_file']['type'][$key];
+				        $berkas['tmp_name']= $_FILES['image_file']['tmp_name'][$key];
+				        $berkas['error']= $_FILES['image_file']['error'][$key];
+				        $berkas['size']= $_FILES['image_file']['size'][$key];
+				        $namafile = $this->upload_image($berkas, $wh_no, $no);
 						// Panggil fungsi upload_image dan kirim file sesuai dengan indexnya
-						$namafile = $this->upload_image($wh_no, $no, $key);  
+						// $namafile = $this->upload_image($wh_no, $no, $key);  
 						if ($namafile) {
 							$wh_galleries[] = [
 								'WH_NO'       => $wh_no,
@@ -169,7 +176,6 @@ class Warehouse extends CI_Controller {
 						}
 					}
 				}
-
 				$save = $this->Dbhelper->insertData('WAREHOUSE', $warehouse_report);
 				if (!empty($warehouse_corn)) {
 					$save_corn = $this->db->insert_batch('WAREHOUSE_CORN', $warehouse_corn);
@@ -459,11 +465,11 @@ class Warehouse extends CI_Controller {
 				PROVINCE.PROVINCE AS PROVINCE_NAME
 			FROM
 				WAREHOUSE WH
-			JOIN 
+			LEFT JOIN 
 				CD_DISTRICTS DISTRICTS ON WH.DISTRICT = DISTRICTS.ID_DISTRICTS
-			JOIN 
+			LEFT JOIN 
 				CD_REGENCIES REGENCIES ON DISTRICTS.REGENCIES_ID = REGENCIES.ID_REGENCIES
-			JOIN 
+			LEFT JOIN 
 				CD_PROVINCE PROVINCE ON REGENCIES.PROVINCE_ID = PROVINCE.ID_PROVINCE
 		";
 		if ($filter['province'] != '*') {
@@ -494,10 +500,22 @@ class Warehouse extends CI_Controller {
 	}
 
 	private function generateWarehouseNo() {
-        $generated_no = "WHS";
+		$generated_no = "WAREHOUSE".date('Ymd');
         $no = 1;
-        $data = $this->Dbhelper->selectTabel('WH_NO', 'WAREHOUSE', array(), 'WH_NO', 'DESC');
-		$no 	= count($data) + 1;
+        $today = date('Ymd');
+        $this->db->select('WH_NO, CREATED_AT');
+        $this->db->from('WAREHOUSE');
+        $this->db->like('CREATED_AT', $today, 'after');
+        $this->db->order_by('CREATED_AT', 'DESC');
+        $this->db->order_by('WH_NO', 'DESC');
+        $latest_data = $this->db->get()->row();
+        if (!empty($latest_data)) {
+            $no = substr($latest_data->WH_NO, -4);
+
+            $date = date('Y-m-d', strtotime($latest_data->CREATED_AT));
+            $hour = date('H', strtotime($latest_data->CREATED_AT));
+            $no += 1;
+        }
         if ($no < 10) {
             $no = "000".$no;
         } elseif ($no >= 10 && $no < 100) {
@@ -510,7 +528,7 @@ class Warehouse extends CI_Controller {
         return $generated_no;
     }
 
-    public function upload_image($wh_no, $sequence, $index) {
+    public function upload_image_bak($wh_no, $sequence, $index) {
 		$result = "";
 	
 		// Cek apakah file pada index yang bersangkutan ada
@@ -541,6 +559,34 @@ class Warehouse extends CI_Controller {
 			}
 		}
 	
+		return $result;
+	}
+
+	public function upload_image($berkas, $wh_no, $sequence) {
+		$result = "";
+		if ($berkas["name"] != "") {
+			$pathDir 	= "./upload/";
+			// chmod($pathDir, 777);
+			$temp = explode(".", $berkas["name"]);
+			$type_file = '.'.end($temp);
+			if (trim($berkas['name']) != "") {
+				$_FILES["files"] = $berkas;
+				$stringRandom = random_char(10);
+				$nama = $wh_no."_".$sequence.$type_file;
+				$config['upload_path']          = $pathDir;
+                $config['allowed_types']        = 'gif|jpg|png|jpeg';
+
+                $config['file_name'] = $nama;
+                $this->upload->initialize($config);
+                if ( ! $this->upload->do_upload('files')) {
+                    $result = array('error' => $this->upload->display_errors());
+					dd($result);
+                } else {
+                    $result = $nama;
+                }
+			}
+		}
+
 		return $result;
 	}
 	
