@@ -106,7 +106,7 @@ class Warehouse extends CI_Controller {
 				return redirect($this->own_link.'/report');
 			}
 
-			$warehouse_no = $this->generateWarehouseNo();
+			$wh_no = $this->generateWarehouseNo();
 			try {
 				
 				// SURVEY DATA
@@ -125,7 +125,7 @@ class Warehouse extends CI_Controller {
 					"DAILY_15"			=> dbClean($post['daily_15']),
 					"BUYING_17"			=> dbClean($post['buying_17']),
 					"BUYING_15"			=> dbClean($post['buying_15']),
-					"SALES_TREADERS"	=> dbClean($post['sales_traders']),
+					"SALES_TRADERS"		=> dbClean($post['sales_traders']),
 					"SALES_FEEDMILL"	=> dbClean($post['sales_feedmill']),
 					"SALES_PRICE"		=> dbClean($post['sales_price']),
 					"DESCRIPT"			=> dbClean($post['descript']),

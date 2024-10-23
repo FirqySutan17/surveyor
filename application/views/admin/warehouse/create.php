@@ -886,10 +886,10 @@
                                     <input type="number" name="daily_17" placeholder="0" class="form-control" style="font-size: 14px">
                                 </td>
                                 <td data-label="BUYING PRICE 15%">
-                                    <input type="number" name="sales_15" placeholder="0" class="form-control" style="font-size: 14px">
+                                    <input type="number" name="buying_15" placeholder="0" class="form-control" style="font-size: 14px">
                                 </td>
                                 <td data-label="BUYING PRICE 17%">
-                                    <input type="number" name="sales_17" placeholder="0" class="form-control" style="font-size: 14px">
+                                    <input type="number" name="buying_17" placeholder="0" class="form-control" style="font-size: 14px">
                                 </td>
                             </tr>
                         </tbody>
