@@ -46,7 +46,7 @@ class Warehouse extends CI_Controller {
 		$data['districts'] 			= $this->datadistricts();
 		$data['datatable']			= $this->datatable($filter);
 		$data['filter']				= $filter;
-		// dd($data['districts']);
+		// dd($data['datatable']);
 		
 		$this->template->_v('warehouse/index', $data);
 	}
@@ -76,7 +76,7 @@ class Warehouse extends CI_Controller {
 		$data['districts'] 			= $this->datadistricts();
 		$data['datatable']			= $this->datatable($filter);
 		$data['filter']				= $filter;
-		// dd($data['districts']);
+		// dd($data['datatable']);
 		
 		$this->template->_v('warehouse/index-update', $data);
 	}
@@ -193,14 +193,15 @@ class Warehouse extends CI_Controller {
         return redirect($this->own_link);
 	}
 
-	public function detail($survey_no) {
+	public function detail($wh_no) {
 		$user	= 	$this->session_data['user'];
 
-		$data_detail = $this->get_surveydetail($survey_no);
+		$data_detail = $this->get_whdetail($wh_no);
 		$data['title'] 				= 'SURVEY';
 		$data['user'] 				= $user;
 		$data['detail']				= $data_detail;
-		$this->template->_v('survey/detail', $data);
+		// dd($data['detail']);
+		$this->template->_v('warehouse/detail', $data);
 	}
 
 	public function edit($wh_no) {
@@ -396,11 +397,14 @@ class Warehouse extends CI_Controller {
 		$query = "
 			SELECT 
 				WH.*,
+				GUDANG.NAMA AS GUDANG_NAME,
 				DISTRICTS.DISTRICS AS DISTRICT_NAME, 
 				REGENCIES.REGENCIES AS REGENCIES_NAME, 
 				PROVINCE.PROVINCE AS PROVINCE_NAME
 			FROM
 				WAREHOUSE WH
+			JOIN 
+				CD_GUDANG GUDANG ON WH.WH_NAME = GUDANG.CODE
 			LEFT JOIN 
 				CD_DISTRICTS DISTRICTS ON WH.DISTRICT = DISTRICTS.ID_DISTRICTS
 			LEFT JOIN 

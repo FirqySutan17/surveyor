@@ -928,7 +928,7 @@
                         <tbody>
                             <tr>
                                 <td data-label="REMARKS">
-                                    <textarea type="text" name="descript" class="form-control" placeholder="EX : LOREM IPSUM DOLOR SIT AMET" style="font-size: 14px !important; text-align: left" required rows="6"></textarea>
+                                    <textarea type="text" name="descript" class="form-control" placeholder="EX : LOREM IPSUM DOLOR SIT AMET" style="font-size: 14px !important; text-align: left; text-transform: uppercase" required rows="6"></textarea>
                                 </td>
                             </tr>
                         </tbody>
@@ -980,7 +980,7 @@
                             </thead>
                             <tbody id="surveyimages">
                                 <tr>
-                                    <td><input type="text" name="image_title[]" class="form-control" placeholder="Type here.."></td>
+                                    <td><input type="text" name="image_title[]" class="form-control" style="text-transform: uppercase" placeholder="Type here.."></td>
                                     <td><input type="file" accept="image/png, image/jpeg, image/jpg" name="image_file[]" class="form-control"></td>
                                     <td><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
                                 </tr>
@@ -1097,7 +1097,7 @@
     function addImages() {
         let tabledata = `
             <tr>
-                <td><input type="text" name="image_title[]" class="form-control" placeholder="Type here.."></td>
+                <td><input type="text" name="image_title[]" class="form-control" style="text-transform: uppercase" placeholder="Type here.."></td>
                 <td><input type="file" accept="image/png, image/jpeg, image/jpg" name="image_file[]" class="form-control"></td>
                 <td><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
             </tr>

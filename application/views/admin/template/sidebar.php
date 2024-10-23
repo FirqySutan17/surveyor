@@ -308,7 +308,7 @@
                         <li class="<?= ($this->uri->segment(2) == 'visit' && $this->uri->segment(3) == 'customer') ? 'active' : '' ?>">
                             <a href="<?= route('dashboard/warehouse') ?>"
                                 class="">
-                                <i class='bx bxs-right-arrow'></i> GUDANG REPORT
+                                <i class='bx bxs-right-arrow'></i> WAREHOUSE REPORT
                             </a>
                         </li>
                     <?php endif ?>
