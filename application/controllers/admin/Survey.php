@@ -332,6 +332,7 @@ class survey extends CI_Controller {
 		$data['title'] 				= 'SURVEY';
 		$data['user'] 				= $user;
 		$data['detail']				= $data_detail;
+		$data['placeholder'] 	= $this->list_placeholder();
 		$this->template->_v('survey/detail', $data);
 	}
 
