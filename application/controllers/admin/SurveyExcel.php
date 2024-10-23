@@ -218,7 +218,7 @@ class SurveyExcel extends CI_Controller {
 	}
 
 	private function get_surveydetail($survey_no) {
-		return $this->Dbhelper->selectOneRawQuery("
+		$result =  $this->Dbhelper->selectOneRawQuery("
 			SELECT 
 					a.*, 
 					FN_USER_NAME(CREATED_BY) CREATED_BY_NAME,
@@ -230,6 +230,9 @@ class SurveyExcel extends CI_Controller {
 					AND r.ID_REGENCIES = a.REGENCY
 					AND a.SURVEY_NO = '$survey_no'
 		");
+
+		$result = (array) $result;
+		return $result;
 	}
 
 	private function generateSurveyExcelNo() {

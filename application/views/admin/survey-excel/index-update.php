@@ -342,8 +342,8 @@
                     <td style="text-align: center; vertical-align: middle"><?= date('Y-m-d', strtotime($v['SURVEY_DATE'])) ?></td>
                     <td style="text-align: center; vertical-align: middle; width: 30%"><?= $v['TITLE'] ?></td>
                     <td style="text-align: center; vertical-align: middle">
-                        <a href="<?= admin_url('survey/edit/'.$v['SURVEY_NO']) ?>" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
-                        <!-- <a href="<?= admin_url('survey/detail/'.$v['SURVEY_NO']) ?>" target="_blank" class="btn btn-sm" title="Detail"><i class="fas fa-eye text-primary"></i></a> -->
+                        <a href="<?= admin_url('survey-excel/edit/'.$v['SURVEY_NO']) ?>" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
+                        <!-- <a href="<?= admin_url('survey-excel/detail/'.$v['SURVEY_NO']) ?>" target="_blank" class="btn btn-sm" title="Detail"><i class="fas fa-eye text-primary"></i></a> -->
                     </td>
                 </tr>
             <?php endforeach ?>
