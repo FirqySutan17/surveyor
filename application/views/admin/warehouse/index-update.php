@@ -279,49 +279,37 @@
 </style>
 
 <div class="main-content pre-posttest">
-	<div class="row">
-		<div class="col-md-6 col-sm-12">
-			<h3 class="card-title">
-				<strong>DATA - WAREHOUSE</strong>
-			</h3>
-		</div>
-		<div class="col-md-3 col-sm-12">
-			
-		</div>
-		<div class="col-md-3 col-sm-12">
-			<a href="<?= admin_url('master/warehouse/create') ?>" class="btn btn-primary btn-block">
-				CREATE
-			</a>
-		</div>
-	</div>
-    
+    <h3 class="card-title">
+        <strong>DATA - WAREHOUSE</strong>
+    </h3>
+	
 	<form class="form-horizontal" action="#" method="POST">
         <div class="row" style="padding: 0px 10px; border-bottom: 2px solid #000; padding-bottom: 10px;margin: 0px 0px; margin-bottom: 10px; ">
 			<div class="col-md-6 col-sm-12" style="display: flex;; align-items: center; margin-bottom: 10px">
-                <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 0px; font-weight: 600">WAREHOUSE : </span> 
-                <select id="warehouse" class="form-control" name="warehouse" >
-					<option value="*" selected>- ALL WAREHOUSE -</option>
-                    <?php foreach ($warehouse as $field): ?>
-                        <option <?= $filter['warehouse'] == $field['CODE'] ? 'selected' : '' ?> value="<?= $field['CODE'] ?>"><?= $field['NAMA'] ?></option>
+                <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 0px; font-weight: 600">PROVINCE : </span> 
+                <select id="province" class="form-control" name="province" >
+					<option value="*" selected>- ALL PROVINCE -</option>
+                    <?php foreach ($province as $field): ?>
+                        <option <?= $filter['province'] == $field['ID_PROVINCE'] ? 'selected' : '' ?> value="<?= $field['ID_PROVINCE'] ?>"><?= $field['PROVINCE'] ?></option>
                     <?php endforeach ?>
                 </select>
             </div>
 			<div class="col-md-6 col-sm-12" style="display: flex;; align-items: center">
-                <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 0px; font-weight: 600">AREA : </span> 
-                <select id="area" class="form-control" name="area" >
-					<option value="*" selected>- ALL AREA -</option>
-                    <?php foreach ($area as $field): ?>
-                        <option <?= $filter['area'] == $field['AREA'] ? 'selected' : '' ?> value="<?= $field['AREA'] ?>"><?= $field['AREA'] ?></option>
-                    <?php endforeach ?>
+                <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 0px; font-weight: 600">REGENCIES : </span> 
+                <select id="regencies" class="form-control" name="regencies" >
+					<option value="*" selected>- ALL REGENCIES -</option>
+                    <!-- <?php foreach ($regencies as $field): ?>
+                        <option <?= $filter['regencies'] == $field['ID_REGENCIES'] ? 'selected' : '' ?> value="<?= $field['ID_REGENCIES'] ?>"><?= $field['REGENCIES'] ?></option>
+                    <?php endforeach ?> -->
                 </select>
             </div>  
 			<div class="col-md-6 col-sm-12" style="display: flex;; align-items: center">
-                <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 0px; font-weight: 600">CLASSIFICATION : </span> 
-                <select id="klasifikasi" class="form-control" name="klasifikasi" >
-					<option value="*" selected>- ALL CLASSIFICATION -</option>
-                    <?php foreach ($klasifikasi as $field): ?>
-                        <option <?= $filter['klasifikasi'] == $field['CLASSIFICATION'] ? 'selected' : '' ?> value="<?= $field['CLASSIFICATION'] ?>"><?= $field['CLASSIFICATION'] ?></option>
-                    <?php endforeach ?>
+                <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 0px; font-weight: 600">DISTRICTS : </span> 
+                <select id="districts" class="form-control" name="districts" >
+					<option value="*" selected>- ALL DISTRICTS -</option>
+                    <!-- <?php foreach ($districts as $field): ?>
+                        <option <?= $filter['districts'] == $field['ID_DISTRICTS'] ? 'selected' : '' ?> value="<?= $field['ID_DISTRICTS'] ?>"><?= $field['DISTRICS'] ?></option>
+                    <?php endforeach ?> -->
                 </select>
             </div>
 			     
@@ -332,39 +320,42 @@
                 <button type="submit" formaction="<?= admin_url('visit/report-collector/excel') ?>" class="btn btn-info btn-block" style="height: 30px">EXCEL</button>
             </div> -->
         </div>
-		
     </form>
-	
     <table class="table table-bordered table-hover" id="example1">
         <thead>
             <tr>
-                <th style="text-align: center;">NO</th>
-                <th style="text-align: center;">CODE</th>
-                <th style="text-align: center;">WAREHOUSE</th>
-                <th style="text-align: center;">PHONE NUMBER</th>
-                <th style="text-align: center;">CLASSIFICATION</th>
-                <th style="text-align: center;">CAPACITY</th>
-                <th style="text-align: center;">CATEGORY</th>
-                <th style="text-align: center;">AREA</th>
-				<th style="text-align: center;">ACTION</th>
+                <th style="text-align: center;">WAREHOUSE NO</th>
+                <th style="text-align: center;">NAME</th>
+                <th style="text-align: center;">PROVINCE</th>
+                <th style="text-align: center;">REGENCIES</th>
+                <th style="text-align: center;">DISTRICTS</th>
+                <th style="text-align: center;">ACTION</th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($datatable as $i => $v): ?>
-                <tr>
-                    <td style="text-align: center; vertical-align: middle"><?= $i + 1 ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['CODE'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['NAMA'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['PHONE_NUMBER'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['CLASSIFICATION'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['CAPACITY'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['KATEGORI'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['AREA'] ?></td>
-					<td style="text-align: center; vertical-align: middle">
-                        <a href="<?= admin_url('master/warehouse/edit/'.$v['CODE']) ?>" class="btn btn-sm"><i class="fas fa-pen text-warning"></i></a>
-                    </td>
-                </tr>
-            <?php endforeach ?>
+		<?php foreach ($datatable as $i => $v): ?>
+			<tr>
+				<td style="text-align: center; vertical-align: middle">
+                    <?= $v['WH_NO'] ?>
+				</td>
+                <td style="text-align: center; vertical-align: middle">
+                    <?= $v['WH_NAME'] ?>
+				</td>
+				<td style="text-align: center; vertical-align: middle">
+					<?= $v['PROVINCE_NAME'] ?>
+				</td>
+				<td style="text-align: center; vertical-align: middle">
+					<?= $v['REGENCIES_NAME'] ?>
+				</td>
+				<td style="text-align: center; vertical-align: middle">
+					<?= $v['DISTRICT_NAME'] ?>
+				</td>
+				<td style="text-align: center; vertical-align: middle">
+					<a href="<?= admin_url('warehouse/edit/'.$v['WH_NO']) ?>"class="btn btn-sm"><i class="fas fa-pen text-warning"></i></a>
+					<a href="<?= admin_url('warehouse/detail/'.$v['WH_NO']) ?>" class="btn btn-sm"><i class="fas fa-eye text-success"></i></a>
+				</td>
+			</tr>
+		<?php endforeach ?>
         </tbody>
     </table>
 </div>
@@ -381,20 +372,77 @@
       );
     });
 
-	$('#warehouse').select2({
+	$('#province').select2({
         theme: 'bootstrap4',
         language: "en",
-        placeholder: "- SELECT WAREHOUSE -",
+        placeholder: "- SELECT PROVINCE -",
     });
 
-	$('#area').select2({
+	$('#regencies').select2({
         theme: 'bootstrap4',
-        language: "en",
-        placeholder: "- SELECT AREA -",
+        placeholder: "- SELECT REGENCIES -",
+        ajax: {
+            url: "<?= base_url('ajax/load/kota') ?>",
+            dataType: 'json',
+            data: function (params) {
+                return {
+                q: params.term,
+                provinsi: $("#province option:selected").val()
+                };
+            },
+            processResults: function(data) {
+                return {
+                    results: $.map(data, function(item) {
+                        return {
+                            text: item.ID_REGENCIES + " - " + item.REGENCIES,
+                            id: item.ID_REGENCIES
+                        }
+                    })
+                };
+            }
+        },
+        // templateSelection: function (data, container) {
+        //     // // Add custom attributes to the <option> tag for the selected option
+        //     // $(data.element).attr('data-jsondetail', data.jsondetail);
+        //     // return data.text;
+        // }
+    }).on("select2:select", function (e) {
+        // let data = $("#customer_entry option:selected").val();
+        // let detaildata = $("#customer_entry option:selected").data('jsondetail');
+        // load_datacustomer(detaildata);
     });
-	$('#klasifikasi').select2({
+
+    $('#districts').select2({
         theme: 'bootstrap4',
-        language: "en",
-        placeholder: "- SELECT CLASSIFICATION -",
+        placeholder: "- SELECT DISTRICTS -",
+        ajax: {
+            url: "<?= base_url('ajax/load/desa') ?>",
+            dataType: 'json',
+            data: function (params) {
+                return {
+                q: params.term,
+                kota: $("#regencies option:selected").val()
+                };
+            },
+            processResults: function(data) {
+                return {
+                    results: $.map(data, function(item) {
+                        return {
+                            text: item.ID_DISTRICTS + " - " + item.DISTRICS,
+                            id: item.ID_DISTRICTS
+                        }
+                    })
+                };
+            }
+        },
+        // templateSelection: function (data, container) {
+        //     // // Add custom attributes to the <option> tag for the selected option
+        //     // $(data.element).attr('data-jsondetail', data.jsondetail);
+        //     // return data.text;
+        // }
+    }).on("select2:select", function (e) {
+        // let data = $("#customer_entry option:selected").val();
+        // let detaildata = $("#customer_entry option:selected").data('jsondetail');
+        // load_datacustomer(detaildata);
     });
 </script>

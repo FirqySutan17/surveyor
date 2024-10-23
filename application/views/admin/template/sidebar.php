@@ -179,6 +179,14 @@
                             </a>
                         </li>
                     <?php endif ?>
+                    <?php if (in_array('M006', $user_access) || in_array('*', $user_access)): ?>
+                        <li class="<?= $this->uri->segment(3) == 'kategori' ? 'active' : '' ?>">
+                            <a href="<?= route('dashboard/master/warehouse') ?>"
+                                class="">
+                                <i class='bx bxs-right-arrow'></i> GUDANG
+                            </a>
+                        </li>
+                    <?php endif ?>
                 </ul>
             </li>
             <?php endif ?>
@@ -253,9 +261,9 @@
                     <?php endif ?>
                     <?php if (in_array('TR005', $user_access) || in_array('*', $user_access)): ?>
                         <li class="">
-                            <a href="<?= admin_url('master/warehouse/data-update') ?>"
+                            <a href="<?= admin_url('warehouse/data-update') ?>"
                                 class="">
-                                <i class='bx bxs-right-arrow'></i> GUDANG UPDATE
+                                <i class='bx bxs-right-arrow'></i> WAREHOUSE UPDATE
                             </a>
                         </li>
                     <?php endif ?>

@@ -52,37 +52,33 @@ class Warehouse extends CI_Controller {
 	}
 
 	public function index_update() {
+		$province 		= "*";
+		$regencies 		= "*";
+		$districts 		= "*";
 
-		$sdate 		= date('Y-m').'-01';
-		$edate 		= date('Y-m-d');
-		$plant 		= "*";
-		$surveyor = "*";
-		$phase 		= "*";
+		$user = $this->session_data['user'];
 
 		if ($this->input->server('REQUEST_METHOD') === 'POST') {
-			$sdate 			= $this->input->post('sdate');
-			$edate 			= $this->input->post('edate');
-			$plant 			= $this->input->post('plant');
-			$surveyor 	= $this->input->post('surveyor');
-			$phase 	= $this->input->post('phase');
+			$province 			= $this->input->post('province');
+			$regencies 			= $this->input->post('regencies');
+			$districts 			= $this->input->post('districts');
 		}
 
 		$filter = [
-			"plant"	=> $plant,
-			"sdate"	=> $sdate,
-			"edate"	=> $edate,
-			"surveyor"	=> $surveyor,
-			"phase"	=> $phase
+			"province"				=> $province,
+			"regencies"				=> $regencies,
+			"districts"				=> $districts,
 		];
 
-		$data['phase']				=	$this->list_phase();
-		$data['title'] 				= 'SURVEY';
-		$data['datatable']		= $this->datatable($filter);
+		$data['title'] 				= 'DISTRICTS';
+		$data['province'] 			= $this->dataprovince();
+		$data['regencies'] 			= $this->dataregencies();
+		$data['districts'] 			= $this->datadistricts();
+		$data['datatable']			= $this->datatable($filter);
 		$data['filter']				= $filter;
-		$data['plant'] 				= $this->Dbhelper->selectTabel('CODE, CODE_NAME', 'CD_CODE', array('HEAD_CODE' => 'AB'), 'CODE', 'ASC');
-		$data['surveyor'] 		= $this->list_surveyor();
+		// dd($data['districts']);
 		
-		$this->template->_v('survey/index-update', $data);
+		$this->template->_v('warehouse/index-update', $data);
 	}
 
 	public function entry() {
@@ -207,213 +203,149 @@ class Warehouse extends CI_Controller {
 		$this->template->_v('survey/detail', $data);
 	}
 
-	public function edit($survey_no) {
+	public function edit($wh_no) {
 		$user 							= $this->session_data['user'];
 
-		$data_detail = $this->get_surveydetail($survey_no);
-		$data['title'] 			= 'SURVEY';
-		$data['user'] 			= $user;
+		$data_detail = $this->get_whdetail($wh_no);
+		$data['title'] 				= 'WAREHOUSE';
+		$data['user'] 				= $user;
 		$data['detail']				= $data_detail;
-		$data['placeholder'] 	= $this->list_placeholder();
-		$data['harvest'] 	= $this->list_harvest();
 		
-		$this->template->_v('survey/edit', $data);
+		dd($data['detail']);
+		$this->template->_v('warehouse/edit', $data);
 	}
 
-	public function do_update() {
+	public function do_update($wh_no) {
 		if ($this->input->server('REQUEST_METHOD') === 'POST') {
 			$post = $this->input->post();
-			$survey_no = $post['survey_no'];
+			$postjson = json_encode($post);
+			$textfile = date('YmdHis') . '_' . $this->session_data['user']['EMPLOYEE_ID'];
+	
+			if (!write_file(APPPATH . "logs/log_$textfile.txt", $postjson)) {
+				$this->session->set_flashdata('success', "Unable to log post");
+				return redirect($this->own_link . '/report');
+			}
+	
 			try {
-				// dd($post);
-				// VR DATA
-				$survey = [
-					"CURRENT_PHASE"				=> "",
-					"CURRENT_PHASE_DATE"	=> "",
-					"UMUR_TANAM"		=> 0,
-					"UPDATED_AT"		=> date('Ymd His'),
-					"UPDATED_BY"		=> $this->session_data['user']['EMPLOYEE_ID']
+				// SURVEY DATA
+				$warehouse_report = [
+					"WH_DATE"          => date('Ymd', strtotime($post['wh_date'])),
+					"PROVINCE"         => dbClean($post['province']),
+					"REGENCIES"        => dbClean($post['regencies']),
+					"DISTRICT"         => dbClean($post['districts']),
+					"WH_NAME"          => dbClean($post['wh_name']),
+					"STOCK_SILO"       => dbClean($post['stock_silo']),
+					"STOCK_FLAT"       => dbClean($post['stock_flat']),
+					"STOCK_LJ"         => dbClean($post['stock_lj']),
+					"STOCK_DRYER"      => dbClean($post['stock_dryer']),
+					"DAILY_17"         => dbClean($post['daily_17']),
+					"DAILY_15"         => dbClean($post['daily_15']),
+					"BUYING_17"        => dbClean($post['buying_17']),
+					"BUYING_15"        => dbClean($post['buying_15']),
+					"SALES_TRADERS"    => dbClean($post['sales_traders']),
+					"SALES_FEEDMILL"   => dbClean($post['sales_feedmill']),
+					"SALES_PRICE"      => dbClean($post['sales_price']),
+					"DESCRIPT"         => dbClean($post['descript']),
+					"UPDATED_AT"       => date('Ymd His'),
+					"UPDATED_BY"       => $this->session_data['user']['EMPLOYEE_ID'],
 				];
-				
-				$survey_farmers = [];
-				if (!empty($post['farmer_name'])) {
-					foreach ($post['farmer_name'] as $i => $v) {
+	
+				// Cek jika user log-in tidak ditemukan
+				if (empty($warehouse_report["UPDATED_BY"])) {
+					$this->session->set_flashdata('error', "User log-in not found");
+					return redirect($this->own_link . '/report');
+				}
+	
+				// Update WAREHOUSE table berdasarkan WH_NO
+				$update = $this->Dbhelper->updateData('WAREHOUSE', $warehouse_report, ['WH_NO' => $wh_no]);
+	
+				// Update WAREHOUSE_CORN
+				$warehouse_corn = [];
+				if (!empty($post['region'])) {
+					foreach ($post['region'] as $i => $v) {
 						$curr_data = [
-							"SURVEY_NO"		=> $survey_no,
-							"SEQUENCE"		=> $i + 1,
-							"SURVEY_DATE"	=> date('Ymd', strtotime($survey_report['SURVEY_DATE'])),
-							"FARMER_NAME"	=> $v,
-							"FARMER_PHONE"	=> $post['farmer_phone'][$i]
+							"WH_NO"        => $wh_no,
+							"SEQUENCE"     => $i + 1,
+							"REGION"       => $v,
+							"AMOUNT_TON"   => $post['amount_ton'][$i]
 						];
-
-						$survey_farmers[] = $curr_data;
+	
+						$warehouse_corn[] = $curr_data;
 					}
 				}
-
-				$survey_market_price = [];
-				if (!empty($post['market_price'])) {
-					foreach ($post['market_price'] as $i => $v) {
-						$curr_data = [
-							"SURVEY_NO"		=> $survey_no,
-							"SURVEY_DATE"	=> date('Ymd', strtotime($post['market_date'][$i])),
-							"PRICE"	=> $v
-						];
-
-						$survey_market_price[] = $curr_data;
-					}
+	
+				// Hapus data corn lama dan insert ulang
+				$this->db->delete('WAREHOUSE_CORN', ['WH_NO' => $wh_no]);
+				if (!empty($warehouse_corn)) {
+					$save_corn = $this->db->insert_batch('WAREHOUSE_CORN', $warehouse_corn);
 				}
-
-				$survey_harvest_phase = [];
-				$survey_planting_phase = [];
-				$phase_array = ['persiapan-lahan', 'vegetatif-awal', 'vegetatif-akhir', 'genetatif-awal', 'genetatif-akhir', 'gagal-panen'];
-				$current_phase 			= "";
-				$current_phase_date = "";
-				$umur_tanam = 0;
-				if (!empty($post['PLANTING_siklus'])) {
-					$sequence = 1;
-					foreach ($post['PLANTING_siklus'] as $siklus_index => $siklus) {
-						foreach ($phase_array as $phase_key) {
-							$phase 	= $post['PLANTING_phase'][$phase_key][$siklus_index];
-							$curr_phase_date 	= !empty($post['PLANTING_date'][$phase_key][$siklus_index]) ?  date('Ymd', strtotime($post['PLANTING_date'][$phase_key][$siklus_index])) : '';
-							if (!empty($curr_phase_date)) {
-								$current_phase = $phase_key;
-								$current_phase_date = $curr_phase_date;
-							}
-							foreach ($post['PLANTING_description'][$phase_key][$siklus_index] as $i => $v) {
-								if ($i == 0 && $current_phase == $phase_key) {
-									$umur_tanam = (int) $v;
-								}
-								$curr_data = [
-									"SURVEY_NO"			=> $survey_no,
-									"SEQUENCE"			=> $sequence,
-									"SURVEY_DATE"		=> $curr_phase_date,
-									"PHASE"				=> $phase,
-									"DESCRIPTION"		=> dbClean($v),
-									"SIKLUS"			=> $siklus
-								];
-		
-								$sequence += 1;
-								$survey_planting_phase[] = $curr_data;
-							}
-						}
-
-						if (!empty($post['HARVEST_score'])) {
-							foreach ($post['HARVEST_score'][$siklus_index] as $i => $v) {
-								if (!empty($post['baris'][$siklus_index][$i])) {
-									$curr_data = [
-										"SURVEY_NO"			=> $survey_no,
-										"SEQUENCE"			=> $i + 1,
-										"SURVEY_DATE"		=> date('Ymd', strtotime($survey_report['SURVEY_DATE'])),
-										"SCORE"				=> $v,
-										"BARIS"				=> dbClean($post['baris'][$siklus_index][$i]),
-										"BARIS_ACTUAL"		=> dbClean($post['baris_actual'][$siklus_index][$i]),
-										"BARIS"				=> dbClean($post['baris'][$siklus_index][$i]),
-										"BARIS_ACTUAL"		=> dbClean($post['baris_actual'][$siklus_index][$i]),
-										"BIJI"				=> dbClean($post['biji'][$siklus_index][$i]),
-										"BIJI_ACTUAL"		=> dbClean($post['biji_actual'][$siklus_index][$i]),
-										"BOBOT"				=> dbClean($post['bobot'][$siklus_index][$i]),
-										"BOBOT_ACTUAL"		=> dbClean($post['bobot_actual'][$siklus_index][$i]),
-										'SIKLUS'			=> $siklus
-									];
-		
-									$survey_harvest_phase[] = $curr_data;
-								}
-							}
+	
+				// Proses update images
+				$wh_galleries = [];
+				if (!empty($_FILES['image_file']['name'])) {
+					foreach ($_FILES['image_file']['name'] as $key => $v) {
+						$no = $key + 1;
+	
+						$berkas = [];
+						$berkas['name'] = $v;
+						$berkas['type'] = $_FILES['image_file']['type'][$key];
+						$berkas['tmp_name'] = $_FILES['image_file']['tmp_name'][$key];
+						$berkas['error'] = $_FILES['image_file']['error'][$key];
+						$berkas['size'] = $_FILES['image_file']['size'][$key];
+						$namafile = $this->upload_image($berkas, $wh_no, $no);
+	
+						if ($namafile) {
+							$wh_galleries[] = [
+								'WH_NO'       => $wh_no,
+								'SEQUENCE'    => $no,
+								'IMAGE_TITLE' => $post['image_title'][$key],
+								'IMAGE_FILE'  => $namafile
+							];
 						}
 					}
 				}
-
-
-				$survey_galleries = [];
-				if (!empty($_FILES)) {
-					// foreach ($_FILES['SURVEY_IMAGE']['name'] as $key => $v) {
-					// 	$no = $key + 1;
-					// 	$berkas = [];
-					// 	$berkas['name']= $v;
-				  //       $berkas['type']= $_FILES['SURVEY_IMAGE']['type'][$key];
-				  //       $berkas['tmp_name']= $_FILES['SURVEY_IMAGE']['tmp_name'][$key];
-				  //       $berkas['error']= $_FILES['SURVEY_IMAGE']['error'][$key];
-				  //       $berkas['size']= $_FILES['SURVEY_IMAGE']['size'][$key];
-
-				  //       $namafile = $this->upload_image($berkas, $survey_no, $no);
-				  //       $survey_galleries[] = [
-				  //       	'SURVEY_NO'		=> $survey_no,
-				  //       	'SEQUENCE'		=> $no,
-				  //       	'IMAGE_TITLE'	=> !empty($post['SURVEY_IMAGE_TITLE'][$key]) ? $post['SURVEY_IMAGE_TITLE'][$key] : '-',
-				  //       	'IMAGE_FILENAME'	=> $namafile
-				  //       ];
-					// }
+	
+				// Hapus data images lama dan insert ulang jika ada gambar baru
+				$this->db->delete('WAREHOUSE_IMAGES', ['WH_NO' => $wh_no]);
+				if (!empty($wh_galleries)) {
+					$save_galleries = $this->db->insert_batch('WAREHOUSE_IMAGES', $wh_galleries);
 				}
-
-				$survey["CURRENT_PHASE"] 	= $current_phase;
-				$survey["CURRENT_PHASE_DATE"] 	= $current_phase_date;
-				$survey["UMUR_TANAM"] 		= $umur_tanam;
-				$save = $this->db->update('SURVEY', $survey, array('SURVEY_NO' => $survey_no));
-				if (!empty($survey_farmers)) {
-					$delete = $this->db->delete('SURVEY_FARMERS', array('SURVEY_NO' => $survey_no));
-					$save_farmers = $this->db->insert_batch('SURVEY_FARMERS', $survey_farmers);
-				}
-				if (!empty($survey_market_price)) {
-					$delete = $this->db->delete('SURVEY_MARKET_PRICES', array('SURVEY_NO' => $survey_no));
-					$save_market_prices = $this->db->insert_batch('SURVEY_MARKET_PRICES', $survey_market_price);
-				}
-				if (!empty($survey_harvest_phase)) {
-					$delete = $this->db->delete('SURVEY_HARVEST_PHASE', array('SURVEY_NO' => $survey_no));
-					$save_harvest_phase = $this->db->insert_batch('SURVEY_HARVEST_PHASE', $survey_harvest_phase);
-				}
-				if (!empty($survey_planting_phase)) {
-					$delete = $this->db->delete('SURVEY_PLANTING_PHASE', array('SURVEY_NO' => $survey_no));
-					$save_planting_phase = $this->db->insert_batch('SURVEY_PLANTING_PHASE', $survey_planting_phase);
-				}
-				if (!empty($survey_galleries)) {
-					$delete = $this->db->delete('SURVEY_IMAGES', array('SURVEY_NO' => $survey_no));
-					$save_galleries = $this->db->insert_batch('SURVEY_IMAGES', $survey_galleries);
-				}
-
-				// $vr_galleries = [];
-				// if (!empty($post['VR_image_name'])) {
-				// 	foreach ($post['VR_image_name'] as $i => $v) {
-				// 		$no = $i + 1;
-				// 		$namafile = !empty($post['VR_image_filename'][$i]) ? $post['VR_image_filename'][$i] : '';
-				// 		if (!empty($_FILES['VR_image_file']['name'][$i])) {
-				// 			if (!empty($namafile)) {
-				// 				$delete_image = $this->delete_image($namafile);
-				// 			}
-				// 			$berkas = [];
-				// 			$berkas['name']= $_FILES['VR_image_file']['name'][$i];
-				// 	        $berkas['type']= $_FILES['VR_image_file']['type'][$i];
-				// 	        $berkas['tmp_name']= $_FILES['VR_image_file']['tmp_name'][$i];
-				// 	        $berkas['error']= $_FILES['VR_image_file']['error'][$i];
-				// 	        $berkas['size']= $_FILES['VR_image_file']['size'][$i];
-
-				// 	        $namafile = $this->upload_image($berkas, $visiting_no, $no);
-				// 		}
-				// 		$vr_galleries[] = [
-				//         	'VISITING_NO'	=> $visiting_no,
-				//         	'SEQUENCE'		=> $no,
-				//         	'IMAGE_NAME'	=> $v,
-				//         	'IMAGE_FILENAME'	=> $namafile
-				//         ];
-				// 	}
-				// } elseif (empty($post['VR_image_name']) && !empty($post['VR_image_filename'])) {
-				// 	foreach ($post['VR_image_filename'] as $i => $v) {
-				// 		$delete_image = $this->delete_image($v);
-				// 	}
-				// }
-				
-
-				if ($save) {
+	
+				if ($update) {
 					$this->session->set_flashdata('success', "Update data success");
 					return redirect($this->own_link);
 				}
+	
 			} catch (Exception $e) {
 				dd($e->getMessage());
 			}
+	
 			$this->session->set_flashdata('error', "Update data failed");
-			return redirect($this->own_link);
+			return redirect($this->own_link . "/report");
 		}
+	
 		$this->session->set_flashdata('error', "Access denied");
-        return redirect($this->own_link);
+		return redirect($this->own_link);
+	}
+	
+	private function get_whdetail($wh_no) {
+		$data['WAREHOUSE'] 		= $this->Dbhelper->selectOneRawQuery("
+			SELECT 
+					a.*, 
+					FN_USER_NAME(CREATED_BY) CREATED_BY_NAME,
+					p.PROVINCE as PROVINCE_NAME,
+					r.REGENCIES as REGENCY_NAME,
+					d.DISTRICS as DISTRICT_NAME
+			FROM WAREHOUSE a, CD_PROVINCE p, CD_REGENCIES r, CD_DISTRICTS d
+			WHERE 
+					p.ID_PROVINCE = a.PROVINCE
+					AND r.ID_REGENCIES = a.REGENCY
+					AND d.ID_DISTRICTS = A.DISTRICT
+					AND a.WH_NO = '$wh_no'
+		");
+		$data['WAREHOUSE_CORN']			= $this->Dbhelper->selectTabel('*', 'WAREHOUSE_CORN', array('WH_NO' => $wh_no), 'SEQUENCE', 'ASC');
+		$data['WAREHOUSE_IMAGES']		= $this->Dbhelper->selectTabel('*', 'WAREHOUSE_IMAGES', array('WH_NO' => $wh_no), 'SEQUENCE', 'ASC');
+		return $data;
 	}
 
 	private function dataprovince() {
