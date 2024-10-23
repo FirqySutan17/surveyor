@@ -1325,10 +1325,16 @@
                             </tr>
                         </thead>
                         <tbody id="visitimages">
-                            <tr>
-                                <td width="30%" data-label ="DATE / TITLE">SURVEY LOKASI 27/09/2024</td>
-                                <td width="70%" data-label ="UPLOAD IMAGE" style="text-align: center"><img src="<?= asset('img/maps-drawing-1.png') ?>" alt="" style="width: 100%; text-align: center; object-fit: cover"></td>
-                            </tr>
+                            <?php if(!empty($detail['SURVEY_IMAGES'])): ?>
+                                <?php foreach($detail['SURVEY_IMAGES'] as $sf): ?>
+                                    <tr>
+                                        <td data-label ="DATE / TITLE"><?= $f['IMAGE_TITLE'] ?></td>
+                                        <td data-label ="UPLOAD IMAGE">
+                                            <img src="<?= base_url('upload/'.$sf['IMAGE_FILENAME']) ?>" alt="" style="height: 170px; width: 170px; object-fit: cover;margin-bottom:20px">
+                                        </td>
+                                    </tr>
+                                <?php endforeach ?>
+                            <?php endif ?>
                         </tbody>
                     </table>
                 </div>

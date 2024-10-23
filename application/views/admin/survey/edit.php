@@ -1085,8 +1085,12 @@
                             <?php if(!empty($detail['SURVEY_IMAGES'])): ?>
                                 <?php foreach($detail['SURVEY_IMAGES'] as $sf): ?>
                                     <tr>
-                                        <td data-label ="DATE / TITLE"><input type="text" name="SURVEY_IMAGE_TITLE[]" class="form-control" placeholder="EX : JAN 2024 / TITLE HERE"></td>
-                                        <td data-label ="UPLOAD IMAGE"><input type="file" accept="image/png, image/jpeg, image/jpg" name="SURVEY_IMAGE[]" class="form-control"></td>
+                                        <td data-label ="DATE / TITLE"><input type="text" name="SURVEY_IMAGE_TITLE[]" class="form-control" placeholder="EX : JAN 2024 / TITLE HERE" value="<?= $sf['IMAGE_TITLE'] ?>"></td>
+                                        <td data-label ="UPLOAD IMAGE">
+                                            <img src="<?= base_url('upload/'.$sf['IMAGE_FILENAME']) ?>" alt="" style="height: 170px; width: 170px; object-fit: cover;margin-bottom:20px">
+                                            <br/>
+                                            <input type="file" accept="image/png, image/jpeg, image/jpg" name="SURVEY_IMAGE[]" class="form-control">
+                                        </td>
                                         <td><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
                                     </tr>
                                 <?php endforeach ?>
