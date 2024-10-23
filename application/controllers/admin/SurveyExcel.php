@@ -141,7 +141,6 @@ class SurveyExcel extends CI_Controller {
 		$data['title'] 			= 'SURVEY EXCEL';
 		$data['user'] 			= $user;
 		$data['detail']				= $data_detail;
-		dd($data);
 		$this->template->_v('survey-excel/edit', $data);
 	}
 
@@ -224,7 +223,7 @@ class SurveyExcel extends CI_Controller {
 					FN_USER_NAME(CREATED_BY) CREATED_BY_NAME,
 					p.PROVINCE as PROVINCE_NAME,
 					r.REGENCIES as REGENCY_NAME
-			FROM SURVEY a, CD_PROVINCE p, CD_REGENCIES r
+			FROM SURVEY_EXCEL a, CD_PROVINCE p, CD_REGENCIES r
 			WHERE 
 					p.ID_PROVINCE = a.PROVINCE
 					AND r.ID_REGENCIES = a.REGENCY

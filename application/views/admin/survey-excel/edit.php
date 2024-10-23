@@ -826,7 +826,6 @@
                     </table>
 
 
-                    <div id="iframe-location"></div>
                     <table class="table table-bordered" style="margin-bottom: 10px">
                         <thead>
                             <tr>

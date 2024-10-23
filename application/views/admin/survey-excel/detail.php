@@ -769,237 +769,82 @@
 
 <div class="main-content pre-posttest">
     <h3 class="card-title">
-        <strong>SURVEY DETAIL</strong>
+        <strong>SURVEY EXCEL DETAIL</strong>
     </h3>
     <div class="row">
-        <form action="<?= admin_url('visit/do_create') ?>" method="POST" enctype="multipart/form-data">
-            <div class="content-task mt-5">
-                <h3 class="sub-title">1. LOCATION INFORMATION</h3>
-                <div class="table-responsive mt-2">
-                    <table class="table table-bordered" style="margin-bottom: 10px">
-                        <thead>
-                            <tr>
-                                <th style="text-align: center">DRAFTER</th>
-                                <th style="text-align: center">DATE</th>
-                                <th style="text-align: center">LAND TYPE</th>
-                                <th style="text-align: center">LAND AREA / LUAS TANAH (Ha)</th>
-                                <th style="text-align: center">COORDINATE</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td data-label="EMPLOYEE">
-                                    <?= $detail['CREATED_BY'].' - '.$detail['CREATED_BY_NAME'] ?>
-                                </td>
-                                <td data-label="DATE">
-                                    <?= date('Y-m-d', strtotime($detail['SURVEY_DATE'])) ?>
-                                </td>
-                                <td data-label="LAND TYPE">
-                                    <?= $detail['LAND_TYPE'] ?>
-                                </td>
-                                <td data-label="LAND TYPE">
-                                    <?= $detail['LUAS_LAHAN'] ?>
-                                </td>
-                                <td data-label="COORDINATE">
-                                    <?= $detail['COORDINATE'] ?>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <div class="content-task mt-5">
+            <div class="table-responsive mt-2">
+                <table class="table table-bordered" style="margin-bottom: 10px">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center">DRAFTER</th>
+                            <th style="text-align: center">DATE</th>
+                            <th style="text-align: center">TITLE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="EMPLOYEE">
+                                <?= $user['EMPLOYEE_ID'] ?> - <?= $user['FULL_NAME'] ?>
+                            </td>
+                            <td data-label="DATE">
+                                <?= date('d M Y', strtotime($detail['SURVEY_DATE'])) ?>
+                            </td>
+                            <td data-label="TITLE">
+                                <?= $detail['TITLE'] ?>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
-                    <table class="table table-bordered" style="margin-bottom: 10px">
-                        <thead>
-                            <tr>
-                                <th style="text-align: center">PROVINCE</th>
-                                <th style="text-align: center">REGENCIES</th>
-                                <th style="text-align: center">DISTRICTS</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td data-label="PROVINCE">
-                                    <?= $detail['PROVINCE_NAME'] ?>
-                                </td>
-                                <td data-label="REGENCIES">
-                                    <?= $detail['REGENCY_NAME'] ?>
-                                </td>
-                                <td data-label="DISTRICTS">
-                                    <?= $detail['DISTRICT_NAME'] ?>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <table class="table table-bordered" style="margin-bottom: 10px">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center">PROVINCE</th>
+                            <th style="text-align: center">REGENCIES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="PROVINCE">
+                                <?= $detail['PROVINCE_NAME'] ?>
+                            </td>
+                            <td data-label="REGENCIES">
+                                <?= $detail['REGENCY_NAME'] ?>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
-                    <iframe class="maps-frame" src="https://maps.google.com/maps?q=<?= $detail['COORDINATE'] ?>&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    <table class="table table-bordered" style="margin-bottom: 10px">
-                        <thead>
-                            <tr>
-                                <th>ADDRESS</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td data-label="ADDRESS" style="text-transform: uppercase;"><?= $detail['DESCRIPTION'] ?></td>
-                            </tr>   
-                        </tbody>
-                        
-                    </table>
-                </div>
-            </div>
 
-            <div class="content-task mt-5">
-                <h3 class="sub-title">2. FARMERS INFORMATION</h3>
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <!-- <th colspan="3" style="text-align: right; background: #fff; border: 0px"><button type="button" class="btn cust-btn-add" onclick="addFarmers()">+</button></th> -->
-                                </tr>
-                                <tr>
-                                    <th>FARMERS</th>
-                                    <th>PHONE NUMBER</th>
-                                    <!-- <th></th> -->
-                                </tr>
-                            </thead>
-                            <tbody id="farmersinfo">
-                                <?php if(!empty($detail['SURVEY_FARMERS'])): ?>
-                                    <?php foreach($detail['SURVEY_FARMERS'] as $sf): ?>
-                                        <tr>
-                                            <td data-label="FARMERS" width="50%"><?= $sf['FARMER_NAME'] ?></td>
-                                            <td data-label="PHONE NUMBER" width="50%"><?= $sf['FARMER_PHONE'] ?></td>
-                                            <!-- <td width="5%"><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td> -->
-                                        </tr>
-                                    <?php endforeach ?>
-                                <?php else: ?>
-                                    <h3>NO DATA YET</h3> 
+                <table class="table table-bordered" style="margin-bottom: 10px">
+                    <thead>
+                        <tr>
+                            <th>DESCRIPTION</th>
+                            <th>EXCEL FILE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="DESCRIPTION">
+                                <?= $detail['DESCRIPTION'] ?>
+                            </td>
+                            <td data-label="EXCEL-FILE">
+                                <?php if (!empty($detail['SURVEY_FILE'])): ?>
+                                    <a href="<?= base_url('upload/excel/'.$detail['SURVEY_FILE']) ?>" class="btn btn-info" target="_blank">Excel FIle</a>
                                 <?php endif ?>
-                            </tbody>
-                        </table>
-                    </div>
+                            </td>
+                        </tr>   
+                    </tbody>
+                    
+                </table>
             </div>
+        </div>
 
-            <div class="content-task mt-5">
-                <h3 class="sub-title">3. SEGMENT CONDITION</h3>
-                <?php if(!empty($detail['SURVEY_PLANTING_PHASE'])): ?>
-                    <?php foreach($detail['SURVEY_PLANTING_PHASE'] as $siklus => $planting_phase): ?>
-                        <div class="table-responsive">
-                            <table class="table table-bordered" style="margin-bottom: 0px">
-                                <thead>
-                                    <tr>
-                                        <th colspan="3" style="text-align: left; font-size: 13px !important">PHASE <?= $siklus ?></th>
-                                    </tr>
-                                    <tr>
-                                        <th style="text-align: left">FASE</th>
-                                        <th style="text-align: left">TANGGAL</th>
-                                        <th style="text-align: left">DESCRIPTION</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                                                    
-                                    <?php foreach($planting_phase as  $phase_key => $phase): ?>
-                                        <?php if (!empty($phase['tanggal'])): ?>
-                                            <tr>
-                                                <td data-label="fase" width="15%"><?= $phase['fase'] ?></td>
-                                                <td data-label="tanggal" width="15%"><?= date('d M Y', strtotime($phase['tanggal'])) ?></td>
-                                                <td data-label="data" width="70%">
-                                                    <ul style="text-align: left; margin-left: 20px; list-style-type: none">
-                                                    <?php foreach($phase['data'] as $i_deskripsi => $deskripsi): ?>
-                                                            <li>
-                                                                <?php if ($phase_key != 'persiapan-lahan'): ?>
-                                                                    <?php $form_placeholder = $phase_key == 'persiapan-lahan' ? $placeholder[$phase_key][0] : $placeholder[$phase_key][$i_deskripsi]; ?>
-                                                                    <label for=""><?= $form_placeholder ?> : </label>
-                                                                <?php endif ?>
-                                                                <label for=""><?= $deskripsi ?></label>
-                                                            </li>
-                                                    <?php endforeach ?>
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                        <?php endif ?>
-                                    <?php endforeach ?>
-                                </tbody>
-                            </table>
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th colspan="10" style="text-align: left; font-size: 13px !important">HARVEST PHASE <?= $siklus ?></th>
-                                    </tr>
-                                    <tr>
-                                        <th style="width: 10%">SCORE</th>
-                                        <th style="width: 10%">BARIS</th>
-                                        <th style="width: 10%">ACTUAL</th>
-                                        <th style="width: 10%">%</th>
-                                        <th style="width: 10%">BIJI</th>
-                                        <th style="width: 10%">ACTUAL</th>
-                                        <th style="width: 10%">%</th>
-                                        <th style="width: 10%">BOBOT</th>
-                                        <th style="width: 10%">ACTUAL</th>
-                                        <th style="width: 10%">%</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
-                    <?php endforeach ?>
-                <?php endif ?>
+        <div class="form-group row mt-5" style="margin: 20px 0px !important">
+            <div class="col-lg-12 col-sm-12" style="display: flex; padding: 0px">
+                <a href="<?= admin_url('survey-excel') ?>" class="btn btn-primary cust-btn-back" style="width: 100%; height: 50px; display: flex; align-items: center; justify-content: center;">KEMBALI</a>
             </div>
-
-            <div class="content-task mt-5">
-                <h3 class="sub-title">4. MARKET PRICES</h3>
-                <div class="table-responsive">
-                    <table class="table table-bordered" style="margin-bottom: 20px">
-                        <thead>
-                            <tr>
-                                <th>DATE</th>
-                                <th>PRICE</th>
-                            </tr>
-                        </thead>
-                        <tbody id="marketprice">
-                            <?php if(!empty($detail['SURVEY_MARKET_PRICES'])): ?>
-                                <?php foreach($detail['SURVEY_MARKET_PRICES'] as $sf): ?>
-                                    <tr>
-                                        <td data-label="DATE" width="50%"><?= date('d M Y', strtotime($sf['SURVEY_DATE'])) ?></td>
-                                        <td data-label="PRICE" width="50%"><?= $sf['PRICE'] ?></td>
-                                    </tr>
-                                <?php endforeach ?>
-                            <?php endif ?>
-                        </tbody>
-                    </table>
-                </div>                   
-            </div>
-
-            <div class="content-task mt-5">
-                <h3 class="sub-title">5. SURVEY GALLERIES</h3>
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>DATE / TITLE</th>
-                                <th>IMAGE</th>
-                            </tr>
-                        </thead>
-                        <tbody id="visitimages">
-                            <?php if(!empty($detail['SURVEY_IMAGES'])): ?>
-                                <?php foreach($detail['SURVEY_IMAGES'] as $sf): ?>
-                                    <tr>
-                                        <td data-label ="DATE / TITLE"><?= $sf['IMAGE_TITLE'] ?></td>
-                                        <td data-label ="UPLOAD IMAGE">
-                                            <img src="<?= base_url('upload/'.$sf['IMAGE_FILENAME']) ?>" alt="" style="height: 170px; width: 170px; object-fit: cover;margin-bottom:20px">
-                                        </td>
-                                    </tr>
-                                <?php endforeach ?>
-                            <?php endif ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="form-group row mt-5" style="margin: 20px 0px !important">
-                <div class="col-lg-12 col-sm-12" style="display: flex; padding: 0px">
-                    <a href="<?= admin_url('survey') ?>" class="btn btn-primary cust-btn-back" style="width: 100%; height: 50px; display: flex; align-items: center; justify-content: center;">KEMBALI</a>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
