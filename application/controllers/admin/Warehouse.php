@@ -153,17 +153,17 @@ class Warehouse extends CI_Controller {
 				}
 
 				$wh_galleries = [];
-				if (!empty($_FILES)) {
-					foreach ($_FILES['image_title']['name'] as $key => $v) {
+				if (!empty($_FILES['image_file'])) {  // Ubah dari image_title ke image_file
+					foreach ($_FILES['image_file']['name'] as $key => $v) {
 						$no = $key + 1;
 
-				        $namafile = $this->upload_image($berkas, $wh_no, $no);
-				        $wh_galleries[] = [
-				        	'WH_NO'	=> $wh_no,
-				        	'SEQUENCE'		=> $no,
-				        	'IMAGE_TITLE'	=> $post['image_title'][$key],
-				        	'IMAGE_FILE'	=> $namafile
-				        ];
+						$namafile = $this->upload_image($_FILES['image_file'], $wh_no, $no);  // Pastikan fungsi upload_image menerima $_FILES['image_file']
+						$wh_galleries[] = [
+							'WH_NO'       => $wh_no,
+							'SEQUENCE'    => $no,
+							'IMAGE_TITLE' => $post['image_title'][$key],
+							'IMAGE_FILE'  => $namafile
+						];
 					}
 				}
 	
