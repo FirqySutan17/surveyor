@@ -1024,7 +1024,7 @@
         ajax: {
             url: "<?= ('ajax/load/kota') ?>",
             dataType: 'json',
-            data: function (parambase_urls) {
+            data: function (params) {
                 return {
                 q: params.term,
                 provinsi: $("#province option:selected").val()
