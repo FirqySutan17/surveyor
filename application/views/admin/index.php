@@ -212,7 +212,7 @@
         text-decoration: none;
         margin-top: 20px;
         margin-bottom: 20px;
-        font-size: 14px !important;
+        font-size: 18px !important;
     }
 
     .box-att {
@@ -495,24 +495,27 @@
 </style>
 
 <div class="main-content" style="background: linear-gradient(0deg, rgba(0,125,195,1) 10%, rgba(161,221,255,1) 98%);min-height: 91.5vh">
-    <div class="information-box">
+    <h3 class="sub-title" style="margin-top: 20px !important; border-bottom: 2px solid #fff; padding-bottom: 10px; margin-bottom: 10px;">SURVEY MAPS INFORMATION</h3>
+    <div class="filter-box" style="margin-bottom: 10px; padding: 0px 20px; border-bottom: 2px solid #fff; padding-bottom: 10px;">
         <form action="#" method="GET">
             <div class="row">
                 <div class="col-md-6 col-sm-12">
-                    <select class="form-control" name="mapdata">
+                    <select id="map-filter" class="form-control" name="mapdata">
                         <option <?= $filter['mapdata'] == 'PHASE' ? 'selected' : '' ?> value="PHASE">PHASE</option>
                         <option <?= $filter['mapdata'] == 'PLANT_TYPE' ? 'selected' : '' ?> value="PLANT_TYPE">PLANT TYPE</option>
                     </select>
                 </div>
-                <div class="col-md-6 col-sm-12">
-                    <button type="submit" class="btn btn-primary btn-block" style="height: 30px">FILTER</button>
+                <div class="col-md-2 col-sm-12">
+                    <button type="submit" class="btn btn-primary btn-block" style="height: 33px">FILTER</button>
+                </div>
+                <div class="col-md-4 col-sm-12">
+
                 </div>
             </div>
         </form>
     </div>
-    <br>
     <div id="map" style="height: 450px; z-index: 1; border-radius: 10px;"></div>
-    <div class="information-box">
+    <!-- <div class="information-box">
         <h3 style="font-family: cjFont; margin-bottom: 0px;line-height: 40px; font-weight: 700; letter-spacing: 1px">
             INFORMATION
         </h3>
@@ -525,11 +528,12 @@
                 </li>
             <?php endforeach ?>
         </ul>
-    </div>
+    </div> -->
 </div>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script type="text/javascript" src="<?= base_url('assets/leaflet/leaflet.legend.js') ?>"></script>
 <script>
+
     // Inisialisasi peta
     var map = L.map("map").setView([-4.199249737560975, 122.85021421757004], 5); // Koordinat awal dan zoom
     let mapdata = `<?= $filter['mapdata'] ?>`;

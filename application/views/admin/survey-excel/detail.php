@@ -790,7 +790,6 @@
                             <td data-label="DATE" style="text-transform: uppercase">
                                 <?= date('d M Y', strtotime($detail['SURVEY_DATE'])) ?>
                             </td>
-                            
                         </tr>
                     </tbody>
                 </table>
