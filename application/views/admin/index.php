@@ -484,6 +484,21 @@
         margin-top: -7px
     }
 
+
+    .leaflet-legend-title {
+        font-size: 16px !important;
+        margin-bottom: 5px;
+    }
+
+    .select2-container .select2-selection--single .select2-selection__rendered {
+        font-size: 15px !important;
+    }
+
+    .select2-container .select2-selection, .select2-selection__rendered {
+        height: 34px !important;
+        line-height: 34px !important;
+    }
+
     @media (max-width: 600px) {
         .information-box ul li {
             padding-bottom: 30px
@@ -495,11 +510,14 @@
 </style>
 
 <div class="main-content" style="background: linear-gradient(0deg, rgba(0,125,195,1) 10%, rgba(161,221,255,1) 98%);min-height: 91.5vh">
-    <h3 class="sub-title" style="margin-top: 20px !important; border-bottom: 2px solid #fff; padding-bottom: 10px; margin-bottom: 10px;">SURVEY MAPS INFORMATION</h3>
-    <div class="filter-box" style="margin-bottom: 10px; padding: 0px 20px; border-bottom: 2px solid #fff; padding-bottom: 10px;">
+    
+    <div class="filter-box" style="margin: 10px 0px; border-bottom: 2px solid #fff; padding: 0px 10px 10px 10px">
         <form action="#" method="GET">
             <div class="row">
-                <div class="col-md-6 col-sm-12">
+                <div class="col-md-8 col-sm-12">
+                    <h3 class="sub-title" style="margin-bottom: 0px !important; line-height: 2">SURVEY MAPS INFORMATION</h3>
+                </div>
+                <div class="col-md-2 col-sm-12">
                     <select id="map-filter" class="form-control" name="mapdata">
                         <option <?= $filter['mapdata'] == 'PHASE' ? 'selected' : '' ?> value="PHASE">PHASE</option>
                         <option <?= $filter['mapdata'] == 'PLANT_TYPE' ? 'selected' : '' ?> value="PLANT_TYPE">PLANT TYPE</option>
@@ -507,9 +525,6 @@
                 </div>
                 <div class="col-md-2 col-sm-12">
                     <button type="submit" class="btn btn-primary btn-block" style="height: 33px">FILTER</button>
-                </div>
-                <div class="col-md-4 col-sm-12">
-
                 </div>
             </div>
         </form>
@@ -533,9 +548,13 @@
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script type="text/javascript" src="<?= base_url('assets/leaflet/leaflet.legend.js') ?>"></script>
 <script>
-
+    $('#map-filter').select2({
+        theme: 'bootstrap4',
+        language: "en",
+        placeholder: "- SELECT PROVINCE -",
+    });
     // Inisialisasi peta
-    var map = L.map("map").setView([-4.199249737560975, 122.85021421757004], 5); // Koordinat awal dan zoom
+    var map = L.map("map").setView([-0.490749, 113.655673], 5); // Koordinat awal dan zoom
     let mapdata = `<?= $filter['mapdata'] ?>`;
 
     // Tambahkan layer peta
@@ -693,7 +712,7 @@
         }
         let obj = {
             coords: [coordinate[0], coordinate[1]],
-            info: `<strong>${title}:</strong><br>${marker.ADDRESS.toUpperCase()}`,
+            info: `<div class="title-phase"><strong>${title}:</strong></div><br>${marker.ADDRESS.toUpperCase()}`,
             phase: marker.CURRENT_PHASE,
             plant_type: marker.TANAMAN
         };
