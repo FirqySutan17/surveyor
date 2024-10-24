@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<link rel="stylesheet" href="<?= base_url('assets/leaflet/leaflet.legend.css') ?>" />
 <style>
     .db-box h4 {
         font-weight: 700;
@@ -528,6 +529,7 @@
     </div>
 </div>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script type="text/javascript" src="<?= base_url('assets/leaflet/leaflet.legend.js') ?>"></script>
 <script>
         // Inisialisasi peta
         var map = L.map("map").setView([-4.199249737560975, 122.85021421757004], 5); // Koordinat awal dan zoom
@@ -545,6 +547,21 @@
         var gaURL   = `<?= base_url('assets/img/marker-icon-ga.png') ?>`;
         var grURL   = `<?= base_url('assets/img/marker-icon-gr.png') ?>`;
         var gpURL   = `<?= base_url('assets/img/marker-icon-gp.png') ?>`;
+
+
+        
+        L.control.Legend({
+            position: "bottomleft",
+            legends: [
+                { label: "Persiapan Lahan", type: "image", url: plURL, },
+                { label: "Vegetatif Awal", type: "image", url: vaURL, },
+                { label: "Vegetatif AKhir", type: "image", url: vrURL, },
+                { label: "Genetatif Awal", type: "image", url: gaURL, },
+                { label: "Genetatif AKhir", type: "image", url: grURL, },
+                { label: "Gagal Panen", type: "image", url: gpURL, }
+            ]
+        }).addTo(map);
+
         var iconSize    = [25, 41];
         var iconAnchor  = [12, 41];
         var popupAnchor = [1, -34];
@@ -640,16 +657,4 @@
             }
             markerInstance.bindPopup(marker.info); // Mengikat info box dengan marker
         });
-
-        L.control.Legend({
-            position: "bottomleft",
-            legends: [
-                { label: "Persiapan Lahan", type: "image", url: plURL, },
-                { label: "Vegetatif Awal", type: "image", url: vaURL, },
-                { label: "Vegetatif AKhir", type: "image", url: vrURL, },
-                { label: "Genetatif Awal", type: "image", url: gaURL, },
-                { label: "Genetatif AKhir", type: "image", url: grURL, },
-                { label: "Gagal Panen", type: "image", url: gpURL, }
-            ]
-        }).addTo(map);
 </script>
