@@ -499,12 +499,18 @@
         line-height: 34px !important;
     }
 
+    
+
     @media (max-width: 600px) {
         .information-box ul li {
             padding-bottom: 30px
         }
         .information-box svg {
             margin-top: 10px
+        }
+        .select2.select2-container.select2-container--bootstrap4 {
+            width: 100%;
+            margin-bottom: 10px;
         }
     }
 </style>
