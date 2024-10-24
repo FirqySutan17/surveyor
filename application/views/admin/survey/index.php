@@ -202,6 +202,7 @@
 	table.table-bordered.dataTable th,
 	table.table-bordered.dataTable td {
 		font-size: 10px !important;
+		text-transform: uppercase;
 	}
 
 	table.dataTable thead .sorting:after,
@@ -225,6 +226,7 @@
 		padding-top: 8px;
 		white-space: nowrap;
 		font-size: 10px !important;
+		text-transform: uppercase;
 	}
 	.pagination > .disabled > a,
 	.pagination > .disabled > a:focus,
