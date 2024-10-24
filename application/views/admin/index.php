@@ -495,7 +495,7 @@
 </style>
 
 <div class="main-content" style="background: linear-gradient(0deg, rgba(0,125,195,1) 10%, rgba(161,221,255,1) 98%);min-height: 91.5vh">
-    <div>
+    <!-- <div>
         <form action="#" method="GET">
             <div class="col-md-6 col-sm-12" style=" margin-bottom: 10px">
                 <select class="form-control" name="mapdata">
@@ -508,7 +508,7 @@
             </div>
         </form>
     </div>
-    <br>
+    <br> -->
     <div id="map" style="height: 450px; z-index: 1; border-radius: 10px;"></div>
     <div class="information-box">
         <h3 style="font-family: cjFont; margin-bottom: 0px;line-height: 40px; font-weight: 700; letter-spacing: 1px">
