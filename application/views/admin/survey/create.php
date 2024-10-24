@@ -789,6 +789,7 @@
                                 <th style="text-align: center">DATE</th>
                                 <th style="text-align: center">LAND TYPE</th>
                                 <th style="text-align: center">LUAS TANAH (Ha)</th>
+                                <th style="text-align: center">JENIS TANAMAN</th>
                                 <th style="text-align: center">COORDINATE</th>
                                 <th style="text-align: center">ACTION</th>
                             </tr>
@@ -811,6 +812,13 @@
                                 </td>
                                 <td data-label="LAND AREA">
                                     <input type="number" name="luas_lahan" class="form-control" placeholder="0" style="font-size: 14px" required>
+                                </td>
+                                <td data-label="LAND TYPE">
+                                    <select class="form-control" style="width: 100%; text-align: center" name="tanaman" required>
+                                        <?php foreach($tanaman as $item): ?>
+                                            <option value="<?= $item ?>"><?= $item ?></option>
+                                        <?php endforeach ?>
+                                    </select>
                                 </td>
                                 <td data-label="COORDINATE">
                                     <div id="coordinateText"></div>

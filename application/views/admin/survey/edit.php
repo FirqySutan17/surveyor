@@ -789,6 +789,7 @@
                                 <th style="text-align: center">DATE</th>
                                 <th style="text-align: center">LAND TYPE</th>
                                 <th style="text-align: center">LAND AREA (Ha)</th>
+                                <th style="text-align: center">JENIS TANAMAN</th>
                                 <th style="text-align: center">COORDINATE</th>
                             </tr>
                         </thead>
@@ -805,6 +806,9 @@
                                 </td>
                                 <td data-label="LAND AREA">
                                     <?= $detail['SURVEY']['LUAS_LAHAN'] ?>
+                                </td>
+                                <td data-label="JENIS TANAMAN">
+                                    <?= $detail['SURVEY']['TANAMAN'] ?>
                                 </td>
                                 <td data-label="COORDINATE">
                                     <?= $detail['SURVEY']['COORDINATE'] ?>

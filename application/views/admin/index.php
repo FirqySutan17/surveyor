@@ -510,14 +510,30 @@
              </div>
         </div>
     </div> -->
+    <div class="information-box">
+        <h3 style="font-family: cjFont; margin-bottom: 0px;line-height: 40px; font-weight: 700; letter-spacing: 1px">
+            MAP LOAD BY <?= $filter['mapdata'] ?>
+        </h3>
+        <hr>
+        <!-- <p style="margin: 0px; text-align: center; padding: 65px 0px">NO INFORMATION YET</p> -->
+        <form action="#" method="GET">
+            <div class="col-md-6 col-sm-12" style="display: flex; margin-bottom: 10px">
+                <select class="form-control" name="mapdata">
+					<option <?= $filter['mapdata'] == 'PHASE' ? 'selected' : '' ?> value="PHASE">PHASE</option>
+                    <option <?= $filter['mapdata'] == 'PLANT_TYPE' ? 'selected' : '' ?> value="PLANT_TYPE">PLANT TYPE</option>
+                </select>
+            </div>
+            <div class="col-md-12 col-sm-12" style="display: flex;">
+                <button type="submit" class="btn btn-primary btn-block" style="height: 30px">FILTER</button>
+            </div>
+        </form>
+    </div>
     <div id="map" style="height: 450px; z-index: 1; border-radius: 10px;"></div>
     <div class="information-box">
         <h3 style="font-family: cjFont; margin-bottom: 0px;line-height: 40px; font-weight: 700; letter-spacing: 1px">
             INFORMATION
         </h3>
         <hr>
-        <!-- <p style="margin: 0px; text-align: center; padding: 65px 0px">NO INFORMATION YET</p> -->
-         
         <ul>
             <?php foreach ($survey as $i => $v): ?>
                 <li>
@@ -531,44 +547,98 @@
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script type="text/javascript" src="<?= base_url('assets/leaflet/leaflet.legend.js') ?>"></script>
 <script>
-        // Inisialisasi peta
-        var map = L.map("map").setView([-4.199249737560975, 122.85021421757004], 5); // Koordinat awal dan zoom
+    // Inisialisasi peta
+    var map = L.map("map").setView([-4.199249737560975, 122.85021421757004], 5); // Koordinat awal dan zoom
+    const mapdata = `<?= $filter['mapdata'] ?>`;
 
-        // Tambahkan layer peta
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            maxZoom: 19,
-            attribution: "© OpenStreetMap",
-        }).addTo(map);
+    // Tambahkan layer peta
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: "© OpenStreetMap",
+    }).addTo(map);
 
-        var shadowURL   = `<?= base_url('assets/img/marker-shadow.png') ?>`;
-        var plURL   = `<?= base_url('assets/img/marker-icon-pl.png') ?>`;
-        var vaURL   = `<?= base_url('assets/img/marker-icon-va.png') ?>`;
-        var vrURL   = `<?= base_url('assets/img/marker-icon-vr.png') ?>`;
-        var gaURL   = `<?= base_url('assets/img/marker-icon-ga.png') ?>`;
-        var grURL   = `<?= base_url('assets/img/marker-icon-gr.png') ?>`;
-        var gpURL   = `<?= base_url('assets/img/marker-icon-gp2.png') ?>`;
+    var shadowURL   = `<?= base_url('assets/img/marker-shadow.png') ?>`;
 
+    if (mapdata == 'PLANT_TYPE') {
+        var jagungURL       = `<?= base_url('assets/img/marker-icon-jagung.png') ?>`;
+        var padiURL       = `<?= base_url('assets/img/marker-icon-padi.png') ?>`;
+        var casavaURL       = `<?= base_url('assets/img/marker-icon-casava.png') ?>`;
+        var tanamanLainURL       = `<?= base_url('assets/img/marker-icon-lain.png') ?>`;
 
         
         L.control.Legend({
             position: "bottomleft",
             legends: [
-                { label: "Persiapan Lahan", type: "image", url: plURL, },
-                { label: "Vegetatif Awal", type: "image", url: vaURL, },
-                { label: "Vegetatif AKhir", type: "image", url: vrURL, },
-                { label: "Genetatif Awal", type: "image", url: gaURL, },
-                { label: "Genetatif AKhir", type: "image", url: grURL, },
-                { label: "Gagal Panen", type: "image", url: gpURL, }
+                { label: "JAGUNG", type: "image", url: jagungURL, },
+                { label: "PADI", type: "image", url: padiURL, },
+                { label: "CASAVA", type: "image", url: casavaURL, },
+                { label: "TANAMAN LAIN", type: "image", url: tanamanLainURL, },
             ],
-            column: 3,
-            collapsed: true
+            title: 'LEGEND',
+            column: 2
         }).addTo(map);
 
-        var iconSize    = [25, 41];
-        var iconAnchor  = [12, 41];
-        var popupAnchor = [1, -34];
-        var shadowSize  = [41, 41];
+        
+        var iconJagung = new L.Icon({
+            iconUrl: jagungURL,
+            shadowUrl: shadowURL,
+            iconSize: iconSize,
+            iconAnchor: iconAnchor,
+            popupAnchor: popupAnchor,
+            shadowSize: shadowSize
+        });
 
+        var iconPadi = new L.Icon({
+            iconUrl: padiURL,
+            shadowUrl: shadowURL,
+            iconSize: iconSize,
+            iconAnchor: iconAnchor,
+            popupAnchor: popupAnchor,
+            shadowSize: shadowSize
+        });
+
+        var iconCasava = new L.Icon({
+            iconUrl: casavaURL,
+            shadowUrl: shadowURL,
+            iconSize: iconSize,
+            iconAnchor: iconAnchor,
+            popupAnchor: popupAnchor,
+            shadowSize: shadowSize
+        });
+
+        var iconTanamanLain = new L.Icon({
+            iconUrl: tanamanLainURL,
+            shadowUrl: shadowURL,
+            iconSize: iconSize,
+            iconAnchor: iconAnchor,
+            popupAnchor: popupAnchor,
+            shadowSize: shadowSize
+        });
+
+    } else {
+        var plURL       = `<?= base_url('assets/img/marker-icon-pl.png') ?>`;
+        var vaURL       = `<?= base_url('assets/img/marker-icon-va.png') ?>`;
+        var vrURL       = `<?= base_url('assets/img/marker-icon-vr.png') ?>`;
+        var gaURL       = `<?= base_url('assets/img/marker-icon-ga.png') ?>`;
+        var grURL       = `<?= base_url('assets/img/marker-icon-gr.png') ?>`;
+        var gpURL       = `<?= base_url('assets/img/marker-icon-gp2.png') ?>`;
+
+        
+        L.control.Legend({
+            position: "bottomleft",
+            legends: [
+                { label: "PERSIAPAN LAHAN", type: "image", url: plURL, },
+                { label: "VEGETATIF AWAL", type: "image", url: vaURL, },
+                { label: "VEGETATIF AKHIR", type: "image", url: vrURL, },
+                { label: "GENETATIF AWAL", type: "image", url: gaURL, },
+                { label: "GENETATIF AKHIR", type: "image", url: grURL, },
+                { label: "GAGAL PANEN", type: "image", url: gpURL, }
+            ],
+            title: 'LEGEND',
+            column: 3
+        }).addTo(map);
+
+        
         var iconPL = new L.Icon({
             iconUrl: plURL,
             shadowUrl: shadowURL,
@@ -622,41 +692,65 @@
             popupAnchor: popupAnchor,
             shadowSize: shadowSize
         });
+    }
 
-      // Data marker
-        var markers = [];
-        var markers_data = JSON.parse('<?= json_encode($titik_post) ?>');
-        markers_data.forEach(marker => {
-            let coordinate = marker.COORDINATE.split(",");
-            let obj = {
-                coords: [coordinate[0], coordinate[1]],
-                info: `<strong>${marker.CURRENT_PHASE.replace('-', ' ').toUpperCase()}:</strong><br>${marker.ADDRESS}`,
-                phase: marker.CURRENT_PHASE
-            };
-            markers.push(obj);
-        });
+    var iconSize    = [25, 41];
+    var iconAnchor  = [12, 41];
+    var popupAnchor = [1, -34];
+    var shadowSize  = [41, 41];
 
-        // Tambahkan marker ke peta
-        markers.forEach(function (marker) {
-            var icon = '';
-            if (marker.phase == 'persiapan-lahan') {
+
+    // Data marker
+    var markers = [];
+    var markers_data = JSON.parse('<?= json_encode($titik_post) ?>');
+    markers_data.forEach(marker => {
+        let coordinate = marker.COORDINATE.split(",");
+        let obj = {
+            coords: [coordinate[0], coordinate[1]],
+            info: `<strong>${marker.CURRENT_PHASE.replace('-', ' ').toUpperCase()}:</strong><br>${marker.ADDRESS.toUpperCase()}`,
+            phase: marker.CURRENT_PHASE,
+            plant_type: marker.TANAMAN
+        };
+        markers.push(obj);
+    });
+
+    // Tambahkan marker ke peta
+    markers.forEach(function (marker) {
+        var icon = mapdataPhase(mapdata, marker.phase, marker.plant_type);
+        var markerInstance = L.marker(marker.coords).addTo(map);
+        if (icon !== '') {
+            var markerInstance = L.marker(marker.coords, {icon: icon}).addTo(map);
+        }
+        markerInstance.bindPopup(marker.info); // Mengikat info box dengan marker
+    });
+
+    function mapdataPhase(mapdata, phase, plant_type) {
+        icon = '';
+        if (mapdata == 'PLANT_TYPE') {
+            if (plant_type == 'JAGUNG') {
+                icon = iconJagung;
+            } else if (plant_type == 'PADI') {
+                icon = iconPadi;
+            } else if (plant_type == 'CASAVA') {
+                icon = iconCasava;
+            } else if (plant_type == 'TANAMAN_LAIN') {
+                icon = iconTanamanLain;
+            }
+        } else {
+            if (phase == 'persiapan-lahan') {
                 icon = iconPL;
-            } else if (marker.phase == 'vegetatif-awal') {
+            } else if (phase == 'vegetatif-awal') {
                 icon = iconVA;
-            } else if (marker.phase == 'vegetatif-akhir') {
+            } else if (phase == 'vegetatif-akhir') {
                 icon = iconVR;
-            } else if (marker.phase == 'genetatif-awal') {
+            } else if (phase == 'genetatif-awal') {
                 icon = iconGA;
-            } else if (marker.phase == 'genetatif-akhir') {
+            } else if (phase == 'genetatif-akhir') {
                 icon = iconGR;
-            } else if (marker.phase == 'gagal-panen') {
+            } else if (phase == 'gagal-panen') {
                 icon = iconGP;
             }
-
-            var markerInstance = L.marker(marker.coords).addTo(map);
-            if (icon !== '') {
-                var markerInstance = L.marker(marker.coords, {icon: icon}).addTo(map);
-            }
-            markerInstance.bindPopup(marker.info); // Mengikat info box dengan marker
-        });
+        }
+        return icon;
+    }
 </script>

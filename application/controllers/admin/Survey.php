@@ -32,6 +32,7 @@ class survey extends CI_Controller {
 		$data['provinces'] 	= $this->Dbhelper->selectTabel('ID_PROVINCE, PROVINCE', 'CD_PROVINCE', [], 'PROVINCE', 'ASC');
 		$data['placeholder'] 	= $this->list_placeholder();
 		$data['harvest'] 	= $this->list_harvest();
+		$data['tanaman'] 	= $this->list_tanaman();
 		
 		// dd($data['user']);
 		$this->template->_v('survey/create', $data);
@@ -63,6 +64,7 @@ class survey extends CI_Controller {
 					"DISTRICT"			=> dbClean($post['districts']),
 					"DESCRIPTION"		=> dbClean($post['address']),
 					"LUAS_LAHAN"		=> dbClean($post['luas_lahan']),
+					"TANAMAN"				=> dbClean($post['tanaman']),
 					"CREATED_AT"		=> date('Ymd His'),
 					"CREATED_BY"		=> $this->session_data['user']['EMPLOYEE_ID'],
 					"PLANT"					=> $this->session_data['user']['PLANT'] == '*' ? '3212' : $this->session_data['user']['PLANT'],
@@ -930,6 +932,10 @@ class survey extends CI_Controller {
 		];
 
 		return $result;
+	}
+
+	private function list_tanaman() {
+		return ['JAGUNG', 'PADI', 'CASAVA', 'TANAMAN_LAIN'];
 	}
 
 	private function get_surveydetail($survey_no) {
