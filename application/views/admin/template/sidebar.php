@@ -222,6 +222,12 @@
                                 <i class='bx bxs-right-arrow'></i> SURVEY ENTRY
                             </a>
                         </li>
+                        <li class="<?= ($this->uri->segment(2) == 'survey-excel' && $this->uri->segment(3) == 'entry') ? 'active' : '' ?>">
+                            <a href="<?= route('dashboard/survey-excel/entry') ?>"
+                                class="">
+                                <i class='bx bxs-right-arrow'></i> SURVEY EXCEL ENTRY
+                            </a>
+                        </li>
                     <?php endif ?>
                     <?php if (in_array('TR008', $user_access) || in_array('*', $user_access)): ?>
                         <li class="<?= $this->uri->segment(3) == 'warehouse' ? 'active' : '' ?>">
@@ -258,6 +264,12 @@
                                 <i class='bx bxs-right-arrow'></i> SURVEY UPDATE
                             </a>
                         </li>
+                        <li class="">
+                            <a href="<?= route('dashboard/survey-excel/data-update') ?>"
+                                class="">
+                                <i class='bx bxs-right-arrow'></i> SURVEY EXCEL UPDATE
+                            </a>
+                        </li>
                     <?php endif ?>
                     <?php if (in_array('TR009', $user_access) || in_array('*', $user_access)): ?>
                         <li class="">
@@ -272,7 +284,7 @@
             <?php endif ?>
 
             <?php if (in_array('R001', $user_access) || in_array('R002', $user_access) || in_array('*', $user_access)): ?>
-            <li class="dropdown <?= ($this->uri->segment(2) == 'visit' && $this->uri->segment(3) == 'report') ? 'active' : '' ?>">
+            <li class="dropdown <?= ($this->uri->segment(2) == 'survey' && $this->uri->segment(3) == 'report') ? 'active' : '' ?>">
                 <a href="javascript:void(0)" class="dropdown-btn">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -288,7 +300,7 @@
                 </a>
                 <ul class="nav-submenu menu-content">
                     <?php if (in_array('R004', $user_access) || in_array('*', $user_access)): ?>
-                        <li class="<?= ($this->uri->segment(2) == 'visit' && $this->uri->segment(3) == 'report') ? 'active' : '' ?>">
+                        <li class="<?= ($this->uri->segment(2) == 'survey' && $this->uri->segment(3) == 'report') ? 'active' : '' ?>">
                             <a href="<?= route('dashboard/survey/report-by-districts') ?>"
                                 class="">
                                 <i class='bx bxs-right-arrow'></i> REPORT BY DISTRICTS
@@ -296,16 +308,22 @@
                         </li>
                     <?php endif ?>
                     <?php if (in_array('R001', $user_access) || in_array('*', $user_access)): ?>
-                        <li class="<?= ($this->uri->segment(2) == 'visit' && $this->uri->segment(3) == 'report') ? 'active' : '' ?>">
+                        <li class="<?= ($this->uri->segment(2) == 'survey' && $this->uri->segment(3) == 'report') ? 'active' : '' ?>">
                             <a href="<?= route('dashboard/survey') ?>"
                                 class="">
                                 <i class='bx bxs-right-arrow'></i> REPORT BY SURVEYOR
                             </a>
                         </li>
+                        <li class="<?= ($this->uri->segment(2) == 'survey-excel' && $this->uri->segment(3) == 'report') ? 'active' : '' ?>">
+                            <a href="<?= route('dashboard/survey-excel') ?>"
+                                class="">
+                                <i class='bx bxs-right-arrow'></i> REPORT SURVEYOR EXCEL
+                            </a>
+                        </li>
                     <?php endif ?>
                    
                     <?php if (in_array('R002', $user_access) || in_array('*', $user_access)): ?>
-                        <li class="<?= ($this->uri->segment(2) == 'visit' && $this->uri->segment(3) == 'customer') ? 'active' : '' ?>">
+                        <li class="<?= ($this->uri->segment(2) == 'warehouse' && $this->uri->segment(3) == 'customer') ? 'active' : '' ?>">
                             <a href="<?= route('dashboard/warehouse') ?>"
                                 class="">
                                 <i class='bx bxs-right-arrow'></i> WAREHOUSE REPORT
@@ -313,7 +331,7 @@
                         </li>
                     <?php endif ?>
                     <?php if (in_array('R003', $user_access) || in_array('*', $user_access)): ?>
-                        <li class="<?= ($this->uri->segment(2) == 'visit' && $this->uri->segment(3) == 'report') ? 'active' : '' ?>">
+                        <li class="<?= ($this->uri->segment(2) == 'attendance' && $this->uri->segment(3) == 'report') ? 'active' : '' ?>">
                             <a href="<?= route('dashboard/attendance') ?>"
                                 class="">
                                 <i class='bx bxs-right-arrow'></i> ATTENDANCE REPORT

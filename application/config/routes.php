@@ -111,6 +111,14 @@ $route['survey/do_create_mobile'] 	= 'Home/do_create_mobile';
 	$route['dashboard/warehouse/do_update'] 			= 'admin/Warehouse/do_update';
 	$route['dashboard/warehouse/detail/(:any)'] 		= 'admin/Warehouse/detail/$1';
 	$route['dashboard/warehouse/delete/(:any)']			= 'admin/Warehouse/delete/$1';
+
+	$route['dashboard/survey-excel'] 								= 'admin/SurveyExcel/index';
+	$route['dashboard/survey-excel/data-update'] 		= 'admin/SurveyExcel/index_update';
+	$route['dashboard/survey-excel/entry'] 					= 'admin/SurveyExcel/entry';
+	$route['dashboard/survey-excel/do_create'] 			= 'admin/SurveyExcel/do_create';
+	$route['dashboard/survey-excel/detail/(:any)'] 	= 'admin/SurveyExcel/detail/$1';
+	$route['dashboard/survey-excel/edit/(:any)'] 		= 'admin/SurveyExcel/edit/$1';
+	$route['dashboard/survey-excel/do_update'] 			= 'admin/SurveyExcel/do_update';
 /* ENTRY ROUTES */
 
 // REPORT ROUTES
