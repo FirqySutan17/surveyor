@@ -540,11 +540,19 @@
 
     var shadowURL   = `<?= base_url('assets/img/marker-shadow.png') ?>`;
 
+    
+    var plURL       = `<?= base_url('assets/img/marker-icon-pl.png') ?>`;
+    var vaURL       = `<?= base_url('assets/img/marker-icon-va.png') ?>`;
+    var vrURL       = `<?= base_url('assets/img/marker-icon-vr.png') ?>`;
+    var gaURL       = `<?= base_url('assets/img/marker-icon-ga.png') ?>`;
+    var grURL       = `<?= base_url('assets/img/marker-icon-gr.png') ?>`;
+    var gpURL       = `<?= base_url('assets/img/marker-icon-gp2.png') ?>`;
+    var jagungURL       = `<?= base_url('assets/img/marker-icon-jagung.png') ?>`;
+    var padiURL       = `<?= base_url('assets/img/marker-icon-padi.png') ?>`;
+    var casavaURL       = `<?= base_url('assets/img/marker-icon-casava.png') ?>`;
+    var tanamanLainURL       = `<?= base_url('assets/img/marker-icon-lain.png') ?>`;
+
     if (mapdata == 'PLANT_TYPE') {
-        var jagungURL       = `<?= base_url('assets/img/marker-icon-jagung.png') ?>`;
-        var padiURL       = `<?= base_url('assets/img/marker-icon-padi.png') ?>`;
-        var casavaURL       = `<?= base_url('assets/img/marker-icon-casava.png') ?>`;
-        var tanamanLainURL       = `<?= base_url('assets/img/marker-icon-lain.png') ?>`;
 
         
         L.control.Legend({
@@ -558,53 +566,7 @@
             title: 'LEGEND',
             column: 2
         }).addTo(map);
-
-        
-        var iconJagung = new L.Icon({
-            iconUrl: jagungURL,
-            shadowUrl: shadowURL,
-            iconSize: iconSize,
-            iconAnchor: iconAnchor,
-            popupAnchor: popupAnchor,
-            shadowSize: shadowSize
-        });
-
-        var iconPadi = new L.Icon({
-            iconUrl: padiURL,
-            shadowUrl: shadowURL,
-            iconSize: iconSize,
-            iconAnchor: iconAnchor,
-            popupAnchor: popupAnchor,
-            shadowSize: shadowSize
-        });
-
-        var iconCasava = new L.Icon({
-            iconUrl: casavaURL,
-            shadowUrl: shadowURL,
-            iconSize: iconSize,
-            iconAnchor: iconAnchor,
-            popupAnchor: popupAnchor,
-            shadowSize: shadowSize
-        });
-
-        var iconTanamanLain = new L.Icon({
-            iconUrl: tanamanLainURL,
-            shadowUrl: shadowURL,
-            iconSize: iconSize,
-            iconAnchor: iconAnchor,
-            popupAnchor: popupAnchor,
-            shadowSize: shadowSize
-        });
-
     } else {
-        var plURL       = `<?= base_url('assets/img/marker-icon-pl.png') ?>`;
-        var vaURL       = `<?= base_url('assets/img/marker-icon-va.png') ?>`;
-        var vrURL       = `<?= base_url('assets/img/marker-icon-vr.png') ?>`;
-        var gaURL       = `<?= base_url('assets/img/marker-icon-ga.png') ?>`;
-        var grURL       = `<?= base_url('assets/img/marker-icon-gr.png') ?>`;
-        var gpURL       = `<?= base_url('assets/img/marker-icon-gp2.png') ?>`;
-
-        
         L.control.Legend({
             position: "bottomleft",
             legends: [
@@ -618,68 +580,101 @@
             title: 'LEGEND',
             column: 3
         }).addTo(map);
-
-        
-        var iconPL = new L.Icon({
-            iconUrl: plURL,
-            shadowUrl: shadowURL,
-            iconSize: iconSize,
-            iconAnchor: iconAnchor,
-            popupAnchor: popupAnchor,
-            shadowSize: shadowSize
-        });
-
-        var iconVA = new L.Icon({
-            iconUrl: vaURL,
-            shadowUrl: shadowURL,
-            iconSize: iconSize,
-            iconAnchor: iconAnchor,
-            popupAnchor: popupAnchor,
-            shadowSize: shadowSize
-        });
-
-        var iconVR = new L.Icon({
-            iconUrl: vrURL,
-            shadowUrl: shadowURL,
-            iconSize: iconSize,
-            iconAnchor: iconAnchor,
-            popupAnchor: popupAnchor,
-            shadowSize: shadowSize
-        });
-
-        var iconGA = new L.Icon({
-            iconUrl: gaURL,
-            shadowUrl: shadowURL,
-            iconSize: iconSize,
-            iconAnchor: iconAnchor,
-            popupAnchor: popupAnchor,
-            shadowSize: shadowSize
-        });
-
-        var iconGR = new L.Icon({
-            iconUrl: grURL,
-            shadowUrl: shadowURL,
-            iconSize: iconSize,
-            iconAnchor: iconAnchor,
-            popupAnchor: popupAnchor,
-            shadowSize: shadowSize
-        });
-
-        var iconGP = new L.Icon({
-            iconUrl: gpURL,
-            shadowUrl: shadowURL,
-            iconSize: iconSize,
-            iconAnchor: iconAnchor,
-            popupAnchor: popupAnchor,
-            shadowSize: shadowSize
-        });
     }
 
     var iconSize    = [25, 41];
     var iconAnchor  = [12, 41];
     var popupAnchor = [1, -34];
     var shadowSize  = [41, 41];
+    var iconPL = new L.Icon({
+        iconUrl: plURL,
+        shadowUrl: shadowURL,
+        iconSize: iconSize,
+        iconAnchor: iconAnchor,
+        popupAnchor: popupAnchor,
+        shadowSize: shadowSize
+    });
 
+    var iconVA = new L.Icon({
+        iconUrl: vaURL,
+        shadowUrl: shadowURL,
+        iconSize: iconSize,
+        iconAnchor: iconAnchor,
+        popupAnchor: popupAnchor,
+        shadowSize: shadowSize
+    });
+
+    var iconVR = new L.Icon({
+        iconUrl: vrURL,
+        shadowUrl: shadowURL,
+        iconSize: iconSize,
+        iconAnchor: iconAnchor,
+        popupAnchor: popupAnchor,
+        shadowSize: shadowSize
+    });
+
+    var iconGA = new L.Icon({
+        iconUrl: gaURL,
+        shadowUrl: shadowURL,
+        iconSize: iconSize,
+        iconAnchor: iconAnchor,
+        popupAnchor: popupAnchor,
+        shadowSize: shadowSize
+    });
+
+    var iconGR = new L.Icon({
+        iconUrl: grURL,
+        shadowUrl: shadowURL,
+        iconSize: iconSize,
+        iconAnchor: iconAnchor,
+        popupAnchor: popupAnchor,
+        shadowSize: shadowSize
+    });
+
+    var iconGP = new L.Icon({
+        iconUrl: gpURL,
+        shadowUrl: shadowURL,
+        iconSize: iconSize,
+        iconAnchor: iconAnchor,
+        popupAnchor: popupAnchor,
+        shadowSize: shadowSize
+    });
+
+    var iconJagung = new L.Icon({
+        iconUrl: jagungURL,
+        shadowUrl: shadowURL,
+        iconSize: iconSize,
+        iconAnchor: iconAnchor,
+        popupAnchor: popupAnchor,
+        shadowSize: shadowSize
+    });
+
+    var iconPadi = new L.Icon({
+        iconUrl: padiURL,
+        shadowUrl: shadowURL,
+        iconSize: iconSize,
+        iconAnchor: iconAnchor,
+        popupAnchor: popupAnchor,
+        shadowSize: shadowSize
+    });
+
+    var iconCasava = new L.Icon({
+        iconUrl: casavaURL,
+        shadowUrl: shadowURL,
+        iconSize: iconSize,
+        iconAnchor: iconAnchor,
+        popupAnchor: popupAnchor,
+        shadowSize: shadowSize
+    });
+
+    var iconTanamanLain = new L.Icon({
+        iconUrl: tanamanLainURL,
+        shadowUrl: shadowURL,
+        iconSize: iconSize,
+        iconAnchor: iconAnchor,
+        popupAnchor: popupAnchor,
+        shadowSize: shadowSize
+    });
 
     // Data marker
     var markers = [];
@@ -699,17 +694,17 @@
     // Tambahkan marker ke peta
     markers.forEach(function (marker) {
         icon = '';
-        if (mapdata == 'PLANT_TYPE') {
-            if (marker.plant_type == 'JAGUNG') {
-                icon = iconJagung;
-            } else if (marker.plant_type == 'PADI') {
-                icon = iconPadi;
-            } else if (marker.plant_type == 'CASAVA') {
-                icon = iconCasava;
-            } else if (marker.plant_type == 'TANAMAN_LAIN') {
-                icon = iconTanamanLain;
-            }
-        } else {
+        // if (mapdata == 'PLANT_TYPE') {
+        //     if (marker.plant_type == 'JAGUNG') {
+        //         icon = iconJagung;
+        //     } else if (marker.plant_type == 'PADI') {
+        //         icon = iconPadi;
+        //     } else if (marker.plant_type == 'CASAVA') {
+        //         icon = iconCasava;
+        //     } else if (marker.plant_type == 'TANAMAN_LAIN') {
+        //         icon = iconTanamanLain;
+        //     }
+        // } else {
             if (marker.phase == 'persiapan-lahan') {
                 icon = iconPL;
             } else if (marker.phase == 'vegetatif-awal') {
@@ -723,7 +718,7 @@
             } else if (marker.phase == 'gagal-panen') {
                 icon = iconGP;
             }
-        }
+        // }
 
         var markerInstance = L.marker(marker.coords).addTo(map);
         if (icon !== '') {
