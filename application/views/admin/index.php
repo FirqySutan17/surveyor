@@ -495,16 +495,18 @@
 </style>
 
 <div class="main-content" style="background: linear-gradient(0deg, rgba(0,125,195,1) 10%, rgba(161,221,255,1) 98%);min-height: 91.5vh">
-    <div  lass="information-box">
+    <div class="information-box">
         <form action="#" method="GET">
-            <div class="col-md-6 col-sm-12" style=" margin-bottom: 10px">
-                <select class="form-control" name="mapdata">
-                    <option <?= $filter['mapdata'] == 'PHASE' ? 'selected' : '' ?> value="PHASE">PHASE</option>
-                    <option <?= $filter['mapdata'] == 'PLANT_TYPE' ? 'selected' : '' ?> value="PLANT_TYPE">PLANT TYPE</option>
-                </select>
-            </div>
-            <div class="col-md-6 col-sm-12" style="">
-                <button type="submit" class="btn btn-primary btn-block" style="height: 30px">FILTER</button>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <select class="form-control" name="mapdata">
+                        <option <?= $filter['mapdata'] == 'PHASE' ? 'selected' : '' ?> value="PHASE">PHASE</option>
+                        <option <?= $filter['mapdata'] == 'PLANT_TYPE' ? 'selected' : '' ?> value="PLANT_TYPE">PLANT TYPE</option>
+                    </select>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <button type="submit" class="btn btn-primary btn-block" style="height: 30px">FILTER</button>
+                </div>
             </div>
         </form>
     </div>
@@ -681,9 +683,13 @@
     var markers_data = JSON.parse('<?= json_encode($titik_post) ?>');
     markers_data.forEach(marker => {
         let coordinate = marker.COORDINATE.split(",");
+        let title = marker.TANAMAN.toUpperCase();
+        if (marker.CURRENT_PHASE) {
+            title = title + ' - ' + marker.CURRENT_PHASE.replace('-', ' ').toUpperCase();
+        }
         let obj = {
             coords: [coordinate[0], coordinate[1]],
-            info: `<strong>${marker.CURRENT_PHASE.replace('-', ' ').toUpperCase()}:</strong><br>${marker.ADDRESS.toUpperCase()}`,
+            info: `<strong>${title}:</strong><br>${marker.ADDRESS.toUpperCase()}`,
             phase: marker.CURRENT_PHASE,
             plant_type: marker.TANAMAN
         };
