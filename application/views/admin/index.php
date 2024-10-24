@@ -590,7 +590,7 @@
         });
 
         var iconGP = new L.Icon({
-            iconUrl: `<?= base_url('assets/img/marker-icon-gp.png') ?>`,
+            iconUrl: `<?= base_url('assets/img/marker-icon-gp2.png') ?>`,
             shadowUrl: shadowURL,
             iconSize: iconSize,
             iconAnchor: iconAnchor,
@@ -634,4 +634,16 @@
             }
             markerInstance.bindPopup(marker.info); // Mengikat info box dengan marker
         });
+
+        L.control.Legend({
+            position: "bottomleft",
+            legends: [
+                { label: "Persiapan Lahan", type: "image", url: iconPL, },
+                { label: "Vegetatif Awal", type: "image", url: iconVA, },
+                { label: "Vegetatif AKhir", type: "image", url: iconVR, },
+                { label: "Genetatif Awal", type: "image", url: iconGA, },
+                { label: "Genetatif AKhir", type: "image", url: iconGR, },
+                { label: "Gagal Panen", type: "image", url: iconGP, }
+            ]
+        }).addTo(map);
 </script>
