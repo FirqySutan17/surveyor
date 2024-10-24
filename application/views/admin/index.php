@@ -539,13 +539,19 @@
         }).addTo(map);
 
         var shadowURL   = `<?= base_url('assets/img/marker-shadow.png') ?>`;
+        var plURL   = `<?= base_url('assets/img/marker-icon-pl.png') ?>`;
+        var vaURL   = `<?= base_url('assets/img/marker-icon-va.png') ?>`;
+        var vrURL   = `<?= base_url('assets/img/marker-icon-vr.png') ?>`;
+        var gaURL   = `<?= base_url('assets/img/marker-icon-ga.png') ?>`;
+        var grURL   = `<?= base_url('assets/img/marker-icon-gr.png') ?>`;
+        var gpURL   = `<?= base_url('assets/img/marker-icon-gp.png') ?>`;
         var iconSize    = [25, 41];
         var iconAnchor  = [12, 41];
         var popupAnchor = [1, -34];
         var shadowSize  = [41, 41];
 
         var iconPL = new L.Icon({
-            iconUrl: `<?= base_url('assets/img/marker-icon-pl.png') ?>`,
+            iconUrl: plURL,
             shadowUrl: shadowURL,
             iconSize: iconSize,
             iconAnchor: iconAnchor,
@@ -554,7 +560,7 @@
         });
 
         var iconVA = new L.Icon({
-            iconUrl: `<?= base_url('assets/img/marker-icon-va.png') ?>`,
+            iconUrl: vaURL,
             shadowUrl: shadowURL,
             iconSize: iconSize,
             iconAnchor: iconAnchor,
@@ -563,7 +569,7 @@
         });
 
         var iconVR = new L.Icon({
-            iconUrl: `<?= base_url('assets/img/marker-icon-vr.png') ?>`,
+            iconUrl: vrURL,
             shadowUrl: shadowURL,
             iconSize: iconSize,
             iconAnchor: iconAnchor,
@@ -572,7 +578,7 @@
         });
 
         var iconGA = new L.Icon({
-            iconUrl: `<?= base_url('assets/img/marker-icon-ga.png') ?>`,
+            iconUrl: gaURL,
             shadowUrl: shadowURL,
             iconSize: iconSize,
             iconAnchor: iconAnchor,
@@ -581,7 +587,7 @@
         });
 
         var iconGR = new L.Icon({
-            iconUrl: `<?= base_url('assets/img/marker-icon-gr.png') ?>`,
+            iconUrl: grURL,
             shadowUrl: shadowURL,
             iconSize: iconSize,
             iconAnchor: iconAnchor,
@@ -590,7 +596,7 @@
         });
 
         var iconGP = new L.Icon({
-            iconUrl: `<?= base_url('assets/img/marker-icon-gp2.png') ?>`,
+            iconUrl: gpURL,
             shadowUrl: shadowURL,
             iconSize: iconSize,
             iconAnchor: iconAnchor,
@@ -638,12 +644,12 @@
         L.control.Legend({
             position: "bottomleft",
             legends: [
-                { label: "Persiapan Lahan", type: "image", url: iconPL, },
-                { label: "Vegetatif Awal", type: "image", url: iconVA, },
-                { label: "Vegetatif AKhir", type: "image", url: iconVR, },
-                { label: "Genetatif Awal", type: "image", url: iconGA, },
-                { label: "Genetatif AKhir", type: "image", url: iconGR, },
-                { label: "Gagal Panen", type: "image", url: iconGP, }
+                { label: "Persiapan Lahan", type: "image", url: plURL, },
+                { label: "Vegetatif Awal", type: "image", url: vaURL, },
+                { label: "Vegetatif AKhir", type: "image", url: vrURL, },
+                { label: "Genetatif Awal", type: "image", url: gaURL, },
+                { label: "Genetatif AKhir", type: "image", url: grURL, },
+                { label: "Gagal Panen", type: "image", url: gpURL, }
             ]
         }).addTo(map);
 </script>
