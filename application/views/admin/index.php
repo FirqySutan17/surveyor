@@ -495,39 +495,17 @@
 </style>
 
 <div class="main-content" style="background: linear-gradient(0deg, rgba(0,125,195,1) 10%, rgba(161,221,255,1) 98%);min-height: 91.5vh">
-    <!-- <img src="<?= asset('img/logo.png') ?>" alt="" style="width: 70%; text-align: center; object-fit: cover;"> -->
-    <!-- <div class="db-table" style="margin-top: 10px">
-        <div class="db-box" style="height: 250px">
-            <h4 style="font-family: cjFont; margin-bottom: 0px; text-align: center; margin-bottom: 5px">TITLE POINT 3</h4>
-            <p style="font-weight: 500; color: #fff"><?= convMonth(date('m')).' '.date('Y') ?></p>
-            
+    <form action="#" method="GET">
+        <div class="col-md-6 col-sm-12" style="display: flex; margin-bottom: 10px">
+            <select class="form-control" name="mapdata">
+                <option <?= $filter['mapdata'] == 'PHASE' ? 'selected' : '' ?> value="PHASE">PHASE</option>
+                <option <?= $filter['mapdata'] == 'PLANT_TYPE' ? 'selected' : '' ?> value="PLANT_TYPE">PLANT TYPE</option>
+            </select>
         </div>
-        <div class="db-box" style="box-shadow: none; padding: 0px;height: 250px">
-            <div style="padding: 20px 10px; border-radius: 10px; margin-bottom: 20px">
-                <h4 style="font-family: cjFont; margin-bottom: 0px; text-align: center; margin-bottom: 5px;">TITLE POINT 4</h4>
-                <p style="font-weight: 500; color: #fff"><?= date('Y') ?></p>
-                
-             </div>
+        <div class="col-md-6 col-sm-12" style="display: flex;">
+            <button type="submit" class="btn btn-primary btn-block" style="height: 30px">FILTER</button>
         </div>
-    </div> -->
-    <div class="information-box">
-        <h3 style="font-family: cjFont; margin-bottom: 0px;line-height: 40px; font-weight: 700; letter-spacing: 1px">
-            MAP LOAD BY <?= $filter['mapdata'] ?>
-        </h3>
-        <hr>
-        <!-- <p style="margin: 0px; text-align: center; padding: 65px 0px">NO INFORMATION YET</p> -->
-        <form action="#" method="GET">
-            <div class="col-md-6 col-sm-12" style="display: flex; margin-bottom: 10px">
-                <select class="form-control" name="mapdata">
-					<option <?= $filter['mapdata'] == 'PHASE' ? 'selected' : '' ?> value="PHASE">PHASE</option>
-                    <option <?= $filter['mapdata'] == 'PLANT_TYPE' ? 'selected' : '' ?> value="PLANT_TYPE">PLANT TYPE</option>
-                </select>
-            </div>
-            <div class="col-md-6 col-sm-12" style="display: flex;">
-                <button type="submit" class="btn btn-primary btn-block" style="height: 30px">FILTER</button>
-            </div>
-        </form>
-    </div>
+    </form>
     <br>
     <div id="map" style="height: 450px; z-index: 1; border-radius: 10px;"></div>
     <div class="information-box">
@@ -550,7 +528,7 @@
 <script>
     // Inisialisasi peta
     var map = L.map("map").setView([-4.199249737560975, 122.85021421757004], 5); // Koordinat awal dan zoom
-    const mapdata = `<?= $filter['mapdata'] ?>`;
+    let mapdata = `<?= $filter['mapdata'] ?>`;
 
     // Tambahkan layer peta
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -743,7 +721,7 @@
                 icon = iconGP;
             }
         }
-        
+
         var markerInstance = L.marker(marker.coords).addTo(map);
         if (icon !== '') {
             var markerInstance = L.marker(marker.coords, {icon: icon}).addTo(map);
