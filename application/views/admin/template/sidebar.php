@@ -223,7 +223,7 @@
                             </a>
                         </li>
                     <?php endif ?>
-                    <?php if (in_array('TR002', $user_access) || in_array('*', $user_access)): ?>
+                    <?php if (in_array('TR008', $user_access) || in_array('*', $user_access)): ?>
                         <li class="<?= $this->uri->segment(3) == 'warehouse' ? 'active' : '' ?>">
                             <a href="<?= admin_url('warehouse/entry') ?>"
                                 class="">
@@ -259,7 +259,7 @@
                             </a>
                         </li>
                     <?php endif ?>
-                    <?php if (in_array('TR005', $user_access) || in_array('*', $user_access)): ?>
+                    <?php if (in_array('TR009', $user_access) || in_array('*', $user_access)): ?>
                         <li class="">
                             <a href="<?= admin_url('warehouse/data-update') ?>"
                                 class="">
