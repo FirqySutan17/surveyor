@@ -687,24 +687,23 @@
             phase: marker.CURRENT_PHASE,
             plant_type: marker.TANAMAN
         };
-        console.log(marker, obj);
         markers.push(obj);
     });
 
     // Tambahkan marker ke peta
     markers.forEach(function (marker) {
         icon = '';
-        // if (mapdata == 'PLANT_TYPE') {
-        //     if (marker.plant_type == 'JAGUNG') {
-        //         icon = iconJagung;
-        //     } else if (marker.plant_type == 'PADI') {
-        //         icon = iconPadi;
-        //     } else if (marker.plant_type == 'CASAVA') {
-        //         icon = iconCasava;
-        //     } else if (marker.plant_type == 'TANAMAN_LAIN') {
-        //         icon = iconTanamanLain;
-        //     }
-        // } else {
+        if (mapdata == 'PLANT_TYPE') {
+            if (marker.plant_type == 'JAGUNG') {
+                icon = iconJagung;
+            } else if (marker.plant_type == 'PADI') {
+                icon = iconPadi;
+            } else if (marker.plant_type == 'CASAVA') {
+                icon = iconCasava;
+            } else if (marker.plant_type == 'TANAMAN_LAIN') {
+                icon = iconTanamanLain;
+            }
+        } else {
             if (marker.phase == 'persiapan-lahan') {
                 icon = iconPL;
             } else if (marker.phase == 'vegetatif-awal') {
@@ -718,7 +717,7 @@
             } else if (marker.phase == 'gagal-panen') {
                 icon = iconGP;
             }
-        // }
+        }
 
         var markerInstance = L.marker(marker.coords).addTo(map);
         if (icon !== '') {
