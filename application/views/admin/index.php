@@ -546,7 +546,7 @@
         var vrURL   = `<?= base_url('assets/img/marker-icon-vr.png') ?>`;
         var gaURL   = `<?= base_url('assets/img/marker-icon-ga.png') ?>`;
         var grURL   = `<?= base_url('assets/img/marker-icon-gr.png') ?>`;
-        var gpURL   = `<?= base_url('assets/img/marker-icon-gp.png') ?>`;
+        var gpURL   = `<?= base_url('assets/img/marker-icon-gp2.png') ?>`;
 
 
         
@@ -559,7 +559,9 @@
                 { label: "Genetatif Awal", type: "image", url: gaURL, },
                 { label: "Genetatif AKhir", type: "image", url: grURL, },
                 { label: "Gagal Panen", type: "image", url: gpURL, }
-            ]
+            ],
+            column: 3,
+            collapsed: true
         }).addTo(map);
 
         var iconSize    = [25, 41];
