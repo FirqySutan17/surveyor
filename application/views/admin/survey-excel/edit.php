@@ -797,7 +797,7 @@
                                     <?= $user['EMPLOYEE_ID'] ?> - <?= $user['FULL_NAME'] ?>
                                 </td>
                                 <td data-label="DATE">
-                                    <input type="date" name="survey_date" class="form-control" style="font-size: 14px" value="<?= $detail['SURVEY_DATE'] ?>" required>
+                                    <input type="date" name="survey_date" class="form-control" style="font-size: 14px" value="<?= date('Y-m-d', strtotime($detail['SURVEY_DATE'])) ?>" required>
                                 </td>
                                 <td data-label="TITLE">
                                     <input type="text" name="title" class="form-control" placeholder="0" style="font-size: 14px" value="<?= $detail['TITLE'] ?>" required>
