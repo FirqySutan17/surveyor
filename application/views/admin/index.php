@@ -717,41 +717,37 @@
 
     // Tambahkan marker ke peta
     markers.forEach(function (marker) {
-        var icon = mapdataPhase(mapdata, marker.phase, marker.plant_type);
+        icon = '';
+        if (mapdata == 'PLANT_TYPE') {
+            if (marker.plant_type == 'JAGUNG') {
+                icon = iconJagung;
+            } else if (marker.plant_type == 'PADI') {
+                icon = iconPadi;
+            } else if (marker.plant_type == 'CASAVA') {
+                icon = iconCasava;
+            } else if (marker.plant_type == 'TANAMAN_LAIN') {
+                icon = iconTanamanLain;
+            }
+        } else {
+            if (marker.phase == 'persiapan-lahan') {
+                icon = iconPL;
+            } else if (marker.phase == 'vegetatif-awal') {
+                icon = iconVA;
+            } else if (marker.phase == 'vegetatif-akhir') {
+                icon = iconVR;
+            } else if (marker.phase == 'genetatif-awal') {
+                icon = iconGA;
+            } else if (marker.phase == 'genetatif-akhir') {
+                icon = iconGR;
+            } else if (marker.phase == 'gagal-panen') {
+                icon = iconGP;
+            }
+        }
+        
         var markerInstance = L.marker(marker.coords).addTo(map);
         if (icon !== '') {
             var markerInstance = L.marker(marker.coords, {icon: icon}).addTo(map);
         }
         markerInstance.bindPopup(marker.info); // Mengikat info box dengan marker
     });
-
-    function mapdataPhase(mapdata, phase, plant_type) {
-        icon = '';
-        if (mapdata == 'PLANT_TYPE') {
-            if (plant_type == 'JAGUNG') {
-                icon = iconJagung;
-            } else if (plant_type == 'PADI') {
-                icon = iconPadi;
-            } else if (plant_type == 'CASAVA') {
-                icon = iconCasava;
-            } else if (plant_type == 'TANAMAN_LAIN') {
-                icon = iconTanamanLain;
-            }
-        } else {
-            if (phase == 'persiapan-lahan') {
-                icon = iconPL;
-            } else if (phase == 'vegetatif-awal') {
-                icon = iconVA;
-            } else if (phase == 'vegetatif-akhir') {
-                icon = iconVR;
-            } else if (phase == 'genetatif-awal') {
-                icon = iconGA;
-            } else if (phase == 'genetatif-akhir') {
-                icon = iconGR;
-            } else if (phase == 'gagal-panen') {
-                icon = iconGP;
-            }
-        }
-        return icon;
-    }
 </script>
