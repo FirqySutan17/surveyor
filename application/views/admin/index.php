@@ -523,11 +523,12 @@
                     <option <?= $filter['mapdata'] == 'PLANT_TYPE' ? 'selected' : '' ?> value="PLANT_TYPE">PLANT TYPE</option>
                 </select>
             </div>
-            <div class="col-md-12 col-sm-12" style="display: flex;">
+            <div class="col-md-6 col-sm-12" style="display: flex;">
                 <button type="submit" class="btn btn-primary btn-block" style="height: 30px">FILTER</button>
             </div>
         </form>
     </div>
+    <br>
     <div id="map" style="height: 450px; z-index: 1; border-radius: 10px;"></div>
     <div class="information-box">
         <h3 style="font-family: cjFont; margin-bottom: 0px;line-height: 40px; font-weight: 700; letter-spacing: 1px">
