@@ -630,7 +630,7 @@
 
             var markerInstance = L.marker(marker.coords).addTo(map);
             if (icon !== '') {
-                var markerInstance = L.marker(marker.coords, icon: icon).addTo(map);
+                var markerInstance = L.marker(marker.coords).addTo(map);
             }
             markerInstance.bindPopup(marker.info); // Mengikat info box dengan marker
         });
