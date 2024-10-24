@@ -538,37 +538,100 @@
             attribution: "© OpenStreetMap",
         }).addTo(map);
 
+        var shadowURL   = `<?= base_url('assets/img/marker-shadow.png') ?>`;
+        var iconSize    = [25, 41];
+        var iconAnchor  = [12, 41];
+        var popupAnchor = [1, -34];
+        var shadowSize  = [41, 41];
+
+        var iconPL = new L.Icon({
+            iconUrl: `<?= base_url('assets/img/marker-icon-pl.png') ?>`,
+            shadowUrl: shadowURL,
+            iconSize: iconSize,
+            iconAnchor: iconAnchor,
+            popupAnchor: popupAnchor,
+            shadowSize: shadowSize
+        });
+
+        var iconVA = new L.Icon({
+            iconUrl: `<?= base_url('assets/img/marker-icon-va.png') ?>`,
+            shadowUrl: shadowURL,
+            iconSize: iconSize,
+            iconAnchor: iconAnchor,
+            popupAnchor: popupAnchor,
+            shadowSize: shadowSize
+        });
+
+        var iconVR = new L.Icon({
+            iconUrl: `<?= base_url('assets/img/marker-icon-vr.png') ?>`,
+            shadowUrl: shadowURL,
+            iconSize: iconSize,
+            iconAnchor: iconAnchor,
+            popupAnchor: popupAnchor,
+            shadowSize: shadowSize
+        });
+
+        var iconGA = new L.Icon({
+            iconUrl: `<?= base_url('assets/img/marker-icon-ga.png') ?>`,
+            shadowUrl: shadowURL,
+            iconSize: iconSize,
+            iconAnchor: iconAnchor,
+            popupAnchor: popupAnchor,
+            shadowSize: shadowSize
+        });
+
+        var iconGR = new L.Icon({
+            iconUrl: `<?= base_url('assets/img/marker-icon-gr.png') ?>`,
+            shadowUrl: shadowURL,
+            iconSize: iconSize,
+            iconAnchor: iconAnchor,
+            popupAnchor: popupAnchor,
+            shadowSize: shadowSize
+        });
+
+        var iconGP = new L.Icon({
+            iconUrl: `<?= base_url('assets/img/marker-icon-gp.png') ?>`,
+            shadowUrl: shadowURL,
+            iconSize: iconSize,
+            iconAnchor: iconAnchor,
+            popupAnchor: popupAnchor,
+            shadowSize: shadowSize
+        });
+
       // Data marker
-    //   var markers = [
-    //     {
-    //       coords: [-6.196272919843322, 106.83224670972295],
-    //       info: "<strong>Marker 1:</strong><br>Jakarta<br>Info tambahan",
-    //     },
-    //     {
-    //       coords: [5.547944609773346, 95.31874503129693],
-    //       info: "<strong>Marker 2:</strong><br>Banda Aceh<br>Info tambahan",
-    //     },
-    //     {
-    //       coords: [-6.615515539869791, 144.1303116562076],
-    //       info: "<strong>Marker 3:</strong><br>Papua Nugini<br>Info tambahan",
-    //     },
-    //   ];
         var markers = [];
         var markers_data = JSON.parse('<?= json_encode($titik_post) ?>');
         markers_data.forEach(marker => {
             let coordinate = marker.COORDINATE.split(",");
             let obj = {
                 coords: [coordinate[0], coordinate[1]],
-                info: `<strong>${marker.CURRENT_PHASE.replace('-', ' ').toUpperCase()}:</strong><br>${marker.ADDRESS}`
+                info: `<strong>${marker.CURRENT_PHASE.replace('-', ' ').toUpperCase()}:</strong><br>${marker.ADDRESS}`,
+                phase: marker.CURRENT_PHASE
             };
             markers.push(obj);
         });
-        console.log(markers_data);
-        console.log(markers);
 
         // Tambahkan marker ke peta
         markers.forEach(function (marker) {
+            var icon = '';
+            if (marker.phase == 'persiapan-lahan') {
+                icon = iconPL;
+            } else if (marker.phase == 'vegetatif-awal') {
+                icon = iconVA;
+            } else if (marker.phase == 'vegetatif-akhir') {
+                icon = iconVR;
+            } else if (marker.phase == 'genetatif-awal') {
+                icon = iconGA;
+            } else if (marker.phase == 'genetatif-akhir') {
+                icon = iconGR;
+            } else if (marker.phase == 'gagal-panen') {
+                icon = iconGP;
+            }
+
             var markerInstance = L.marker(marker.coords).addTo(map);
+            if (icon !== '') {
+                var markerInstance = L.marker(marker.coords, icon: icon).addTo(map);
+            }
             markerInstance.bindPopup(marker.info); // Mengikat info box dengan marker
         });
 </script>
