@@ -692,6 +692,7 @@
             phase: marker.CURRENT_PHASE,
             plant_type: marker.TANAMAN
         };
+        console.log(marker, obj);
         markers.push(obj);
     });
 
