@@ -717,7 +717,6 @@
             position: relative;
             white-space: normal !important;
             font-size: 12px !important;
-
         }
         input {
             font-size: 12px !important;

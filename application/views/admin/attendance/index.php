@@ -372,6 +372,36 @@
 			width: 100%
 		}
 	}
+	@media (max-width: 600px) {
+		table thead {
+            display: none;
+        }
+        table, table tbody, table tr, table td {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        } 
+        th, td {
+            font-size: 12px !important;
+            text-align: center;
+        }
+        table tbody tr td {
+            text-align: center;
+            padding-left: 50%;
+            position: relative;
+            white-space: normal !important;
+            font-size: 12px !important;
+        }
+		table td:before {
+            content: attr(data-label);
+            width: 100%;
+            font-weight: 600;
+            font-size: 13px;
+            text-align: left;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        } 
+	}
 </style>
 
 <div class="main-content pre-posttest">
@@ -448,25 +478,46 @@
 					</table>
 					<table class="table table-bordered" style="margin-bottom: 10px">
 							<thead>
-					<tr>
-						<th colspan="3" style="text-align: center">CHECK IN</th>
-					</tr>
+								<tr>
+									<th style="text-align: center">CHECK IN</th>
+									<th style="text-align: center">CHECK OUT</th>
+									<th style="text-align: center">LOCATION</th>
+								</tr>
 							</thead>
 							<tbody>
 								<tr class="table-maps">
+									<td data-label="CHECK IN" class="table-maps-date" style="text-align: center;">
+										<br>
+										<div id="detail-checkin">-</div>
+										<br>
+										<div id="detail-imagein">-</div>
+										<br>
+									</td>
+									<td data-label="CHECK OUT" class="table-maps-date" style="text-align: center;">
+										<br>
+										<div id="detail-checkout">-</div>
+										<br>
+										<div id="detail-imageout">-</div>
+										<br>
+									</td>
+									<td data-label="LOCATION" class="table-maps-frame" style="text-align: center; padding: 0px 20px">
+										<iframe id="detail-frame-in" style="height: 300px; width: 100%; margin: 10px 0px" class="maps-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d32658969.626560632!2d95.9556841630188!3d-2.268827313454851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2c4c07d7496404b7%3A0xe37b4de71badf485!2sIndonesia!5e0!3m2!1sid!2sid!4v1728009870092!5m2!1sid!2sid&zoom=15" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+									</td>
+								</tr>
+								<!-- <tr class="table-maps">
 									<th class="table-maps-date" style="text-align: center;" id="detail-checkin">-</th>
 									<th class="table-maps-image" style="text-align: center;" id="detail-imagein">-</th>
 									<th class="table-maps-frame" style="text-align: center;">
 										<iframe id="detail-frame-in" style="height: 300px; width: 100%; margin: 10px 0px" class="maps-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d32658969.626560632!2d95.9556841630188!3d-2.268827313454851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2c4c07d7496404b7%3A0xe37b4de71badf485!2sIndonesia!5e0!3m2!1sid!2sid!4v1728009870092!5m2!1sid!2sid&zoom=15" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 									</th>
-								</tr>
+								</tr> -->
 							</tbody>
 					</table>
-			<table class="table table-bordered" style="margin-bottom: 10px">
+					<!-- <table class="table table-bordered" style="margin-bottom: 10px">
 							<thead>
-					<tr>
-						<th colspan="3" style="text-align: center">CHECK OUT</th>
-					</tr>
+								<tr>
+									<th colspan="3" style="text-align: center">CHECK OUT</th>
+								</tr>
 							</thead>
 							<tbody>
 							<tr class="table-maps">
@@ -475,7 +526,7 @@
 								<th class="table-maps-frame" style="text-align: center;"><iframe id="detail-frame-out" style="height: 300px; width: 100%; margin: 10px 0px" class="maps-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d32658969.626560632!2d95.9556841630188!3d-2.268827313454851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2c4c07d7496404b7%3A0xe37b4de71badf485!2sIndonesia!5e0!3m2!1sid!2sid!4v1728009870092!5m2!1sid!2sid&zoom=15" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></th>
 							</tr>
 							</tbody>
-					</table>
+					</table> -->
 			<button onclick="window.dialog.close();" aria-label="close" class="x">❌</button>
 	</dialog>
 </div>
