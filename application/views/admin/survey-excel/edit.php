@@ -788,7 +788,7 @@
                             <tr>
                                 <th style="text-align: center">DRAFTER</th>
                                 <th style="text-align: center">DATE</th>
-                                <th style="text-align: center">TITLE</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -799,9 +799,7 @@
                                 <td data-label="DATE">
                                     <input type="date" name="survey_date" class="form-control" style="font-size: 14px" value="<?= date('Y-m-d', strtotime($detail['SURVEY_DATE'])) ?>" required>
                                 </td>
-                                <td data-label="TITLE">
-                                    <input type="text" name="title" class="form-control" placeholder="0" style="font-size: 14px" value="<?= $detail['TITLE'] ?>" required>
-                                </td>
+                                
                             </tr>
                         </tbody>
                     </table>
@@ -809,12 +807,16 @@
                     <table class="table table-bordered" style="margin-bottom: 10px">
                         <thead>
                             <tr>
+                                <th style="text-align: center">TITLE</th>
                                 <th style="text-align: center">PROVINCE</th>
                                 <th style="text-align: center">REGENCIES</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
+                                <td data-label="TITLE">
+                                    <input type="text" name="title" class="form-control" placeholder="0" style="font-size: 14px" value="<?= $detail['TITLE'] ?>" required>
+                                </td>
                                 <td data-label="PROVINCE">
                                     <?= $detail['PROVINCE_NAME'] ?>
                                 </td>
@@ -825,24 +827,35 @@
                         </tbody>
                     </table>
 
-
                     <table class="table table-bordered" style="margin-bottom: 10px">
                         <thead>
                             <tr>
-                                <th>DESCRIPTION</th>
                                 <th>EXCEL FILE</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td data-label="DESCRIPTION">
-                                    <textarea name="DESCRIPTION" class="form-control"><?= $detail['DESCRIPTION'] ?></textarea>
-                                </td>
-                                <td data-label="EXCEL-FILE">
+                                <td data-label="EXCEL FILE">
                                     <?php if (!empty($detail['SURVEY_FILE'])): ?>
-                                        <a href="<?= base_url('upload/excel/'.$detail['SURVEY_FILE']) ?>" class="btn btn-info" target="_blank">Excel FIle</a>
+                                        <a href="<?= base_url('upload/excel/'.$detail['SURVEY_FILE']) ?>" class="btn btn-info" target="_blank" style="margin-bottom: 10px">DOWNLOAD</a>
                                     <?php endif ?>
                                     <input type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="SURVEY_FILE" class="form-control">
+                                </td>
+                            </tr>   
+                        </tbody>
+                        
+                    </table>
+
+                    <table class="table table-bordered" style="margin-bottom: 10px">
+                        <thead>
+                            <tr>
+                                <th>DESCRIPTION</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td data-label="DESCRIPTION">
+                                    <textarea name="DESCRIPTION" class="form-control" rows="5" placeholder="EX : LOREM IPSUM DOLOR SIT AMET"><?= $detail['DESCRIPTION'] ?></textarea>
                                 </td>
                             </tr>   
                         </tbody>

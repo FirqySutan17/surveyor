@@ -40,7 +40,7 @@ class Warehouse extends CI_Controller {
 			"districts"				=> $districts,
 		];
 
-		$data['title'] 				= 'DISTRICTS';
+		$data['title'] 				= 'WAREHOUSE';
 		$data['province'] 			= $this->dataprovince();
 		$data['regencies'] 			= $this->dataregencies();
 		$data['districts'] 			= $this->datadistricts();
@@ -70,7 +70,7 @@ class Warehouse extends CI_Controller {
 			"districts"				=> $districts,
 		];
 
-		$data['title'] 				= 'DISTRICTS';
+		$data['title'] 				= 'WAREHOUSE';
 		$data['province'] 			= $this->dataprovince();
 		$data['regencies'] 			= $this->dataregencies();
 		$data['districts'] 			= $this->datadistricts();
@@ -197,7 +197,7 @@ class Warehouse extends CI_Controller {
 		$user	= 	$this->session_data['user'];
 
 		$data_detail = $this->get_whdetail($wh_no);
-		$data['title'] 				= 'SURVEY';
+		$data['title'] 				= 'WAREHOUSE';
 		$data['user'] 				= $user;
 		$data['detail']				= $data_detail;
 		// dd($data['detail']);

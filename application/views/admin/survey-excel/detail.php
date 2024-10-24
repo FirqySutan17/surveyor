@@ -779,7 +779,7 @@
                         <tr>
                             <th style="text-align: center">DRAFTER</th>
                             <th style="text-align: center">DATE</th>
-                            <th style="text-align: center">TITLE</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -787,12 +787,10 @@
                             <td data-label="EMPLOYEE">
                                 <?= $user['EMPLOYEE_ID'] ?> - <?= $user['FULL_NAME'] ?>
                             </td>
-                            <td data-label="DATE">
+                            <td data-label="DATE" style="text-transform: uppercase">
                                 <?= date('d M Y', strtotime($detail['SURVEY_DATE'])) ?>
                             </td>
-                            <td data-label="TITLE">
-                                <?= $detail['TITLE'] ?>
-                            </td>
+                            
                         </tr>
                     </tbody>
                 </table>
@@ -800,12 +798,16 @@
                 <table class="table table-bordered" style="margin-bottom: 10px">
                     <thead>
                         <tr>
+                            <th style="text-align: center">TITLE</th>
                             <th style="text-align: center">PROVINCE</th>
                             <th style="text-align: center">REGENCIES</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
+                            <td data-label="TITLE">
+                                <?= $detail['TITLE'] ?>
+                            </td>
                             <td data-label="PROVINCE">
                                 <?= $detail['PROVINCE_NAME'] ?>
                             </td>
@@ -816,12 +818,10 @@
                     </tbody>
                 </table>
 
-
                 <table class="table table-bordered" style="margin-bottom: 10px">
                     <thead>
                         <tr>
                             <th>DESCRIPTION</th>
-                            <th>EXCEL FILE</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -829,14 +829,25 @@
                             <td data-label="DESCRIPTION">
                                 <?= $detail['DESCRIPTION'] ?>
                             </td>
-                            <td data-label="EXCEL-FILE">
+                        </tr>   
+                    </tbody>
+                </table>
+
+                <table class="table table-bordered" style="margin-bottom: 10px">
+                    <thead>
+                        <tr>
+                            <th>EXCEL FILE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="EXCEL FILE">
                                 <?php if (!empty($detail['SURVEY_FILE'])): ?>
-                                    <a href="<?= base_url('upload/excel/'.$detail['SURVEY_FILE']) ?>" class="btn btn-info" target="_blank">Excel FIle</a>
+                                    <a href="<?= base_url('upload/excel/'.$detail['SURVEY_FILE']) ?>" class="btn btn-info" target="_blank">DOWNLOAD FILE</a>
                                 <?php endif ?>
                             </td>
                         </tr>   
                     </tbody>
-                    
                 </table>
             </div>
         </div>
