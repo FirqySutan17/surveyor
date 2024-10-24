@@ -495,17 +495,19 @@
 </style>
 
 <div class="main-content" style="background: linear-gradient(0deg, rgba(0,125,195,1) 10%, rgba(161,221,255,1) 98%);min-height: 91.5vh">
-    <form action="#" method="GET">
-        <div class="col-md-6 col-sm-12" style="display: flex; margin-bottom: 10px">
-            <select class="form-control" name="mapdata">
-                <option <?= $filter['mapdata'] == 'PHASE' ? 'selected' : '' ?> value="PHASE">PHASE</option>
-                <option <?= $filter['mapdata'] == 'PLANT_TYPE' ? 'selected' : '' ?> value="PLANT_TYPE">PLANT TYPE</option>
-            </select>
-        </div>
-        <div class="col-md-6 col-sm-12" style="display: flex;">
-            <button type="submit" class="btn btn-primary btn-block" style="height: 30px">FILTER</button>
-        </div>
-    </form>
+    <div>
+        <form action="#" method="GET">
+            <div class="col-md-6 col-sm-12" style=" margin-bottom: 10px">
+                <select class="form-control" name="mapdata">
+                    <option <?= $filter['mapdata'] == 'PHASE' ? 'selected' : '' ?> value="PHASE">PHASE</option>
+                    <option <?= $filter['mapdata'] == 'PLANT_TYPE' ? 'selected' : '' ?> value="PLANT_TYPE">PLANT TYPE</option>
+                </select>
+            </div>
+            <div class="col-md-6 col-sm-12" style="">
+                <button type="submit" class="btn btn-primary btn-block" style="height: 30px">FILTER</button>
+            </div>
+        </form>
+    </div>
     <br>
     <div id="map" style="height: 450px; z-index: 1; border-radius: 10px;"></div>
     <div class="information-box">
