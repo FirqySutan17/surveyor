@@ -348,6 +348,21 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group row">
+                            <label for="working_area" class="col-lg-12 col-sm-12 col-form-label">Working Area</label>
+                            <div class="col-lg-12 col-sm-12">
+                                <select id="working_area" class="form-control" style="width: 100%;" name="working_area[]" multiple>
+                                    <option <?= (!empty($user_province) && in_array('*', $user_province)) ? 'selected' : '' ?> value="*">* - ALL PROVINCE</option>
+                                    <?php foreach ($provinces as $province): ?>
+                                    <option <?= (!empty($user_province) && in_array($province['ID_PROVINCE'], $user_province)) ? 'selected' : '' ?> value="<?= $province['ID_PROVINCE'] ?>"><?= $province['ID_PROVINCE'].' - '.$province['PROVINCE'] ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <hr>
                 <div class="form-group row">
                     <label for="password" class="col-lg-12 col-sm-12 col-form-label">New Password</label>
@@ -385,6 +400,13 @@
             theme: 'bootstrap4',
             language: "en",
             placeholder: "- PILIH REGION -",
+      }).on("change", function (e) {
+            console.log('check');
+      });
+      $('#working_area').select2({
+            theme: 'bootstrap4',
+            language: "en",
+            placeholder: "- PILIH AREA KERJA USER -",
       }).on("change", function (e) {
             console.log('check');
       });

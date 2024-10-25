@@ -74,8 +74,17 @@ class User extends CI_Controller {
 		$data['title'] 			= 'Edit User';
 		$data['plant'] 			= $this->Dbhelper->selectTabel('CODE, CODE_NAME', 'CD_CODE', array('HEAD_CODE' => 'AB'), 'CODE', 'ASC');
 		$data['region'] 		= $this->Dbhelper->selectTabel('CODE, CODE_NAME', 'CD_CODE', array('HEAD_CODE' => 'CS02'), 'CODE', 'ASC');
+		$data['provinces'] 		= $this->Dbhelper->selectTabel('ID_PROVINCE, PROVINCE', 'CD_PROVINCE', array(), 'PROVINCE', 'ASC');
 		$data['menu_access']	= $this->menu_listdata();
 		$data['model']			= $this->Dbhelper->selectTabelOne('*', 'CD_USER', array('EMPLOYEE_ID' => $employee_id));
+		$user_province			= $this->Dbhelper->selectTabel('PROVINCE_ID', 'USER_PROVINCE', array('EMPLOYEE_ID' => $employee_id));
+
+		$data['user_province'] = [];
+		if (!empty($user_province)) {
+			foreach ($user_province as $up) {
+				$data['user_province'][] = $up;
+			}
+		}
 		$this->template->_v('master/user/edit', $data);
 	}
 
@@ -86,13 +95,17 @@ class User extends CI_Controller {
 
 			$post_data = [];
 			foreach ($post as $key => $value) {
-				$key = strtoupper($key);
-				if ($key == 'MENU_ACCESS') {
-					$post_data[$key] = in_array('*', $value) ? json_encode(['*']) : json_encode($value);
-				} else {
-					$post_data[$key] = dbClean($value);
+				if ($key != 'working_area') {
+					$key = strtoupper($key);
+					if ($key == 'MENU_ACCESS') {
+						$post_data[$key] = in_array('*', $value) ? json_encode(['*']) : json_encode($value);
+					} else {
+						$post_data[$key] = dbClean($value);
+					}
 				}
 			}
+			
+
 			$validation 	= $this->validation($post_data);
 			$htmlMessage 	= "";
 			if (count($validation) > 0) {
@@ -116,6 +129,20 @@ class User extends CI_Controller {
 			if (!empty($post_data['NEW_PASSWORD'])) {
 				$update_data['PASSWORD'] = password_hash($post_data['NEW_PASSWORD'], PASSWORD_DEFAULT);
 			}
+
+			if (!empty($post['working_area'])) {
+				$user_province_batch = [];
+				foreach ($post['working_area'] as $v) {
+					$user_province_batch[] = [
+						'EMPLOYEE_ID'	=>  $post_data['EMPLOYEE_ID'],
+						'PROVINCE_ID'	=> $v
+					];
+				}
+				$delete = $this->db->delete('USER_PROVINCE', array('EMPLOYEE_ID' => $post_data['EMPLOYEE_ID']));
+				$save_planting_phase = $this->db->insert_batch('USER_PROVINCE', $user_province_batch);
+
+			}
+
 			$save 	= $this->Dbhelper->updateData("CD_USER", array('EMPLOYEE_ID' => $post_data['EMPLOYEE_ID']), $update_data);		
 			if ($save) {
 				$this->session->set_flashdata('success', "Update data success");
