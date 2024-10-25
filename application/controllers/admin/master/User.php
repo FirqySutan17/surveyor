@@ -85,6 +85,7 @@ class User extends CI_Controller {
 				$data['user_province'][] = $up;
 			}
 		}
+		dd($data);
 		$this->template->_v('master/user/edit', $data);
 	}
 
