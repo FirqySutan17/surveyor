@@ -270,9 +270,7 @@
 		border: 1px solid #ddd;
 		font-size: 11px;
 	}
-	.table-responsive {
-		width: 100%;
-	}
+	
 	.table-w-message {
 		width: 100%;
 	}
@@ -282,8 +280,59 @@
         width: 100%;
         height: 100px;
     }
-	.filter-style {
-		flex-direction: column
+	@media (max-width: 600px) {
+		.table-responsive-new {
+			width: 100%;
+			overflow: auto;
+		}
+		.filter-style {
+			flex-direction: column;
+			align-content: flex-start;
+			justify-content: center;
+			align-items: flex-start;
+		}
+		.filter-style .label-span {
+			margin-bottom: 5px
+		}
+		.btn-filter {
+			margin: 10px 0px
+		}
+		.table-container {
+			width: 100%;
+			overflow-x: auto;
+			max-height: 500px; /* Atur tinggi maksimal sesuai kebutuhan */
+			position: relative; /* Agar sticky header berfungsi */
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+		}
+
+		thead th {
+			position: sticky;
+			top: 0;
+			background-color: white;
+			z-index: 10; /* Z-index untuk header */
+			box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4); /* Beri sedikit bayangan untuk efek header tetap */
+		}
+
+		thead th.fixed-column {
+			position: sticky !important;
+			top: 0;
+			left: 0;
+			z-index: 11; /* Lebih tinggi agar tetap di atas ketika di-scroll */
+			background-color: white;
+			box-shadow: 2px 0 2px -1px rgba(0, 0, 0, 0.4); /* Efek bayangan horizontal untuk kolom tetap */
+		}
+
+		tbody td.fixed-column {
+			position: sticky;
+			left: 0;
+			background-color: white;
+			z-index: 1; /* Lebih rendah dari header */
+			box-shadow: 2px 0 2px -1px rgba(0, 0, 0, 0.4); /* Efek bayangan pada kolom */
+		}
 	}
 </style>
 
@@ -293,15 +342,15 @@
     </h3>
 		<form class="form-horizontal" action="#" method="POST">
         <div class="row" style="padding: 0px 10px; border-bottom: 2px solid #000; padding-bottom: 8px;margin: 0px 0px; margin-bottom: 10px; ">
-			<div class="col-md-6 col-sm-12" class="filter-style" style="display: flex; margin-bottom: 10px">
+			<div class="col-md-6 col-sm-12 filter-style"  style="display: flex; margin-bottom: 10px">
                 <span class="label-span" style="width: 50%; display: inline-block; vertical-align: middle; margin-top: 12px; font-weight: 600">START DATE : </span> 
                 <input type="date" name="sdate" value="<?= $filter['sdate'] ?>" style="margin-left: 8px;" class="form-control" required>
             </div>
-            <div class="col-md-6 col-sm-12" class="filter-style" style="display: flex; margin-bottom: 10px">
+            <div class="col-md-6 col-sm-12 filter-style"  style="display: flex; margin-bottom: 10px">
                 <span class="label-span" style="width: 50%; display: inline-block; vertical-align: middle; margin-top: 12px; font-weight: 600">END DATE : </span> 
                 <input type="date" name="edate" value="<?= $filter['edate'] ?>" style="margin-left: 8px;" class="form-control" required>
             </div>
-            <div class="col-md-6 col-sm-12" class="filter-style" style="display: flex; margin-bottom: 10px">
+            <div class="col-md-6 col-sm-12 filter-style"  style="display: flex; margin-bottom: 10px">
                 <span class="label-span" style="width: 50%; display: inline-block; vertical-align: middle; margin-top: 5px; font-weight: 600">PROVINCE : </span> 
                 <select id="province" class="form-control" name="province" style="width: 100%">
                     <option <?= $filter['province'] == '*' ? 'selected' : '' ?> value="*">* - ALL PROVINCE </option>
@@ -310,7 +359,7 @@
                     <?php endforeach ?>
                 </select>
             </div>
-			<div class="col-md-6 col-sm-12" class="filter-style" style="display: flex; margin-bottom: 10px">
+			<div class="col-md-6 col-sm-12 filter-style"  style="display: flex; margin-bottom: 10px">
                 <span class="label-span" style="width: 50%; display: inline-block; vertical-align: middle; margin-top: 5px; font-weight: 600">REGENCIES : </span> 
                 <select id="regencies" class="form-control" name="regencies" style="width: 100%">
 					<option <?= $filter['regencies'] == '*' ? 'selected' : '' ?> value="*">* - ALL REGENCIES </option>
@@ -320,55 +369,56 @@
                 </select>
             </div>
 						
-            <div class="col-md-12 col-sm-12" style="display: flex;">
-                <button type="submit" class="btn btn-primary btn-block" style="height: 30px">FILTER</button>
+            <div class="col-md-12 col-sm-12 btn-filter" style="display: flex;">
+                <button type="submit" class="btn btn-primary btn-block" style="height: 34px">FILTER</button>
             </div>
         </div>
     </form>
-    <table class="table table-bordered table-hover" id="example1">
-        <thead>
-            <tr>
-				<th rowspan="2">KECAMATAN</th>
-                <th rowspan="2">AREA</th>
-                <th rowspan="2">EST. AREA TANAM (HA)</th>
-                <th rowspan="2">EST. AREA TANAM (%)</th>
-                <th rowspan="2">ACTUAL TANAM (HA)</th>
-                <th rowspan="2">TOTAL PRODUKSI (MT)</th>
-                <th colspan="4">USIA TANAM</th>
-                <th colspan="9">PANEN - ESTIMASI QTY - MT</th>
-            </tr>
-            <tr>
-
-                <th>0-1 BULAN</th>
-                <th>1-2 BULAN</th>
-                <th>2-3 BULAN</th>
-                <th>> 3 BULAN</th>
-                <th colspan="1">JANUARI</th>
-                <th colspan="1">FEBRUARI</th>
-                <th colspan="1">MARET</th>
-            </tr>
-        </thead>
-        <tbody>
-			<?php foreach ($datatable as $i => $v): ?>
-            <tr>
-				<td style="white-space: nowrap;"><?= $v['DISTRICTS'] ?></td>
-                <td style="white-space: nowrap;"><?= $v['PROVINCE'] ?> - <?= $v['REGENCIES'] ?></td>
-                <td style="text-align: center"><?= number_format($v['PLANT_AREA']) ?></td>
-                <td style="text-align: center"><?= $v['PLANT_AREA_ESTIMATE'] < 1 ? '0'.$v['PLANT_AREA_ESTIMATE'] : $v['PLANT_AREA_ESTIMATE'] ?>%</td>
-                <td style="text-align: center"><?= number_format($v['TOTAL_LAHAN']) ?></td>
-                <td style="text-align: center"><?= number_format($v['TOTAL_PRODUKSI']) ?></td>
-                <td style="text-align: center"><?= $v['DAY30'] ?>%</td>
-                <td style="text-align: center"><?= $v['DAY60'] ?>%</td>
-                <td style="text-align: center"><?= $v['DAY90'] ?>%</td>
-                <td style="text-align: center"><?= $v['DAY90PLUS'] ?>%</td>
-                <td style="text-align: center">00 MT</td>
-                <td style="text-align: center">00 MT</td>
-                <td style="text-align: center">00 MT</td>
-            </tr>
-			<?php endforeach ?>
-            <!-- Tambahkan baris lainnya sesuai dengan data -->
-        </tbody>
-    </table>
+	<div class="table-responsive-new table-container">
+		<table class="table table-bordered table-hover" id="example1">
+			<thead>
+				<tr>
+					<th rowspan="2" class="fixed-column">KECAMATAN</th>
+					<th rowspan="2">AREA</th>
+					<th rowspan="2">EST. AREA TANAM (HA)</th>
+					<th rowspan="2">EST. AREA TANAM (%)</th>
+					<th rowspan="2">ACTUAL TANAM (HA)</th>
+					<th rowspan="2">TOTAL PRODUKSI (MT)</th>
+					<th colspan="4">USIA TANAM</th>
+					<th colspan="9">PANEN - ESTIMASI QTY - MT</th>
+				</tr>
+				<tr>
+					<th>0-1 BULAN</th>
+					<th>1-2 BULAN</th>
+					<th>2-3 BULAN</th>
+					<th>> 3 BULAN</th>
+					<th colspan="1">JANUARI</th>
+					<th colspan="1">FEBRUARI</th>
+					<th colspan="1">MARET</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach ($datatable as $i => $v): ?>
+				<tr>
+					<td class="fixed-column" style="white-space: nowrap; background: #fff"><?= $v['DISTRICTS'] ?></td>
+					<td style="white-space: nowrap;"><?= $v['PROVINCE'] ?> - <?= $v['REGENCIES'] ?></td>
+					<td style="text-align: center"><?= number_format($v['PLANT_AREA']) ?></td>
+					<td style="text-align: center"><?= $v['PLANT_AREA_ESTIMATE'] < 1 ? '0'.$v['PLANT_AREA_ESTIMATE'] : $v['PLANT_AREA_ESTIMATE'] ?>%</td>
+					<td style="text-align: center"><?= number_format($v['TOTAL_LAHAN']) ?></td>
+					<td style="text-align: center"><?= number_format($v['TOTAL_PRODUKSI']) ?></td>
+					<td style="text-align: center"><?= $v['DAY30'] ?>%</td>
+					<td style="text-align: center"><?= $v['DAY60'] ?>%</td>
+					<td style="text-align: center"><?= $v['DAY90'] ?>%</td>
+					<td style="text-align: center"><?= $v['DAY90PLUS'] ?>%</td>
+					<td style="text-align: center">00 MT</td>
+					<td style="text-align: center">00 MT</td>
+					<td style="text-align: center">00 MT</td>
+				</tr>
+				<?php endforeach ?>
+			</tbody>
+		</table>
+	</div>
+   
 </div>
 
 <script src="<?= asset('vendor/select2/js/select2.min.js') ?>"></script>

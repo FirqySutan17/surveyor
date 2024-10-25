@@ -282,6 +282,72 @@
         width: 100%;
         height: 100px;
     }
+	.address {
+		width: 30%
+	}
+	table tbody tr td {
+        text-align: center;
+    }
+	@media (max-width: 600px) {
+		.filter-style {
+			flex-direction: column;
+			align-content: flex-start;
+			justify-content: center;
+			align-items: flex-start;
+		}
+		.filter-style .label-span {
+			margin-bottom: 5px
+		}
+		.btn-filter {
+			margin: 10px 0px
+		}
+		table thead {
+            display: none;
+        }
+        table, table tbody, table tr, table td {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        } 
+        th, td {
+            font-size: 12px !important;
+            text-align: right;
+        }
+        table tbody tr td {
+            text-align: right;
+            padding-left: 50%;
+            position: relative;
+            white-space: normal !important;
+            font-size: 12px !important;
+        }
+		table td:before {
+            content: attr(data-label);
+            width: 100%;
+            font-weight: 600;
+            font-size: 13px;
+            text-align: left;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        } 
+		.address {
+			width: auto
+		}
+		tr {
+			overflow: hidden;
+			margin-bottom: 20px;
+			border-top: 4px solid #000;
+			border-bottom: 4px solid #000;
+		}
+		table.table-bordered.dataTable th, table.table-bordered.dataTable td {
+			font-size: 12px !important;
+			text-transform: uppercase;
+			font-weight: 700;
+			width: auto !important;
+		}
+		.btn-show-detail svg {
+			font-size: 20px
+		}
+	}
 </style>
 
 <div class="main-content pre-posttest">
@@ -290,42 +356,42 @@
     </h3>
 		<form class="form-horizontal" action="#" method="POST">
         <div class="row" style="padding: 0px 10px; border-bottom: 2px solid #000; padding-bottom: 8px;margin: 0px 0px; margin-bottom: 10px; ">
-						<div class="col-md-6 col-sm-12" style="display: flex; margin-bottom: 10px">
+			<div class="col-md-6 col-sm-12 filter-style" style="display: flex; margin-bottom: 10px">
                 <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 12px; font-weight: 600">START DATE : </span> 
                 <input type="date" name="sdate" value="<?= $filter['sdate'] ?>" class="form-control" required>
             </div>
-            <div class="col-md-6 col-sm-12" style="display: flex; margin-bottom: 10px">
+            <div class="col-md-6 col-sm-12 filter-style" style="display: flex; margin-bottom: 10px">
                 <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 12px; font-weight: 600">END DATE : </span> 
                 <input type="date" name="edate" value="<?= $filter['edate'] ?>" class="form-control" required>
             </div>
-            <div class="col-md-6 col-sm-12" style="display: flex; margin-bottom: 10px">
+            <div class="col-md-6 col-sm-12 filter-style" style="display: flex; margin-bottom: 10px">
                 <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 5px; font-weight: 600">PLANT : </span> 
-                <select id="plant" class="form-control" name="plant" style="width: 78%">
+                <select id="plant" class="form-control" name="plant">
                     <?php foreach ($plant as $field): ?>
                         <option <?= $filter['plant'] == $field['CODE'] ? 'selected' : '' ?> value="<?= $field['CODE'] ?>"><?= $field['CODE'] ?> - <?= $field['CODE_NAME'] ?></option>
                     <?php endforeach ?>
                 </select>
             </div>
-						<div class="col-md-6 col-sm-12" style="display: flex; margin-bottom: 10px">
+						<div class="col-md-6 col-sm-12 filter-style" style="display: flex; margin-bottom: 10px">
                 <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 5px; font-weight: 600">SURVEYOR : </span> 
-                <select id="surveyor" class="form-control" name="surveyor" style="width: 78%">
+                <select id="surveyor" class="form-control" name="surveyor">
 										<option <?= $filter['surveyor'] == '*' ? 'selected' : '' ?> value="*">* - ALL SURVEYOR </option>
                     <?php foreach ($surveyor as $field): ?>
                         <option <?= $filter['surveyor'] == $field['CREATED_BY'] ? 'selected' : '' ?> value="<?= $field['CREATED_BY'] ?>"><?= $field['CREATED_BY'] ?> - <?= $field['CREATED_BY_NAME'] ?></option>
                     <?php endforeach ?>
                 </select>
             </div>
-						<div class="col-md-6 col-sm-12" style="display: flex; margin-bottom: 10px">
+			<div class="col-md-6 col-sm-12 filter-style" style="display: flex; margin-bottom: 10px">
                 <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 5px; font-weight: 600">PHASE : </span> 
-                <select id="phase" class="form-control" name="phase" style="width: 78%">
+                <select id="phase" class="form-control" name="phase">
 								<option <?= $filter['surveyor'] == '*' ? 'selected' : '' ?> value="*">* - ALL PHASE </option>
                     <?php foreach ($phase as $field): ?>
                         <option <?= $filter['phase'] == $field['CODE'] ? 'selected' : '' ?> value="<?= $field['CODE'] ?>"><?= $field['CODE'] ?> - <?= $field['CODE_NAME'] ?></option>
                     <?php endforeach ?>
                 </select>
             </div>
-            <div class="col-md-12 col-sm-12" style="display: flex;">
-                <button type="submit" class="btn btn-primary btn-block" style="height: 30px">FILTER</button>
+            <div class="col-md-12 col-sm-12 btn-filter" style="display: flex;">
+                <button type="submit" class="btn btn-primary btn-block" style="height: 34px">FILTER</button>
             </div>
         </div>
     </form>
@@ -346,18 +412,18 @@
         <tbody>
             <?php foreach ($datatable as $i => $v): ?>
                 <tr>
-                    <td style="text-align: center; vertical-align: middle"><?= $i + 1 ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['SURVEY_NO'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['PLANT_NAME'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= $v['CREATED_BY'].' - '.$v['CREATED_BY_NAME'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= date('Y-m-d', strtotime($v['SURVEY_DATE'])) ?></td>
-                    <!-- <td style="text-align: center; vertical-align: middle">
+                    <td data-label="NO" style="vertical-align: middle"><?= $i + 1 ?></td>
+                    <td data-label="SURVEY NO" style="vertical-align: middle"><?= $v['SURVEY_NO'] ?></td>
+                    <td data-label="PLANT" style="vertical-align: middle"><?= $v['PLANT_NAME'] ?></td>
+                    <td data-label="SURVEYOR" style="vertical-align: middle"><?= $v['CREATED_BY'].' - '.$v['CREATED_BY_NAME'] ?></td>
+                    <td data-label="DATE" style="vertical-align: middle"><?= date('Y-m-d', strtotime($v['SURVEY_DATE'])) ?></td>
+                    <!-- <td data-label="NO" style="vertical-align: middle">
 											<iframe class="maps-frame" src="https://maps.google.com/maps?q=<?= $v['COORDINATE'] ?>&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 										</td> -->
-                    <td style="text-align: center; vertical-align: middle; width: 30%"><?= $v['DESCRIPTION'] ?></td>
-                    <td style="text-align: center; vertical-align: middle"><?= str_replace(",", "\n", $v['FARMER_NAMES']) ?></td>
+                    <td data-label="ADDRESS" style="vertical-align: middle; width: 30%"><?= $v['DESCRIPTION'] ?></td>
+                    <td data-label="PETANI" style="vertical-align: middle"><?= str_replace(",", "\n", $v['FARMER_NAMES']) ?></td>
                     <td style="text-align: center; vertical-align: middle">
-                        <a href="<?= admin_url('survey/edit/'.$v['SURVEY_NO']) ?>" class="btn btn-sm" title="Edit"><i class="fas fa-pen text-success"></i></a>
+                        <a href="<?= admin_url('survey/edit/'.$v['SURVEY_NO']) ?>" class="btn btn-sm btn-show-detail" title="Edit"><i class="fas fa-pen text-success"></i></a>
                         <!-- <a href="<?= admin_url('survey/drawing') ?>" class="btn btn-sm" title="Drawing"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px"></i></a> -->
                         <!-- <a href="<?= admin_url('survey/detail/'.$v['SURVEY_NO']) ?>" target="_blank" class="btn btn-sm" title="Detail"><i class="fas fa-eye text-primary"></i></a> -->
                     </td>

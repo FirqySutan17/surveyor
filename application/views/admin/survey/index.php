@@ -289,7 +289,6 @@
 	}
 	table tbody tr td {
         text-align: center;
-
     }
 	@media (max-width: 600px) {
 		.filter-style {

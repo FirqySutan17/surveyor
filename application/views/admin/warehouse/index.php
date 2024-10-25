@@ -276,6 +276,69 @@
 	.table-w-message {
 		width: 100%;
 	}
+	table tbody tr td {
+        text-align: center;
+    }
+	@media (max-width: 600px) {
+		.filter-style {
+			flex-direction: column;
+			align-content: flex-start;
+			justify-content: center;
+			align-items: flex-start;
+		}
+		.filter-style .label-span {
+			margin-bottom: 5px
+		}
+		.btn-filter {
+			margin: 10px 0px
+		}
+		table thead {
+            display: none;
+        }
+        table, table tbody, table tr, table td {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        } 
+        th, td {
+            font-size: 12px !important;
+            text-align: right;
+        }
+        table tbody tr td {
+            text-align: right;
+            padding-left: 50%;
+            position: relative;
+            white-space: normal !important;
+            font-size: 12px !important;
+        }
+		table td:before {
+            content: attr(data-label);
+            width: 100%;
+            font-weight: 600;
+            font-size: 13px;
+            text-align: left;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        } 
+		.address {
+			width: auto
+		}
+		tr {
+			overflow: hidden;
+			margin-bottom: 20px;
+			border-top: 4px solid #000;
+			border-bottom: 4px solid #000;
+		}
+		table.table-bordered.dataTable th, table.table-bordered.dataTable td {
+			font-size: 12px !important;
+			text-transform: uppercase;
+			font-weight: 700;
+			width: auto !important;
+		}
+		.btn-show-detail svg {
+			font-size: 20px
+		}
+	}
 </style>
 
 <div class="main-content pre-posttest">
@@ -285,7 +348,7 @@
 	
 	<form class="form-horizontal" action="#" method="POST">
         <div class="row" style="padding: 0px 10px; border-bottom: 2px solid #000; padding-bottom: 10px;margin: 0px 0px; margin-bottom: 10px; ">
-			<div class="col-md-6 col-sm-12" style="display: flex;; align-items: center; margin-bottom: 10px">
+			<div class="col-md-6 col-sm-12 filter-style" style="display: flex; margin-bottom: 10px">
                 <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 0px; font-weight: 600">PROVINCE : </span> 
                 <select id="province" class="form-control" name="province" >
 					<option value="*" selected>- ALL PROVINCE -</option>
@@ -294,7 +357,7 @@
                     <?php endforeach ?>
                 </select>
             </div>
-			<div class="col-md-6 col-sm-12" style="display: flex;; align-items: center">
+			<div class="col-md-6 col-sm-12 filter-style" style="display: flex;margin-bottom: 10px">
                 <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 0px; font-weight: 600">REGENCIES : </span> 
                 <select id="regencies" class="form-control" name="regencies" >
 					<option value="*" selected>- ALL REGENCIES -</option>
@@ -303,7 +366,7 @@
                     <?php endforeach ?> -->
                 </select>
             </div>  
-			<div class="col-md-6 col-sm-12" style="display: flex;; align-items: center">
+			<div class="col-md-6 col-sm-12 filter-style" style="display: flex; margin-bottom: 10px">
                 <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 0px; font-weight: 600">DISTRICTS : </span> 
                 <select id="districts" class="form-control" name="districts" >
 					<option value="*" selected>- ALL DISTRICTS -</option>
@@ -313,8 +376,8 @@
                 </select>
             </div>
 			     
-            <div class="col-md-6 col-sm-12" style="display: flex; align-items: center; justify-content: center">
-                <button type="submit" class="btn btn-primary btn-block" style="height: 30px">FILTER</button>
+            <div class="col-md-6 col-sm-12 btn-filter" style="display: flex; justify-content: center">
+                <button type="submit" class="btn btn-primary btn-block" style="height: 34px">FILTER</button>
             </div>
             <!-- <div class="col-md-2 col-sm-12" style="display: flex; align-items: center">
                 <button type="submit" formaction="<?= admin_url('visit/report-collector/excel') ?>" class="btn btn-info btn-block" style="height: 30px">EXCEL</button>
@@ -335,24 +398,24 @@
         <tbody>
 		<?php foreach ($datatable as $i => $v): ?>
 			<tr>
-				<td style="text-align: center; vertical-align: middle">
+				<td data-label="WAREHOUSE NO" style="text-align: center; vertical-align: middle">
                     <?= $v['WH_NO'] ?>
 				</td>
-                <td style="text-align: center; vertical-align: middle">
+                <td data-label="NAME" style="text-align: center; vertical-align: middle">
                     <?= $v['GUDANG_NAME'] ?>
 				</td>
-				<td style="text-align: center; vertical-align: middle">
+				<td data-label="PROVINCE" style="text-align: center; vertical-align: middle">
 					<?= $v['PROVINCE_NAME'] ?>
 				</td>
-				<td style="text-align: center; vertical-align: middle">
+				<td data-label="REGENCIES" style="text-align: center; vertical-align: middle">
 					<?= $v['REGENCIES_NAME'] ?>
 				</td>
-				<td style="text-align: center; vertical-align: middle">
+				<td data-label="DISTRICTS" style="text-align: center; vertical-align: middle">
 					<?= $v['DISTRICT_NAME'] ?>
 				</td>
 				<td style="text-align: center; vertical-align: middle">
 					<!-- <a href="<?= admin_url('warehouse/edit/'.$v['WH_NO']) ?>"class="btn btn-sm"><i class="fas fa-pen text-warning"></i></a> -->
-					<a href="<?= admin_url('warehouse/detail/'.$v['WH_NO']) ?>" class="btn btn-sm"><i class="fas fa-eye text-success"></i></a>
+					<a href="<?= admin_url('warehouse/detail/'.$v['WH_NO']) ?>" class="btn btn-sm btn-show-detail"><i class="fas fa-eye text-success"></i></a>
 				</td>
 			</tr>
 		<?php endforeach ?>

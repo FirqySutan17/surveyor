@@ -351,6 +351,9 @@
 	.table-maps-frame {
 		width: 30%
 	}
+	th, td {
+		text-align: center
+	}
 	@media (max-width: 1024px) {
 		dialog {
 			padding: 1rem 1.5rem;
@@ -373,6 +376,18 @@
 		}
 	}
 	@media (max-width: 600px) {
+		.filter-style {
+			flex-direction: column;
+			align-content: flex-start;
+			justify-content: center;
+			align-items: flex-start;
+		}
+		.filter-style .label-span {
+			margin-bottom: 5px
+		}
+		.btn-filter {
+			margin: 10px 0px
+		}
 		table thead {
             display: none;
         }
@@ -383,10 +398,10 @@
         } 
         th, td {
             font-size: 12px !important;
-            text-align: center;
+            text-align: right;
         }
         table tbody tr td {
-            text-align: center;
+            text-align: right;
             padding-left: 50%;
             position: relative;
             white-space: normal !important;
@@ -401,6 +416,24 @@
             text-transform: uppercase;
             margin-bottom: 5px;
         } 
+		.address {
+			width: auto
+		}
+		tr {
+			overflow: hidden;
+			margin-bottom: 20px;
+			border-top: 4px solid #000;
+			border-bottom: 4px solid #000;
+		}
+		table.table-bordered.dataTable th, table.table-bordered.dataTable td {
+			font-size: 12px !important;
+			text-transform: uppercase;
+			font-weight: 700;
+			width: auto !important;
+		}
+		.btn-show-detail svg {
+			font-size: 20px
+		}
 	}
 </style>
 
@@ -410,15 +443,15 @@
     </h3>
 	<form class="form-horizontal" action="#" method="POST">
         <div class="row" style="padding: 0px 10px; border-bottom: 2px solid #000; padding-bottom: 10px;margin: 0px 0px; margin-bottom: 10px; ">
-			<div class="col-md-4 col-sm-12" style="display: flex; margin: 10px 0px">
+			<div class="col-md-4 col-sm-12 filter-style" style="display: flex; margin: 10px 0px">
                 <span class="label-span" style="width: 29%; display: inline-block; vertical-align: middle; margin-top: 8px; font-weight: 600">DATE : </span> 
                 <input type="date" name="datemonth" value="<?= $filter['datemonth'] ?>" class="form-control" required>
             </div>
-			<div class="col-md-6 col-sm-12" style="display: flex;; align-items: center">
+			<div class="col-md-6 col-sm-12 filter-style" style="display: flex;; align-items: center">
                 
             </div>            
-            <div class="col-md-2 col-sm-12" style="display: flex; align-items: center">
-                <button type="submit" class="btn btn-primary btn-block" style="height: 30px">FILTER</button>
+            <div class="col-md-2 col-sm-12 btn-filter" style="display: flex; align-items: center">
+                <button type="submit" class="btn btn-primary btn-block" style="height: 34px">FILTER</button>
             </div>
             <!-- <div class="col-md-2 col-sm-12" style="display: flex; align-items: center">
                 <button type="submit" formaction="<?= admin_url('survey/report/excel') ?>" class="btn btn-info btn-block" style="height: 30px">EXCEL</button>
@@ -444,13 +477,13 @@
 								$path_out = $v['PLANT'].'/'.$v['PLANT'].'_'.$v['EMPNO'].'_'.$v['ATTEND_DATE'].'_OUT.jpg'; 
 							?>
 							<tr>
-									<td style="text-align: center; vertical-align: middle"><?= $i + 1 ?></td>
-									<td style="text-align: center; vertical-align: middle"><?= date('Y-m-d', strtotime($v['ATTEND_DATE'])) ?></td>
-									<td style="text-align: center; vertical-align: middle"><?= $v['FULL_NAME'] ?></td>
-									<td style="text-align: center; vertical-align: middle"><?= date('H:i:s', strtotime($v['TIME_IN'])) ?></td>
-									<td style="text-align: center; vertical-align: middle"><?= !empty($v['TIME_OUT']) ? date('H:i:s', strtotime($v['TIME_OUT'])) : '-' ?></td>
+									<td data-label="NO" style="vertical-align: middle"><?= $i + 1 ?></td>
+									<td data-label="DATE" style="vertical-align: middle"><?= date('Y-m-d', strtotime($v['ATTEND_DATE'])) ?></td>
+									<td data-label="NAME" style="vertical-align: middle"><?= $v['FULL_NAME'] ?></td>
+									<td data-label="CHECK IN" style="vertical-align: middle"><?= date('H:i:s', strtotime($v['TIME_IN'])) ?></td>
+									<td data-label="CHECK OUT" style="vertical-align: middle"><?= !empty($v['TIME_OUT']) ? date('H:i:s', strtotime($v['TIME_OUT'])) : '-' ?></td>
 									<td style="text-align: center; vertical-align: middle">
-										<button id="btn-detail-<?= $i ?>" data-name="<?= $v['FULL_NAME'] ?>"  data-tanggal="<?= date('d/m/Y', strtotime($v['ATTEND_DATE'])) ?>" data-timein="<?= date('H:i:s', strtotime($v['TIME_IN'])) ?>" data-coordinatein="<?= $v['REG_IN_OS'] ?>" data-timeout="<?= !empty($v['TIME_OUT']) ? date('H:i:s', strtotime($v['TIME_OUT'])) : '-' ?>" data-coordinateout="<?= $v['REG_OUT_OS'] ?>" data-imagein="<?= $path_in ?>" data-imageout="<?= $path_out ?>" class="primary" onclick="showDetail('<?= $i ?>')" style="background: none; border: none;"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px; margin-top: 5px"></i></button>
+										<button id="btn-detail-<?= $i ?>" data-name="<?= $v['FULL_NAME'] ?>"  data-tanggal="<?= date('d/m/Y', strtotime($v['ATTEND_DATE'])) ?>" data-timein="<?= date('H:i:s', strtotime($v['TIME_IN'])) ?>" data-coordinatein="<?= $v['REG_IN_OS'] ?>" data-timeout="<?= !empty($v['TIME_OUT']) ? date('H:i:s', strtotime($v['TIME_OUT'])) : '-' ?>" data-coordinateout="<?= $v['REG_OUT_OS'] ?>" data-imagein="<?= $path_in ?>" data-imageout="<?= $path_out ?>" class="primary btn-show-detail" onclick="showDetail('<?= $i ?>')" style="background: none; border: none;"><i class="fas fa-location-crosshairs text-warning" style="font-size: 16px; margin-top: 5px"></i></button>
 										<!-- <a href="<?= admin_url('survey/detail') ?>" target="_blank" class="btn btn-sm" title="Detail"><i class="fas fa-eye text-primary"></i></a> -->
 									</td>
 							</tr>
