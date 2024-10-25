@@ -282,6 +282,9 @@
         width: 100%;
         height: 100px;
     }
+	.filter-style {
+		flex-direction: column
+	}
 </style>
 
 <div class="main-content pre-posttest">
@@ -290,15 +293,15 @@
     </h3>
 		<form class="form-horizontal" action="#" method="POST">
         <div class="row" style="padding: 0px 10px; border-bottom: 2px solid #000; padding-bottom: 8px;margin: 0px 0px; margin-bottom: 10px; ">
-						<div class="col-md-6 col-sm-12" style="display: flex; margin-bottom: 10px">
+			<div class="col-md-6 col-sm-12" class="filter-style" style="display: flex; margin-bottom: 10px">
                 <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 12px; font-weight: 600">START DATE : </span> 
                 <input type="date" name="sdate" value="<?= $filter['sdate'] ?>" style="margin-left: 3px;" class="form-control" required>
             </div>
-            <div class="col-md-6 col-sm-12" style="display: flex; margin-bottom: 10px">
+            <div class="col-md-6 col-sm-12" class="filter-style" style="display: flex; margin-bottom: 10px">
                 <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 12px; font-weight: 600">END DATE : </span> 
                 <input type="date" name="edate" value="<?= $filter['edate'] ?>" style="margin-left: 3px;" class="form-control" required>
             </div>
-            <div class="col-md-6 col-sm-12" style="display: flex; margin-bottom: 10px">
+            <div class="col-md-6 col-sm-12" class="filter-style" style="display: flex; margin-bottom: 10px">
                 <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 5px; font-weight: 600">PLANT : </span> 
                 <select id="plant" class="form-control" name="plant">
                     <?php foreach ($plant as $field): ?>
@@ -306,7 +309,7 @@
                     <?php endforeach ?>
                 </select>
             </div>
-						<div class="col-md-6 col-sm-12" style="display: flex; margin-bottom: 10px">
+			<div class="col-md-6 col-sm-12" class="filter-style" style="display: flex; margin-bottom: 10px">
                 <span class="label-span" style="width: 35%; display: inline-block; vertical-align: middle; margin-top: 5px; font-weight: 600">SURVEYOR : </span> 
                 <select id="surveyor" class="form-control" name="surveyor">
 										<option <?= $filter['surveyor'] == '*' ? 'selected' : '' ?> value="*">* - ALL SURVEYOR </option>

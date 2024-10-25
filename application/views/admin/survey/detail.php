@@ -989,7 +989,10 @@
                                     <tr>
                                         <td data-label ="DATE / TITLE"><?= $sf['IMAGE_TITLE'] ?></td>
                                         <td data-label ="UPLOAD IMAGE">
-                                            <img src="<?= base_url('upload/'.$sf['IMAGE_FILENAME']) ?>" alt="" style="height: 170px; width: 170px; object-fit: cover;margin-bottom:20px">
+                                            <img class="imageshow" src="<?= base_url('upload/'.$sf['IMAGE_FILENAME']) ?>" alt="" style="height: 170px; width: 170px; object-fit: cover; display:none">
+                                            <a class="buttons" href="<?= base_url('upload/'.$sf['IMAGE_FILENAME']) ?>" data-lightbox="mygallery">
+                                                <img src="<?= base_url('upload/'.$sf['IMAGE_FILENAME']) ?>" alt="" style="height: 170px; width: 170px; object-fit: cover">
+                                            </a>
                                         </td>
                                     </tr>
                                 <?php endforeach ?>
@@ -1007,3 +1010,5 @@
         </form>
     </div>
 </div>
+
+<script src="<?= asset('vendor/lightbox2/dist/js/lightbox-plus-jquery.min.js') ?>"></script>
