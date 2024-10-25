@@ -819,7 +819,7 @@ class survey extends CI_Controller {
 			ORDER BY report.TOTAL_PRODUKSI DESC
 		";
 		$data = $this->db->query($query)->result_array();
-		
+		// dd($query);
 		return $data;
 	}
 
