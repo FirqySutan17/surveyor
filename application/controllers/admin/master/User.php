@@ -82,10 +82,10 @@ class User extends CI_Controller {
 		$data['user_province'] = [];
 		if (!empty($user_province)) {
 			foreach ($user_province as $up) {
-				$data['user_province'][] = $up;
+				$data['user_province'][] = $up['PROVINCE_ID'];
 			}
 		}
-		dd($data);
+		// dd($data);
 		$this->template->_v('master/user/edit', $data);
 	}
 
