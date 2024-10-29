@@ -392,9 +392,9 @@
 					<th>1-2 BULAN</th>
 					<th>2-3 BULAN</th>
 					<th>> 3 BULAN</th>
+					<th colspan="1">NOVEMBER</th>
+					<th colspan="1">DESEMBER</th>
 					<th colspan="1">JANUARI</th>
-					<th colspan="1">FEBRUARI</th>
-					<th colspan="1">MARET</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -410,9 +410,9 @@
 					<td style="text-align: center"><?= $v['DAY60'] ?>%</td>
 					<td style="text-align: center"><?= $v['DAY90'] ?>%</td>
 					<td style="text-align: center"><?= $v['DAY90PLUS'] ?>%</td>
-					<td style="text-align: center">00 MT</td>
-					<td style="text-align: center">00 MT</td>
-					<td style="text-align: center">00 MT</td>
+					<td style="text-align: center"><?= number_format($v['ESTIMASI1']) ?></td>
+					<td style="text-align: center"><?= number_format($v['ESTIMASI2']) ?></td>
+					<td style="text-align: center"><?= number_format($v['ESTIMASI3']) ?></td>
 				</tr>
 				<?php endforeach ?>
 			</tbody>
