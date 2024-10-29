@@ -8,7 +8,7 @@ class Warehouse extends CI_Controller {
 	var $session_data = "";
 	public function __Construct() {
 		parent::__construct();
-		$this->menu_id = 'TR002';
+		$this->menu_id = 'M008';
 		$this->menu_id1 = 'R002';
 		$this->menu_id2 = 'TR005';
 		$this->session_data = $this->session->userdata('user_dashboard');

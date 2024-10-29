@@ -179,7 +179,7 @@
                             </a>
                         </li>
                     <?php endif ?>
-                    <?php if (in_array('M006', $user_access) || in_array('*', $user_access)): ?>
+                    <?php if (in_array('M008', $user_access) || in_array('*', $user_access)): ?>
                         <li class="<?= $this->uri->segment(3) == 'kategori' ? 'active' : '' ?>">
                             <a href="<?= route('dashboard/master/warehouse') ?>"
                                 class="">
