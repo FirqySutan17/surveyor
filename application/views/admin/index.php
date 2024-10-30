@@ -582,6 +582,7 @@
     var padiURL       = `<?= base_url('assets/img/marker-icon-padi.png') ?>`;
     var casavaURL       = `<?= base_url('assets/img/marker-icon-casava.png') ?>`;
     var tanamanLainURL       = `<?= base_url('assets/img/marker-icon-lain.png') ?>`;
+    var nophaseURL       = `<?= base_url('assets/img/marker-icon-gp.png') ?>`;
 
     if (mapdata == 'PLANT_TYPE') {
 
@@ -606,10 +607,11 @@
                 { label: "VEGETATIF AKHIR", type: "image", url: vrURL, },
                 { label: "GENETATIF AWAL", type: "image", url: gaURL, },
                 { label: "GENETATIF AKHIR", type: "image", url: grURL, },
-                { label: "GAGAL PANEN", type: "image", url: gpURL, }
+                { label: "GAGAL PANEN", type: "image", url: gpURL, },
+                { label: "NO PHASE", type: "image", url: nophaseURL, }
             ],
             title: 'LEGEND',
-            column: 3
+            column: 4
         }).addTo(map);
     }
 
@@ -671,6 +673,15 @@
         shadowSize: shadowSize
     });
 
+    var iconsGP = new L.Icon({
+        iconUrl: nophaseURL,
+        shadowUrl: shadowURL,
+        iconSize: iconSize,
+        iconAnchor: iconAnchor,
+        popupAnchor: popupAnchor,
+        shadowSize: shadowSize
+    });
+
     var iconJagung = new L.Icon({
         iconUrl: jagungURL,
         shadowUrl: shadowURL,
@@ -713,12 +724,14 @@
     markers_data.forEach(marker => {
         let coordinate = marker.COORDINATE.split(",");
         let title = marker.TANAMAN.toUpperCase();
-        if (marker.CURRENT_PHASE) {
+        if (marker.CURRENT_PHASE && marker.CURRENT_PHASE !== "-") {
             title = title + ' - ' + marker.CURRENT_PHASE.replace('-', ' ').toUpperCase();
+        } else {
+            title = title + ' - NO PHASE';
         }
         let obj = {
             coords: [coordinate[0], coordinate[1]],
-            info: `<div class="title-phase"><strong>${title}:</strong></div><br>${marker.ADDRESS.toUpperCase()}`,
+            info: `<div class="title-phase"><strong>${title} : </strong></div><br>${marker.ADDRESS.toUpperCase()}`,
             phase: marker.CURRENT_PHASE,
             plant_type: marker.TANAMAN
         };
@@ -752,6 +765,8 @@
                 icon = iconGR;
             } else if (marker.phase == 'gagal-panen') {
                 icon = iconGP;
+            } else if (marker.phase == '-') {
+                icon = iconsGP;
             }
         }
 
