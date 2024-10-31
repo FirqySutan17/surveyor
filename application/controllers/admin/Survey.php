@@ -613,7 +613,7 @@ class survey extends CI_Controller {
 			'plus3Month' 			=> $plus3Month,
 			'plus3Month_text' => convMonth(substr($plus3Month, 4), TRUE)
 		];
-
+		dd($estimasiFilter);
 		$data['title'] 				= 'SURVEY';
 		$data['datatable']		= $this->datatable_report($filter, $estimasiFilter);
 		$data['filter']				= $filter;
