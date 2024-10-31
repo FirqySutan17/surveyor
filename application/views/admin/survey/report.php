@@ -392,9 +392,9 @@
 					<th>1-2 BULAN</th>
 					<th>2-3 BULAN</th>
 					<th>> 3 BULAN</th>
-					<th colspan="1">NOVEMBER</th>
-					<th colspan="1">DESEMBER</th>
-					<th colspan="1">JANUARI</th>
+					<th colspan="1"><?= $estimasiFilter['plus1Month_text'] ?></th>
+					<th colspan="1"><?= $estimasiFilter['plus2Month_text'] ?></th>
+					<th colspan="1"><?= $estimasiFilter['plus3Month_text'] ?></th>
 				</tr>
 			</thead>
 			<tbody>

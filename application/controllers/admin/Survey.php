@@ -601,11 +601,25 @@ class survey extends CI_Controller {
 			"regencies"		=> $regencies
 		];
 
+		$plus1Month = date('Ym', strtotime("+1 month"));
+		$plus2Month = date('Ym', strtotime("+2 month"));
+		$plus3Month = date('Ym', strtotime("+3 month"));
+
+		$estimasiFilter = [
+			'plus1Month' 			=> $plus1Month,
+			'plus1Month_text' => convMonth(substr($plus1Month, 4), TRUE),
+			'plus2Month' 			=> $plus2Month,
+			'plus2Month_text' => convMonth(substr($plus2Month, 4), TRUE),
+			'plus3Month' 			=> $plus3Month,
+			'plus3Month_text' => convMonth(substr($plus3Month, 4), TRUE)
+		];
+
 		$data['title'] 				= 'SURVEY';
-		$data['datatable']		= $this->datatable_report($filter);
+		$data['datatable']		= $this->datatable_report($filter, $estimasiFilter);
 		$data['filter']				= $filter;
 		$data['province'] 			= $this->dataprovince();
 		$data['regencies'] 			= $this->dataregencies();
+		$data['estimasiFilter']	= $estimasiFilter;
 		// dd($data['datatable']);
 		$this->template->_v('survey/report', $data);
 	}
@@ -691,7 +705,7 @@ class survey extends CI_Controller {
 		return $data;
 	}
 
-	private function datatable_report($filter) {
+	private function datatable_report($filter, $estimasiFilter) {
 		$sdate = date('Ymd', strtotime($filter['sdate']));
 		$edate = date('Ymd', strtotime($filter['edate']));
 		$province 	= $filter['province'];
@@ -751,6 +765,10 @@ class survey extends CI_Controller {
 		if (empty($where_inside)) {
 			$where_outside = "WHERE report.TOTAL_PRODUKSI > 0";
 		}
+
+		$plus1Month = $estimasiFilter['plus1Month'];
+		$plus2Month = $estimasiFilter['plus2Month'];
+		$plus3Month = $estimasiFilter['plus3Month'];
 
 		$query = "
 			SELECT 
@@ -849,21 +867,21 @@ class survey extends CI_Controller {
 					COALESCE(
 						(SELECT SUM(LUAS_LAHAN * 5.5) as TOTAL_PRODUKSI
 						FROM SURVEY D
-						WHERE D.CURRENT_PHASE_DATE IS NOT NULL AND TO_CHAR(TO_DATE(D.CURRENT_PHASE_DATE,'YYYYMMDD')+(120 - D.UMUR_TANAM), 'YYMM') = '2501'
+						WHERE D.CURRENT_PHASE_DATE IS NOT NULL AND TO_CHAR(TO_DATE(D.CURRENT_PHASE_DATE,'YYYYMMDD')+(120 - D.UMUR_TANAM), 'YYMM') = '$plus1Month'
 						AND D.DISTRICT = A.ID_DISTRICTS 
 						GROUP BY D.DISTRICT), 0
 					) AS ESTIMASI1,
 					COALESCE(
 						(SELECT SUM(LUAS_LAHAN * 5.5) as TOTAL_PRODUKSI
 						FROM SURVEY D
-						WHERE D.CURRENT_PHASE_DATE IS NOT NULL AND TO_CHAR(TO_DATE(D.CURRENT_PHASE_DATE,'YYYYMMDD')+(120 - D.UMUR_TANAM), 'YYMM') = '2502'
+						WHERE D.CURRENT_PHASE_DATE IS NOT NULL AND TO_CHAR(TO_DATE(D.CURRENT_PHASE_DATE,'YYYYMMDD')+(120 - D.UMUR_TANAM), 'YYMM') = '$plus2Month'
 						AND D.DISTRICT = A.ID_DISTRICTS 
 						GROUP BY D.DISTRICT), 0
 					) AS ESTIMASI2,
 					COALESCE(
 						(SELECT SUM(LUAS_LAHAN * 5.5) as TOTAL_PRODUKSI
 						FROM SURVEY D
-						WHERE D.CURRENT_PHASE_DATE IS NOT NULL AND TO_CHAR(TO_DATE(D.CURRENT_PHASE_DATE,'YYYYMMDD')+(120 - D.UMUR_TANAM), 'YYMM') = '2503'
+						WHERE D.CURRENT_PHASE_DATE IS NOT NULL AND TO_CHAR(TO_DATE(D.CURRENT_PHASE_DATE,'YYYYMMDD')+(120 - D.UMUR_TANAM), 'YYMM') = '$plus3Month'
 						AND D.DISTRICT = A.ID_DISTRICTS 
 						GROUP BY D.DISTRICT), 0
 					) AS ESTIMASI3
