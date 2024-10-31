@@ -601,9 +601,9 @@ class survey extends CI_Controller {
 			"regencies"		=> $regencies
 		];
 
-		$plus1Month = date('Ym', strtotime("+1 month"));
-		$plus2Month = date('Ym', strtotime("+2 month"));
-		$plus3Month = date('Ym', strtotime("+3 month"));
+		$plus1Month = date('Ym', strtotime("+30 days"));
+		$plus2Month = date('Ym', strtotime("+60 days"));
+		$plus3Month = date('Ym', strtotime("+90 days"));
 
 		$estimasiFilter = [
 			'plus1Month' 			=> $plus1Month,
@@ -613,7 +613,7 @@ class survey extends CI_Controller {
 			'plus3Month' 			=> $plus3Month,
 			'plus3Month_text' => convMonth(substr($plus3Month, 4), TRUE)
 		];
-		dd($estimasiFilter);
+		// dd($estimasiFilter);
 		$data['title'] 				= 'SURVEY';
 		$data['datatable']		= $this->datatable_report($filter, $estimasiFilter);
 		$data['filter']				= $filter;
