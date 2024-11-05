@@ -729,9 +729,10 @@
         } else {
             title = title + ' - NO PHASE';
         }
+        let url = `<?= admin_url('survey/detail') ?>/${marker.SURVEY_NO}`;
         let obj = {
             coords: [coordinate[0], coordinate[1]],
-            info: `<div class="title-phase"><strong>${title} : </strong></div><br>${marker.ADDRESS.toUpperCase()}`,
+            info: `<div class="title-phase"><strong>${title} : </strong></div><br>${marker.ADDRESS.toUpperCase()}<br><a href="${url}" target="_blank">DETAIL</a>`,
             phase: marker.CURRENT_PHASE,
             plant_type: marker.TANAMAN
         };
