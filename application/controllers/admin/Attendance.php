@@ -38,7 +38,8 @@ class Attendance extends CI_Controller {
 
 	public function datatable($user, $filter) {
 		$where = "";
-		if ($user['userSurveyor']['EMPLOYEE_ID'] != '999999') {
+		$listOpenFilter = ['999999', '01220023', '03220017'];
+		if (!in_array($user['userSurveyor']['EMPLOYEE_ID'], $listOpenFilter)) {
 			$company 	= $user['userWFH']['COMPANY'];
 			$plant 		= $user['userWFH']['PLANT'];
 			$empno 		= $user['userWFH']['EMPNO'];
