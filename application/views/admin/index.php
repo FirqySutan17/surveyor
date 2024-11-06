@@ -499,7 +499,26 @@
         line-height: 34px !important;
     }
 
-    
+    .btn-survey {
+         border: 1px solid #000;
+         color: #000 !important;
+         text-align: right;
+         padding: 5px 10px;
+         margin-top: 20px;
+         border-radius: 5px;
+         display: flex;
+         flex-wrap: nowrap;
+         align-content: center;
+         justify-content: center;
+         align-items: center;
+    }
+    .btn-survey:hover {
+        background: #000;
+        color: #fff !important;
+    }
+    .leaflet-popup-content {
+        line-height: 1.9 !important;
+    }
 
     @media (max-width: 600px) {
         .information-box ul li {
@@ -732,7 +751,7 @@
         let url = `<?= admin_url('survey/detail') ?>/${marker.SURVEY_NO}`;
         let obj = {
             coords: [coordinate[0], coordinate[1]],
-            info: `<div class="title-phase"><strong>${title} : </strong></div><br>${marker.ADDRESS.toUpperCase()}<br><a href="${url}" target="_blank">DETAIL</a>`,
+            info: `<div class="title-phase"><strong>${title} : </strong></div><br>${marker.ADDRESS.toUpperCase()}<br><a class="btn-survey" href="${url}" target="_blank">DETAIL SURVEY</a>`,
             phase: marker.CURRENT_PHASE,
             plant_type: marker.TANAMAN
         };
