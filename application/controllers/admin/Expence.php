@@ -112,11 +112,7 @@ class Expence extends CI_Controller {
 	}
 
 	public function generate_pdf($slugdata) {
-		$explode = explode("-", $slugdata);
-		dd($explode);
-		$employee_id 	= $explode[0];
-		$month 				= $explode[1];
-		$data_detail 	= [];
+		$data_detail 	= $this->get_expense_detail($slugdata);
 	
 		$this->load->library('pdf');
 		$data['detail'] = $data_detail;
@@ -231,6 +227,27 @@ class Expence extends CI_Controller {
         return redirect($this->own_link);
 	}
 
+	private function get_expense_detail($slugdata) {
+		$exp = explode("-", $slugdata);
+		$employee_id 	= $exp[0];
+		$month 				= $exp[1];
+		$query = "
+				SELECT 
+					a.*, 
+					b.FULL_NAME,
+					b.EMAIL,
+					FN_CODE_NAME(b.PLANT, 'AB' ) COMPANY_NAME
+			FROM EXPENCE a, CD_USER b
+			WHERE
+					a.REG_EMP = B.EMPLOYEE_ID
+					AND EX_DATE LIKE '$month%' AND A.REG_EMP = '$employee_id'
+			ORDER BY EX_DATE ASC
+		";
+
+		$result = $this->Dbhelper->selectOneRawQuery($query);
+		dd($result);
+	}
+
 	private function datatable($filter) {
         // Konversi sdate ke format YYYYMM untuk filter berdasarkan bulan
         $sdate = date('Ym', strtotime($filter['sdate']));
@@ -270,6 +287,21 @@ class Expence extends CI_Controller {
         $data = $this->db->query($query)->result_array();
         return $data;
     }
+
+		private function get_expense_detail($slugdata) {
+			$query = "
+				SELECT 
+						a.*, 
+						b.FULL_NAME,
+						b.EMAIL,
+						FN_CODE_NAME(b.PLANT, 'AB' ) COMPANY_NAME
+				FROM EXPENCE a, CD_USER b
+				WHERE
+						a.REG_EMP = B.EMPLOYEE_ID
+						AND EX_DATE LIKE '202411%' AND A.REG_EMP = '01220023'
+				ORDER BY EX_DATE ASC
+			";
+		}
 
     private function datatable_surveyor() {
 		$query = "
