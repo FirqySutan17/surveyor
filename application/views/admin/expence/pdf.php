@@ -88,16 +88,16 @@
         <div class="content">
             <table style="width: 100%; border: none">
                 <tr>
-                    <td style="width: 35%; border: none">Employee Name : <strong>Firqy Sutan</strong> </td>
-                    <td style="width: 45%; border: none">Employee ID : <strong>01220023</strong> </td>
-                    <td style="width: 20%; border: none">Telephone : <strong>EXT.</strong> </td>
+                    <td style="width: 35%; border: none">Employee Name : <strong><?= $expense['master']['NAME'] ?></strong> </td>
+                    <td style="width: 45%; border: none">Employee ID : <strong><?= $expense['master']['EMPLOYEE_ID'] ?></strong> </td>
+                    <td style="width: 20%; border: none">Email : <strong><?= $expense['master']['EMAIL'] ?></strong> </td>
                 </tr>
             </table>
             <table style="width: 100%;">
                 <tr>
                     <td style="width: 35%;">Section Name : <strong>Purchasing</strong> </td>
-                    <td style="width: 45%;">Company : <strong>PT. CJ Feed and Care Indonesia</strong> </td>
-                    <td style="width: 20%;">Code : <strong>11 2024</strong> </td>
+                    <td style="width: 45%;">Site : <strong><?= $expense['master']['PLANT'] ?></strong> </td>
+                    <td style="width: 20%;">Month : <strong><?= $expense['master']['MONTH'] ?></strong> </td>
                 </tr>
             </table>
             <table style="width: 100%;">

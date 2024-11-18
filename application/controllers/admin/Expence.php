@@ -115,7 +115,7 @@ class Expence extends CI_Controller {
 		$data_detail 	= $this->get_expense_detail($slugdata);
 	
 		$this->load->library('pdf');
-		$data['detail'] = $data_detail;
+		$data['expense'] = $data_detail;
 		$html = $this->load->view('admin/expence/pdf', $data, TRUE);
 		
 		$this->dompdf->loadHtml($html);
@@ -255,7 +255,8 @@ class Expence extends CI_Controller {
 						'NAME'				=> $v['FULL_NAME'],
 						'EMPLOYEE_ID'	=> $v['REG_EMP'],
 						'PLANT'				=> $v['COMPANY_NAME'],
-						'EMAIL'				=> $v['EMAIL']
+						'EMAIL'				=> $v['EMAIL'],
+						'MONTH'				=> date('M Y', strtotime($month.'01'))
 					];
 				}
 
@@ -282,7 +283,6 @@ class Expence extends CI_Controller {
 			'master'	=> $master,
 			'detail'	=> $detail
 		];
-		dd($data);
 		return $data;
 	}
 
