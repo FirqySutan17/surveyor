@@ -554,7 +554,7 @@
             </div>
         </form>
     </div>
-    <div id="map" style="height: 450px; z-index: 1; border-radius: 10px;"></div>
+    <div id="map" style="min-height: 75vh; z-index: 1; border-radius: 10px;"></div>
     <!-- <div class="information-box">
         <h3 style="font-family: cjFont; margin-bottom: 0px;line-height: 40px; font-weight: 700; letter-spacing: 1px">
             INFORMATION
