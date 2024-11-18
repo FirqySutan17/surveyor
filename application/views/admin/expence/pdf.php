@@ -89,15 +89,15 @@
             <table style="width: 100%; border: none">
                 <tr>
                     <td style="width: 35%; border: none">Employee Name : <strong><?= $expense['master']['NAME'] ?></strong> </td>
-                    <td style="width: 45%; border: none">Employee ID : <strong><?= $expense['master']['EMPLOYEE_ID'] ?></strong> </td>
-                    <td style="width: 20%; border: none">Email : <strong><?= $expense['master']['EMAIL'] ?></strong> </td>
+                    <td style="width: 35%; border: none">Employee ID : <strong><?= $expense['master']['EMPLOYEE_ID'] ?></strong> </td>
+                    <td style="width: 30%; border: none">Email : <strong><?= $expense['master']['EMAIL'] ?></strong> </td>
                 </tr>
             </table>
             <table style="width: 100%;">
                 <tr>
                     <td style="width: 35%;">Section Name : <strong>Purchasing</strong> </td>
-                    <td style="width: 45%;">Site : <strong><?= $expense['master']['PLANT'] ?></strong> </td>
-                    <td style="width: 20%;">Month : <strong><?= $expense['master']['MONTH'] ?></strong> </td>
+                    <td style="width: 35%;">Site : <strong><?= $expense['master']['PLANT'] ?></strong> </td>
+                    <td style="width: 30%;">Month : <strong><?= $expense['master']['MONTH'] ?></strong> </td>
                 </tr>
             </table>
             <table style="width: 100%;">
@@ -105,112 +105,83 @@
                     <td style="width: 100%;"><strong>EVIDENCE LIST</strong> </td>
                 </tr>
             </table>
-            <table style="width: 100%;">
-                <tr>
-                    <td style="text-align: center"><strong>DATE</strong> </td>
-                    <td style="text-align: center"><strong>MEAL</strong> </td>
-                    <td style="text-align: center"><strong>GASOLINE</strong> </td>
-                    <td style="text-align: center"><strong>TOLL</strong> </td>
-                    <td style="text-align: center"><strong>PARKING</strong> </td>
-                    <td style="text-align: center"><strong>OTHERS</strong> </td>
-                </tr>
-                <tr>
-                    <td style="text-align: center">11 NOV 2024</td>
-                    <td style="text-align: center">
-                        <div class="cat-column">
-                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('assets/img/logo.png') ?>" alt=""><br>
-                            <p style="margin: 0px">Rp 325.000</p>
-                            <p style="margin: 0px">-6.22592,106.8269568</p>
-                        </div>
-                        <div class="cat-column">
-                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('assets/img/logo.png') ?>" alt=""><br>
-                            <p style="margin: 0px">Rp 325.000</p>
-                            <p style="margin: 0px">-6.22592,106.8269568</p>
-                        </div>
-                    </td>
-                    <td style="text-align: center">
-                        <div class="cat-column">
-                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('assets/img/logo.png') ?>" alt=""><br>
-                            <p style="margin: 0px">Rp 325.000</p>
-                            <p style="margin: 0px">-6.22592,106.8269568</p>
-                        </div>
-                    </td>
-                    <td style="text-align: center">
-                        <div class="cat-column">
-                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('assets/img/logo.png') ?>" alt=""><br>
-                            <p style="margin: 0px">Rp 325.000</p>
-                            <p style="margin: 0px">-6.22592,106.8269568</p>
-                        </div>
-                    </td>
-                    <td style="text-align: center">
-                        <div class="cat-column">
-                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('assets/img/logo.png') ?>" alt=""><br>
-                            <p style="margin: 0px">Rp 325.000</p>
-                            <p style="margin: 0px">-6.22592,106.8269568</p>
-                        </div>
-                    </td>
-                    <td style="text-align: center">
-                        <div class="cat-column">
-                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('assets/img/logo.png') ?>" alt=""><br>
-                            <p style="margin: 0px">Rp 325.000</p>
-                            <p style="margin: 0px">-6.22592,106.8269568</p>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-            <table style="width: 100%;">
-                <tr>
-                    <td style="text-align: center"><strong>DATE</strong> </td>
-                    <td style="text-align: center"><strong>MEAL</strong> </td>
-                    <td style="text-align: center"><strong>GASOLINE</strong> </td>
-                    <td style="text-align: center"><strong>TOLL</strong> </td>
-                    <td style="text-align: center"><strong>PARKING</strong> </td>
-                    <td style="text-align: center"><strong>OTHERS</strong> </td>
-                </tr>
-                <tr>
-                    <td style="text-align: center">12 NOV 2024</td>
-                    <td style="text-align: center">
-                        <div class="cat-column">
-                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('assets/img/logo.png') ?>" alt=""><br>
-                            <p style="margin: 0px">Rp 325.000</p>
-                            <p style="margin: 0px">-6.22592,106.8269568</p>
-                        </div>
-                        <div class="cat-column">
-                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('assets/img/logo.png') ?>" alt=""><br>
-                            <p style="margin: 0px">Rp 325.000</p>
-                            <p style="margin: 0px">-6.22592,106.8269568</p>
-                        </div>
-                    </td>
-                    <td style="text-align: center">
-                        <div class="cat-column">
-                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('assets/img/logo.png') ?>" alt=""><br>
-                            <p style="margin: 0px">Rp 325.000</p>
-                            <p style="margin: 0px">-6.22592,106.8269568</p>
-                        </div>
-                    </td>
-                    <td style="text-align: center">
-                        <div class="cat-column">
-                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('assets/img/logo.png') ?>" alt=""><br>
-                            <p style="margin: 0px">Rp 325.000</p>
-                            <p style="margin: 0px">-6.22592,106.8269568</p>
-                        </div>
-                    </td>
-                    <td style="text-align: center">
-                        <div class="cat-column">
-                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('assets/img/logo.png') ?>" alt=""><br>
-                            <p style="margin: 0px">Rp 325.000</p>
-                            <p style="margin: 0px">-6.22592,106.8269568</p>
-                        </div>
-                    </td>
-                    <td style="text-align: center">
-                        <div class="cat-column">
-                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('assets/img/logo.png') ?>" alt=""><br>
-                            <p style="margin: 0px">Rp 325.000</p>
-                            <p style="margin: 0px">-6.22592,106.8269568</p>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+            <?php if(!empty($expense['detail'])): ?>
+                <?php foreach($expense['detail'] as $detail): ?>
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="text-align: center"><strong>DATE</strong> </td>
+                            <td style="text-align: center"><strong>MEAL</strong> </td>
+                            <td style="text-align: center"><strong>GASOLINE</strong> </td>
+                            <td style="text-align: center"><strong>TOLL</strong> </td>
+                            <td style="text-align: center"><strong>PARKING</strong> </td>
+                            <td style="text-align: center"><strong>OTHERS</strong> </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center"><?= $detail['DATE'] ?></td>
+                            <td style="text-align: center">
+                                <?php if(!empty($detail['MEAL'])): ?>
+                                    <?php foreach($detail['MEAL'] as $d): ?>
+
+                                        <div class="cat-column">
+                                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('upload/'.$d['IMAGE']) ?>" alt=""><br>
+                                            <p style="margin: 0px">Rp <?= number_format($d['AMOUNT'])  ?></p>
+                                            <p style="margin: 0px"><?= $d['COORDINATE'] ?></p>
+                                        </div>
+                                    <?php endforeach ?>
+                                <?php endif ?>
+                            </td>
+                            <td style="text-align: center">
+                                <?php if(!empty($detail['GASOLINE'])): ?>
+                                    <?php foreach($detail['GASOLINE'] as $d): ?>
+
+                                        <div class="cat-column">
+                                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('upload/'.$d['IMAGE']) ?>" alt=""><br>
+                                            <p style="margin: 0px">Rp <?= number_format($d['AMOUNT'])  ?></p>
+                                            <p style="margin: 0px"><?= $d['COORDINATE'] ?></p>
+                                        </div>
+                                    <?php endforeach ?>
+                                <?php endif ?>
+                            </td>
+                            <td style="text-align: center">
+                                <?php if(!empty($detail['TOLL'])): ?>
+                                    <?php foreach($detail['TOLL'] as $d): ?>
+
+                                        <div class="cat-column">
+                                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('upload/'.$d['IMAGE']) ?>" alt=""><br>
+                                            <p style="margin: 0px">Rp <?= number_format($d['AMOUNT'])  ?></p>
+                                            <p style="margin: 0px"><?= $d['COORDINATE'] ?></p>
+                                        </div>
+                                    <?php endforeach ?>
+                                <?php endif ?>
+                            </td>
+                            <td style="text-align: center">
+                                <?php if(!empty($detail['PARKING'])): ?>
+                                    <?php foreach($detail['PARKING'] as $d): ?>
+
+                                        <div class="cat-column">
+                                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('upload/'.$d['IMAGE']) ?>" alt=""><br>
+                                            <p style="margin: 0px">Rp <?= number_format($d['AMOUNT'])  ?></p>
+                                            <p style="margin: 0px"><?= $d['COORDINATE'] ?></p>
+                                        </div>
+                                    <?php endforeach ?>
+                                <?php endif ?>
+                            </td>
+                            <td style="text-align: center">
+                                <?php if(!empty($detail['OTHERS'])): ?>
+                                    <?php foreach($detail['OTHERS'] as $d): ?>
+
+                                        <div class="cat-column">
+                                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('upload/'.$d['IMAGE']) ?>" alt=""><br>
+                                            <p style="margin: 0px">Rp <?= number_format($d['AMOUNT'])  ?></p>
+                                            <p style="margin: 0px"><?= $d['COORDINATE'] ?></p>
+                                        </div>
+                                    <?php endforeach ?>
+                                <?php endif ?>
+                            </td>
+                        </tr>
+                    </table>
+                <?php endforeach ?>
+            <?php endif ?>
         </div>
 
         <div class="footer">
