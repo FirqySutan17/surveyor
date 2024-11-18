@@ -229,8 +229,8 @@ class Expence extends CI_Controller {
 
 	private function get_expense_detail($slugdata) {
 		$exp = explode("-", $slugdata);
-		$employee_id 	= $exp[0];
-		$month 				= $exp[1];
+		$employee_id 	= $exp[1];
+		$month 				= $exp[0];
 		$query = "
 				SELECT 
 					a.*, 
