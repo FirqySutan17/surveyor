@@ -245,8 +245,45 @@ class Expence extends CI_Controller {
 		";
 
 		$result = $this->Dbhelper->selectRawQuery($query);
-		dd($result, FALSE);
-		dd($query);
+
+		$master 	= [];
+		$detail 	= [];
+		if (!empty($result)) {
+			foreach ($result as $v) {
+				if (empty($master)) {
+					$master = [
+						'NAME'				=> $v['FULL_NAME'],
+						'EMPLOYEE_ID'	=> $v['REG_EMP'],
+						'PLANT'				=> $v['COMPANY_NAME'],
+						'EMAIL'				=> $v['EMAIL']
+					];
+				}
+
+				if (!array_key_exists($v['EX_DATE'], $detail)) {
+					$detail[$v['EX_DATE']] = [
+						'DATE'	=> $v['EX_DATE'],
+						'MEAL'	=> [],
+						'GASOLINE'	=> [],
+						'TOLL'	=> [],
+						'PARKING'	=> [],
+						'OTHERS'	=> [],
+					];
+				}
+
+				$detail[$v['EX_DATE']][$v['CATEGORY']][] = [
+					'IMAGE'				=> $v['IMAGE'],
+					'AMOUNT'			=> $v['AMOUNT'],
+					'COORDINATE'	=> $v['COORDINATE']
+				];
+			}
+		}
+		
+		$data = [
+			'master'	=> $master,
+			'detail'	=> $detail
+		];
+		dd($data);
+		return $data;
 	}
 
 	private function datatable($filter) {
