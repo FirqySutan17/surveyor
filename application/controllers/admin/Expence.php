@@ -245,7 +245,8 @@ class Expence extends CI_Controller {
 		";
 
 		$result = $this->Dbhelper->selectOneRawQuery($query);
-		dd($result);
+		dd($result, FALSE);
+		dd($query);
 	}
 
 	private function datatable($filter) {
