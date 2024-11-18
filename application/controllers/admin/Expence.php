@@ -244,7 +244,7 @@ class Expence extends CI_Controller {
 			ORDER BY EX_DATE ASC
 		";
 
-		$result = $this->Dbhelper->selectOneRawQuery($query);
+		$result = $this->Dbhelper->selectRawQuery($query);
 		dd($result, FALSE);
 		dd($query);
 	}
