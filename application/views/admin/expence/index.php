@@ -383,6 +383,7 @@
 			</thead>
 			<tbody>
 				<?php foreach ($datatable as $i => $v): ?>
+					<?php $slug = date('Ym', strtotime($v['EX_DATE_MONTH'])).'-'.$v['REG_EMP']; ?>
 				<tr>
 					<td style="text-align: center"><?= $i + 1 ?></td>
 					<!-- <td style="text-align: center">#<STRONG><?= $v['EX_NO'] ?></STRONG></td> -->
@@ -390,7 +391,7 @@
 					<td style="text-align: center"><?= $v['REG_EMP'] ?> - <?= $v['FULL_NAME'] ?></td>
 					<td style="text-align: center"><?= number_format($v['TOTAL_AMOUNT']) ?></td>
 					<td style="text-align: center">
-						<a href="<?= admin_url('expence/pdf') ?>" class="btn btn-sm btn-show-detail"><i class="fas fa-eye text-success"></i></a>
+						<a href="<?= admin_url('expence/pdf/'.$slug) ?>" target="_blank" class="btn btn-sm btn-show-detail"><i class="fas fa-eye text-success"></i></a>
 					</td>
 				</tr>
 				<?php endforeach ?>

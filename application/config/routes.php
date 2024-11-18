@@ -103,10 +103,10 @@ $route['survey/do_create_mobile'] 	= 'Home/do_create_mobile';
 	$route['dashboard/attendance/create'] 				= 'admin/Attendance/create';
 	$route['dashboard/attendance/do-attend'] 		    = 'admin/Attendance/do_attend';
 
-	$route['dashboard/expence'] 					= 'admin/Expence/index';
+	$route['dashboard/expence'] 							= 'admin/Expence/index';
 	$route['dashboard/expence/entry'] 				= 'admin/Expence/entry';
-	$route['dashboard/expence/do-create'] 		    = 'admin/Expence/do_create';
-	$route['dashboard/expence/pdf'] 			= 'admin/Expence/generate_pdf';
+	$route['dashboard/expence/do-create'] 		= 'admin/Expence/do_create';
+	$route['dashboard/expence/pdf/(:any)'] 		= 'admin/Expence/generate_pdf/$1';
 	$route['dashboard/expence/detail'] 				= 'admin/Expence/detail';
 
 	$route['dashboard/warehouse'] 						= 'admin/Warehouse';

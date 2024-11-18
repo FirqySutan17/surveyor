@@ -111,8 +111,12 @@ class Expence extends CI_Controller {
 		$this->template->_v('expence/pdf', $data);
 	}
 
-	public function generate_pdf() {
-		$data_detail = [];
+	public function generate_pdf($slugdata) {
+		$explode = explode("-", $slugdata);
+		dd($explode);
+		$employee_id 	= $explode[0];
+		$month 				= $explode[1];
+		$data_detail 	= [];
 	
 		$this->load->library('pdf');
 		$data['detail'] = $data_detail;
