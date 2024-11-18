@@ -113,7 +113,6 @@ class Expence extends CI_Controller {
 
 	public function generate_pdf($slugdata) {
 		$data_detail 	= $this->get_expense_detail($slugdata);
-		dd($data_detail);
 		$this->load->library('pdf');
 		$data['expense'] = $data_detail;
 		$html = $this->load->view('admin/expence/pdf', $data, TRUE);

@@ -117,7 +117,7 @@
                             <td style="text-align: center"><strong>OTHERS</strong> </td>
                         </tr>
                         <tr>
-                            <td style="text-align: center"><?= $detail['DATE'] ?></td>
+                            <td style="text-align: center"><?= convDate($detail['DATE']) ?></td>
                             <td style="text-align: center">
                                 <?php if(!empty($detail['MEAL'])): ?>
                                     <?php foreach($detail['MEAL'] as $d): ?>
