@@ -76,7 +76,7 @@
     
     <div class="container">
         <div class="header">
-            <img style="width: 150px;position: absolute;  text-align: left" src="./assets/img/logo.png" alt="">
+            <img style="width: 150px;position: absolute;  text-align: left" src="<?= base_url('assets/img/logo.png') ?>" alt="">
             <h2 style="margin:50px 0px 0px 0px;">EVIDENCE REPORT</h2>
             <h6 style="margin:0px;">
                 DATE : <?php $currentDateTime = new DateTime('now');
@@ -118,40 +118,40 @@
                     <td style="text-align: center">11 NOV 2024</td>
                     <td style="text-align: center">
                         <div class="cat-column">
-                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="./assets/img/logo.png" alt=""><br>
+                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('assets/img/logo.png') ?>" alt=""><br>
                             <p style="margin: 0px">Rp 325.000</p>
                             <p style="margin: 0px">-6.22592,106.8269568</p>
                         </div>
                         <div class="cat-column">
-                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="./assets/img/logo.png" alt=""><br>
-                            <p style="margin: 0px">Rp 325.000</p>
-                            <p style="margin: 0px">-6.22592,106.8269568</p>
-                        </div>
-                    </td>
-                    <td style="text-align: center">
-                        <div class="cat-column">
-                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="./assets/img/logo.png" alt=""><br>
+                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('assets/img/logo.png') ?>" alt=""><br>
                             <p style="margin: 0px">Rp 325.000</p>
                             <p style="margin: 0px">-6.22592,106.8269568</p>
                         </div>
                     </td>
                     <td style="text-align: center">
                         <div class="cat-column">
-                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="./assets/img/logo.png" alt=""><br>
+                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('assets/img/logo.png') ?>" alt=""><br>
                             <p style="margin: 0px">Rp 325.000</p>
                             <p style="margin: 0px">-6.22592,106.8269568</p>
                         </div>
                     </td>
                     <td style="text-align: center">
                         <div class="cat-column">
-                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="./assets/img/logo.png" alt=""><br>
+                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('assets/img/logo.png') ?>" alt=""><br>
                             <p style="margin: 0px">Rp 325.000</p>
                             <p style="margin: 0px">-6.22592,106.8269568</p>
                         </div>
                     </td>
                     <td style="text-align: center">
                         <div class="cat-column">
-                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="./assets/img/logo.png" alt=""><br>
+                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('assets/img/logo.png') ?>" alt=""><br>
+                            <p style="margin: 0px">Rp 325.000</p>
+                            <p style="margin: 0px">-6.22592,106.8269568</p>
+                        </div>
+                    </td>
+                    <td style="text-align: center">
+                        <div class="cat-column">
+                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('assets/img/logo.png') ?>" alt=""><br>
                             <p style="margin: 0px">Rp 325.000</p>
                             <p style="margin: 0px">-6.22592,106.8269568</p>
                         </div>
@@ -171,40 +171,40 @@
                     <td style="text-align: center">12 NOV 2024</td>
                     <td style="text-align: center">
                         <div class="cat-column">
-                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="./assets/img/logo.png" alt=""><br>
+                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('assets/img/logo.png') ?>" alt=""><br>
                             <p style="margin: 0px">Rp 325.000</p>
                             <p style="margin: 0px">-6.22592,106.8269568</p>
                         </div>
                         <div class="cat-column">
-                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="./assets/img/logo.png" alt=""><br>
-                            <p style="margin: 0px">Rp 325.000</p>
-                            <p style="margin: 0px">-6.22592,106.8269568</p>
-                        </div>
-                    </td>
-                    <td style="text-align: center">
-                        <div class="cat-column">
-                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="./assets/img/logo.png" alt=""><br>
+                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('assets/img/logo.png') ?>" alt=""><br>
                             <p style="margin: 0px">Rp 325.000</p>
                             <p style="margin: 0px">-6.22592,106.8269568</p>
                         </div>
                     </td>
                     <td style="text-align: center">
                         <div class="cat-column">
-                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="./assets/img/logo.png" alt=""><br>
+                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('assets/img/logo.png') ?>" alt=""><br>
                             <p style="margin: 0px">Rp 325.000</p>
                             <p style="margin: 0px">-6.22592,106.8269568</p>
                         </div>
                     </td>
                     <td style="text-align: center">
                         <div class="cat-column">
-                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="./assets/img/logo.png" alt=""><br>
+                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('assets/img/logo.png') ?>" alt=""><br>
                             <p style="margin: 0px">Rp 325.000</p>
                             <p style="margin: 0px">-6.22592,106.8269568</p>
                         </div>
                     </td>
                     <td style="text-align: center">
                         <div class="cat-column">
-                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="./assets/img/logo.png" alt=""><br>
+                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('assets/img/logo.png') ?>" alt=""><br>
+                            <p style="margin: 0px">Rp 325.000</p>
+                            <p style="margin: 0px">-6.22592,106.8269568</p>
+                        </div>
+                    </td>
+                    <td style="text-align: center">
+                        <div class="cat-column">
+                            <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('assets/img/logo.png') ?>" alt=""><br>
                             <p style="margin: 0px">Rp 325.000</p>
                             <p style="margin: 0px">-6.22592,106.8269568</p>
                         </div>
