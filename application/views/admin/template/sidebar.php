@@ -237,6 +237,14 @@
                             </a>
                         </li>
                     <?php endif ?>
+                    <?php if (in_array('O001', $user_access) || in_array('*', $user_access)): ?>
+                        <li class="<?= $this->uri->segment(3) == 'expence' ? 'active' : '' ?>">
+                            <a href="<?= admin_url('expence/entry') ?>"
+                                class="">
+                                <i class='bx bxs-right-arrow'></i> EXPENCES ENTRY
+                            </a>
+                        </li>
+                    <?php endif ?>
                 </ul>
             </li>
             <?php endif ?>
@@ -335,6 +343,14 @@
                             <a href="<?= route('dashboard/attendance') ?>"
                                 class="">
                                 <i class='bx bxs-right-arrow'></i> ATTENDANCE REPORT
+                            </a>
+                        </li>
+                    <?php endif ?>
+                    <?php if (in_array('O002', $user_access) || in_array('*', $user_access)): ?>
+                        <li class="<?= ($this->uri->segment(2) == 'expence' && $this->uri->segment(3) == 'report') ? 'active' : '' ?>">
+                            <a href="<?= route('dashboard/expence') ?>"
+                                class="">
+                                <i class='bx bxs-right-arrow'></i> EXPENCE REPORT
                             </a>
                         </li>
                     <?php endif ?>
