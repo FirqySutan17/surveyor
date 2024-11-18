@@ -288,21 +288,6 @@ class Expence extends CI_Controller {
         return $data;
     }
 
-		private function get_expense_detail($slugdata) {
-			$query = "
-				SELECT 
-						a.*, 
-						b.FULL_NAME,
-						b.EMAIL,
-						FN_CODE_NAME(b.PLANT, 'AB' ) COMPANY_NAME
-				FROM EXPENCE a, CD_USER b
-				WHERE
-						a.REG_EMP = B.EMPLOYEE_ID
-						AND EX_DATE LIKE '202411%' AND A.REG_EMP = '01220023'
-				ORDER BY EX_DATE ASC
-			";
-		}
-
     private function datatable_surveyor() {
 		$query = "
 			SELECT * FROM CD_USER
