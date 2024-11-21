@@ -1063,7 +1063,7 @@
                                         <input type="text" name="districs" class="form-control"  autocomplete="off" style="font-size: 14px !important; text-align: left" value="<?= $model['DISTRICT_NAME'] ?>" readonly>
                                     </td>
                                     <td data-label="districts">
-                                        <input type="number" name="plant_area" class="form-control" placeholder="EX : 1024"  autocomplete="off" style="font-size: 14px !important; text-align: center" required>
+                                        <input type="number" name="plant_area" class="form-control" placeholder="EX : 1024"  autocomplete="off" style="font-size: 14px !important; text-align: center" value="<?= $model['PLANT_AREA'] ?>" required>
                                     </td>
                                 </tr>
                             </tbody>
