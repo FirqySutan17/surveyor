@@ -41,15 +41,6 @@ class survey extends CI_Controller {
 	public function do_create() {
 		if ($this->input->server('REQUEST_METHOD') === 'POST') {
 			$post = $this->input->post();
-			// $postjson = json_encode($post);
-			// $textfile = date('YmdHis').'_'.$this->session_data['user']['EMPLOYEE_ID'];
-			// if (!write_file(APPPATH."logs/log_$textfile.txt", $postjson)) {
-			// 	$this->session->set_flashdata('success', "Unable to logs post");
-			// 	return redirect($this->own_link.'/report');
-			// }
-
-			// dd($_FILES, false);
-			// dd($post);
 			$survey_no = $this->generateSurveyNo();
 			try {
 				
@@ -112,7 +103,7 @@ class survey extends CI_Controller {
 				$current_phase 	= "";
 				$current_phase_date = "";
 				$umur_tanam 		= 0;
-				$phase_array = ['persiapan-lahan', 'vegetatif-awal', 'vegetatif-akhir', 'genetatif-awal', 'genetatif-akhir', 'gagal-panen'];
+				$phase_array = $this->phase_array();
 				if (!empty($post['PLANTING_siklus'])) {
 					$sequence = 1;
 					foreach ($post['PLANTING_siklus'] as $siklus_index => $siklus) {
@@ -396,7 +387,7 @@ class survey extends CI_Controller {
 
 				$survey_harvest_phase = [];
 				$survey_planting_phase = [];
-				$phase_array = ['persiapan-lahan', 'vegetatif-awal', 'vegetatif-akhir', 'genetatif-awal', 'genetatif-akhir', 'gagal-panen'];
+				$phase_array = $this->phase_array();
 				$current_phase 			= "";
 				$current_phase_date = "";
 				$umur_tanam = 0;
@@ -534,38 +525,6 @@ class survey extends CI_Controller {
 					$delete = $this->db->delete('SURVEY_IMAGES', array('SURVEY_NO' => $survey_no));
 					$save_galleries = $this->db->insert_batch('SURVEY_IMAGES', $survey_galleries);
 				}
-
-				// $vr_galleries = [];
-				// if (!empty($post['VR_image_name'])) {
-				// 	foreach ($post['VR_image_name'] as $i => $v) {
-				// 		$no = $i + 1;
-				// 		$namafile = !empty($post['VR_image_filename'][$i]) ? $post['VR_image_filename'][$i] : '';
-				// 		if (!empty($_FILES['VR_image_file']['name'][$i])) {
-				// 			if (!empty($namafile)) {
-				// 				$delete_image = $this->delete_image($namafile);
-				// 			}
-				// 			$berkas = [];
-				// 			$berkas['name']= $_FILES['VR_image_file']['name'][$i];
-				// 	        $berkas['type']= $_FILES['VR_image_file']['type'][$i];
-				// 	        $berkas['tmp_name']= $_FILES['VR_image_file']['tmp_name'][$i];
-				// 	        $berkas['error']= $_FILES['VR_image_file']['error'][$i];
-				// 	        $berkas['size']= $_FILES['VR_image_file']['size'][$i];
-
-				// 	        $namafile = $this->upload_image($berkas, $visiting_no, $no);
-				// 		}
-				// 		$vr_galleries[] = [
-				//         	'VISITING_NO'	=> $visiting_no,
-				//         	'SEQUENCE'		=> $no,
-				//         	'IMAGE_NAME'	=> $v,
-				//         	'IMAGE_FILENAME'	=> $namafile
-				//         ];
-				// 	}
-				// } elseif (empty($post['VR_image_name']) && !empty($post['VR_image_filename'])) {
-				// 	foreach ($post['VR_image_filename'] as $i => $v) {
-				// 		$delete_image = $this->delete_image($v);
-				// 	}
-				// }
-				
 
 				if ($save) {
 					$this->session->set_flashdata('success', "Update data success");
@@ -710,47 +669,6 @@ class survey extends CI_Controller {
 		$edate = date('Ymd', strtotime($filter['edate']));
 		$province 	= $filter['province'];
 		$regencies 	= $filter['regencies'];
-
-		// $query = "
-		// 	SELECT 
-		// 		DISTRICTS.ID_DISTRICTS, 
-		// 		DISTRICTS.PLANT_AREA, 
-		// 		DISTRICTS.SEGMENT, 
-		// 		DISTRICTS.DISTRICS AS DISTRICT_NAME, 
-		// 		REGENCIES.REGENCIES AS REGENCIES_NAME, 
-		// 		PROVINCE.PROVINCE AS PROVINCE_NAME
-		// 	FROM 
-		// 		CD_DISTRICTS DISTRICTS
-		// 	JOIN 
-		// 		CD_REGENCIES REGENCIES ON DISTRICTS.REGENCIES_ID = REGENCIES.ID_REGENCIES
-		// 	JOIN 
-		// 		CD_PROVINCE PROVINCE ON REGENCIES.PROVINCE_ID = PROVINCE.ID_PROVINCE
-		// 	JOIN 
-		// 		SURVEY SURVEY ON DISTRICTS._ID_DISTRICT = SURVEY.DISTRICT
-		// ";
-		// if ($filter['province'] != '*') {
-		// 	$query .= " WHERE ID_PROVINCE = '".$filter['province']."'";
-		// }
-		// if ($filter['regencies'] != '*') {
-		// 	if ($filter['province'] != '*') {
-		// 		$query .= " and ";
-		// 	} else {
-		// 		$query .= " WHERE ";
-		// 	}
-		// 	$query .= " ID_REGENCIES = '".$filter['regencies']."'";
-		// }
-		// if ($filter['districts'] != '*') {
-			
-		// 	if ($filter['regencies'] != '*' || $filter['province'] != '*') {
-		// 		$query .= " and ";
-		// 	} else {
-		// 		$query .= " WHERE ";
-		// 	}
-		// 	$query .= " ID_DISTRICTS = '".$filter['districts']."'";
-		// }
-		// $query .= " order by ID_DISTRICTS ASC";
-		// $query .= " order by ID_DISTRICTS ASC";
-		// dd($query);
     
 		$where_inside = "";
 		if ($filter['province'] != '*') {
@@ -924,18 +842,26 @@ class survey extends CI_Controller {
 		$data[] 	= ["CODE" => 'genetatif-awal', 	"CODE_NAME" => 'GENETATIF AWAL'];
 		$data[] 	= ["CODE" => 'genetatif-akhir', "CODE_NAME" => 'GENETATIF AKHIR'];
 		$data[] 	= ["CODE" => 'gagal-panen', 		"CODE_NAME" => 'GAGAL PANEN'];
+		$data[] 	= ["CODE" => 'gagal-tanam', 		"CODE_NAME" => 'GAGAL TANAM'];
+		$data[] 	= ["CODE" => 'lahan-kosong', 		"CODE_NAME" => 'LAHAN KOSONG'];
 		return $data;
+	}
+
+	private function phase_array() {
+		return ['persiapan-lahan', 'vegetatif-awal', 'vegetatif-akhir', 'genetatif-awal', 'genetatif-akhir', 'gagal-panen', 'gagal-tanam', 'lahan-kosong'];
 	}
 
 	private function list_placeholder() {
 		$data = [];
 
 		$data['persiapan-lahan'] 	= ["STANDARD / KETERANGAN PERSIAPAN LAHAN"];
-		$data['vegetatif-awal'] 	= ["UMUR TANAM (1 - 25)", "TINGGI TANAMAN", "JUMLAH DAUN", "JENIS PUPUK YANG SUDAH DIAPLIKASIKAN", "ESTIMASI JUMLAH PUPUK DIAPLIKASIKAN (KG)", "JENIS HERBISIDA / PERSTISIDA YANG DIAPLIKASIKAN", "CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)", "FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)", "INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)"];
-		$data['vegetatif-akhir'] 	= ["UMUR TANAM (26 - 50)", "TINGGI TANAMAN", "JUMLAH DAUN", "MUNCUL BUNGA JANTAN DAN BETINA (ADA / TIDAK)", "JENIS PUPUK YANG SUDAH DIAPLIKASIKAN", "ESTIMASI JUMLAH PUPUK DIAPLIKASIKAN (KG)", "JENIS HERBISIDA / PESTISIDA YANG DIAPLIKASIKAN", "CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)", "FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)", "INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)"];
-		$data['genetatif-awal'] 	= ["UMUR TANAM (51 - 70)", "MUNCUL BUAH (ADA / TIDAK)", "JIKA BUAH ADA MAKA UKURAN BUAH (PANJANG DAN DIAMETER BUAH MUDA)", "MUNCUL BUNGA JANTAN DAN BETINA (ADA / TIDAK)", "KONDISI BUAH MUDAH (HUJAN SEGAR, PUCAT ATAU BUSUK)", "ESTIMASI JUMLAH PUPUK DIAPLIKASIKAN (KG)", "JENIS HERBISIDA / PESTISIDA YANG DIAPLIKASIKAN", "CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)", "FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)", "INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)"];
-		$data['genetatif-akhir']	= ["UMUR TANAM (71 - 110)", "MASUK KE FORMAT HASIL PANEN PADA SHEET HASIL PANEN", "JENIS HERBISIDA / PESTISIDA YANG DIAPLIKASIKAN", "CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)", "FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)", "INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)"];
-		$data['gagal-panen']			= ["UMUR SAAT PUSO", "KONDISI SAAT PUSO (KEKERINGAN / BANJIR)", "ESTIMASI LAHAN YANG TERKENA PUSO", "ESTIMASI PRODUKSI YANG HILANG KARENA PUSO"];
+		$data['vegetatif-awal'] 	= ["UMUR TANAM (1 - 25)", "TINGGI TANAMAN", "JUMLAH DAUN", "JENIS PUPUK YANG SUDAH DIAPLIKASIKAN", "ESTIMASI JUMLAH PUPUK DIAPLIKASIKAN (KG)", "JENIS HERBISIDA / PERSTISIDA YANG DIAPLIKASIKAN", "CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)", "FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)", "INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)", "KETERANGAN"];
+		$data['vegetatif-akhir'] 	= ["UMUR TANAM (26 - 50)", "TINGGI TANAMAN", "JUMLAH DAUN", "MUNCUL BUNGA JANTAN DAN BETINA (ADA / TIDAK)", "JENIS PUPUK YANG SUDAH DIAPLIKASIKAN", "ESTIMASI JUMLAH PUPUK DIAPLIKASIKAN (KG)", "JENIS HERBISIDA / PESTISIDA YANG DIAPLIKASIKAN", "CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)", "FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)", "INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)", "KETERANGAN"];
+		$data['genetatif-awal'] 	= ["UMUR TANAM (51 - 70)", "MUNCUL BUAH (ADA / TIDAK)", "JIKA BUAH ADA MAKA UKURAN BUAH (PANJANG DAN DIAMETER BUAH MUDA)", "MUNCUL BUNGA JANTAN DAN BETINA (ADA / TIDAK)", "KONDISI BUAH MUDAH (HUJAN SEGAR, PUCAT ATAU BUSUK)", "ESTIMASI JUMLAH PUPUK DIAPLIKASIKAN (KG)", "JENIS HERBISIDA / PESTISIDA YANG DIAPLIKASIKAN", "CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)", "FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)", "INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)", "KETERANGAN"];
+		$data['genetatif-akhir']	= ["UMUR TANAM (71 - 110)", "MASUK KE FORMAT HASIL PANEN PADA SHEET HASIL PANEN", "JENIS HERBISIDA / PESTISIDA YANG DIAPLIKASIKAN", "CUACA SAAT SURVEY (KERING, BERAWAN, GERIMIS, HUJAN ATAU BANJIR)", "FREKUENSI HUJAN DALAM SEMINGGU DI LOKASI SURVEY (BERAPA KALI DALAM SEMINGGU)", "INTESITAS HUJAN DALAM SEMINGGU (KECIL, SEDANG, BESAR)", "KETERANGAN"];
+		$data['gagal-panen']			= ["UMUR SAAT PUSO", "KONDISI SAAT PUSO (KEKERINGAN / BANJIR)", "ESTIMASI LAHAN YANG TERKENA PUSO", "ESTIMASI PRODUKSI YANG HILANG KARENA PUSO", "KETERANGAN"];
+		$data['gagal-tanam']			= ["UMUR TANAMAN", "ESTIMASI LUAS AREA", "GAGAL TANAM KE BERAPA (1, 2, atau sudah 3x)", "ALASAN GAGAL TANAM", "KETERANGAN"];
+		$data['lahan-kosong']			= ["ESTIMASI LUAS AREA", "ALASAN GAGAL TANAM", "KETERANGAN"];
 
 		return $data;
 	}
@@ -1047,6 +973,16 @@ class survey extends CI_Controller {
 							'data'		=> []
 						], 
 						'gagal-panen'			=> [
+							'tanggal'	=> '',
+							'fase'		=> '',
+							'data'		=> []
+						], 
+						'gagal-tanam'			=> [
+							'tanggal'	=> '',
+							'fase'		=> '',
+							'data'		=> []
+						], 
+						'lahan-kosong'			=> [
 							'tanggal'	=> '',
 							'fase'		=> '',
 							'data'		=> []

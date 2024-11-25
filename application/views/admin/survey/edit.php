@@ -1057,7 +1057,7 @@
                             <?php if(!empty($detail['SURVEY_MARKET_PRICES'])): ?>
                                 <?php foreach($detail['SURVEY_MARKET_PRICES'] as $sf): ?>
                                     <tr>
-                                        <td data-label="DATE"><input type="month" name="market_date[]" value="<?= date('Y-m', strtotime($sf['SURVEY_DATE'])) ?>" class="form-control"></td>
+                                        <td data-label="DATE"><input type="date" name="market_date[]" value="<?= date('Y-m-d', strtotime($sf['SURVEY_DATE'])) ?>" class="form-control"></td>
                                         <td data-label="PRICE"><input type="number" name="market_price[]" class="form-control" value="<?= $sf['PRICE'] ?>" onkeyup="onkeyup_data(event)" onkeydown="onkeydown_data(event)"></td>
                                         <td></td>
                                     </tr>
@@ -1453,7 +1453,7 @@
     function addMarketprice() {
         let tabledata = `
         <tr>
-            <td data-label="DATE"><input type="month" name="market_date[]" class="form-control"></td>
+            <td data-label="DATE"><input type="date" name="market_date[]" class="form-control"></td>
             <td data-label="PRICE"><input type="number" name="market_price[]" class="form-control" placeholder="EX : 200000" onkeyup="onkeyup_data(event)" onkeydown="onkeydown_data(event)"></td>
             <td><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
         </tr>

@@ -942,7 +942,7 @@
                                 <th style="text-align: right; background: #fff; border: 0px;"><button type="button" class="btn cust-btn-add" onclick="addMarketprice()">+</button></th>
                             </tr>
                             <tr>
-                                <td data-label="DATE"><input type="month" name="market_date[]" class="form-control"></td>
+                                <td data-label="DATE"><input type="date" name="market_date[]" class="form-control"></td>
                                 <td data-label="PRICE"><input type="number" name="market_price[]" class="form-control" placeholder="EX : 200000" onkeyup="onkeyup_data(event)" onkeydown="onkeydown_data(event)"></td>
                                 <td><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
                             </tr>
@@ -1493,7 +1493,7 @@
     function addMarketprice() {
         let tabledata = `
         <tr>
-            <td data-label="DATE"><input type="month" name="market_date[]" class="form-control"></td>
+            <td data-label="DATE"><input type="date" name="market_date[]" class="form-control"></td>
             <td data-label="PRICE"><input type="number" name="market_price[]" class="form-control" placeholder="EX : 200000" onkeyup="onkeyup_data(event)" onkeydown="onkeydown_data(event)"></td>
             <td><a onclick="deleteRow(this)" href="javascript:void(0)" class="btn btn-sm" title="Hapus"><i class="fas fa-trash text-danger"></i></a></td>
         </tr>

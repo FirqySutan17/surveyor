@@ -106,8 +106,16 @@
                 </tr>
             </table>
             <?php if(!empty($expense['detail'])): ?>
+                <?php $grand_total = [
+                    'MEAL'      => 0,
+                    'GASOLINE'  => 0,
+                    'TOLL'      => 0,
+                    'PARKING'   => 0,
+                    'OTHERS'    => 0
+                ]; ?>
                 <?php foreach($expense['detail'] as $detail): ?>
                     <table style="width: 100%;">
+                        <?php $total_meal = 0; $total_gasoline = 0; $total_toll = 0; $total_parking = 0; $total_others = 0; ?>
                         <tr>
                             <td style="text-align: center"><strong>DATE</strong> </td>
                             <td style="text-align: center"><strong>MEAL</strong> </td>
@@ -121,7 +129,7 @@
                             <td style="text-align: center">
                                 <?php if(!empty($detail['MEAL'])): ?>
                                     <?php foreach($detail['MEAL'] as $d): ?>
-
+                                        <?php $total_meal += $d['AMOUNT']; ?>
                                         <div class="cat-column">
                                             <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('upload/'.$d['IMAGE']) ?>" alt=""><br>
                                             <p style="margin: 0px">Rp <?= number_format($d['AMOUNT'])  ?></p>
@@ -133,7 +141,7 @@
                             <td style="text-align: center">
                                 <?php if(!empty($detail['GASOLINE'])): ?>
                                     <?php foreach($detail['GASOLINE'] as $d): ?>
-
+                                        <?php $total_gasoline += $d['AMOUNT']; ?>
                                         <div class="cat-column">
                                             <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('upload/'.$d['IMAGE']) ?>" alt=""><br>
                                             <p style="margin: 0px">Rp <?= number_format($d['AMOUNT'])  ?></p>
@@ -145,7 +153,7 @@
                             <td style="text-align: center">
                                 <?php if(!empty($detail['TOLL'])): ?>
                                     <?php foreach($detail['TOLL'] as $d): ?>
-
+                                        <?php $total_toll += $d['AMOUNT']; ?>
                                         <div class="cat-column">
                                             <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('upload/'.$d['IMAGE']) ?>" alt=""><br>
                                             <p style="margin: 0px">Rp <?= number_format($d['AMOUNT'])  ?></p>
@@ -157,7 +165,7 @@
                             <td style="text-align: center">
                                 <?php if(!empty($detail['PARKING'])): ?>
                                     <?php foreach($detail['PARKING'] as $d): ?>
-
+                                        <?php $total_parking += $d['AMOUNT']; ?>
                                         <div class="cat-column">
                                             <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('upload/'.$d['IMAGE']) ?>" alt=""><br>
                                             <p style="margin: 0px">Rp <?= number_format($d['AMOUNT'])  ?></p>
@@ -169,7 +177,7 @@
                             <td style="text-align: center">
                                 <?php if(!empty($detail['OTHERS'])): ?>
                                     <?php foreach($detail['OTHERS'] as $d): ?>
-
+                                        <?php $total_others += $d['AMOUNT']; ?>
                                         <div class="cat-column">
                                             <img style="width: 100px; object-fit: contain; margin-bottom: 10px" src="<?= base_url('upload/'.$d['IMAGE']) ?>" alt=""><br>
                                             <p style="margin: 0px">Rp <?= number_format($d['AMOUNT'])  ?></p>
@@ -179,8 +187,27 @@
                                 <?php endif ?>
                             </td>
                         </tr>
+                        <tr>
+                            <td style="text-align: center"></td>
+                            <td style="text-align: center"><strong>Rp. <?= number_format($total_meal) ?></strong> </td>
+                            <td style="text-align: center"><strong>Rp. <?= number_format($total_gasoline) ?></strong> </td>
+                            <td style="text-align: center"><strong>Rp. <?= number_format($total_toll) ?></strong> </td>
+                            <td style="text-align: center"><strong>Rp. <?= number_format($total_parking) ?></strong> </td>
+                            <td style="text-align: center"><strong>Rp. <?= number_format($total_others) ?></strong> </td>
+                        </tr>
+                        <?php $grand_total['MEAL'] += $total_meal; $grand_total['GASOLINE'] += $total_gasoline; $grand_total['TOLL'] += $total_toll; $grand_total['PARKING'] += $total_parking; $grand_total['OTHERS'] += $total_others; ?>
                     </table>
                 <?php endforeach ?>
+                <table style="width: 100%;">
+                    <tr>
+                        <td style="text-align: center"></td>
+                        <td style="text-align: center"><strong>Rp. <?= number_format($grand_total['MEAL']) ?></strong> </td>
+                        <td style="text-align: center"><strong>Rp. <?= number_format($grand_total['GASOLINE']) ?></strong> </td>
+                        <td style="text-align: center"><strong>Rp. <?= number_format($grand_total['TOLL']) ?></strong> </td>
+                        <td style="text-align: center"><strong>Rp. <?= number_format($grand_total['PARKING']) ?></strong> </td>
+                        <td style="text-align: center"><strong>Rp. <?= number_format($grand_total['OTHERS']) ?></strong> </td>
+                    </tr>
+                </table>
             <?php endif ?>
         </div>
 
