@@ -539,7 +539,7 @@
     <div class="filter-box" style="margin: 10px 0px; border-bottom: 2px solid #fff; padding: 0px 10px 10px 10px">
         <form action="#" method="GET">
             <div class="row">
-                <div class="col-md-8 col-sm-12">
+                <div class="col-md-6 col-sm-12">
                     <h3 class="sub-title" style="margin-bottom: 0px !important; line-height: 2">SURVEY MAPS INFORMATION</h3>
                 </div>
                 <div class="col-md-2 col-sm-12">
