@@ -571,7 +571,7 @@
     </div> -->
 </div>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script type="text/javascript" src="<?= base_url('assets/leaflet/leaflet.legend.js') ?>"></script>
+    <script type="text/javascript" src="https://cjfnc.id/surveyor/assets/leaflet/leaflet.legend.js"></script>
 <script>
     $('#map-filter').select2({
         theme: 'bootstrap4',
