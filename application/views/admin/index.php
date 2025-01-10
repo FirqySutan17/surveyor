@@ -549,6 +549,14 @@
                     </select>
                 </div>
                 <div class="col-md-2 col-sm-12">
+                    <select id="surveyor" class="form-control" name="surveyor">
+						<option <?= $filter['surveyor'] == '*' ? 'selected' : '' ?> value="*">* - ALL SURVEYOR </option>
+                        <?php foreach ($surveyor as $field): ?>
+                            <option <?= $filter['surveyor'] == $field['CREATED_BY'] ? 'selected' : '' ?> value="<?= $field['CREATED_BY'] ?>"><?= $field['CREATED_BY'] ?> - <?= $field['CREATED_BY_NAME'] ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </div>
+                <div class="col-md-2 col-sm-12">
                     <button type="submit" class="btn btn-primary btn-block" style="height: 33px">FILTER</button>
                 </div>
             </div>

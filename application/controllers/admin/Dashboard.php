@@ -10,34 +10,52 @@ class Dashboard extends CI_Controller {
 	}
 
 	public function index() {
-		$all_survey_data = $this->Dbhelper->get_all_survey_data();
+		// $all_survey_data = $this->Dbhelper->get_all_survey_data();
 
 		$survey_result = [];
-		foreach ($all_survey_data as $survey) {
-			$umur_tanam = $survey['UMUR_TANAM'];
-			$current_phase_date = $survey['CURRENT_PHASE_DATE']; // Ambil tanggal dari field CURRENT_PHASE_DATE
+		// foreach ($all_survey_data as $survey) {
+		// 	$umur_tanam = $survey['UMUR_TANAM'];
+		// 	$current_phase_date = $survey['CURRENT_PHASE_DATE']; // Ambil tanggal dari field CURRENT_PHASE_DATE
 
-			// Dapatkan data yang mendekati status selanjutnya berdasarkan perhitungan umur_tanam dan current_phase_date
-			$near_status_data = $this->Dbhelper->get_near_next_status($umur_tanam, $current_phase_date);
+		// 	// Dapatkan data yang mendekati status selanjutnya berdasarkan perhitungan umur_tanam dan current_phase_date
+		// 	$near_status_data = $this->Dbhelper->get_near_next_status($umur_tanam, $current_phase_date);
 
-			// Gabungkan data yang memenuhi syarat ke dalam array hasil
-			if (!empty($near_status_data)) {
-					$survey_result = array_merge($survey_result, $near_status_data);
-			}
-		}
+		// 	// Gabungkan data yang memenuhi syarat ke dalam array hasil
+		// 	if (!empty($near_status_data)) {
+		// 			$survey_result = array_merge($survey_result, $near_status_data);
+		// 	}
+		// }
 
-		$mapdata 			= !empty($this->input->get('mapdata')) ? $this->input->get('mapdata') : 'PHASE';
+		$mapdata 				= !empty($this->input->get('mapdata')) ? $this->input->get('mapdata') : 'PHASE';
+		$surveyor 			= !empty($this->input->get('surveyor')) ? $this->input->get('surveyor') : '*';
 		$filter 		= [
-			'mapdata'			=> $mapdata
+			'mapdata'			=> $mapdata,
+			'surveyor'			=> $surveyor
 		];
 		$data['filter']				= $filter;
 
-		$data['titik_post']			= $this->Dbhelper->selectRawQuery('SELECT SURVEY_NO, CURRENT_PHASE, COORDINATE, DESCRIPTION as ADDRESS, TANAMAN FROM SURVEY WHERE COORDINATE IS NOT NULL AND DESCRIPTION IS NOT NULL');
+		$where = $surveyor == '*' ? '' : "AND CREATED_BY = '$surveyor'";
+		$data['titik_post']			= $this->Dbhelper->selectRawQuery("SELECT SURVEY_NO, CURRENT_PHASE, COORDINATE, DESCRIPTION as ADDRESS, TANAMAN FROM SURVEY WHERE COORDINATE IS NOT NULL AND DESCRIPTION $where IS NOT NULL");
 		$data['title'] 				= 'DASHBOARD';
 		$data['user']				= $this->session_data['user'];
 		$data['survey'] 			= $survey_result;
+		$data['surveyor'] = $this->list_surveyor();
 		// dd($data['titik_post']);
 		$this->template->_v('index', $data);
+	}
+
+	private function list_surveyor() {
+		$query = "
+			select
+				CREATED_BY,
+				FN_USER_NAME(CREATED_BY) CREATED_BY_NAME
+			from SURVEY
+			WHERE CREATED_BY != '999999'
+			GROUP BY CREATED_BY
+			ORDER BY CREATED_BY ASC
+		";
+		$data 				= $this->db->query($query)->result_array();
+		return $data;
 	}
 
 	public function summary_report() {
